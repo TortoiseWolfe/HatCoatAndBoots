@@ -2,13 +2,57 @@
 
 This file provides guidance to Claude Code when working with this repository.
 
-## Core Development Principles
+## What This Project Is
+
+**HatsCoatsAndBoots** is a children's book on **sustainable natural building** —
+teaching kids how good buildings work via the **Hats, Coats, and Boots** mnemonic
+(hat = roof overhang; coat = insulated thermal envelope; boots = a foundation
+that lifts the structure above wet ground). It is the successor to the author's
+prior self-published book _The House That Code Built_ (which taught web tech as
+house metaphors); this book inverts the metaphor — using buildings to teach
+buildings, with code as the delivery mechanism.
+
+The project is a **fork of ScriptHammer** (Next.js / Docker / SpecKit), part of
+the ScriptHammer family alongside SpokeToWork and TurtleWolfe. The machinery is
+identical; the content domain (a kids' book on real architecture) is the
+difference.
+
+## Constitution — Read Before Building
+
+**Source of truth:** [`.specify/memory/constitution.md`](.specify/memory/constitution.md) (v1.0.0,
+ratified 2026-05-28).
+
+The constitution puts **William McDonough's cradle-to-cradle ethics** in the top
+five principle slots; ScriptHammer's six original disciplines (component
+pattern, TDD, SpecKit, Docker, progressive enhancement, privacy) sit beneath
+them as **Mandatory Constraints**. Ethics lead; engineering supports.
+
+### The five Core Principles (apply to BOTH the book content AND the codebase)
+
+1. **Design Is Intention** — every artifact answers McDonough's question, _"How do we love all the children of all species for all time?"_
+2. **Be More Good, Not Just Less Bad** — pages teach what _thriving_ buildings give back; components actively make the next component easier to write
+3. **Two Metabolisms** — biological nutrients (return to soil) vs technical nutrients (closed industrial loops); no downcycling, no lock-in
+4. **Buildings (and Components) as Assets** — every example structure gives back (oxygen, rainwater, habitat); every component ships with story + tests + a11y
+5. **Hats, Coats, and Boots** — the book's spine and the project's Quality Gate (hat = graceful failure; coat = typed & tested; boots = deployable)
+
+### McDonough source transcripts (cite these when amending principles)
+
+Both live in the sibling `TranScripts/` repo:
+
+- `~/repos/TranScripts/Construction/Construction_Edited/cradle_to_cradle_design_mcdonough_ted2007.md` — TED 2007, framework's first articulation
+- `~/repos/TranScripts/Construction/Construction_Edited/resource_abundance_by_design_mcdonough_wef2015.md` — WEF 2015, sharpened to "more good, not less bad"
+
+Both files carry clickable `[H:MM:SS](?t=SECONDS)` anchors back to the source videos. When amending a principle, **read the actual source passage**, don't paraphrase from memory.
+
+## Core Development Practices (operational — inherited from ScriptHammer)
+
+These are HOW we build; the constitution above is WHY. The practices stay enforced by CI.
 
 1. **Proper Solutions Over Quick Fixes** - Implement correctly the first time
 2. **Root Cause Analysis** - Fix underlying issues, not symptoms
-3. **Stability Over Speed** - This is a production template
+3. **Stability Over Speed** - This is a book children will read; correctness matters
 4. **Clean Architecture** - Follow established patterns consistently
-5. **No Technical Debt** - Never commit TODOs or workarounds
+5. **No Technical Debt** - Never commit TODOs or workarounds (Principle III: don't downcycle code)
 
 ## Docker-First Development (MANDATORY)
 
@@ -28,8 +72,8 @@ yarn install
 npx <anything>
 
 # ✅ CORRECT - Always use Docker
-docker compose exec scripthammer pnpm install
-docker compose exec scripthammer pnpm add <package>
+docker compose exec hatscoatsandboots pnpm install
+docker compose exec hatscoatsandboots pnpm add <package>
 ```
 
 **Why this is critical:**
@@ -43,7 +87,7 @@ docker compose exec scripthammer pnpm add <package>
 
 ```bash
 docker compose down
-docker compose run --rm scripthammer rm -rf node_modules
+docker compose run --rm hatscoatsandboots rm -rf node_modules
 docker compose up
 ```
 
@@ -57,8 +101,8 @@ sudo chown -R $USER:$USER .next
 sudo rm -rf node_modules
 
 # ✅ CORRECT - Use Docker
-docker compose exec scripthammer rm -rf .next
-docker compose exec scripthammer rm -rf node_modules
+docker compose exec hatscoatsandboots rm -rf .next
+docker compose exec hatscoatsandboots rm -rf node_modules
 docker compose down && docker compose up
 ```
 
@@ -67,7 +111,7 @@ docker compose down && docker compose up
 **Permission errors? Always try:**
 
 1. `docker compose down && docker compose up` (restarts container, cleans .next)
-2. `docker compose exec scripthammer pnpm run docker:clean`
+2. `docker compose exec hatscoatsandboots pnpm run docker:clean`
 
 ### Essential Commands
 
@@ -76,24 +120,24 @@ docker compose down && docker compose up
 docker compose up
 
 # Development server
-docker compose exec scripthammer pnpm run dev
+docker compose exec hatscoatsandboots pnpm run dev
 
 # Run tests
-docker compose exec scripthammer pnpm test
-docker compose exec scripthammer pnpm run test:suite    # Full suite
+docker compose exec hatscoatsandboots pnpm test
+docker compose exec hatscoatsandboots pnpm run test:suite    # Full suite
 
 # Storybook
-docker compose exec scripthammer pnpm run storybook
+docker compose exec hatscoatsandboots pnpm run storybook
 
 # E2E tests
-docker compose exec scripthammer pnpm exec playwright test
+docker compose exec hatscoatsandboots pnpm exec playwright test
 
 # Type checking & linting
-docker compose exec scripthammer pnpm run type-check
-docker compose exec scripthammer pnpm run lint
+docker compose exec hatscoatsandboots pnpm run type-check
+docker compose exec hatscoatsandboots pnpm run lint
 
 # Clean start if issues
-docker compose exec scripthammer pnpm run docker:clean
+docker compose exec hatscoatsandboots pnpm run docker:clean
 ```
 
 ### Git Commits from Docker
@@ -106,8 +150,8 @@ GIT_AUTHOR_NAME=Your Name
 GIT_AUTHOR_EMAIL=your@email.com
 
 # Commit from container (hooks run correctly)
-docker compose exec scripthammer git add -A
-docker compose exec scripthammer git commit -m "Your commit message"
+docker compose exec hatscoatsandboots git add -A
+docker compose exec hatscoatsandboots git commit -m "Your commit message"
 
 # Push from host (uses your SSH keys)
 git push
@@ -118,7 +162,7 @@ git push
 Supabase Cloud free tier auto-pauses after 7 days. If paused:
 
 ```bash
-docker compose exec scripthammer pnpm run prime
+docker compose exec hatscoatsandboots pnpm run prime
 ```
 
 ## Component Structure (MANDATORY)
@@ -137,7 +181,7 @@ ComponentName/
 **Always use the generator:**
 
 ```bash
-docker compose exec scripthammer pnpm run generate:component
+docker compose exec hatscoatsandboots pnpm run generate:component
 ```
 
 See `docs/CREATING_COMPONENTS.md` for details.
@@ -237,7 +281,7 @@ docker compose down && docker compose up
 Instance paused after inactivity:
 
 ```bash
-docker compose exec scripthammer pnpm run prime
+docker compose exec hatscoatsandboots pnpm run prime
 ```
 
 ### Tailwind CSS Not Loading
@@ -417,7 +461,7 @@ Apply this any time test code sets `scrollTop` and expects a scroll-event-driven
 
 ## Planning Factory (Multi-Terminal Workflow)
 
-This repo also contains the planning factory tooling from the ScriptHammer planning template. The sections below govern the multi-terminal spec-driven workflow.
+This repo also contains the planning factory tooling from the HatsCoatsAndBoots planning template. The sections below govern the multi-terminal spec-driven workflow.
 
 ### Multi-Terminal Assembly Line
 
@@ -472,7 +516,7 @@ When operating as a terminal in the multi-terminal workflow:
 
 ### Fork Guide
 
-After forking ScriptHammer:
+After forking HatsCoatsAndBoots:
 
 1. Run `/refresh-inventories` — Regenerates context files for your specs
 2. Update `.claude/inventories/` — Reflects your project's features

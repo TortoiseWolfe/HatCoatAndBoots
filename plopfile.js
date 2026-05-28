@@ -16,6 +16,11 @@ const CATEGORY_TITLE_MAP = {
   privacy: 'Features/Privacy',
   forms: 'Features/Forms',
   game: 'Features/Game',
+  // Book content categories (HatsCoatsAndBoots project)
+  architecture: 'Book/Architecture',
+  materials: 'Book/Materials',
+  systems: 'Book/Systems',
+  principles: 'Book/Principles',
 };
 
 module.exports = function (plop) {
@@ -51,6 +56,22 @@ module.exports = function (plop) {
           { name: 'Privacy (privacy features)', value: 'privacy' },
           { name: 'Forms (form features)', value: 'forms' },
           { name: 'Game (3D / WebGL features)', value: 'game' },
+          {
+            name: 'Architecture (book page: sustainable building forms)',
+            value: 'architecture',
+          },
+          {
+            name: 'Materials (book page: natural building materials)',
+            value: 'materials',
+          },
+          {
+            name: 'Systems (book page: closed-loop home systems)',
+            value: 'systems',
+          },
+          {
+            name: 'Principles (book page: cradle-to-cradle lessons)',
+            value: 'principles',
+          },
         ],
         default: 'atomic',
       },
