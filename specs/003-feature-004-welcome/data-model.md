@@ -42,13 +42,13 @@ Stores public keys for E2E encryption. Admin's public key stored here.
 
 Stores user profile data including welcome message flag.
 
-| Field                | Type    | Constraints         | Notes                    |
-| -------------------- | ------- | ------------------- | ------------------------ |
-| id                   | UUID    | PK, FK → auth.users |                          |
-| username             | TEXT    | UNIQUE, NOT NULL    | Admin: `scripthammer`    |
-| display_name         | TEXT    |                     | Admin: `ScriptHammer`    |
-| welcome_message_sent | BOOLEAN | DEFAULT FALSE       | **Used for idempotency** |
-| ...                  | ...     | ...                 | Other fields unchanged   |
+| Field                | Type    | Constraints         | Notes                      |
+| -------------------- | ------- | ------------------- | -------------------------- |
+| id                   | UUID    | PK, FK → auth.users |                            |
+| username             | TEXT    | UNIQUE, NOT NULL    | Admin: `hatscoatsandboots` |
+| display_name         | TEXT    |                     | Admin: `HatsCoatsAndBoots` |
+| welcome_message_sent | BOOLEAN | DEFAULT FALSE       | **Used for idempotency**   |
+| ...                  | ...     | ...                 | Other fields unchanged     |
 
 ---
 

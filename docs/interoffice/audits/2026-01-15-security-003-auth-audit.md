@@ -290,5 +290,5 @@ The feature specification demonstrates strong security design. Implementation ma
 ---
 
 **Security Lead**
-ScriptHammer Council
+HatsCoatsAndBoots Council
 2026-01-15

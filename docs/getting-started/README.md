@@ -1,4 +1,4 @@
-# Getting Started with ScriptHammer
+# Getting Started with HatsCoatsAndBoots
 
 Get your development environment running in under 10 minutes.
 
@@ -21,8 +21,8 @@ Get your development environment running in under 10 minutes.
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/YOUR_ORG/ScriptHammer.git
-cd ScriptHammer
+git clone https://github.com/YOUR_ORG/HatsCoatsAndBoots.git
+cd HatsCoatsAndBoots
 ```
 
 ### 2. Start Docker Environment
@@ -39,8 +39,8 @@ Expected output:
 
 ```
 NAME                    STATUS
-scripthammer-app        running
-scripthammer-db         running (if applicable)
+hatscoatsandboots-app        running
+hatscoatsandboots-db         running (if applicable)
 ```
 
 ### 3. Verify Installation
@@ -75,7 +75,7 @@ Open http://localhost:3000 to browse feature wireframes.
 
 ## Project Overview
 
-ScriptHammer is a **planning template** for AI-assisted development. It contains:
+HatsCoatsAndBoots is a **planning template** for AI-assisted development. It contains:
 
 - **46 feature specifications** - Detailed requirements for each feature
 - **SVG wireframes** - Visual designs for desktop and mobile
@@ -89,7 +89,7 @@ ScriptHammer is a **planning template** for AI-assisted development. It contains
 ## Project Structure
 
 ```
-ScriptHammer/
+HatsCoatsAndBoots/
 │
 ├── features/                    # Feature specifications
 │   ├── IMPLEMENTATION_ORDER.md  # Build sequence (read this first!)

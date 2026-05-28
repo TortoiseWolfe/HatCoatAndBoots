@@ -13,7 +13,7 @@
  *
  * Run from inside the Docker container:
  *   docker exec -e SKIP_WEBSERVER=1 -e BASE_URL=http://localhost:3000 \
- *     sh-feat-scripthammer-1 npx playwright test tests/e2e/admin/ --project=chromium
+ *     sh-feat-hatscoatsandboots-1 npx playwright test tests/e2e/admin/ --project=chromium
  */
 
 import { test, expect } from '@playwright/test';
@@ -23,7 +23,7 @@ const ADMIN_EMAIL = 'test@example.com';
 const ADMIN_PASSWORD = 'TestPassword123!';
 
 // Next.js basePath — all routes must be prefixed
-const BP = '/ScriptHammer';
+const BP = '/HatsCoatsAndBoots';
 
 // Inside the Docker container, the browser can't reach localhost:54321 (Supabase).
 // We proxy all browser requests to localhost:54321 → the Docker-network hostname.

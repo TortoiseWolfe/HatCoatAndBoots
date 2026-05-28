@@ -1,4 +1,4 @@
-# ScriptHammer Constitution
+# HatsCoatsAndBoots Constitution
 
 ## Core Principles
 

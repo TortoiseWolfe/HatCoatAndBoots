@@ -13,7 +13,7 @@
  * this insert the stale assertion would be dead weight.
  *
  * Run from inside the Docker container:
- *   docker compose exec -T -e SKIP_WEBSERVER=1 -e CI= scripthammer \
+ *   docker compose exec -T -e SKIP_WEBSERVER=1 -e CI= hatscoatsandboots \
  *     pnpm exec playwright test tests/e2e/admin/admin-conversation-list.spec.ts --project=chromium
  */
 
@@ -31,7 +31,7 @@ const BP = process.env.NEXT_PUBLIC_BASE_PATH || '';
 // the Docker hostname to 127.0.0.1 via --host-resolver-rules, and this
 // process proxies 127.0.0.1:8000 → the real Kong gateway.
 const SUPABASE_DOCKER_HOST =
-  process.env.SUPABASE_DOCKER_HOST || 'scripthammer-supabase-kong-1';
+  process.env.SUPABASE_DOCKER_HOST || 'hatscoatsandboots-supabase-kong-1';
 const SUPABASE_DOCKER_URL = `http://${SUPABASE_DOCKER_HOST}:8000`;
 const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
 const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || '';

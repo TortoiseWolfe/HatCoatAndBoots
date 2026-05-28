@@ -1069,7 +1069,7 @@ export async function performSignIn(
         .then(() => ({ success: true as const })),
 
       // Failure: Alert with actual error message appears
-      // Filter out page title alerts (e.g., "Sign In - ScriptHammer")
+      // Filter out page title alerts (e.g., "Sign In - HatsCoatsAndBoots")
       page
         .locator('[role="alert"]')
         .filter({

@@ -3,9 +3,9 @@ import { Metadata } from 'next';
 import { PrivacyActions } from '@/components/privacy/PrivacyActions';
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy - ScriptHammer',
+  title: 'Privacy Policy - HatsCoatsAndBoots',
   description:
-    'Learn how ScriptHammer protects your privacy and handles your personal information.',
+    'Learn how HatsCoatsAndBoots protects your privacy and handles your personal information.',
 };
 
 export default function PrivacyPolicyPage() {
@@ -29,9 +29,9 @@ export default function PrivacyPolicyPage() {
         <section className="mb-8">
           <h2 className="mb-4 text-2xl font-semibold">1. Introduction</h2>
           <p className="mb-4">
-            Welcome to ScriptHammer. We are committed to protecting your privacy
-            and ensuring you have a positive experience on our website. This
-            privacy policy explains how we collect, use, and protect your
+            Welcome to HatsCoatsAndBoots. We are committed to protecting your
+            privacy and ensuring you have a positive experience on our website.
+            This privacy policy explains how we collect, use, and protect your
             personal information in compliance with the General Data Protection
             Regulation (GDPR) and other applicable privacy laws.
           </p>

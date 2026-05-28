@@ -57,8 +57,8 @@ describe('cleanupStaleScripthammerUsers (#50)', () => {
   it('deletes the FK chain in correct order per matching user', async () => {
     const client = makeMockClient({
       users: [
-        { id: 'user-a-id', email: 'test-user-a@scripthammer.test' },
-        { id: 'user-b-id', email: 'test-user-b@scripthammer.test' },
+        { id: 'user-a-id', email: 'test-user-a@hatscoatsandboots.test' },
+        { id: 'user-b-id', email: 'test-user-b@hatscoatsandboots.test' },
       ],
     });
 
@@ -84,12 +84,12 @@ describe('cleanupStaleScripthammerUsers (#50)', () => {
     expect(summary.errorsLogged).toBe(0);
   });
 
-  it('ignores users whose email does not match @scripthammer.test', async () => {
+  it('ignores users whose email does not match @hatscoatsandboots.test', async () => {
     const client = makeMockClient({
       users: [
         { id: 'prod-id', email: 'real-user@example.com' },
-        { id: 'admin-id', email: 'admin@scripthammer.com' }, // .com, not .test
-        { id: 'sh-id', email: 'test-user-a@scripthammer.test' },
+        { id: 'admin-id', email: 'admin@hatscoatsandboots.com' }, // .com, not .test
+        { id: 'sh-id', email: 'test-user-a@hatscoatsandboots.test' },
       ],
     });
 
@@ -103,7 +103,7 @@ describe('cleanupStaleScripthammerUsers (#50)', () => {
 
   it('continues to subsequent steps when a DELETE fails (best-effort)', async () => {
     const client = makeMockClient({
-      users: [{ id: 'user-x', email: 'test-user-a@scripthammer.test' }],
+      users: [{ id: 'user-x', email: 'test-user-a@hatscoatsandboots.test' }],
       failOn: { table: 'payment_intents' },
     });
 
@@ -124,7 +124,7 @@ describe('cleanupStaleScripthammerUsers (#50)', () => {
     expect(summary.errorsLogged).toBe(1);
   });
 
-  it('is a no-op when no @scripthammer.test users exist', async () => {
+  it('is a no-op when no @hatscoatsandboots.test users exist', async () => {
     const client = makeMockClient({
       users: [{ id: 'prod-id', email: 'real@example.com' }],
     });
