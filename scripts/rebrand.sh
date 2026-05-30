@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # =============================================================================
-# HatsCoatsAndBoots Rebrand Script
+# HatCoatAndBoots Rebrand Script
 # =============================================================================
-# Automates rebranding of the HatsCoatsAndBoots template to a new project identity.
+# Automates rebranding of the HatCoatAndBoots template to a new project identity.
 # Updates 200+ files including code, config, and documentation.
 #
 # Usage: ./scripts/rebrand.sh <PROJECT_NAME> <OWNER> "<DESCRIPTION>" [OPTIONS]
@@ -17,7 +17,7 @@
 #   --dry-run             Show what would change without modifying files
 #   --keep-cname          Do not update public/CNAME file (keep existing domain)
 #   --preserve-ssh        Keep SSH format for git remote (if currently SSH)
-#   --preserve-attribution Keep HatsCoatsAndBoots attribution link in Footer
+#   --preserve-attribution Keep HatCoatAndBoots attribution link in Footer
 #   --help                Show this help message
 #
 # Exit Codes:
@@ -61,8 +61,8 @@ PRESERVE_SSH=false
 PRESERVE_ATTRIBUTION=false
 
 # Original project name to search for
-ORIGINAL_NAME="HatsCoatsAndBoots"
-ORIGINAL_NAME_LOWER="hatscoatsandboots"
+ORIGINAL_NAME="HatCoatAndBoots"
+ORIGINAL_NAME_LOWER="hatcoatandboots"
 ORIGINAL_OWNER="TortoiseWolfe"
 
 # =============================================================================
@@ -151,7 +151,7 @@ check_uncommitted_changes() {
     fi
 }
 
-# Count HatsCoatsAndBoots references to detect if already rebranded
+# Count HatCoatAndBoots references to detect if already rebranded
 count_references() {
     local count
     count=$(grep -r "$ORIGINAL_NAME" --include="*.ts" --include="*.tsx" --include="*.js" \
@@ -163,7 +163,7 @@ count_references() {
 
 # Detect previous rebrand
 #
-# A fresh HatsCoatsAndBoots clone contains hundreds of "HatsCoatsAndBoots" references
+# A fresh HatCoatAndBoots clone contains hundreds of "HatCoatAndBoots" references
 # across .ts/.tsx/.md/.yml files. A successfully-rebranded fork contains 0–4
 # (only the Footer attribution + this script's own constants — and even those
 # can be stripped with --preserve-attribution=false). The threshold below
@@ -318,16 +318,16 @@ update_package_json() {
     fi
 }
 
-# Update CNAME file (replace hatscoatsandboots domain with new project domain)
+# Update CNAME file (replace hatcoatandboots domain with new project domain)
 update_cname() {
     local cname_file="$REPO_ROOT/public/CNAME"
 
     if [ -f "$cname_file" ]; then
-        # Check if it's a custom domain (not hatscoatsandboots.com)
+        # Check if it's a custom domain (not hatcoatandboots.com)
         local domain
         domain=$(cat "$cname_file" 2>/dev/null || echo "")
 
-        if [[ "$domain" == *"hatscoatsandboots"* ]] || [ -z "$domain" ]; then
+        if [[ "$domain" == *"hatcoatandboots"* ]] || [ -z "$domain" ]; then
             if [ "$KEEP_CNAME" = true ]; then
                 log_info "Keeping CNAME file as-is (--keep-cname flag set)"
             else
@@ -354,27 +354,27 @@ scaffold_themes() {
     fi
 
     # Replace theme names in @plugin "daisyui" block
-    if grep -q "hatscoatsandboots-dark" "$css_file" 2>/dev/null; then
+    if grep -q "hatcoatandboots-dark" "$css_file" 2>/dev/null; then
         if [ "$DRY_RUN" = true ]; then
             log_verbose "[DRY-RUN] Would rename theme references in globals.css"
         else
-            sed "${SED_INPLACE[@]}" "s|hatscoatsandboots-dark|${SANITIZED_NAME}-dark|g" "$css_file"
-            sed "${SED_INPLACE[@]}" "s|hatscoatsandboots-light|${SANITIZED_NAME}-light|g" "$css_file"
-            sed "${SED_INPLACE[@]}" "s|HatsCoatsAndBoots Dark Theme|${DISPLAY_NAME} Dark Theme|g" "$css_file"
-            sed "${SED_INPLACE[@]}" "s|HatsCoatsAndBoots Light Theme|${DISPLAY_NAME} Light Theme|g" "$css_file"
-            log_verbose "Renamed theme blocks: hatscoatsandboots-* → ${SANITIZED_NAME}-*"
+            sed "${SED_INPLACE[@]}" "s|hatcoatandboots-dark|${SANITIZED_NAME}-dark|g" "$css_file"
+            sed "${SED_INPLACE[@]}" "s|hatcoatandboots-light|${SANITIZED_NAME}-light|g" "$css_file"
+            sed "${SED_INPLACE[@]}" "s|HatCoatAndBoots Dark Theme|${DISPLAY_NAME} Dark Theme|g" "$css_file"
+            sed "${SED_INPLACE[@]}" "s|HatCoatAndBoots Light Theme|${DISPLAY_NAME} Light Theme|g" "$css_file"
+            log_verbose "Renamed theme blocks: hatcoatandboots-* → ${SANITIZED_NAME}-*"
         fi
         ((FILES_MODIFIED++)) || true
     fi
 
     # Update ThemeScript.tsx fallback theme names
     local theme_script="$REPO_ROOT/src/components/ThemeScript.tsx"
-    if [ -f "$theme_script" ] && grep -q "hatscoatsandboots-dark" "$theme_script" 2>/dev/null; then
+    if [ -f "$theme_script" ] && grep -q "hatcoatandboots-dark" "$theme_script" 2>/dev/null; then
         if [ "$DRY_RUN" = true ]; then
             log_verbose "[DRY-RUN] Would update ThemeScript.tsx theme names"
         else
-            sed "${SED_INPLACE[@]}" "s|hatscoatsandboots-dark|${SANITIZED_NAME}-dark|g" "$theme_script"
-            sed "${SED_INPLACE[@]}" "s|hatscoatsandboots-light|${SANITIZED_NAME}-light|g" "$theme_script"
+            sed "${SED_INPLACE[@]}" "s|hatcoatandboots-dark|${SANITIZED_NAME}-dark|g" "$theme_script"
+            sed "${SED_INPLACE[@]}" "s|hatcoatandboots-light|${SANITIZED_NAME}-light|g" "$theme_script"
             log_verbose "Updated ThemeScript.tsx theme fallbacks"
         fi
         ((FILES_MODIFIED++)) || true
@@ -382,12 +382,12 @@ scaffold_themes() {
 
     # Update Storybook preview theme names
     local preview_file="$REPO_ROOT/.storybook/preview.tsx"
-    if [ -f "$preview_file" ] && grep -q "hatscoatsandboots-dark" "$preview_file" 2>/dev/null; then
+    if [ -f "$preview_file" ] && grep -q "hatcoatandboots-dark" "$preview_file" 2>/dev/null; then
         if [ "$DRY_RUN" = true ]; then
             log_verbose "[DRY-RUN] Would update .storybook/preview.tsx theme names"
         else
-            sed "${SED_INPLACE[@]}" "s|hatscoatsandboots-dark|${SANITIZED_NAME}-dark|g" "$preview_file"
-            sed "${SED_INPLACE[@]}" "s|hatscoatsandboots-light|${SANITIZED_NAME}-light|g" "$preview_file"
+            sed "${SED_INPLACE[@]}" "s|hatcoatandboots-dark|${SANITIZED_NAME}-dark|g" "$preview_file"
+            sed "${SED_INPLACE[@]}" "s|hatcoatandboots-light|${SANITIZED_NAME}-light|g" "$preview_file"
             log_verbose "Updated Storybook preview theme names"
         fi
         ((FILES_MODIFIED++)) || true
@@ -532,7 +532,7 @@ main() {
     # Header
     echo ""
     echo "========================================="
-    echo "  HatsCoatsAndBoots Rebrand Script v${VERSION}"
+    echo "  HatCoatAndBoots Rebrand Script v${VERSION}"
     echo "========================================="
     echo ""
 

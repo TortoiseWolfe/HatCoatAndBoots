@@ -82,7 +82,7 @@ The component includes comprehensive tests covering:
 Run tests with:
 
 ```bash
-docker compose exec hatscoatsandboots pnpm test src/components/atomic/Dice/
+docker compose exec hatcoatandboots pnpm test src/components/atomic/Dice/
 ```
 
 ## Related Components

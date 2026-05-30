@@ -278,7 +278,7 @@ test.describe('Broken Links Detection', () => {
 
   test('check meta tag images and resources', async ({ page, baseURL }) => {
     baseUrl = baseURL || 'http://localhost:3000';
-    const pagesToCheck = ['/', '/blog', '/blog/hatscoatsandboots-intro'];
+    const pagesToCheck = ['/', '/blog', '/blog/hatcoatandboots-intro'];
     const brokenResources: BrokenLink[] = [];
 
     for (const pagePath of pagesToCheck) {
@@ -389,8 +389,8 @@ test.describe('Broken Links Detection', () => {
         // Handle production URLs (github.io)
         if (url.includes('github.io')) {
           const prodUrl = new URL(url);
-          // Remove base path (/HatsCoatsAndBoots) from pathname
-          const path = prodUrl.pathname.replace(/^\/HatsCoatsAndBoots/, '');
+          // Remove base path (/HatCoatAndBoots) from pathname
+          const path = prodUrl.pathname.replace(/^\/HatCoatAndBoots/, '');
           return `${baseUrl}${path}`;
         }
         // Already a localhost URL

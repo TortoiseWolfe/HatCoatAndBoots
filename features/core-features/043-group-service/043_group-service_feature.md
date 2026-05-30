@@ -2,7 +2,7 @@
 
 **Feature ID**: 043
 **Category**: core-features
-**Source**: HatsCoatsAndBoots README (SPEC-049)
+**Source**: HatCoatAndBoots README (SPEC-049)
 **Status**: Ready for SpecKit
 **Depends on**: 009-user-messaging-system
 

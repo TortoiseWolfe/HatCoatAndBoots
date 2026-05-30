@@ -340,7 +340,7 @@ await expect(page.locator('[data-testid="error-message"]')).toContainText(
 Run contract tests with:
 
 ```bash
-docker compose exec hatscoatsandboots pnpm exec playwright test e2e/auth/sign-in.spec.ts
+docker compose exec hatcoatandboots pnpm exec playwright test e2e/auth/sign-in.spec.ts
 ```
 
 Expected results:

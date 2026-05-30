@@ -1,11 +1,11 @@
 #!/bin/sh
 set -e
 
-# Docker entrypoint for HatsCoatsAndBoots
+# Docker entrypoint for HatCoatAndBoots
 # Runs as node user (set by USER in Dockerfile)
 # No root operations needed at runtime
 
-echo "Initializing HatsCoatsAndBoots container..."
+echo "Initializing HatCoatAndBoots container..."
 
 # Ensure dependencies match package.json (fast when already current)
 echo "Checking dependencies..."

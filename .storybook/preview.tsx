@@ -66,8 +66,8 @@ const preview: Preview = {
     // Theme decorator (outermost — sets data-theme on parent element)
     withThemeByDataAttribute({
       themes: {
-        'hatscoatsandboots-dark': 'hatscoatsandboots-dark',
-        'hatscoatsandboots-light': 'hatscoatsandboots-light',
+        'hatcoatandboots-dark': 'hatcoatandboots-dark',
+        'hatcoatandboots-light': 'hatcoatandboots-light',
         light: 'light',
         dark: 'dark',
         cupcake: 'cupcake',
@@ -101,7 +101,7 @@ const preview: Preview = {
         nord: 'nord',
         sunset: 'sunset',
       },
-      defaultTheme: 'hatscoatsandboots-dark',
+      defaultTheme: 'hatcoatandboots-dark',
       attributeName: 'data-theme',
     }),
   ],

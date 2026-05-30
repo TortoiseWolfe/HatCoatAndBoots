@@ -1,6 +1,6 @@
 # Custom Theme Guide
 
-How to create a branded DaisyUI theme for your fork of HatsCoatsAndBoots.
+How to create a branded DaisyUI theme for your fork of HatCoatAndBoots.
 
 ## Quick Start
 
@@ -8,7 +8,7 @@ After running `scripts/rebrand.sh`, your `src/app/globals.css` will contain plac
 
 ## Theme Syntax
 
-HatsCoatsAndBoots uses DaisyUI v5 with Tailwind v4's CSS-first configuration. Custom themes are defined using `@plugin "daisyui/theme"` blocks in `src/app/globals.css`.
+HatCoatAndBoots uses DaisyUI v5 with Tailwind v4's CSS-first configuration. Custom themes are defined using `@plugin "daisyui/theme"` blocks in `src/app/globals.css`.
 
 ### Minimal Example
 
@@ -162,8 +162,8 @@ Update the system theme fallback in `src/components/ThemeScript.tsx`:
 
 ```javascript
 // Change these two return values:
-return 'myproject-dark'; // was 'hatscoatsandboots-dark'
-return 'myproject-light'; // was 'hatscoatsandboots-light'
+return 'myproject-dark'; // was 'hatcoatandboots-dark'
+return 'myproject-light'; // was 'hatcoatandboots-light'
 ```
 
 ### Storybook Preview

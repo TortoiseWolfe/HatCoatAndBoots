@@ -135,26 +135,26 @@ e2e/map.spec.ts
 
 ```bash
 # Run all map component unit tests
-docker compose exec hatscoatsandboots pnpm test src/components/map
+docker compose exec hatcoatandboots pnpm test src/components/map
 
 # Run specific component tests
-docker compose exec hatscoatsandboots pnpm test MapContainer.test
+docker compose exec hatcoatandboots pnpm test MapContainer.test
 
 # Run with coverage
-docker compose exec hatscoatsandboots pnpm test:coverage src/components/map
+docker compose exec hatcoatandboots pnpm test:coverage src/components/map
 ```
 
 ### E2E Tests
 
 ```bash
 # Run map E2E tests (requires dev server on port 3000)
-docker compose exec hatscoatsandboots pnpm exec playwright test e2e/map.spec.ts
+docker compose exec hatcoatandboots pnpm exec playwright test e2e/map.spec.ts
 
 # Run with UI mode for debugging
-docker compose exec hatscoatsandboots pnpm exec playwright test e2e/map.spec.ts --ui
+docker compose exec hatcoatandboots pnpm exec playwright test e2e/map.spec.ts --ui
 
 # Run specific test
-docker compose exec hatscoatsandboots pnpm exec playwright test e2e/map.spec.ts -g "should render map"
+docker compose exec hatcoatandboots pnpm exec playwright test e2e/map.spec.ts -g "should render map"
 ```
 
 ## Common Patterns

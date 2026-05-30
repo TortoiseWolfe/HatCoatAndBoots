@@ -18,10 +18,10 @@ git checkout 006-font-switcher
 docker compose up
 
 # 3. Run tests in watch mode (TDD)
-docker compose exec hatscoatsandboots pnpm test --watch
+docker compose exec hatcoatandboots pnpm test --watch
 
 # 4. Start development server
-docker compose exec hatscoatsandboots pnpm dev
+docker compose exec hatcoatandboots pnpm dev
 ```
 
 Visit http://localhost:3000/accessibility to see the Font Switcher in action!
@@ -107,7 +107,7 @@ it('should render font options', () => {
 ### 2. Run Test (RED)
 
 ```bash
-docker compose exec hatscoatsandboots pnpm test FontSwitcher
+docker compose exec hatcoatandboots pnpm test FontSwitcher
 # Test fails ❌
 ```
 
@@ -123,7 +123,7 @@ export function FontSwitcher() {
 ### 4. Run Test Again
 
 ```bash
-docker compose exec hatscoatsandboots pnpm test FontSwitcher
+docker compose exec hatcoatandboots pnpm test FontSwitcher
 # Test passes ✅
 ```
 
@@ -227,26 +227,26 @@ body {
 
 ```bash
 # Run all tests
-docker compose exec hatscoatsandboots pnpm test
+docker compose exec hatcoatandboots pnpm test
 
 # Run specific test file
-docker compose exec hatscoatsandboots pnpm test FontSwitcher
+docker compose exec hatcoatandboots pnpm test FontSwitcher
 
 # Run tests in watch mode
-docker compose exec hatscoatsandboots pnpm test --watch
+docker compose exec hatcoatandboots pnpm test --watch
 
 # Check accessibility
-docker compose exec hatscoatsandboots pnpm test:a11y
+docker compose exec hatcoatandboots pnpm test:a11y
 
 # Run Storybook
-docker compose exec hatscoatsandboots pnpm storybook
+docker compose exec hatcoatandboots pnpm storybook
 
 # Build for production
-docker compose exec hatscoatsandboots pnpm build
+docker compose exec hatcoatandboots pnpm build
 
 # Lint and format
-docker compose exec hatscoatsandboots pnpm lint
-docker compose exec hatscoatsandboots pnpm format
+docker compose exec hatcoatandboots pnpm lint
+docker compose exec hatcoatandboots pnpm format
 ```
 
 ## 🐛 Troubleshooting

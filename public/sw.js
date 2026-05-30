@@ -1,8 +1,8 @@
-// HatsCoatsAndBoots Service Worker v1.0.0
+// HatCoatAndBoots Service Worker v1.0.0
 // Provides offline support, caching, and background sync
 // Note: Cache name includes project name - updated by rebrand script
 
-const CACHE_VERSION = 'hatscoatsandboots-v1.0.0'; // Updated by scripts/rebrand.sh
+const CACHE_VERSION = 'hatcoatandboots-v1.0.0'; // Updated by scripts/rebrand.sh
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const DYNAMIC_CACHE = `${CACHE_VERSION}-dynamic`;
 const IMAGE_CACHE = `${CACHE_VERSION}-images`;
@@ -49,7 +49,7 @@ self.addEventListener('activate', (event) => {
           cacheNames
             .filter((cacheName) => {
               return (
-                cacheName.startsWith('hatscoatsandboots-') &&
+                cacheName.startsWith('hatcoatandboots-') &&
                 cacheName !== STATIC_CACHE &&
                 cacheName !== DYNAMIC_CACHE &&
                 cacheName !== IMAGE_CACHE
@@ -216,7 +216,7 @@ self.addEventListener('message', (event) => {
       caches.keys().then((cacheNames) => {
         return Promise.all(
           cacheNames
-            .filter((cacheName) => cacheName.startsWith('hatscoatsandboots-'))
+            .filter((cacheName) => cacheName.startsWith('hatcoatandboots-'))
             .map((cacheName) => caches.delete(cacheName))
         );
       })
@@ -238,10 +238,7 @@ self.addEventListener('push', (event) => {
   };
 
   event.waitUntil(
-    self.registration.showNotification(
-      'HatsCoatsAndBoots Notification',
-      options
-    )
+    self.registration.showNotification('HatCoatAndBoots Notification', options)
   );
 });
 

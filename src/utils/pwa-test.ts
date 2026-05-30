@@ -142,11 +142,11 @@ export class PWATester {
       }
 
       const cacheNames = await caches.keys();
-      const hatscoatsandbootsCaches = cacheNames.filter((name) =>
-        name.startsWith('hatscoatsandboots-')
+      const hatcoatandbootsCaches = cacheNames.filter((name) =>
+        name.startsWith('hatcoatandboots-')
       );
 
-      if (hatscoatsandbootsCaches.length === 0) {
+      if (hatcoatandbootsCaches.length === 0) {
         return {
           feature: 'Offline Capability',
           status: 'warning',
@@ -155,7 +155,7 @@ export class PWATester {
       }
 
       // Check cache contents
-      const cache = await caches.open(hatscoatsandbootsCaches[0]);
+      const cache = await caches.open(hatcoatandbootsCaches[0]);
       const keys = await cache.keys();
 
       return {
@@ -163,7 +163,7 @@ export class PWATester {
         status: 'pass',
         message: `Offline cache active with ${keys.length} cached resources`,
         details: {
-          cacheNames: hatscoatsandbootsCaches,
+          cacheNames: hatcoatandbootsCaches,
           resourceCount: keys.length,
           sampleResources: keys.slice(0, 5).map((k) => k.url),
         },

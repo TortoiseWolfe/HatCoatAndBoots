@@ -95,7 +95,7 @@ describe('Web3Forms Utilities', () => {
         body: JSON.stringify({
           access_key: WEB3FORMS_CONFIG.accessKey,
           ...validFormData,
-          from_name: 'HatsCoatsAndBoots Contact Form',
+          from_name: 'HatCoatAndBoots Contact Form',
           botcheck: false,
         }),
       });

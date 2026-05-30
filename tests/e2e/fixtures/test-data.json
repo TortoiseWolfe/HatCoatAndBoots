@@ -54,7 +54,7 @@
   },
   "navigation": {
     "pages": [
-      { "name": "Home", "path": "/", "title": "HatsCoatsAndBoots" },
+      { "name": "Home", "path": "/", "title": "HatCoatAndBoots" },
       { "name": "Themes", "path": "/themes", "title": "Theme" },
       { "name": "Components", "path": "/components", "title": "Component" },
       {
@@ -65,7 +65,7 @@
       { "name": "Status", "path": "/status", "title": "Status" }
     ],
     "externalLinks": [
-      { "name": "GitHub", "url": "github.com/TortoiseWolfe/HatsCoatsAndBoots" }
+      { "name": "GitHub", "url": "github.com/TortoiseWolfe/HatCoatAndBoots" }
     ]
   },
   "components": {
@@ -91,9 +91,9 @@
   },
   "pwa": {
     "manifest": {
-      "name": "HatsCoatsAndBoots",
-      "short_name": "HatsCoatsAndBoots",
-      "start_url": "/HatsCoatsAndBoots/",
+      "name": "HatCoatAndBoots",
+      "short_name": "HatCoatAndBoots",
+      "start_url": "/HatCoatAndBoots/",
       "display": "standalone",
       "theme_color": "#3b82f6",
       "background_color": "#ffffff"

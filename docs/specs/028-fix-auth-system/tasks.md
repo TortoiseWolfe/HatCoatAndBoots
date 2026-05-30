@@ -161,15 +161,15 @@
 **Purpose**: Ensure all stories work together and pass validation
 
 - [ ] T016 [P] Run existing auth tests to ensure no regressions
-  - `docker compose exec hatscoatsandboots pnpm test src/contexts/AuthContext`
-  - `docker compose exec hatscoatsandboots pnpm test src/components/auth`
+  - `docker compose exec hatcoatandboots pnpm test src/contexts/AuthContext`
+  - `docker compose exec hatcoatandboots pnpm test src/components/auth`
 
 - [ ] T017 [P] Run E2E auth tests
-  - `docker compose exec hatscoatsandboots pnpm exec playwright test tests/e2e/auth/`
+  - `docker compose exec hatcoatandboots pnpm exec playwright test tests/e2e/auth/`
 
 - [ ] T018 [P] Run type-check and lint
-  - `docker compose exec hatscoatsandboots pnpm run type-check`
-  - `docker compose exec hatscoatsandboots pnpm run lint`
+  - `docker compose exec hatcoatandboots pnpm run type-check`
+  - `docker compose exec hatcoatandboots pnpm run lint`
 
 - [ ] T019 Manual verification on local environment
   - Test sign-in flow end-to-end

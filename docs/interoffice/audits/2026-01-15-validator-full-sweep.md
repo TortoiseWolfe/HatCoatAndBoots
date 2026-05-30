@@ -62,23 +62,23 @@ Signature must be left-aligned at `x="40"`, NOT centered at `x="960"` with `text
 
 ## SIGNATURE-004 / G-043 Failures (12 SVGs)
 
-Signature must use format: `NNN:NN | Feature Name | HatsCoatsAndBoots`
+Signature must use format: `NNN:NN | Feature Name | HatCoatAndBoots`
 
-| Feature                      | SVG                                | Current Format                              | Correct Format |
-| ---------------------------- | ---------------------------------- | ------------------------------------------- | -------------- | ------------------------ | ------------------ |
-| 003-user-authentication      | 01-registration-sign-in.svg        | `HatsCoatsAndBoots Wireframe v5 - 003...`   | `003:01        | User Authentication      | HatsCoatsAndBoots` |
-| 003-user-authentication      | 02-verification-password-reset.svg | `HatsCoatsAndBoots Wireframe v5 - 003...`   | `003:02        | User Authentication      | HatsCoatsAndBoots` |
-| 003-user-authentication      | 03-profile-session-management.svg  | `HatsCoatsAndBoots Wireframe v5 - 003...`   | `003:03        | User Authentication      | HatsCoatsAndBoots` |
-| 008-on-the-account           | 01-avatar-upload-flow.svg          | `HatsCoatsAndBoots Wireframe v5 - 008...`   | `008:01        | On The Account           | HatsCoatsAndBoots` |
-| 010-unified-blog-content     | 01-editor-and-preview.svg          | `HatsCoatsAndBoots Wireframe v5 - 010...`   | `010:01        | Unified Blog Content     | HatsCoatsAndBoots` |
-| 010-unified-blog-content     | 02-conflict-resolution.svg         | `HatsCoatsAndBoots Wireframe v5 - 010...`   | `010:02        | Unified Blog Content     | HatsCoatsAndBoots` |
-| 014-admin-welcome-email-gate | 01-verification-gate.svg           | `HatsCoatsAndBoots Wireframe v5 - 014...`   | `014:01        | Admin Welcome Email Gate | HatsCoatsAndBoots` |
-| 014-admin-welcome-email-gate | 02-admin-setup-process.svg         | `HatsCoatsAndBoots Wireframe v5 - 014...`   | `014:02        | Admin Welcome Email Gate | HatsCoatsAndBoots` |
-| 016-messaging-critical-fixes | 01-message-input-visibility.svg    | `HatsCoatsAndBoots v0.1 - Messaging UX...`  | `016:01        | Messaging Critical Fixes | HatsCoatsAndBoots` |
-| 016-messaging-critical-fixes | 02-oauth-setup-flow.svg            | `HatsCoatsAndBoots v0.1 - OAuth Setup...`   | `016:02        | Messaging Critical Fixes | HatsCoatsAndBoots` |
-| 016-messaging-critical-fixes | 03-conversation-error-states.svg   | `HatsCoatsAndBoots v0.1 - Conversation...`  | `016:03        | Messaging Critical Fixes | HatsCoatsAndBoots` |
-| 021-geolocation-map          | 01-map-interface-permission.svg    | `HatsCoatsAndBoots v0.1 - Map Interface...` | `021:01        | Geolocation Map          | HatsCoatsAndBoots` |
-| 021-geolocation-map          | 02-markers-and-accessibility.svg   | `HatsCoatsAndBoots v0.1 - Markers and...`   | `021:02        | Geolocation Map          | HatsCoatsAndBoots` |
+| Feature                      | SVG                                | Current Format                            | Correct Format |
+| ---------------------------- | ---------------------------------- | ----------------------------------------- | -------------- | ------------------------ | ---------------- |
+| 003-user-authentication      | 01-registration-sign-in.svg        | `HatCoatAndBoots Wireframe v5 - 003...`   | `003:01        | User Authentication      | HatCoatAndBoots` |
+| 003-user-authentication      | 02-verification-password-reset.svg | `HatCoatAndBoots Wireframe v5 - 003...`   | `003:02        | User Authentication      | HatCoatAndBoots` |
+| 003-user-authentication      | 03-profile-session-management.svg  | `HatCoatAndBoots Wireframe v5 - 003...`   | `003:03        | User Authentication      | HatCoatAndBoots` |
+| 008-on-the-account           | 01-avatar-upload-flow.svg          | `HatCoatAndBoots Wireframe v5 - 008...`   | `008:01        | On The Account           | HatCoatAndBoots` |
+| 010-unified-blog-content     | 01-editor-and-preview.svg          | `HatCoatAndBoots Wireframe v5 - 010...`   | `010:01        | Unified Blog Content     | HatCoatAndBoots` |
+| 010-unified-blog-content     | 02-conflict-resolution.svg         | `HatCoatAndBoots Wireframe v5 - 010...`   | `010:02        | Unified Blog Content     | HatCoatAndBoots` |
+| 014-admin-welcome-email-gate | 01-verification-gate.svg           | `HatCoatAndBoots Wireframe v5 - 014...`   | `014:01        | Admin Welcome Email Gate | HatCoatAndBoots` |
+| 014-admin-welcome-email-gate | 02-admin-setup-process.svg         | `HatCoatAndBoots Wireframe v5 - 014...`   | `014:02        | Admin Welcome Email Gate | HatCoatAndBoots` |
+| 016-messaging-critical-fixes | 01-message-input-visibility.svg    | `HatCoatAndBoots v0.1 - Messaging UX...`  | `016:01        | Messaging Critical Fixes | HatCoatAndBoots` |
+| 016-messaging-critical-fixes | 02-oauth-setup-flow.svg            | `HatCoatAndBoots v0.1 - OAuth Setup...`   | `016:02        | Messaging Critical Fixes | HatCoatAndBoots` |
+| 016-messaging-critical-fixes | 03-conversation-error-states.svg   | `HatCoatAndBoots v0.1 - Conversation...`  | `016:03        | Messaging Critical Fixes | HatCoatAndBoots` |
+| 021-geolocation-map          | 01-map-interface-permission.svg    | `HatCoatAndBoots v0.1 - Map Interface...` | `021:01        | Geolocation Map          | HatCoatAndBoots` |
+| 021-geolocation-map          | 02-markers-and-accessibility.svg   | `HatCoatAndBoots v0.1 - Markers and...`   | `021:02        | Geolocation Map          | HatCoatAndBoots` |
 
 **Action**: PATCH - Replace signature text content
 

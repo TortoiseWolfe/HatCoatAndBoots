@@ -4,7 +4,7 @@
 **Category**: core-features
 **Priority**: P2
 **Status**: Draft
-**Source**: Migrated from HatsCoatsAndBoots docs/specs/021
+**Source**: Migrated from HatCoatAndBoots docs/specs/021
 
 ---
 

@@ -116,6 +116,9 @@ storybook-static/
 .component-backup-*
 docs/visual-testing/
 
+# Throwaway wireframe-rendering / screenshot scripts at repo root
+/*.mjs
+
 # Test screenshots
 screenshots/
 .screenshots/

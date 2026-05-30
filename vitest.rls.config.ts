@@ -17,7 +17,7 @@ export default defineConfig({
     globals: true,
     testTimeout: 30000,
     hookTimeout: 30000,
-    // Scrub stale *@hatscoatsandboots.test users + orphan FK rows before any
+    // Scrub stale *@hatcoatandboots.test users + orphan FK rows before any
     // test file collects. Defends against killed prior runs leaving
     // payment_intents that block createTestUser's deleteUser. (#50)
     globalSetup: ['./tests/rls/__setup__/cleanup-stale.ts'],

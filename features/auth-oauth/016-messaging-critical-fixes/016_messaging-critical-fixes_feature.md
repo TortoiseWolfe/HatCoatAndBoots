@@ -2,7 +2,7 @@
 
 **Feature ID**: 016
 **Category**: auth-oauth
-**Source**: HatsCoatsAndBoots/specs/006-feature-006-critical
+**Source**: HatCoatAndBoots/specs/006-feature-006-critical
 **Status**: Ready for SpecKit
 **Depends on**: 013-oauth-messaging-password
 

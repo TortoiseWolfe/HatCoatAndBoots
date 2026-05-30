@@ -1,8 +1,8 @@
 {
   "version": "https://jsonfeed.org/version/1.1",
-  "title": "HatsCoatsAndBoots Blog",
-  "home_page_url": "https://tortoisewolfe.github.io/HatsCoatsAndBoots/blog",
-  "feed_url": "https://tortoisewolfe.github.io/HatsCoatsAndBoots/feed.json",
+  "title": "HatCoatAndBoots Blog",
+  "home_page_url": "https://tortoisewolfe.github.io/HatCoatAndBoots/blog",
+  "feed_url": "https://tortoisewolfe.github.io/HatCoatAndBoots/feed.json",
   "description": "Opinionated Next.js PWA Template",
   "items": []
 }

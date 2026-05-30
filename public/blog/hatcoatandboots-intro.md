@@ -2,9 +2,9 @@
 title: Scripthammer - Opinionated Next.js PWA Template
 author: TortoiseWolfe
 date: 2025-09-26
-slug: hatscoatsandboots-intro
+slug: hatcoatandboots-intro
 tags:
-  - hatscoatsandboots
+  - hatcoatandboots
   - next.js
   - pwa
   - typescript
@@ -12,9 +12,9 @@ tags:
 categories:
   - documentation
 excerpt: Opinionated Next.js 15.5 template with PWA support, 32 DaisyUI themes, Docker-first development environment, and comprehensive testing suite.
-featuredImage: /blog-images/hatscoatsandboots-intro/featured-og.svg
+featuredImage: /blog-images/hatcoatandboots-intro/featured-og.svg
 featuredImageAlt: Scripthammer - The Opinionated Next.js PWA Template with 32 themes and Docker development
-ogImage: /blog-images/hatscoatsandboots-intro/featured-og.png
+ogImage: /blog-images/hatcoatandboots-intro/featured-og.png
 ogTitle: Scripthammer - Opinionated Next.js PWA Template
 ogDescription: Build production-ready Next.js apps with 32 themes, Docker development, PWA support, and comprehensive testing. No configuration hell.
 twitterCard: summary_large_image
@@ -26,7 +26,7 @@ Scripthammer is an opinionated Next.js template that comes batteries-included wi
 
 ## 📦 What's Actually In This Template
 
-![Scripthammer Dashboard](/blog-images/hatscoatsandboots-intro/dashboard-overview.svg)
+![Scripthammer Dashboard](/blog-images/hatcoatandboots-intro/dashboard-overview.svg)
 _The Scripthammer dashboard showing the theme switcher and component structure_
 
 ### 🔧 Core Technologies
@@ -60,11 +60,11 @@ Theme switching is instant and persisted across sessions.
 
 #### 🧪 Testing That Actually Runs
 
-![Testing Suite Output](/blog-images/hatscoatsandboots-intro/testing-output.svg)
+![Testing Suite Output](/blog-images/hatcoatandboots-intro/testing-output.svg)
 _Comprehensive test suite with unit, E2E (End-to-End), and accessibility testing_
 
 ```bash
-docker compose exec hatscoatsandboots pnpm run test:suite
+docker compose exec hatcoatandboots pnpm run test:suite
 ```
 
 - [Vitest](https://vitest.dev/) for unit tests (58% coverage)
@@ -83,10 +83,10 @@ docker compose exec hatscoatsandboots pnpm run test:suite
 
 ## 🐳 Docker Development Environment (MANDATORY)
 
-![Docker Architecture](/blog-images/hatscoatsandboots-intro/docker-architecture.svg)
+![Docker Architecture](/blog-images/hatcoatandboots-intro/docker-architecture.svg)
 _Docker-first development environment with isolated containers_
 
-**⚠️ CRITICAL**: HatsCoatsAndBoots is Docker-only. Local npm/pnpm commands are NOT supported and WILL NOT WORK.
+**⚠️ CRITICAL**: HatCoatAndBoots is Docker-only. Local npm/pnpm commands are NOT supported and WILL NOT WORK.
 
 Everything MUST run in [Docker](https://www.docker.com/). No "works on my machine" problems:
 
@@ -95,9 +95,9 @@ Everything MUST run in [Docker](https://www.docker.com/). No "works on my machin
 docker compose up
 
 # ALL commands must use docker compose exec:
-docker compose exec hatscoatsandboots pnpm run dev
-docker compose exec hatscoatsandboots pnpm test
-docker compose exec hatscoatsandboots pnpm run generate:component
+docker compose exec hatcoatandboots pnpm run dev
+docker compose exec hatcoatandboots pnpm test
+docker compose exec hatcoatandboots pnpm run generate:component
 
 # ❌ NEVER run locally:
 # pnpm install  # WILL NOT WORK
@@ -109,7 +109,7 @@ docker compose exec hatscoatsandboots pnpm run generate:component
 Stop copying component boilerplate. Use the generator:
 
 ```bash
-docker compose exec hatscoatsandboots pnpm run generate:component MyComponent atomic
+docker compose exec hatcoatandboots pnpm run generate:component MyComponent atomic
 ```
 
 This creates the required 5-file structure:
@@ -185,15 +185,15 @@ src/
 
 ```bash
 # Quick validation
-docker compose exec hatscoatsandboots pnpm run test:quick
+docker compose exec hatcoatandboots pnpm run test:quick
 
 # Full test suite
-docker compose exec hatscoatsandboots pnpm run test:suite
+docker compose exec hatcoatandboots pnpm run test:suite
 
 # Specific tests
-docker compose exec hatscoatsandboots pnpm run type-check
-docker compose exec hatscoatsandboots pnpm run lint
-docker compose exec hatscoatsandboots pnpm run test:coverage
+docker compose exec hatcoatandboots pnpm run type-check
+docker compose exec hatcoatandboots pnpm run lint
+docker compose exec hatcoatandboots pnpm run test:coverage
 ```
 
 ## 💡 Why Scripthammer?
@@ -225,12 +225,12 @@ docker compose up  # First build takes 5-10 minutes
 
 **Remember**:
 
-- ✅ `docker compose exec hatscoatsandboots pnpm install` - Correct
+- ✅ `docker compose exec hatcoatandboots pnpm install` - Correct
 - ❌ `pnpm install` - Will NOT work
 - ❌ `npm install` - Will NOT work
 
 ## 🎯 What's Next?
 
-Check out the [CONSTITUTION.md](https://github.com/TortoiseWolfe/HatsCoatsAndBoots/blob/main/.specify/memory/constitution.md) for the project principles and current sprint goals. Read [CLAUDE.md](https://github.com/TortoiseWolfe/HatsCoatsAndBoots/blob/main/CLAUDE.md) for AI (Artificial Intelligence) pair programming guidelines and best practices when working with this codebase.
+Check out the [CONSTITUTION.md](https://github.com/TortoiseWolfe/HatCoatAndBoots/blob/main/.specify/memory/constitution.md) for the project principles and current sprint goals. Read [CLAUDE.md](https://github.com/TortoiseWolfe/HatCoatAndBoots/blob/main/CLAUDE.md) for AI (Artificial Intelligence) pair programming guidelines and best practices when working with this codebase.
 
 This is Scripthammer. Stop configuring, start shipping.

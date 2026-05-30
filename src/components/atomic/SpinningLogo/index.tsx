@@ -1,2 +1,2 @@
 export { SpinningLogo } from './SpinningLogo';
-export { LayeredHatsCoatsAndBootsLogo } from './LayeredHatsCoatsAndBootsLogo';
+export { LayeredHatCoatAndBootsLogo } from './LayeredHatCoatAndBootsLogo';

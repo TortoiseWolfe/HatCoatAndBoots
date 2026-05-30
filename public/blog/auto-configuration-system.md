@@ -1,7 +1,7 @@
 ---
 title: 'Auto-Configuration: Use Template and Start Building'
 slug: 'auto-configuration-system'
-excerpt: "HatsCoatsAndBoots's auto-configuration eliminates setup friction. Use the template, run Docker, and watch your project automatically adapt with zero manual config."
+excerpt: "HatCoatAndBoots's auto-configuration eliminates setup friction. Use the template, run Docker, and watch your project automatically adapt with zero manual config."
 author: Development Team
 date: 2025-09-27
 status: scheduled
@@ -22,7 +22,7 @@ ogImage: /blog-images/auto-config/featured-og.png
 
 # Auto-Configuration: Use Template and Start Building
 
-HatsCoatsAndBoots automatically configures itself based on your new repository. Use this template, and everything adapts to your project name and settings with minimal setup.
+HatCoatAndBoots automatically configures itself based on your new repository. Use this template, and everything adapts to your project name and settings with minimal setup.
 
 ## ✅ Prerequisites
 
@@ -36,7 +36,7 @@ HatsCoatsAndBoots automatically configures itself based on your new repository. 
 
 ### 1. Use Template on GitHub
 
-Click "Use this template" on [HatsCoatsAndBoots](https://github.com/TortoiseWolfe/HatsCoatsAndBoots) and create your repository with any name you like.
+Click "Use this template" on [HatCoatAndBoots](https://github.com/TortoiseWolfe/HatCoatAndBoots) and create your repository with any name you like.
 
 ### 2. Clone Your New Repository
 
@@ -104,12 +104,12 @@ All commands MUST be run inside Docker:
 
 ```bash
 # ❌ WRONG: pnpm run dev
-# ✅ RIGHT: docker compose exec hatscoatsandboots pnpm run dev
+# ✅ RIGHT: docker compose exec hatcoatandboots pnpm run dev
 ```
 
 ## 🔧 What Gets Auto-Configured
 
-When you create from template and clone, HatsCoatsAndBoots automatically detects and configures:
+When you create from template and clone, HatCoatAndBoots automatically detects and configures:
 
 - **Project Name**: From your repository name
 - **Owner Info**: From your GitHub username (not "Admin" or generic names)
@@ -125,7 +125,7 @@ The auto-config system generates configuration at build time:
 1. **TypeScript Config**: `/src/config/project-detected.ts` - Strongly typed for your components
 2. **JSON Config**: `/src/config/project-detected.json` - Raw configuration data
 
-Check these files after running `docker compose exec hatscoatsandboots pnpm run build` - they contain YOUR project's information automatically detected from Git.
+Check these files after running `docker compose exec hatcoatandboots pnpm run build` - they contain YOUR project's information automatically detected from Git.
 
 ## 💡 How to Use It
 
@@ -167,7 +167,7 @@ Traditional templates require editing multiple files:
 - ❌ Edit PWA manifests
 - ❌ Update hardcoded references throughout codebase
 
-With HatsCoatsAndBoots, the process is dramatically simplified:
+With HatCoatAndBoots, the process is dramatically simplified:
 
 - ✅ Use template with any name
 - ✅ Create `.env` file (one-time, 30 seconds)
@@ -180,8 +180,8 @@ With HatsCoatsAndBoots, the process is dramatically simplified:
 
 ```bash
 # MUST use Docker - local commands won't work
-docker compose exec hatscoatsandboots pnpm run build
-docker compose exec hatscoatsandboots pnpm run deploy
+docker compose exec hatcoatandboots pnpm run build
+docker compose exec hatcoatandboots pnpm run deploy
 # Automatically configured for your repository
 ```
 
@@ -278,10 +278,10 @@ If you need to use additional environment variables, update `.github/workflows/d
 
 ```bash
 # Run the comprehensive test suite (all tests must run in Docker)
-docker compose exec hatscoatsandboots pnpm run test:suite
+docker compose exec hatcoatandboots pnpm run test:suite
 ```
 
-**⚠️ REMINDER**: Every single command in this project MUST be prefixed with `docker compose exec hatscoatsandboots`. There are NO exceptions.
+**⚠️ REMINDER**: Every single command in this project MUST be prefixed with `docker compose exec hatcoatandboots`. There are NO exceptions.
 
 ### Check Current Config
 
@@ -325,7 +325,7 @@ function getProjectInfo() {
 
   // 3. Fall back to defaults
   return {
-    projectName: 'HatsCoatsAndBoots',
+    projectName: 'HatCoatAndBoots',
     projectOwner: 'TortoiseWolfe',
     source: 'default',
   };
@@ -353,18 +353,18 @@ Currently supported:
 
 ```bash
 # Development - Local testing with hot reload at http://localhost:3000
-docker compose exec hatscoatsandboots pnpm run dev
+docker compose exec hatcoatandboots pnpm run dev
 
 # Production Build - Creates static files for GitHub Pages deployment
-docker compose exec hatscoatsandboots pnpm run build
-docker compose exec hatscoatsandboots pnpm run deploy
+docker compose exec hatcoatandboots pnpm run build
+docker compose exec hatcoatandboots pnpm run deploy
 ```
 
 The project auto-detects your configuration from git, so you don't need different settings for different environments.
 
 ## 🧪 Try It Now
 
-1. **Use Template** [HatsCoatsAndBoots](https://github.com/TortoiseWolfe/HatsCoatsAndBoots) (30 seconds)
+1. **Use Template** [HatCoatAndBoots](https://github.com/TortoiseWolfe/HatCoatAndBoots) (30 seconds)
 2. **Clone** your new repository (30 seconds)
 3. **Create .env** with `cp .env.example .env` (30 seconds)
 4. **Run** `docker compose up` (5-10 minutes first build)
@@ -417,12 +417,12 @@ _The auto-configuration process: Use Template → Clone → Ready in 3 simple st
 
 The magic happens through our detection script that runs at build time, analyzing your git remote to extract project information and automatically generating all configuration files.
 
-## Traditional Setup vs HatsCoatsAndBoots
+## Traditional Setup vs HatCoatAndBoots
 
 ![Before and After Comparison](/blog-images/auto-config/before-after.svg)
 _Save 30-60 minutes of manual configuration with every new project_
 
-While traditional templates require editing 22+ files and configuration points, HatsCoatsAndBoots handles everything automatically. No more hunting for hardcoded values or broken references after using the template.
+While traditional templates require editing 22+ files and configuration points, HatCoatAndBoots handles everything automatically. No more hunting for hardcoded values or broken references after using the template.
 
 ## ⚠️ Troubleshooting
 
@@ -443,10 +443,10 @@ While traditional templates require editing 22+ files and configuration points, 
 **Project name not updating:**
 
 - Auto-detection runs at BUILD time, not runtime
-- Run `docker compose exec hatscoatsandboots pnpm run build` to regenerate
+- Run `docker compose exec hatcoatandboots pnpm run build` to regenerate
 - Check `src/config/project-detected.ts` for detected values
 
-**Hardcoded values still showing "HatsCoatsAndBoots":**
+**Hardcoded values still showing "HatCoatAndBoots":**
 
 - Some components may still have hardcoded values
 - This is a known limitation being addressed
@@ -454,7 +454,7 @@ While traditional templates require editing 22+ files and configuration points, 
 
 ## ✅ The Bottom Line
 
-HatsCoatsAndBoots significantly reduces setup friction compared to traditional templates. While not completely "zero-config," it automates most configuration through git detection, requiring only minimal setup (creating the `.env` file).
+HatCoatAndBoots significantly reduces setup friction compared to traditional templates. While not completely "zero-config," it automates most configuration through git detection, requiring only minimal setup (creating the `.env` file).
 
 **Minimal configuration. Quick setup. Use template and build.**
 

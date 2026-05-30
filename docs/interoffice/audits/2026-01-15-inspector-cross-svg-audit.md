@@ -48,28 +48,28 @@ All signatures should be left-aligned (`x="40"`) but these files use centered al
 
 ### 2. Signature Format Violations (12 files)
 
-Valid format: `NNN:NN | Feature Name | HatsCoatsAndBoots`
-Regex: `^[0-9]{3}:[0-9]{2} \| .+ \| HatsCoatsAndBoots$`
+Valid format: `NNN:NN | Feature Name | HatCoatAndBoots`
+Regex: `^[0-9]{3}:[0-9]{2} \| .+ \| HatCoatAndBoots$`
 
-| Feature                      | File | Actual Format                                                                           |
-| ---------------------------- | ---- | --------------------------------------------------------------------------------------- |
-| 007-e2e-testing-framework    | 02   | `HatsCoatsAndBoots v0.1 - E2E Testing CI/CD Pipeline - 007-e2e-testing-framework`       |
-| 010-unified-blog-content     | 01   | `HatsCoatsAndBoots Wireframe v5 - 010-unified-blog-content - Editor and Preview`        |
-| 010-unified-blog-content     | 02   | `HatsCoatsAndBoots Wireframe v5 - 010-unified-blog-content - Conflict Resolution`       |
-| 014-admin-welcome-email-gate | 01   | `HatsCoatsAndBoots Wireframe v5 - 014-admin-welcome-email-gate - Verification Gate`     |
-| 014-admin-welcome-email-gate | 02   | `HatsCoatsAndBoots Wireframe v5 - 014-admin-welcome-email-gate - Admin Setup Process`   |
-| 016-messaging-critical-fixes | 01   | `HatsCoatsAndBoots v0.1 - Messaging UX Input Visibility - 016-messaging-critical-fixes` |
-| 016-messaging-critical-fixes | 02   | `HatsCoatsAndBoots v0.1 - OAuth Setup Flow - 016-messaging-critical-fixes`              |
-| 016-messaging-critical-fixes | 03   | `HatsCoatsAndBoots v0.1 - Conversation Error States - 016-messaging-critical-fixes`     |
-| 021-geolocation-map          | 01   | `HatsCoatsAndBoots v0.1 - Map Interface Permission Flow - 021-geolocation-map`          |
-| 021-geolocation-map          | 02   | `HatsCoatsAndBoots v0.1 - Markers and Accessibility - 021-geolocation-map`              |
-| 022-web3forms-integration    | 01   | `Generator1 \| 022-web3forms-integration \| 01-contact-form-ui.svg`                     |
-| 022-web3forms-integration    | 02   | `Generator1 \| 022-web3forms-integration \| 02-submission-states.svg`                   |
+| Feature                      | File | Actual Format                                                                         |
+| ---------------------------- | ---- | ------------------------------------------------------------------------------------- |
+| 007-e2e-testing-framework    | 02   | `HatCoatAndBoots v0.1 - E2E Testing CI/CD Pipeline - 007-e2e-testing-framework`       |
+| 010-unified-blog-content     | 01   | `HatCoatAndBoots Wireframe v5 - 010-unified-blog-content - Editor and Preview`        |
+| 010-unified-blog-content     | 02   | `HatCoatAndBoots Wireframe v5 - 010-unified-blog-content - Conflict Resolution`       |
+| 014-admin-welcome-email-gate | 01   | `HatCoatAndBoots Wireframe v5 - 014-admin-welcome-email-gate - Verification Gate`     |
+| 014-admin-welcome-email-gate | 02   | `HatCoatAndBoots Wireframe v5 - 014-admin-welcome-email-gate - Admin Setup Process`   |
+| 016-messaging-critical-fixes | 01   | `HatCoatAndBoots v0.1 - Messaging UX Input Visibility - 016-messaging-critical-fixes` |
+| 016-messaging-critical-fixes | 02   | `HatCoatAndBoots v0.1 - OAuth Setup Flow - 016-messaging-critical-fixes`              |
+| 016-messaging-critical-fixes | 03   | `HatCoatAndBoots v0.1 - Conversation Error States - 016-messaging-critical-fixes`     |
+| 021-geolocation-map          | 01   | `HatCoatAndBoots v0.1 - Map Interface Permission Flow - 021-geolocation-map`          |
+| 021-geolocation-map          | 02   | `HatCoatAndBoots v0.1 - Markers and Accessibility - 021-geolocation-map`              |
+| 022-web3forms-integration    | 01   | `Generator1 \| 022-web3forms-integration \| 01-contact-form-ui.svg`                   |
+| 022-web3forms-integration    | 02   | `Generator1 \| 022-web3forms-integration \| 02-submission-states.svg`                 |
 
 **Invalid formats detected:**
 
-- `HatsCoatsAndBoots v0.1 - ...` (6 files)
-- `HatsCoatsAndBoots Wireframe v5 - ...` (4 files)
+- `HatCoatAndBoots v0.1 - ...` (6 files)
+- `HatCoatAndBoots Wireframe v5 - ...` (4 files)
 - `Generator1 | ...` (2 files)
 
 ### 3. Header/Footer Missing (2 files)
@@ -101,20 +101,20 @@ Feature 022-web3forms-integration SVGs are missing include templates:
 
 ### Files with Alignment Only (correct format)
 
-| File                          | Has Correct Format                                        |
-| ----------------------------- | --------------------------------------------------------- |
-| 003-user-authentication/01-03 | Yes: `003:0N \| User Authentication \| HatsCoatsAndBoots` |
-| 008-on-the-account/01         | Yes: `008:01 \| User Avatar Upload \| HatsCoatsAndBoots`  |
-| 011-group-chats/01-02         | Yes: `011:0N \| Group Chats \| HatsCoatsAndBoots`         |
+| File                          | Has Correct Format                                      |
+| ----------------------------- | ------------------------------------------------------- |
+| 003-user-authentication/01-03 | Yes: `003:0N \| User Authentication \| HatCoatAndBoots` |
+| 008-on-the-account/01         | Yes: `008:01 \| User Avatar Upload \| HatCoatAndBoots`  |
+| 011-group-chats/01-02         | Yes: `011:0N \| Group Chats \| HatCoatAndBoots`         |
 
 ---
 
 ## GENERAL_ISSUES.md Updates Required
 
-| New Entry | Pattern                                                                |
-| --------- | ---------------------------------------------------------------------- |
-| **G-040** | Signature must be left-aligned (`x="40"`), not centered                |
-| **G-041** | Signature format must be `NNN:NN \| Feature Name \| HatsCoatsAndBoots` |
+| New Entry | Pattern                                                              |
+| --------- | -------------------------------------------------------------------- |
+| **G-040** | Signature must be left-aligned (`x="40"`), not centered              |
+| **G-041** | Signature format must be `NNN:NN \| Feature Name \| HatCoatAndBoots` |
 
 ---
 
@@ -138,7 +138,7 @@ Feature 022-web3forms-integration SVGs are missing include templates:
 
 ```xml
 <text x="40" y="1060" fill="#374151" font-family="system-ui, sans-serif"
-      font-size="18" font-weight="bold">NNN:NN | Feature Name | HatsCoatsAndBoots</text>
+      font-size="18" font-weight="bold">NNN:NN | Feature Name | HatCoatAndBoots</text>
 ```
 
 ---

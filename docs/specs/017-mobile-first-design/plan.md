@@ -33,7 +33,7 @@
 
 ## Summary
 
-**Primary Requirement**: Implement comprehensive mobile-first responsive design across entire HatsCoatsAndBoots site to fix current desktop-cramped-on-mobile experience.
+**Primary Requirement**: Implement comprehensive mobile-first responsive design across entire HatCoatAndBoots site to fix current desktop-cramped-on-mobile experience.
 
 **Technical Approach**:
 
@@ -332,7 +332,7 @@ playwright.config.ts     # Mobile device configurations
 - Document orientation detection patterns
 - Add mobile testing requirements
 
-**Location**: `/home/turtle_wolfe/repos/HatsCoatsAndBoots/CLAUDE.md`
+**Location**: `/home/turtle_wolfe/repos/HatCoatAndBoots/CLAUDE.md`
 
 **Changes Needed**:
 

@@ -165,9 +165,9 @@ export function useOfflineQueue(): UseOfflineQueueReturn {
       return;
     }
     const win = window as unknown as Record<string, unknown>;
-    win.__hatscoatsandboots_syncQueue = () => syncQueue();
+    win.__hatcoatandboots_syncQueue = () => syncQueue();
     return () => {
-      delete win.__hatscoatsandboots_syncQueue;
+      delete win.__hatcoatandboots_syncQueue;
     };
   }, [syncQueue]);
 

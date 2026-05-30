@@ -31,7 +31,7 @@ This guide walks you through setting up the complete payment integration system 
 
 1. Click "New project"
 2. Fill in details:
-   - **Name**: `hatscoatsandboots-payments` (or your project name)
+   - **Name**: `hatcoatandboots-payments` (or your project name)
    - **Database Password**: Generate strong password (save this!)
    - **Region**: Choose closest to your users
    - **Pricing Plan**: Free tier (sufficient for 10k payments/month)
@@ -63,7 +63,7 @@ This guide walks you through setting up the complete payment integration system 
 
 ### 1.4 Add Credentials to .env
 
-Edit `/home/turtle_wolfe/repos/HatsCoatsAndBoots/.env` and add:
+Edit `/home/turtle_wolfe/repos/HatCoatAndBoots/.env` and add:
 
 ```bash
 # Supabase Project Configuration
@@ -87,7 +87,7 @@ SUPABASE_SERVICE_ROLE_KEY=eyJh...your-service-role-key
 The CLI was already installed in Phase 1, but verify:
 
 ```bash
-docker compose exec hatscoatsandboots supabase --version
+docker compose exec hatcoatandboots supabase --version
 # Should show: 2.48.3 or similar
 ```
 
@@ -97,7 +97,7 @@ Now that credentials are in `.env`, link your local project:
 
 ```bash
 # Link to your Supabase project (reads SUPABASE_PROJECT_REF and SUPABASE_DB_PASSWORD from .env)
-docker compose exec hatscoatsandboots supabase link --project-ref $SUPABASE_PROJECT_REF --password $SUPABASE_DB_PASSWORD
+docker compose exec hatcoatandboots supabase link --project-ref $SUPABASE_PROJECT_REF --password $SUPABASE_DB_PASSWORD
 ```
 
 **Expected Output**:
@@ -115,7 +115,7 @@ Apply all 6 database migrations to your cloud project:
 
 ```bash
 # Push migrations
-docker compose exec hatscoatsandboots supabase db push
+docker compose exec hatcoatandboots supabase db push
 
 # Expected output shows 6 migrations applied:
 # - 001_payment_intents
@@ -132,10 +132,10 @@ Generate types from your live database schema:
 
 ```bash
 # Generate types file
-docker compose exec hatscoatsandboots sh -c 'supabase gen types typescript --linked > /app/src/lib/supabase/types.ts'
+docker compose exec hatcoatandboots sh -c 'supabase gen types typescript --linked > /app/src/lib/supabase/types.ts'
 
 # Verify file created
-docker compose exec hatscoatsandboots ls -lh /app/src/lib/supabase/types.ts
+docker compose exec hatcoatandboots ls -lh /app/src/lib/supabase/types.ts
 ```
 
 ---
@@ -186,7 +186,7 @@ You'll add the endpoint URL after deploying Edge Functions.
 ### 4.2 Create App
 
 1. Click **Create App**
-2. App Name: `HatsCoatsAndBoots Payments`
+2. App Name: `HatCoatAndBoots Payments`
 3. Select **Merchant** account type
 4. Click **Create App**
 
@@ -236,7 +236,7 @@ Webhook configuration happens after Edge Function deployment (Step 6).
 ### 5.3 Get API Key
 
 1. **API Keys** → **Create API Key**
-2. Name: `HatsCoatsAndBoots Payments`
+2. Name: `HatCoatAndBoots Payments`
 3. Permission: **Full access** (or **Sending access** only)
 4. Copy the API key (starts with `re_`)
 
@@ -284,15 +284,15 @@ After Phase 3 implementation (not yet done), you'll deploy:
 
 ```bash
 # Deploy all Edge Functions to Supabase
-docker compose exec hatscoatsandboots supabase functions deploy stripe-webhook
-docker compose exec hatscoatsandboots supabase functions deploy paypal-webhook
-docker compose exec hatscoatsandboots supabase functions deploy send-payment-email
+docker compose exec hatcoatandboots supabase functions deploy stripe-webhook
+docker compose exec hatcoatandboots supabase functions deploy paypal-webhook
+docker compose exec hatcoatandboots supabase functions deploy send-payment-email
 ```
 
 ### 7.2 Get Edge Function URLs
 
 ```bash
-docker compose exec hatscoatsandboots supabase functions list
+docker compose exec hatcoatandboots supabase functions list
 ```
 
 Your webhook URLs will be:
@@ -383,10 +383,10 @@ NEXT_PUBLIC_CHIME_SIGN=$yourchimesign
 
 ```bash
 # Restart dev server to load new env vars
-docker compose restart hatscoatsandboots
+docker compose restart hatcoatandboots
 
 # Verify Supabase connection
-docker compose exec hatscoatsandboots pnpm run dev
+docker compose exec hatcoatandboots pnpm run dev
 # Visit http://localhost:3000
 # Check browser console for errors
 ```
@@ -426,10 +426,10 @@ VALUES
 
 ```bash
 # Reset local database
-docker compose exec hatscoatsandboots supabase db reset
+docker compose exec hatcoatandboots supabase db reset
 
 # Re-push migrations
-docker compose exec hatscoatsandboots supabase db push
+docker compose exec hatcoatandboots supabase db push
 ```
 
 ### Environment Variables Not Loading
@@ -438,7 +438,7 @@ docker compose exec hatscoatsandboots supabase db push
 
 ```bash
 # Restart Docker container
-docker compose restart hatscoatsandboots
+docker compose restart hatcoatandboots
 
 # Verify .env file exists and has correct values
 cat .env | grep SUPABASE

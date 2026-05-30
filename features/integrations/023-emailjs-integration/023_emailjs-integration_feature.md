@@ -2,7 +2,7 @@
 
 **Feature ID**: 023
 **Category**: integrations
-**Source**: HatsCoatsAndBoots/docs/specs/010-emailjs-integration
+**Source**: HatCoatAndBoots/docs/specs/010-emailjs-integration
 **Status**: Ready for SpecKit
 **Related**: 022-web3forms-integration (Primary provider)
 

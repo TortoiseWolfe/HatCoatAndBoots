@@ -26,7 +26,7 @@
 
 3. **Start Development Server**:
    ```bash
-   docker compose exec hatscoatsandboots pnpm run dev
+   docker compose exec hatcoatandboots pnpm run dev
    ```
 
 ## Test Scenario: Complete Auth Flow
@@ -257,7 +257,7 @@ localStorage.clear()
 
 After quickstart validation:
 
-1. Run full E2E test suite: `docker compose exec hatscoatsandboots pnpm test:e2e`
-2. Run accessibility tests: `docker compose exec hatscoatsandboots pnpm test:a11y`
+1. Run full E2E test suite: `docker compose exec hatcoatandboots pnpm test:e2e`
+2. Run accessibility tests: `docker compose exec hatcoatandboots pnpm test:a11y`
 3. Load test with k6: `k6 run tests/load/auth-load.js`
 4. Security audit: `npm audit && snyk test`

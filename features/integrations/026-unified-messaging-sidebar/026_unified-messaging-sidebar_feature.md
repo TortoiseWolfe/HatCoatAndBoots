@@ -2,7 +2,7 @@
 
 **Feature ID**: 026
 **Category**: integrations
-**Source**: HatsCoatsAndBoots/docs/specs/037-unified-messaging-sidebar
+**Source**: HatCoatAndBoots/docs/specs/037-unified-messaging-sidebar
 **Status**: Ready for SpecKit
 
 ## Description

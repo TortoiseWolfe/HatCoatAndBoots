@@ -2,7 +2,7 @@
 
 ## Overview
 
-HatsCoatsAndBoots includes a privacy-conscious Google Analytics 4 (GA4) integration that respects user consent and provides comprehensive tracking capabilities for understanding user behavior.
+HatCoatAndBoots includes a privacy-conscious Google Analytics 4 (GA4) integration that respects user consent and provides comprehensive tracking capabilities for understanding user behavior.
 
 ## Features
 

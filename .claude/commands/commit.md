@@ -6,8 +6,8 @@ tags: workflow
 Please follow these steps to commit code changes:
 
 1. **Run Quality Checks**:
-   - Execute `docker compose exec hatscoatsandboots pnpm run lint`
-   - Execute `docker compose exec hatscoatsandboots pnpm run type-check`
+   - Execute `docker compose exec hatcoatandboots pnpm run lint`
+   - Execute `docker compose exec hatcoatandboots pnpm run type-check`
    - If either check fails, stop and report the errors
 
 2. **Stage and Commit**:

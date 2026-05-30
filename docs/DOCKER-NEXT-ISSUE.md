@@ -98,10 +98,10 @@ docker compose down
 docker compose up
 
 # Check container logs
-docker compose logs -f hatscoatsandboots
+docker compose logs -f hatcoatandboots
 
 # Enter container
-docker compose exec hatscoatsandboots sh
+docker compose exec hatcoatandboots sh
 ```
 
 ## When to Use Docker vs Local

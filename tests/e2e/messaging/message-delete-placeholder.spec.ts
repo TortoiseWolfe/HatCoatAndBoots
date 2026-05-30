@@ -12,7 +12,7 @@
  *
  * Run from inside the Docker container:
  *   docker exec -e SKIP_WEBSERVER=1 -e BASE_URL=http://localhost:3000 \
- *     sh-b-hatscoatsandboots-1 npx playwright test tests/e2e/messaging/message-delete-placeholder.spec.ts --project=chromium
+ *     sh-b-hatcoatandboots-1 npx playwright test tests/e2e/messaging/message-delete-placeholder.spec.ts --project=chromium
  */
 
 import { test, expect } from '@playwright/test';
@@ -37,7 +37,7 @@ const MESSAGING_PASSWORD = process.env.TEST_USER_PRIMARY_PASSWORD!;
 const BP = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
 const SUPABASE_DOCKER_HOST =
-  process.env.SUPABASE_DOCKER_HOST || 'hatscoatsandboots-supabase-kong-1';
+  process.env.SUPABASE_DOCKER_HOST || 'hatcoatandboots-supabase-kong-1';
 // In CI, use the cloud Supabase URL. Locally, use the Docker URL.
 const SUPABASE_URL = process.env.CI
   ? process.env.NEXT_PUBLIC_SUPABASE_URL || ''

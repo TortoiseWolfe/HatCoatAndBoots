@@ -14,7 +14,7 @@
 Coverage:
 
 - OWASP Top 10 (2021) full checklist
-- HatsCoatsAndBoots-specific checks (Supabase, Static Export, Privacy)
+- HatCoatAndBoots-specific checks (Supabase, Static Export, Privacy)
 - Quick mode (--quick) for fast scans
 - Structured output format with severity levels
 

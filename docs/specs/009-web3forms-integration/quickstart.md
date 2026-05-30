@@ -52,7 +52,7 @@ NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY=your_web3forms_access_key_here
 
 ```bash
 # Test that the key is loaded
-docker compose exec hatscoatsandboots node -e "console.log(process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY)"
+docker compose exec hatcoatandboots node -e "console.log(process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY)"
 ```
 
 ## Step 3: Generate Form Component
@@ -61,7 +61,7 @@ docker compose exec hatscoatsandboots node -e "console.log(process.env.NEXT_PUBL
 
 ```bash
 # Generate the ContactForm component with proper structure
-docker compose exec hatscoatsandboots pnpm run generate:component
+docker compose exec hatcoatandboots pnpm run generate:component
 
 # Follow the prompts:
 # ? Component type: forms
@@ -400,13 +400,13 @@ export default function ContactPage() {
 
 ```bash
 # Run component tests
-docker compose exec hatscoatsandboots pnpm test ContactForm
+docker compose exec hatcoatandboots pnpm test ContactForm
 
 # Run all form-related tests
-docker compose exec hatscoatsandboots pnpm test -- --testPathPattern=forms
+docker compose exec hatcoatandboots pnpm test -- --testPathPattern=forms
 
 # Check coverage
-docker compose exec hatscoatsandboots pnpm test:coverage
+docker compose exec hatcoatandboots pnpm test:coverage
 ```
 
 ## Step 7: Production Deployment
@@ -422,10 +422,10 @@ NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY=your-production-access-key
 
 ```bash
 # Test production build
-docker compose exec hatscoatsandboots pnpm run build
+docker compose exec hatcoatandboots pnpm run build
 
 # Check for any build errors
-docker compose exec hatscoatsandboots pnpm run start
+docker compose exec hatcoatandboots pnpm run start
 ```
 
 ## Troubleshooting

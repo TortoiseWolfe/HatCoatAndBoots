@@ -5,15 +5,15 @@ import Image from 'next/image';
 import { SpinningLogo } from './SpinningLogo';
 import { detectedConfig } from '@/config/project-detected';
 
-export interface LayeredHatsCoatsAndBootsLogoProps {
+export interface LayeredHatCoatAndBootsLogoProps {
   className?: string;
   size?: number;
   speed?: 'slow' | 'normal' | 'fast' | number;
   pauseOnHover?: boolean;
 }
 
-export const LayeredHatsCoatsAndBootsLogo: React.FC<
-  LayeredHatsCoatsAndBootsLogoProps
+export const LayeredHatCoatAndBootsLogo: React.FC<
+  LayeredHatCoatAndBootsLogoProps
 > = ({ className = '', speed = 'slow', pauseOnHover = true }) => {
   return (
     <div
@@ -52,11 +52,11 @@ export const LayeredHatsCoatsAndBootsLogo: React.FC<
         />
       </div>
 
-      {/* Layer 2: Rotating silver gear + "HatsCoatsAndBoots.com" text (MIDDLE) */}
+      {/* Layer 2: Rotating silver gear + "HatCoatAndBoots.com" text (MIDDLE) */}
       <SpinningLogo speed={speed} pauseOnHover={pauseOnHover}>
         <Image
-          src={`${detectedConfig.basePath}/hatscoatsandboots-logo.svg`}
-          alt="HatsCoatsAndBoots.com gear logo"
+          src={`${detectedConfig.basePath}/hatcoatandboots-logo.svg`}
+          alt="HatCoatAndBoots.com gear logo"
           width={400}
           height={400}
           className="absolute inset-0 h-full w-full"
@@ -100,4 +100,4 @@ export const LayeredHatsCoatsAndBootsLogo: React.FC<
   );
 };
 
-LayeredHatsCoatsAndBootsLogo.displayName = 'LayeredHatsCoatsAndBootsLogo';
+LayeredHatCoatAndBootsLogo.displayName = 'LayeredHatCoatAndBootsLogo';

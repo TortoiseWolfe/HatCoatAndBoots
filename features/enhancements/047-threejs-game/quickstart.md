@@ -11,7 +11,7 @@ All commands assume the dev container is running:
 
 ```bash
 docker compose up -d
-docker compose exec hatscoatsandboots pnpm run dev   # in another terminal if not already
+docker compose exec hatcoatandboots pnpm run dev   # in another terminal if not already
 ```
 
 ---
@@ -20,12 +20,12 @@ docker compose exec hatscoatsandboots pnpm run dev   # in another terminal if no
 
 ```bash
 # Install
-docker compose exec hatscoatsandboots pnpm add three @react-three/fiber @react-three/drei
-docker compose exec hatscoatsandboots pnpm add -D @types/three
+docker compose exec hatcoatandboots pnpm add three @react-three/fiber @react-three/drei
+docker compose exec hatcoatandboots pnpm add -D @types/three
 
 # Verify route-split: production build emits chunks under /_next/static/chunks/
 # /game/3d's chunk includes Three.js; other-route chunks do not.
-docker compose exec hatscoatsandboots pnpm run build
+docker compose exec hatcoatandboots pnpm run build
 ```
 
 **Expected** (compare against `git show HEAD~1:.next/...` if you saved the pre-add baseline, or just compare other-route bundle sizes before vs after the feature lands):
@@ -42,7 +42,7 @@ If the shared chunk grew, search for an accidental `import { Canvas } from '@rea
 
 ```bash
 # In a browser (dev server URL varies by Docker port mapping; check `docker compose ps`).
-# Example: http://localhost:PORT/HatsCoatsAndBoots/game/3d
+# Example: http://localhost:PORT/HatCoatAndBoots/game/3d
 
 # Open browser devtools → Elements panel.
 # Search for: <canvas>
@@ -107,7 +107,7 @@ If the shared chunk grew, search for an accidental `import { Canvas } from '@rea
 
 ```bash
 # Start chromium with WebGL disabled:
-chromium --disable-webgl http://localhost:PORT/HatsCoatsAndBoots/game/3d
+chromium --disable-webgl http://localhost:PORT/HatCoatAndBoots/game/3d
 
 # Or via Chrome DevTools: about:gpu → disable WebGL via the GPU process flags.
 # Or via Firefox: about:config → webgl.disabled = true.
@@ -143,7 +143,7 @@ gl.getExtension('WEBGL_lose_context').loseContext();
 
 ```bash
 # Run the full Pa11y suite locally:
-docker compose exec hatscoatsandboots pnpm test:a11y
+docker compose exec hatcoatandboots pnpm test:a11y
 ```
 
 **Expected**:
@@ -165,19 +165,19 @@ docker compose exec hatscoatsandboots pnpm test:a11y
 ## 7. Production static-export verification
 
 ```bash
-docker compose exec hatscoatsandboots pnpm run build
+docker compose exec hatcoatandboots pnpm run build
 # Check that the static export includes the route:
-docker compose exec hatscoatsandboots ls out/game/3d/
+docker compose exec hatcoatandboots ls out/game/3d/
 ```
 
 **Expected**:
 
 - `out/game/3d/index.html` exists.
 - The HTML contains a `<script src="/_next/static/chunks/..." defer>` that loads the Three.js chunk.
-- Opening `out/game/3d/index.html` directly via `file://` (no server) loads correctly modulo the `basePath` (which is set to `/HatsCoatsAndBoots` in prod). For full local verification:
+- Opening `out/game/3d/index.html` directly via `file://` (no server) loads correctly modulo the `basePath` (which is set to `/HatCoatAndBoots` in prod). For full local verification:
 
 ```bash
-docker compose exec hatscoatsandboots pnpm run start   # serves out/ at http://localhost:3000
+docker compose exec hatcoatandboots pnpm run start   # serves out/ at http://localhost:3000
 ```
 
 **Expected**:
@@ -192,7 +192,7 @@ docker compose exec hatscoatsandboots pnpm run start   # serves out/ at http://l
 
 ```bash
 # Run the new spec across all three browsers:
-docker compose exec hatscoatsandboots pnpm exec playwright test tests/e2e/game-3d.spec.ts
+docker compose exec hatcoatandboots pnpm exec playwright test tests/e2e/game-3d.spec.ts
 ```
 
 **Expected**:

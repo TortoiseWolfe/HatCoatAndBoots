@@ -84,15 +84,15 @@ Extract `[target]` and `[command]` from the arguments.
 **For single terminal** - RUN THIS COMMAND:
 
 ```bash
-tmux send-keys -t hatscoatsandboots:[WINDOW] '[COMMAND]' Enter
+tmux send-keys -t hatcoatandboots:[WINDOW] '[COMMAND]' Enter
 ```
 
 **For group (e.g., all-generators)** - RUN THESE COMMANDS:
 
 ```bash
-tmux send-keys -t hatscoatsandboots:7 '[COMMAND]' Enter && sleep 0.3
-tmux send-keys -t hatscoatsandboots:8 '[COMMAND]' Enter && sleep 0.3
-tmux send-keys -t hatscoatsandboots:9 '[COMMAND]' Enter
+tmux send-keys -t hatcoatandboots:7 '[COMMAND]' Enter && sleep 0.3
+tmux send-keys -t hatcoatandboots:8 '[COMMAND]' Enter && sleep 0.3
+tmux send-keys -t hatcoatandboots:9 '[COMMAND]' Enter
 ```
 
 **IMPORTANT**:
@@ -119,19 +119,19 @@ Sent via tmux to window(s): [list]
 ### Dispatch /queue-check to all generators:
 
 ```bash
-tmux send-keys -t hatscoatsandboots:7 '/queue-check' Enter && sleep 0.3 && tmux send-keys -t hatscoatsandboots:8 '/queue-check' Enter && sleep 0.3 && tmux send-keys -t hatscoatsandboots:9 '/queue-check' Enter
+tmux send-keys -t hatcoatandboots:7 '/queue-check' Enter && sleep 0.3 && tmux send-keys -t hatcoatandboots:8 '/queue-check' Enter && sleep 0.3 && tmux send-keys -t hatcoatandboots:9 '/queue-check' Enter
 ```
 
 ### Dispatch to single generator:
 
 ```bash
-tmux send-keys -t hatscoatsandboots:7 '/queue-check' Enter
+tmux send-keys -t hatcoatandboots:7 '/queue-check' Enter
 ```
 
 ### Dispatch wireframe-fix to generator-1:
 
 ```bash
-tmux send-keys -t hatscoatsandboots:7 '/wireframe-fix [feature] [svg]' Enter
+tmux send-keys -t hatcoatandboots:7 '/wireframe-fix [feature] [svg]' Enter
 ```
 
 ## Error Handling
@@ -139,7 +139,7 @@ tmux send-keys -t hatscoatsandboots:7 '/wireframe-fix [feature] [svg]' Enter
 Before dispatching, verify tmux session exists:
 
 ```bash
-tmux has-session -t hatscoatsandboots 2>/dev/null && echo "Session exists" || echo "ERROR: No hatscoatsandboots session"
+tmux has-session -t hatcoatandboots 2>/dev/null && echo "Session exists" || echo "ERROR: No hatcoatandboots session"
 ```
 
 ## DO NOT

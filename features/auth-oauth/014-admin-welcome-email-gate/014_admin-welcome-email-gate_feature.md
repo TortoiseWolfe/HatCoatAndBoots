@@ -2,7 +2,7 @@
 
 **Feature ID**: 014
 **Category**: auth-oauth
-**Source**: HatsCoatsAndBoots/specs/002-feature-002-admin
+**Source**: HatCoatAndBoots/specs/002-feature-002-admin
 **Status**: Ready for SpecKit
 **Extends**: 012-welcome-message-architecture
 

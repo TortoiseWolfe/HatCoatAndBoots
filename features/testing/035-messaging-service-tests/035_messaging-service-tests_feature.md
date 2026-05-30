@@ -2,7 +2,7 @@
 
 **Feature ID**: 035
 **Category**: testing
-**Source**: HatsCoatsAndBoots README (SPEC-052)
+**Source**: HatCoatAndBoots README (SPEC-052)
 **Status**: Ready for SpecKit
 
 ## Description

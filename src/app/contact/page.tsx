@@ -2,13 +2,13 @@ import type { Metadata } from 'next';
 import { ContactForm } from '@/components/forms/ContactForm';
 
 export const metadata: Metadata = {
-  title: 'Contact Us | HatsCoatsAndBoots',
+  title: 'Contact Us | HatCoatAndBoots',
   description:
-    "Get in touch with the HatsCoatsAndBoots team. We'd love to hear from you!",
-  keywords: ['contact', 'support', 'help', 'feedback', 'HatsCoatsAndBoots'],
+    "Get in touch with the HatCoatAndBoots team. We'd love to hear from you!",
+  keywords: ['contact', 'support', 'help', 'feedback', 'HatCoatAndBoots'],
   openGraph: {
-    title: 'Contact Us | HatsCoatsAndBoots',
-    description: 'Get in touch with the HatsCoatsAndBoots team',
+    title: 'Contact Us | HatCoatAndBoots',
+    description: 'Get in touch with the HatCoatAndBoots team',
     type: 'website',
   },
 };
@@ -110,7 +110,7 @@ export default function ContactPage() {
               </h3>
               <div className="space-y-2">
                 <a
-                  href="https://github.com/TortoiseWolfe/HatsCoatsAndBoots/issues"
+                  href="https://github.com/TortoiseWolfe/HatCoatAndBoots/issues"
                   className="link link-primary flex items-center"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -125,7 +125,7 @@ export default function ContactPage() {
                   GitHub Issues
                 </a>
                 <a
-                  href="https://github.com/TortoiseWolfe/HatsCoatsAndBoots/discussions"
+                  href="https://github.com/TortoiseWolfe/HatCoatAndBoots/discussions"
                   className="link link-primary flex items-center"
                   target="_blank"
                   rel="noopener noreferrer"

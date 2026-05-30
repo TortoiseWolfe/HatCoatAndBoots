@@ -14,7 +14,7 @@
  *
  * Run from inside the Docker container:
  *   docker exec -e SKIP_WEBSERVER=1 -e BASE_URL=http://localhost:3000 \
- *     hatscoatsandboots-hatscoatsandboots-1 npx playwright test tests/e2e/messaging/offline-queue-sync.spec.ts --project=chromium
+ *     hatcoatandboots-hatcoatandboots-1 npx playwright test tests/e2e/messaging/offline-queue-sync.spec.ts --project=chromium
  */
 
 import { test, expect } from '@playwright/test';
@@ -32,12 +32,12 @@ const USER_A_EMAIL = 'test@example.com';
 const USER_A_PASSWORD = 'TestPassword123!';
 const USER_B_EMAIL = 'test-user-b@example.com';
 
-// Next.js basePath — empty in local dev, '/HatsCoatsAndBoots' in CI/prod
+// Next.js basePath — empty in local dev, '/HatCoatAndBoots' in CI/prod
 const BP = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
 // Docker DNS — test process resolves Docker hostnames; browser cannot
 const SUPABASE_DOCKER_HOST =
-  process.env.SUPABASE_DOCKER_HOST || 'hatscoatsandboots-supabase-kong-1';
+  process.env.SUPABASE_DOCKER_HOST || 'hatcoatandboots-supabase-kong-1';
 // In CI, use the cloud Supabase URL. Locally, use the Docker URL.
 const SUPABASE_URL = process.env.CI
   ? process.env.NEXT_PUBLIC_SUPABASE_URL || ''

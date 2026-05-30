@@ -52,14 +52,14 @@ Every batch004 wireframe missing `rx="8"` on:
 
 ### 3. Signature Format (4 wireframes)
 
-| Wireframe                                                 | Actual                                 | Expected                                                  |
-| --------------------------------------------------------- | -------------------------------------- | --------------------------------------------------------- |
-| 010-unified-blog-content/01-editor-and-preview            | "HatsCoatsAndBoots Wireframe v5 - ..." | "010:01 \| Unified Blog Content \| HatsCoatsAndBoots"     |
-| 010-unified-blog-content/02-conflict-resolution           | "HatsCoatsAndBoots Wireframe v5 - ..." | "010:02 \| Unified Blog Content \| HatsCoatsAndBoots"     |
-| 016-messaging-critical-fixes/01-message-input-visibility  | "HatsCoatsAndBoots v0.1 - ..."         | "016:01 \| Messaging Critical Fixes \| HatsCoatsAndBoots" |
-| 016-messaging-critical-fixes/03-conversation-error-states | "HatsCoatsAndBoots v0.1 - ..."         | "016:03 \| Messaging Critical Fixes \| HatsCoatsAndBoots" |
+| Wireframe                                                 | Actual                               | Expected                                                |
+| --------------------------------------------------------- | ------------------------------------ | ------------------------------------------------------- |
+| 010-unified-blog-content/01-editor-and-preview            | "HatCoatAndBoots Wireframe v5 - ..." | "010:01 \| Unified Blog Content \| HatCoatAndBoots"     |
+| 010-unified-blog-content/02-conflict-resolution           | "HatCoatAndBoots Wireframe v5 - ..." | "010:02 \| Unified Blog Content \| HatCoatAndBoots"     |
+| 016-messaging-critical-fixes/01-message-input-visibility  | "HatCoatAndBoots v0.1 - ..."         | "016:01 \| Messaging Critical Fixes \| HatCoatAndBoots" |
+| 016-messaging-critical-fixes/03-conversation-error-states | "HatCoatAndBoots v0.1 - ..."         | "016:03 \| Messaging Critical Fixes \| HatCoatAndBoots" |
 
-**Expected Format:** `NNN:NN | Feature Name | HatsCoatsAndBoots`
+**Expected Format:** `NNN:NN | Feature Name | HatCoatAndBoots`
 
 ### 4. Mobile Active State Missing Icon (G-045) - 5 wireframes
 
@@ -137,7 +137,7 @@ The Operator's QC review identified additional issues NOT detected by automated 
 ### Priority 3: Signature Format (4)
 
 ```bash
-# Regenerate with correct format: NNN:NN | Feature | HatsCoatsAndBoots
+# Regenerate with correct format: NNN:NN | Feature | HatCoatAndBoots
 # Classification: PATCH or REGEN
 ```
 

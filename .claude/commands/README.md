@@ -47,7 +47,7 @@ These are **instruction files** that tell Claude how to generate artifacts for t
 
 ```bash
 # One-time setup (after rebuilding container)
-docker compose exec hatscoatsandboots gh auth login
+docker compose exec hatcoatandboots gh auth login
 
 # Then just run:
 /fetch-test-results

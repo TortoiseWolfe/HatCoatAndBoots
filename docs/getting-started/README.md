@@ -1,4 +1,4 @@
-# Getting Started with HatsCoatsAndBoots
+# Getting Started with HatCoatAndBoots
 
 Get your development environment running in under 10 minutes.
 
@@ -21,8 +21,8 @@ Get your development environment running in under 10 minutes.
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/YOUR_ORG/HatsCoatsAndBoots.git
-cd HatsCoatsAndBoots
+git clone https://github.com/YOUR_ORG/HatCoatAndBoots.git
+cd HatCoatAndBoots
 ```
 
 ### 2. Start Docker Environment
@@ -39,8 +39,8 @@ Expected output:
 
 ```
 NAME                    STATUS
-hatscoatsandboots-app        running
-hatscoatsandboots-db         running (if applicable)
+hatcoatandboots-app        running
+hatcoatandboots-db         running (if applicable)
 ```
 
 ### 3. Verify Installation
@@ -75,7 +75,7 @@ Open http://localhost:3000 to browse feature wireframes.
 
 ## Project Overview
 
-HatsCoatsAndBoots is a **planning template** for AI-assisted development. It contains:
+HatCoatAndBoots is a **planning template** for AI-assisted development. It contains:
 
 - **46 feature specifications** - Detailed requirements for each feature
 - **SVG wireframes** - Visual designs for desktop and mobile
@@ -89,7 +89,7 @@ HatsCoatsAndBoots is a **planning template** for AI-assisted development. It con
 ## Project Structure
 
 ```
-HatsCoatsAndBoots/
+HatCoatAndBoots/
 │
 ├── features/                    # Feature specifications
 │   ├── IMPLEMENTATION_ORDER.md  # Build sequence (read this first!)

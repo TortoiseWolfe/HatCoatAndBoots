@@ -1,5 +1,5 @@
 {
-  "name": "hatscoatsandboots",
+  "name": "hatcoatandboots",
   "version": "0.0.1",
   "description": "A kids' book on sustainable natural building — hats, coats, and boots architecture",
   "packageManager": "pnpm@10.16.1",
@@ -74,7 +74,7 @@
     "test:quick": "pnpm run type-check && pnpm run lint && pnpm test -- --run",
     "test:pwa": "node scripts/test-pwa.js",
     "test:pwa:verbose": "node scripts/test-pwa.js --verbose",
-    "test:pwa:build": "echo 'Building production in Docker...' && docker compose exec hatscoatsandboots pnpm run build && echo 'Starting server...' && docker compose exec -d hatscoatsandboots sh -c 'cd out && python3 -m http.server 3001' && sleep 5 && docker compose exec -e TEST_PORT=3001 hatscoatsandboots node scripts/test-pwa.js --production && docker compose exec hatscoatsandboots pkill -f 'python3 -m http.server' || true",
+    "test:pwa:build": "echo 'Building production in Docker...' && docker compose exec hatcoatandboots pnpm run build && echo 'Starting server...' && docker compose exec -d hatcoatandboots sh -c 'cd out && python3 -m http.server 3001' && sleep 5 && docker compose exec -e TEST_PORT=3001 hatcoatandboots node scripts/test-pwa.js --production && docker compose exec hatcoatandboots pkill -f 'python3 -m http.server' || true",
     "cleanup:intents": "tsx scripts/cleanup-expired-intents.ts",
     "retry:webhooks": "tsx scripts/retry-failed-webhooks.ts",
     "gitleaks": "gitleaks detect --source . --config .gitleaks.toml",

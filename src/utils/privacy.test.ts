@@ -289,7 +289,7 @@ describe('Privacy Utilities', () => {
       downloadJSON({ test: 'data' });
 
       expect(mockElement.download).toBe(
-        'hatscoatsandboots-privacy-export-2024-01-15T10-00-00-000Z.json'
+        'hatcoatandboots-privacy-export-2024-01-15T10-00-00-000Z.json'
       );
     });
 

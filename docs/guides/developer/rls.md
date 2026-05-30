@@ -1,6 +1,6 @@
 # Row-Level Security (RLS) Guide
 
-Comprehensive guide to implementing and testing RLS policies in HatsCoatsAndBoots.
+Comprehensive guide to implementing and testing RLS policies in HatCoatAndBoots.
 
 ---
 
@@ -48,7 +48,7 @@ Row-Level Security (RLS) is a PostgreSQL feature that restricts which rows a use
 | **Audit-friendly**   | Policies are visible and reviewable            |
 | **Zero trust**       | Even leaked credentials have limited access    |
 
-### HatsCoatsAndBoots RLS Requirements
+### HatCoatAndBoots RLS Requirements
 
 - All tables MUST have RLS enabled
 - Zero tolerance for cross-user data access
@@ -107,7 +107,7 @@ CREATE POLICY "policy_name"
 
 ## Policy Patterns
 
-HatsCoatsAndBoots uses four standard RLS patterns:
+HatCoatAndBoots uses four standard RLS patterns:
 
 ### Pattern 1: Owner Isolation
 

@@ -43,7 +43,7 @@ open http://localhost:3000/blog/countdown-timer-react-tutorial  # Blog post
 
 ```bash
 # Take screenshot of current state
-docker compose exec hatscoatsandboots pnpm exec playwright test e2e/screenshot-current-state.spec.ts
+docker compose exec hatcoatandboots pnpm exec playwright test e2e/screenshot-current-state.spec.ts
 ```
 
 ---
@@ -54,7 +54,7 @@ docker compose exec hatscoatsandboots pnpm exec playwright test e2e/screenshot-c
 
 ```bash
 # Run mobile UX tests (these should currently fail or show issues)
-docker compose exec hatscoatsandboots pnpm exec playwright test e2e/tests/blog-mobile-ux.spec.ts --project="iPhone 12"
+docker compose exec hatcoatandboots pnpm exec playwright test e2e/tests/blog-mobile-ux.spec.ts --project="iPhone 12"
 
 # Expected failures:
 # - Touch targets only 20px minimum (not 44px)
@@ -66,7 +66,7 @@ docker compose exec hatscoatsandboots pnpm exec playwright test e2e/tests/blog-m
 
 ```bash
 # Generate test report
-docker compose exec hatscoatsandboots pnpm exec playwright show-report
+docker compose exec hatcoatandboots pnpm exec playwright show-report
 
 # Note: Save this report to compare against post-implementation
 ```
@@ -134,10 +134,10 @@ Add utility patterns:
 
 ```bash
 # Restart dev server to pick up changes
-docker compose restart hatscoatsandboots
+docker compose restart hatcoatandboots
 
 # Check for CSS errors
-docker compose logs hatscoatsandboots | grep -i error
+docker compose logs hatcoatandboots | grep -i error
 ```
 
 ---
@@ -194,7 +194,7 @@ Find button elements and add `min-w-11 min-h-11`:
 
 ```bash
 # Run mobile tests again
-docker compose exec hatscoatsandboots pnpm exec playwright test e2e/tests/blog-mobile-ux.spec.ts --project="iPhone 12"
+docker compose exec hatcoatandboots pnpm exec playwright test e2e/tests/blog-mobile-ux.spec.ts --project="iPhone 12"
 
 # Expected improvements:
 # - Fewer horizontal scroll violations
@@ -206,7 +206,7 @@ docker compose exec hatscoatsandboots pnpm exec playwright test e2e/tests/blog-m
 
 ```bash
 # Take new screenshots
-docker compose exec hatscoatsandboots pnpm exec playwright test e2e/screenshot-after-quickfix.spec.ts
+docker compose exec hatcoatandboots pnpm exec playwright test e2e/screenshot-after-quickfix.spec.ts
 
 # Visual diff should show:
 # - Tighter button spacing
@@ -234,13 +234,13 @@ After completing quickstart, verify these outcomes:
 
 ### Build Verification
 
-- [ ] Run `docker compose exec hatscoatsandboots pnpm run build`
+- [ ] Run `docker compose exec hatcoatandboots pnpm run build`
 - [ ] Build completes without CSS errors
 - [ ] Static export generates successfully
 
 ### Accessibility Check
 
-- [ ] Run `docker compose exec hatscoatsandboots pnpm run test:a11y:dev`
+- [ ] Run `docker compose exec hatcoatandboots pnpm run test:a11y:dev`
 - [ ] No new accessibility violations introduced
 - [ ] Touch targets flagged for improvement (expected until full implementation)
 
@@ -324,12 +324,12 @@ docker compose up
 
 ```bash
 # Verify Tailwind CSS 4 is installed
-docker compose exec hatscoatsandboots pnpm list tailwindcss
+docker compose exec hatcoatandboots pnpm list tailwindcss
 
 # Should show: tailwindcss@4.1.13
 
 # Restart build process
-docker compose restart hatscoatsandboots
+docker compose restart hatcoatandboots
 ```
 
 ### Issue: "Tests fail with different errors"
@@ -338,14 +338,14 @@ docker compose restart hatscoatsandboots
 
 ```bash
 # Update Playwright browsers
-docker compose exec hatscoatsandboots pnpm exec playwright install
+docker compose exec hatcoatandboots pnpm exec playwright install
 
 # Clear test cache
 rm -rf test-results/
 rm -rf playwright-report/
 
 # Run tests again
-docker compose exec hatscoatsandboots pnpm exec playwright test
+docker compose exec hatcoatandboots pnpm exec playwright test
 ```
 
 ---
@@ -363,7 +363,7 @@ You've successfully completed the quickstart if:
 
 ```bash
 # Run Lighthouse on mobile
-docker compose exec hatscoatsandboots npx lighthouse http://localhost:3000 --preset=mobile --quiet
+docker compose exec hatcoatandboots npx lighthouse http://localhost:3000 --preset=mobile --quiet
 
 # Current: Performance 95/100
 # Target: Performance 98-100/100 (after full implementation)
@@ -386,13 +386,13 @@ docker compose exec hatscoatsandboots npx lighthouse http://localhost:3000 --pre
 docker compose up
 
 # Run mobile tests
-docker compose exec hatscoatsandboots pnpm exec playwright test --project="iPhone 12"
+docker compose exec hatcoatandboots pnpm exec playwright test --project="iPhone 12"
 
 # Build production
-docker compose exec hatscoatsandboots pnpm run build
+docker compose exec hatcoatandboots pnpm run build
 
 # Run accessibility tests
-docker compose exec hatscoatsandboots pnpm run test:a11y:dev
+docker compose exec hatcoatandboots pnpm run test:a11y:dev
 ```
 
 ### Key Breakpoints

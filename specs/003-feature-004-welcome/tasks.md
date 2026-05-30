@@ -37,9 +37,9 @@
   ```typescript
   const ADMIN_USER = {
     id: '00000000-0000-0000-0000-000000000001',
-    email: 'admin@hatscoatsandboots.com',
-    username: 'hatscoatsandboots',
-    displayName: 'HatsCoatsAndBoots',
+    email: 'admin@hatcoatandboots.com',
+    username: 'hatcoatandboots',
+    displayName: 'HatCoatAndBoots',
   };
   ```
 
@@ -55,7 +55,7 @@
 - [x] T007 [FOUNDATION] Run seed script and verify admin public key exists:
 
   ```bash
-  docker compose exec hatscoatsandboots pnpm exec tsx scripts/seed-test-users.ts
+  docker compose exec hatcoatandboots pnpm exec tsx scripts/seed-test-users.ts
   ```
 
 - [x] T008 [FOUNDATION] Verify admin public key in database via SQL query
@@ -124,9 +124,9 @@
   );
   ```
 
-- [x] T019 [US1] Run tests: `docker compose exec hatscoatsandboots pnpm test welcome-service`
+- [x] T019 [US1] Run tests: `docker compose exec hatcoatandboots pnpm test welcome-service`
 
-- [x] T020 [US1] Manual verification: Sign up new user, check conversations for welcome message from hatscoatsandboots
+- [x] T020 [US1] Manual verification: Sign up new user, check conversations for welcome message from hatcoatandboots
 
 **Checkpoint**: User Story 1 complete - new users receive welcome messages
 
@@ -222,11 +222,11 @@
 
 - [x] T032 [P] [POLISH] Remove obsolete `TEST_USER_ADMIN_PASSWORD` references from `.env.example` if present
 
-- [x] T033 [POLISH] Run full test suite: `docker compose exec hatscoatsandboots pnpm test`
+- [x] T033 [POLISH] Run full test suite: `docker compose exec hatcoatandboots pnpm test`
 
-- [x] T034 [POLISH] Run type check: `docker compose exec hatscoatsandboots pnpm type-check`
+- [x] T034 [POLISH] Run type check: `docker compose exec hatcoatandboots pnpm type-check`
 
-- [x] T035 [POLISH] Run linter: `docker compose exec hatscoatsandboots pnpm lint`
+- [x] T035 [POLISH] Run linter: `docker compose exec hatcoatandboots pnpm lint`
 
 - [x] T036 [POLISH] Run quickstart.md verification steps
 

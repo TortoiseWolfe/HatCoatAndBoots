@@ -169,7 +169,7 @@ Placeholder/unreadable messages show a clear, non-alarming message instead of er
 
 ```bash
 # Reset database with test messages
-docker compose exec hatscoatsandboots pnpm run db:reset
+docker compose exec hatcoatandboots pnpm run db:reset
 
 # Login as test user
 # Email: test@example.com

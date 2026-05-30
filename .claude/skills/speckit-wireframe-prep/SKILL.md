@@ -7,7 +7,7 @@ metadata:
   source: wireframe:commands/prep.md
 ---
 
-> **HatsCoatsAndBoots note:** feature paths are `features/<category>/<NNN-name>/`,
+> **HatCoatAndBoots note:** feature paths are `features/<category>/<NNN-name>/`,
 > not `specs/<feature>/`. Validator is at
 > `.specify/extensions/wireframe/scripts/validate.py` (shipped by this project).
 

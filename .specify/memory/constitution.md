@@ -2,7 +2,7 @@
 Sync Impact Report - v1.0.0 Ratification (Cradle-to-Cradle Reframe)
 Ratification Date: 2026-05-28
 Version: (forked from ScriptHammer post-PR-#114) → 1.0.0 (FRESH RATIFICATION)
-Project: HatsCoatsAndBoots — a kids' book on sustainable natural building
+Project: HatCoatAndBoots — a kids' book on sustainable natural building
 
 Rationale for fresh v1.0.0 rather than v1.x.x amendment:
   This is a fork from ScriptHammer (commit cb35131, post-PR-#114) followed
@@ -36,7 +36,7 @@ Template Consistency (carried forward from ScriptHammer cb35131):
   ✅ Wireframe gate from ScriptHammer v1.0.2        (preserved in Constraints)
 
 Family Position:
-  HatsCoatsAndBoots is a ScriptHammer family fork (web/Next.js/Docker/SpecKit
+  HatCoatAndBoots is a ScriptHammer family fork (web/Next.js/Docker/SpecKit
   stack — sibling of SpokeToWork and TurtleWolfe). Its content domain is a
   children's book on sustainable natural building, not a generic web app.
   See /home/TurtleWolfe/repos/CLAUDE.md for the 5-track family context.
@@ -48,14 +48,14 @@ Inherited from ScriptHammer PR #114 (squash merge cb35131):
     re-explain the middleware-vs-output:export tension.
 
 Future planning-repo extraction:
-  When this book ships, extract HatsCoatsAndBoots_planning/ as a sibling
+  When this book ships, extract HatCoatAndBoots_planning/ as a sibling
   paper/design repo for a real-world physical sustainable build (mirrors
   the GrimGlow → grimglow-unity extraction). The same I–V apply; the
   artifacts there become site analysis, materials lists, and building
   drawings instead of React components.
 -->
 
-# HatsCoatsAndBoots Constitution
+# HatCoatAndBoots Constitution
 
 **Project:** A children's book teaching sustainable natural building through the
 "Hats, Coats, and Boots" mnemonic for good vernacular architecture, governed
@@ -319,7 +319,7 @@ not invent McDonough quotes or principles not present in the source.
 
 ### v1.0.0 — 2026-05-28 — Ratification
 
-Fresh ratification of a constitution for the HatsCoatsAndBoots project (forked
+Fresh ratification of a constitution for the HatCoatAndBoots project (forked
 from ScriptHammer cb35131 — post-PR-#114 cleanup, then wholesale-reframed).
 Five principles in the Core slots derive from William McDonough's two
 Construction transcripts; six ScriptHammer disciplines move into Mandatory

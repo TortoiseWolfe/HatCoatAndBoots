@@ -9,7 +9,7 @@
 
 ## Executive Summary
 
-Feature 005 is an **exemplary security specification** that systematically addresses vulnerabilities identified in code review. The spec demonstrates mature threat modeling, comprehensive OWASP coverage, and clear prioritization (P0-P3). This is the most security-focused feature in the HatsCoatsAndBoots portfolio.
+Feature 005 is an **exemplary security specification** that systematically addresses vulnerabilities identified in code review. The spec demonstrates mature threat modeling, comprehensive OWASP coverage, and clear prioritization (P0-P3). This is the most security-focused feature in the HatCoatAndBoots portfolio.
 
 **Overall Risk Rating**: LOW (after implementation)
 
@@ -343,5 +343,5 @@ Feature 005 is an exemplary security specification. The minor findings (LOW seve
 ---
 
 **Security Lead**
-HatsCoatsAndBoots Council
+HatCoatAndBoots Council
 2026-01-15

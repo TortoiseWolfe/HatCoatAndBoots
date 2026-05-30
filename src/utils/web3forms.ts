@@ -14,7 +14,7 @@ export const WEB3FORMS_CONFIG = {
   get accessKey() {
     return process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || '';
   },
-  fromName: 'HatsCoatsAndBoots Contact Form',
+  fromName: 'HatCoatAndBoots Contact Form',
 } as const;
 
 /**

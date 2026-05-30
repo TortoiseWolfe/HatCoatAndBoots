@@ -5,7 +5,7 @@
 
 ## Executive Summary
 
-Research into the HatsCoatsAndBoots codebase reveals a well-architected project auto-detection system already in place. The main gaps are:
+Research into the HatCoatAndBoots codebase reveals a well-architected project auto-detection system already in place. The main gaps are:
 
 1. Service worker cache names are hardcoded
 2. manifest.json is static (not generated)
@@ -27,14 +27,14 @@ Research into the HatsCoatsAndBoots codebase reveals a well-architected project 
 
 ### What Needs Implementation
 
-| Component      | File                        | Issue                                      |
-| -------------- | --------------------------- | ------------------------------------------ |
-| Service Worker | `public/sw.js:4`            | Hardcoded `hatscoatsandboots-v1.0.0` cache |
-| Manifest       | `public/manifest.json`      | Static file, not generated                 |
-| robots.txt     | `public/robots.txt`         | Hardcoded sitemap URL                      |
-| Footer         | `src/components/Footer.tsx` | No template attribution link               |
-| Test Setup     | `tests/setup.ts`            | No Supabase client mock                    |
-| Rebrand Script | N/A                         | Does not exist                             |
+| Component      | File                        | Issue                                    |
+| -------------- | --------------------------- | ---------------------------------------- |
+| Service Worker | `public/sw.js:4`            | Hardcoded `hatcoatandboots-v1.0.0` cache |
+| Manifest       | `public/manifest.json`      | Static file, not generated               |
+| robots.txt     | `public/robots.txt`         | Hardcoded sitemap URL                    |
+| Footer         | `src/components/Footer.tsx` | No template attribution link             |
+| Test Setup     | `tests/setup.ts`            | No Supabase client mock                  |
+| Rebrand Script | N/A                         | Does not exist                           |
 
 ## File Analysis
 
@@ -42,7 +42,7 @@ Research into the HatsCoatsAndBoots codebase reveals a well-architected project 
 
 ```javascript
 // Line 4 - HARDCODED
-const CACHE_VERSION = 'hatscoatsandboots-v1.0.0';
+const CACHE_VERSION = 'hatcoatandboots-v1.0.0';
 ```
 
 **Fix Required**: Use dynamic cache name from project config or inject at build time.
@@ -81,7 +81,7 @@ RUN git config --global --add safe.directory /app
 
 `docker-compose.yml`:
 
-- Service name `hatscoatsandboots` is hardcoded
+- Service name `hatcoatandboots` is hardcoded
 - GIT_AUTHOR_NAME/EMAIL not passed through
 
 ### 5. GitHub Actions (`deploy.yml`)
@@ -107,7 +107,7 @@ Create comprehensive shell script that:
 1. Accepts: `NEW_NAME`, `NEW_OWNER`, `NEW_DESCRIPTION`
 2. Auto-sanitizes input (spaces→hyphens, remove special chars)
 3. Replaces all case variations in file contents
-4. Renames files containing "HatsCoatsAndBoots"
+4. Renames files containing "HatCoatAndBoots"
 5. Updates docker-compose service name
 6. Deletes public/CNAME
 7. Updates git remote origin

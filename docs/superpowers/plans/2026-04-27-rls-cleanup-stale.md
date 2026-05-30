@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Add a Vitest `globalSetup` hook to `pnpm test:rls` that scrubs orphan `*@hatscoatsandboots.test` users + their FK-blocking dependent rows before tests collect, so killed prior runs don't wedge the suite.
+**Goal:** Add a Vitest `globalSetup` hook to `pnpm test:rls` that scrubs orphan `*@hatcoatandboots.test` users + their FK-blocking dependent rows before tests collect, so killed prior runs don't wedge the suite.
 
 **Architecture:** One pure cleanup function that takes a Supabase service client and walks the FK chain (`payment_intents` → `subscriptions` → `user_profiles` → `auth.admin.deleteUser`) per matching user. A thin `globalSetup` wrapper constructs the client, calls the function, logs the summary. A unit test mocks the client and pins the call ordering. Cleanup is best-effort — errors are logged and the function continues.
 
@@ -10,7 +10,7 @@
 
 **Spec:** [`docs/superpowers/specs/2026-04-27-rls-cleanup-stale-design.md`](../specs/2026-04-27-rls-cleanup-stale-design.md)
 
-**Tracks:** [#50](https://github.com/TortoiseWolfe/HatsCoatsAndBoots/issues/50) (Family D1 in `docs/STABILITY-TRACKING.md`)
+**Tracks:** [#50](https://github.com/TortoiseWolfe/HatCoatAndBoots/issues/50) (Family D1 in `docs/STABILITY-TRACKING.md`)
 
 ---
 
@@ -52,7 +52,7 @@ Expected: "Already up to date." or fast-forward to current origin tip.
 - [ ] **Step 3: Create branch from inside container**
 
 ```bash
-docker compose exec hatscoatsandboots git checkout -b 050/rls-cleanup-stale
+docker compose exec hatcoatandboots git checkout -b 050/rls-cleanup-stale
 ```
 
 Expected: "Switched to a new branch '050/rls-cleanup-stale'"
@@ -127,8 +127,8 @@ describe('cleanupStaleScripthammerUsers (#50)', () => {
   it('deletes the FK chain in correct order per matching user', async () => {
     const client = makeMockClient({
       users: [
-        { id: 'user-a-id', email: 'test-user-a@hatscoatsandboots.test' },
-        { id: 'user-b-id', email: 'test-user-b@hatscoatsandboots.test' },
+        { id: 'user-a-id', email: 'test-user-a@hatcoatandboots.test' },
+        { id: 'user-b-id', email: 'test-user-b@hatcoatandboots.test' },
       ],
     });
 
@@ -156,12 +156,12 @@ describe('cleanupStaleScripthammerUsers (#50)', () => {
     expect(summary.profilesRemoved).toBe(2);
   });
 
-  it('ignores users whose email does not match @hatscoatsandboots.test', async () => {
+  it('ignores users whose email does not match @hatcoatandboots.test', async () => {
     const client = makeMockClient({
       users: [
         { id: 'prod-id', email: 'real-user@example.com' },
-        { id: 'admin-id', email: 'admin@hatscoatsandboots.com' }, // .com, not .test
-        { id: 'sh-id', email: 'test-user-a@hatscoatsandboots.test' },
+        { id: 'admin-id', email: 'admin@hatcoatandboots.com' }, // .com, not .test
+        { id: 'sh-id', email: 'test-user-a@hatcoatandboots.test' },
       ],
     });
 
@@ -175,7 +175,7 @@ describe('cleanupStaleScripthammerUsers (#50)', () => {
 
   it('continues to subsequent steps when a DELETE fails (best-effort)', async () => {
     const client = makeMockClient({
-      users: [{ id: 'user-x', email: 'test-user-a@hatscoatsandboots.test' }],
+      users: [{ id: 'user-x', email: 'test-user-a@hatcoatandboots.test' }],
       failOn: { table: 'payment_intents' },
     });
 
@@ -197,7 +197,7 @@ describe('cleanupStaleScripthammerUsers (#50)', () => {
     expect(summary.usersRemoved).toBe(1);
   });
 
-  it('is a no-op when no @hatscoatsandboots.test users exist', async () => {
+  it('is a no-op when no @hatcoatandboots.test users exist', async () => {
     const client = makeMockClient({
       users: [{ id: 'prod-id', email: 'real@example.com' }],
     });
@@ -219,7 +219,7 @@ describe('cleanupStaleScripthammerUsers (#50)', () => {
 - [ ] **Step 2: Run the tests, expect failure**
 
 ```bash
-docker compose exec hatscoatsandboots pnpm vitest run tests/unit/rls-cleanup.test.ts
+docker compose exec hatcoatandboots pnpm vitest run tests/unit/rls-cleanup.test.ts
 ```
 
 Expected: ALL FAIL — `cleanupStaleScripthammerUsers` doesn't exist yet (`Cannot find module` or similar).
@@ -236,11 +236,11 @@ Expected: ALL FAIL — `cleanupStaleScripthammerUsers` doesn't exist yet (`Canno
 
 ```ts
 /**
- * Pure cleanup function for stale `*@hatscoatsandboots.test` users (#50).
+ * Pure cleanup function for stale `*@hatcoatandboots.test` users (#50).
  *
  * Walks the FK chain (payment_intents → subscriptions → user_profiles
  * → auth deleteUser) for every test-suite user that matches the
- * hatscoatsandboots.test domain. Best-effort: errors are logged via the
+ * hatcoatandboots.test domain. Best-effort: errors are logged via the
  * provided logger and the cleanup continues. Returns a summary count.
  *
  * Used by tests/rls/__setup__/cleanup-stale.ts as a Vitest globalSetup.
@@ -250,7 +250,7 @@ Expected: ALL FAIL — `cleanupStaleScripthammerUsers` doesn't exist yet (`Canno
 
 import type { SupabaseClient } from '@supabase/supabase-js';
 
-const SCRIPTHAMMER_TEST_DOMAIN = '@hatscoatsandboots.test';
+const SCRIPTHAMMER_TEST_DOMAIN = '@hatcoatandboots.test';
 
 export interface CleanupSummary {
   usersRemoved: number;
@@ -280,7 +280,7 @@ export async function cleanupStaleScripthammerUsers(
     profilesRemoved: 0,
   };
 
-  // 1. List all auth users; filter to the hatscoatsandboots.test domain.
+  // 1. List all auth users; filter to the hatcoatandboots.test domain.
   const { data: listData, error: listError } =
     await client.auth.admin.listUsers({ perPage: 1000 });
   if (listError) {
@@ -365,7 +365,7 @@ export async function cleanupStaleScripthammerUsers(
 - [ ] **Step 2: Run the tests, expect pass**
 
 ```bash
-docker compose exec hatscoatsandboots pnpm vitest run tests/unit/rls-cleanup.test.ts
+docker compose exec hatcoatandboots pnpm vitest run tests/unit/rls-cleanup.test.ts
 ```
 
 Expected: 4/4 PASS.
@@ -373,7 +373,7 @@ Expected: 4/4 PASS.
 - [ ] **Step 3: Type-check**
 
 ```bash
-docker compose exec hatscoatsandboots pnpm run type-check
+docker compose exec hatcoatandboots pnpm run type-check
 ```
 
 Expected: clean (no output after `> tsc --noEmit`).
@@ -381,19 +381,19 @@ Expected: clean (no output after `> tsc --noEmit`).
 - [ ] **Step 4: Commit**
 
 ```bash
-docker compose exec hatscoatsandboots git add tests/unit/rls-cleanup.test.ts tests/rls/__setup__/cleanup-stale-impl.ts
-docker compose exec hatscoatsandboots git commit -m "feat(rls): cleanup-stale impl + 4 regression cases
+docker compose exec hatcoatandboots git add tests/unit/rls-cleanup.test.ts tests/rls/__setup__/cleanup-stale-impl.ts
+docker compose exec hatcoatandboots git commit -m "feat(rls): cleanup-stale impl + 4 regression cases
 
 Pure async function cleanupStaleScripthammerUsers walks the FK chain
 (payment_intents → subscriptions → user_profiles → auth.deleteUser)
-for every *@hatscoatsandboots.test user. Best-effort: errors are logged
+for every *@hatcoatandboots.test user. Best-effort: errors are logged
 and cleanup continues to the next step. Returns a summary count.
 
 Tests pin the contract:
 - Chain runs in correct order per user.
 - Non-matching emails are never touched (production safety).
 - Best-effort: a transient delete error doesn't halt the rest.
-- No-op when no hatscoatsandboots.test users exist.
+- No-op when no hatcoatandboots.test users exist.
 
 Refs #50.
 
@@ -412,7 +412,7 @@ Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>"
 
 ```ts
 /**
- * Vitest globalSetup hook that scrubs stale *@hatscoatsandboots.test users +
+ * Vitest globalSetup hook that scrubs stale *@hatcoatandboots.test users +
  * their FK-blocking dependent rows before pnpm test:rls runs (#50).
  *
  * Wired in vitest.rls.config.ts. Skips silently when
@@ -465,7 +465,7 @@ export async function setup() {
 - [ ] **Step 2: Type-check**
 
 ```bash
-docker compose exec hatscoatsandboots pnpm run type-check
+docker compose exec hatcoatandboots pnpm run type-check
 ```
 
 Expected: clean.
@@ -473,8 +473,8 @@ Expected: clean.
 - [ ] **Step 3: Commit**
 
 ```bash
-docker compose exec hatscoatsandboots git add tests/rls/__setup__/cleanup-stale.ts
-docker compose exec hatscoatsandboots git commit -m "feat(rls): globalSetup wrapper for cleanup-stale
+docker compose exec hatcoatandboots git add tests/rls/__setup__/cleanup-stale.ts
+docker compose exec hatcoatandboots git commit -m "feat(rls): globalSetup wrapper for cleanup-stale
 
 Constructs a Supabase service client from env, calls
 cleanupStaleScripthammerUsers, logs the summary. Skips silently when
@@ -506,7 +506,7 @@ export default defineConfig({
     globals: true,
     testTimeout: 30000,
     hookTimeout: 30000,
-    // Scrub stale *@hatscoatsandboots.test users + orphan FK rows before any
+    // Scrub stale *@hatcoatandboots.test users + orphan FK rows before any
     // test file collects. Defends against killed prior runs leaving
     // payment_intents that block createTestUser's deleteUser. (#50)
     globalSetup: ['./tests/rls/__setup__/cleanup-stale.ts'],
@@ -527,7 +527,7 @@ export default defineConfig({
 (Local Supabase profile must be down or `.env` must point at cloud; the existing setup yesterday showed cloud as the active config.)
 
 ```bash
-docker compose exec hatscoatsandboots pnpm test:rls 2>&1 | tail -30
+docker compose exec hatcoatandboots pnpm test:rls 2>&1 | tail -30
 ```
 
 Expected:
@@ -538,11 +538,11 @@ Expected:
 - [ ] **Step 3: Commit**
 
 ```bash
-docker compose exec hatscoatsandboots git add vitest.rls.config.ts
-docker compose exec hatscoatsandboots git commit -m "feat(rls): wire cleanup-stale globalSetup into pnpm test:rls
+docker compose exec hatcoatandboots git add vitest.rls.config.ts
+docker compose exec hatcoatandboots git commit -m "feat(rls): wire cleanup-stale globalSetup into pnpm test:rls
 
 Killed prior runs that left orphan payment_intents/subscriptions/profiles
-referencing *@hatscoatsandboots.test auth users would wedge createTestUser
+referencing *@hatcoatandboots.test auth users would wedge createTestUser
 in beforeAll because deleteUser hits the FK constraint. The new
 globalSetup walks the FK chain before tests collect, so the next
 invocation recovers automatically. (#50)
@@ -572,16 +572,16 @@ In the psql session, after pnpm test:rls has been run once to create the test us
 
 ```sql
 INSERT INTO auth.users (id, email, encrypted_password)
-VALUES ('00000000-0000-4000-8000-000000050050', 'test-user-a@hatscoatsandboots.test', 'fake');
+VALUES ('00000000-0000-4000-8000-000000050050', 'test-user-a@hatcoatandboots.test', 'fake');
 
 INSERT INTO payment_intents (template_user_id, amount, currency, type, customer_email)
-VALUES ('00000000-0000-4000-8000-000000050050', 1000, 'usd', 'one_time', 'test-user-a@hatscoatsandboots.test');
+VALUES ('00000000-0000-4000-8000-000000050050', 1000, 'usd', 'one_time', 'test-user-a@hatcoatandboots.test');
 ```
 
 - [ ] **Step 3: Run pnpm test:rls and observe**
 
 ```bash
-docker compose exec hatscoatsandboots pnpm test:rls 2>&1 | head -10
+docker compose exec hatcoatandboots pnpm test:rls 2>&1 | head -10
 ```
 
 Expected: a `[rls cleanup-stale] removed 1 user(s), 1 intent(s) ...` log line at the top, and the suite proceeds to 55/55.
@@ -605,7 +605,7 @@ git push -u origin 050/rls-cleanup-stale
 - [ ] **Step 2: Open PR**
 
 ```bash
-gh pr create --repo TortoiseWolfe/HatsCoatsAndBoots \
+gh pr create --repo TortoiseWolfe/HatCoatAndBoots \
   --base main \
   --head 050/rls-cleanup-stale \
   --title "fix(rls): cleanup-stale globalSetup so killed prior runs don't wedge pnpm test:rls (#50)" \
@@ -613,7 +613,7 @@ gh pr create --repo TortoiseWolfe/HatsCoatsAndBoots \
 
 ## Summary
 
-Adds a Vitest \`globalSetup\` to \`pnpm test:rls\` that scrubs orphan \`*@hatscoatsandboots.test\` users and their FK-blocking dependent rows (\`payment_intents\`, \`subscriptions\`, \`user_profiles\`) before any RLS test file collects. The fixture's \`createTestUser\` retry path remains as the second line of defense; this hook just prevents the FK-block that defeated it on 2026-04-26 (and required manual psql cleanup).
+Adds a Vitest \`globalSetup\` to \`pnpm test:rls\` that scrubs orphan \`*@hatcoatandboots.test\` users and their FK-blocking dependent rows (\`payment_intents\`, \`subscriptions\`, \`user_profiles\`) before any RLS test file collects. The fixture's \`createTestUser\` retry path remains as the second line of defense; this hook just prevents the FK-block that defeated it on 2026-04-26 (and required manual psql cleanup).
 
 ## What changed
 
@@ -648,7 +648,7 @@ Watch the PR's CI runs (E2E + Accessibility + main CI). If all green, squash-mer
 - [ ] **Step 4: Sync local main, prune merged branch**
 
 ```bash
-docker compose exec hatscoatsandboots git checkout main
+docker compose exec hatcoatandboots git checkout main
 git fetch --prune origin
 git merge --ff-only origin/main
 git branch -D 050/rls-cleanup-stale
@@ -664,7 +664,7 @@ git branch -D 050/rls-cleanup-stale
 - globalSetup wrapper (Spec Architecture #2): Task 4 ✓
 - Vitest config wire-up (Spec Architecture #3): Task 5 ✓
 - DELETE chain (payment_intents → subscriptions → user_profiles → auth.deleteUser): Task 3 step 1 + Task 2 test 1 ✓
-- Production-safety filter (`@hatscoatsandboots.test` only): Task 3 step 1 + Task 2 test 2 ✓
+- Production-safety filter (`@hatcoatandboots.test` only): Task 3 step 1 + Task 2 test 2 ✓
 - Best-effort semantics: Task 3 step 1 (each step's error is logged, summary tracks partial counts) + Task 2 test 3 ✓
 - No-op on empty: Task 3 step 1 (early-return) + Task 2 test 4 ✓
 - Verification empirical pass criteria from spec (4 unit tests + cloud no-regression + manual stress): Tasks 2, 5, 6 respectively ✓
