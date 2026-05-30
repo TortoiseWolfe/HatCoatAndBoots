@@ -24,7 +24,7 @@ git push origin main
 - Docker security upgrades
 - SVG patches and cleanup
 
-SSH remote confirmed: `git@github.com:TortoiseWolfe/HatsCoatsAndBoots.git`
+SSH remote confirmed: `git@github.com:TortoiseWolfe/HatCoatAndBoots.git`
 
 ---
 

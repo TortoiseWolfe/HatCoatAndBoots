@@ -20,7 +20,7 @@ export const authorConfig = {
     email: '',
   },
   disqus: {
-    shortname: 'hatscoatsandboots',
+    shortname: 'hatcoatandboots',
   },
 } as const;
 

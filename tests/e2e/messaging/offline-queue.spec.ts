@@ -621,7 +621,7 @@ test.describe('Offline Message Queue', () => {
         await page.evaluate(async () => {
           window.dispatchEvent(new Event('online'));
           const fn = (window as unknown as Record<string, unknown>)
-            .__hatscoatsandboots_syncQueue as
+            .__hatcoatandboots_syncQueue as
             | (() => Promise<unknown>)
             | undefined;
           if (fn) await fn();

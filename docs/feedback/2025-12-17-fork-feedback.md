@@ -1,6 +1,6 @@
 # Fork Feedback Changelog
 
-Changes made to HatsCoatsAndBoots based on feedback from forked projects.
+Changes made to HatCoatAndBoots based on feedback from forked projects.
 
 If pulling upstream changes doesn't work cleanly, you can manually apply these fixes.
 
@@ -38,7 +38,7 @@ git config --global --add safe.directory /app
 
 **Solution**: Rebrand script deletes `public/CNAME` by default
 
-**Manual fix**: Delete `public/CNAME` if it contains `hatscoatsandboots.com`
+**Manual fix**: Delete `public/CNAME` if it contains `hatcoatandboots.com`
 
 ### Service Worker Cache Names
 
@@ -46,7 +46,7 @@ git config --global --add safe.directory /app
 
 **Solution**: Made cache names dynamic using project name in `src/lib/service-worker/`
 
-**Manual fix**: Search for `hatscoatsandboots-` in service worker files and replace with your project name.
+**Manual fix**: Search for `hatcoatandboots-` in service worker files and replace with your project name.
 
 ### Admin Email Fallback
 
@@ -114,7 +114,7 @@ git config --global --add safe.directory /app
 If you fork this template and encounter issues:
 
 1. Document the issue and your solution
-2. Submit a PR to HatsCoatsAndBoots or open an issue
+2. Submit a PR to HatCoatAndBoots or open an issue
 3. Help future users avoid the same problems!
 
-[HatsCoatsAndBoots Issues](https://github.com/TortoiseWolfe/HatsCoatsAndBoots/issues)
+[HatCoatAndBoots Issues](https://github.com/TortoiseWolfe/HatCoatAndBoots/issues)

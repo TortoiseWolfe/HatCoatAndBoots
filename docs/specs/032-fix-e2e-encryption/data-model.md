@@ -178,7 +178,7 @@ Migration complete, allow access
 
 ```typescript
 // src/lib/messaging/database.ts
-const db = new Dexie('HatsCoatsAndBootsMessaging');
+const db = new Dexie('HatCoatAndBootsMessaging');
 db.version(1).stores({
   messaging_private_keys: 'userId', // Stores JsonWebKey
   // ... other stores

@@ -7,8 +7,8 @@ import { useAnalytics } from '@/hooks/useAnalytics';
 
 // DaisyUI themes (custom themes listed first)
 const THEMES = [
-  'hatscoatsandboots-dark',
-  'hatscoatsandboots-light',
+  'hatcoatandboots-dark',
+  'hatcoatandboots-light',
   'light',
   'dark',
   'cupcake',
@@ -44,7 +44,7 @@ const THEMES = [
 ];
 
 export function ThemeSwitcher() {
-  const [currentTheme, setCurrentTheme] = useState('hatscoatsandboots-dark');
+  const [currentTheme, setCurrentTheme] = useState('hatcoatandboots-dark');
   const { trackThemeChange } = useAnalytics();
 
   useEffect(() => {
@@ -52,14 +52,14 @@ export function ThemeSwitcher() {
     const canPersist = canUseCookies(CookieCategory.FUNCTIONAL);
 
     // Try to load saved theme
-    let savedTheme = 'hatscoatsandboots-dark';
+    let savedTheme = 'hatcoatandboots-dark';
 
     if (canPersist) {
       // Use localStorage if functional cookies allowed
-      savedTheme = localStorage.getItem('theme') || 'hatscoatsandboots-dark';
+      savedTheme = localStorage.getItem('theme') || 'hatcoatandboots-dark';
     } else {
       // Use sessionStorage as fallback
-      savedTheme = sessionStorage.getItem('theme') || 'hatscoatsandboots-dark';
+      savedTheme = sessionStorage.getItem('theme') || 'hatcoatandboots-dark';
     }
 
     setCurrentTheme(savedTheme);

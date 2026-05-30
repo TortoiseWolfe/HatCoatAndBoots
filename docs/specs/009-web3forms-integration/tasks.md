@@ -241,7 +241,7 @@ describe('useWeb3Forms Hook', () => {
 **Command**:
 
 ```bash
-docker compose exec hatscoatsandboots pnpm run generate:component
+docker compose exec hatcoatandboots pnpm run generate:component
 # Select: forms
 # Name: ContactForm
 # Path: forms/ContactForm
@@ -896,22 +896,22 @@ NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY=your_access_key_here
 
 ```bash
 # Run all form-related tests
-docker compose exec hatscoatsandboots pnpm test src/schemas/contact
-docker compose exec hatscoatsandboots pnpm test src/utils/web3forms
-docker compose exec hatscoatsandboots pnpm test src/hooks/useWeb3Forms
-docker compose exec hatscoatsandboots pnpm test src/components/forms/ContactForm
+docker compose exec hatcoatandboots pnpm test src/schemas/contact
+docker compose exec hatcoatandboots pnpm test src/utils/web3forms
+docker compose exec hatcoatandboots pnpm test src/hooks/useWeb3Forms
+docker compose exec hatcoatandboots pnpm test src/components/forms/ContactForm
 
 # Run integration tests
-docker compose exec hatscoatsandboots pnpm test src/tests/contact-form
+docker compose exec hatcoatandboots pnpm test src/tests/contact-form
 
 # Check test coverage
-docker compose exec hatscoatsandboots pnpm test:coverage
+docker compose exec hatcoatandboots pnpm test:coverage
 
 # Run accessibility audit
-docker compose exec hatscoatsandboots pnpm test:a11y
+docker compose exec hatcoatandboots pnpm test:a11y
 
 # Build and check for errors
-docker compose exec hatscoatsandboots pnpm run build
+docker compose exec hatcoatandboots pnpm run build
 ```
 
 ---

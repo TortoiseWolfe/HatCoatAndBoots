@@ -5,7 +5,7 @@
 ## Prerequisites
 
 - Docker and Docker Compose installed
-- HatsCoatsAndBoots repository cloned
+- HatCoatAndBoots repository cloned
 - `.env` file configured with Supabase credentials
 - At least 3 test user accounts for group testing
 
@@ -20,7 +20,7 @@ docker compose up
 # or manually apply the GROUP CHAT TABLES section
 
 # 3. Run development server
-docker compose exec hatscoatsandboots pnpm run dev
+docker compose exec hatcoatandboots pnpm run dev
 
 # 4. Access the app
 open http://localhost:3000
@@ -70,13 +70,13 @@ open http://localhost:3000
 
 ```bash
 # Unit tests for group services
-docker compose exec hatscoatsandboots pnpm test src/services/messaging/group
+docker compose exec hatcoatandboots pnpm test src/services/messaging/group
 
 # E2E tests for group workflows
-docker compose exec hatscoatsandboots pnpm exec playwright test tests/e2e/messaging/group
+docker compose exec hatcoatandboots pnpm exec playwright test tests/e2e/messaging/group
 
 # Full test suite
-docker compose exec hatscoatsandboots pnpm run test:suite
+docker compose exec hatcoatandboots pnpm run test:suite
 ```
 
 ## Key Files to Modify

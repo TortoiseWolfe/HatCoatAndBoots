@@ -10,14 +10,14 @@
 
 ## Problem Statement
 
-HatsCoatsAndBoots currently has no way for authenticated users to communicate with each other within the platform. Users need:
+HatCoatAndBoots currently has no way for authenticated users to communicate with each other within the platform. Users need:
 
 1. **Privacy-first messaging**: End-to-end encrypted conversations where the server never sees plaintext
 2. **Real-time communication**: Instant message delivery with typing indicators and read receipts
 3. **Offline reliability**: Queue messages when offline, sync when reconnected
 4. **Transparency**: Message editing with visible edit history
 5. **Connection management**: Ability to send friend requests, accept/decline, and block users
-6. **Mobile-first UX**: Touch-optimized chat interface following HatsCoatsAndBoots's 44px touch target standards
+6. **Mobile-first UX**: Touch-optimized chat interface following HatCoatAndBoots's 44px touch target standards
 
 Without this feature, users must rely on external communication channels, reducing platform engagement and limiting user-to-user collaboration.
 
@@ -1486,7 +1486,7 @@ NEXT_PUBLIC_OFFLINE_QUEUE_SIZE=100
 
 ## Notes
 
-- This feature showcases HatsCoatsAndBoots's real-time and offline capabilities
+- This feature showcases HatCoatAndBoots's real-time and offline capabilities
 - Zero-knowledge encryption demonstrates privacy-first architecture
 - Reuses patterns from payment system (realtime, offline queue, RLS)
 - Mobile-first design maintains 44px touch target standards

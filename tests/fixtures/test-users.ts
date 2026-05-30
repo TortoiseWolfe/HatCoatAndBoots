@@ -66,15 +66,15 @@ export interface TestUser {
  */
 export const TEST_USERS = {
   userA: {
-    email: 'test-user-a@hatscoatsandboots.test',
+    email: 'test-user-a@hatcoatandboots.test',
     password: 'TestPassword123!',
   },
   userB: {
-    email: 'test-user-b@hatscoatsandboots.test',
+    email: 'test-user-b@hatcoatandboots.test',
     password: 'TestPassword456!',
   },
   admin: {
-    email: 'test-admin@hatscoatsandboots.test',
+    email: 'test-admin@hatcoatandboots.test',
     password: 'AdminPassword789!',
   },
 } as const;

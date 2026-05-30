@@ -3,9 +3,9 @@ import { Metadata } from 'next';
 import { CookieActions } from '@/components/privacy/CookieActions';
 
 export const metadata: Metadata = {
-  title: 'Cookie Policy - HatsCoatsAndBoots',
+  title: 'Cookie Policy - HatCoatAndBoots',
   description:
-    'Learn how HatsCoatsAndBoots uses cookies and how you can manage your cookie preferences.',
+    'Learn how HatCoatAndBoots uses cookies and how you can manage your cookie preferences.',
 };
 
 export default function CookiePolicyPage() {

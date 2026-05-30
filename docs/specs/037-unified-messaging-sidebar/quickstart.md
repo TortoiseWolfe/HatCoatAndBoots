@@ -5,7 +5,7 @@
 
 ## Prerequisites
 
-- Docker running with HatsCoatsAndBoots container
+- Docker running with HatCoatAndBoots container
 - On feature branch `037-unified-messaging-sidebar`
 - Test user account available (`test@example.com`)
 
@@ -145,7 +145,7 @@ Add Message button in `renderConnectionItem` for `type === 'accepted'`:
 3. **Generate component skeleton**
 
 ```bash
-docker compose exec hatscoatsandboots pnpm run generate:component
+docker compose exec hatcoatandboots pnpm run generate:component
 # Name: UnifiedSidebar
 # Category: organisms
 ```
@@ -265,17 +265,17 @@ Change `/messages/connections` link to `/messages?tab=connections`.
 
 ```bash
 # Run all tests
-docker compose exec hatscoatsandboots pnpm test
+docker compose exec hatcoatandboots pnpm test
 
 # Run specific component tests
-docker compose exec hatscoatsandboots pnpm test ConnectionManager
-docker compose exec hatscoatsandboots pnpm test UnifiedSidebar
+docker compose exec hatcoatandboots pnpm test ConnectionManager
+docker compose exec hatcoatandboots pnpm test UnifiedSidebar
 
 # Type check
-docker compose exec hatscoatsandboots pnpm run type-check
+docker compose exec hatcoatandboots pnpm run type-check
 
 # Lint
-docker compose exec hatscoatsandboots pnpm run lint
+docker compose exec hatcoatandboots pnpm run lint
 ```
 
 ## Verification Checklist

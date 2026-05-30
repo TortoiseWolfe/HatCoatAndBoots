@@ -31,7 +31,7 @@ export async function generateMetadata({
     ) || decodedTag;
 
   return {
-    title: `Posts tagged "${properTag}" | HatsCoatsAndBoots Blog`,
+    title: `Posts tagged "${properTag}" | HatCoatAndBoots Blog`,
     description: `Browse all blog posts tagged with ${properTag}`,
     openGraph: {
       title: `Posts tagged "${properTag}"`,

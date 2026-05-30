@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import { SpinningLogo } from './SpinningLogo';
-import { HatsCoatsAndBootsLogo } from './HatsCoatsAndBootsLogo';
-import { LayeredHatsCoatsAndBootsLogo } from './LayeredHatsCoatsAndBootsLogo';
+import { HatCoatAndBootsLogo } from './HatCoatAndBootsLogo';
+import { LayeredHatCoatAndBootsLogo } from './LayeredHatCoatAndBootsLogo';
 
 const meta = {
   title: 'Components/Atomic/SpinningLogo',
@@ -42,81 +42,81 @@ const ReactLogo = () => (
   </svg>
 );
 
-// Layered HatsCoatsAndBoots Logo as the primary/default story
+// Layered HatCoatAndBoots Logo as the primary/default story
 export const Default: Story = {
   args: {
     children: null,
   },
   render: () => (
-    <LayeredHatsCoatsAndBootsLogo size={250} speed="slow" pauseOnHover={true} />
+    <LayeredHatCoatAndBootsLogo size={250} speed="slow" pauseOnHover={true} />
   ),
 };
 
-// Original simple HatsCoatsAndBoots Logo
-export const SimpleHatsCoatsAndBoots: Story = {
+// Original simple HatCoatAndBoots Logo
+export const SimpleHatCoatAndBoots: Story = {
   args: {
-    children: <HatsCoatsAndBootsLogo />,
+    children: <HatCoatAndBootsLogo />,
     size: 250,
     pauseOnHover: true,
   },
 };
 
-// Layered HatsCoatsAndBoots Logo - the new composite logo
-export const LayeredHatsCoatsAndBoots: Story = {
+// Layered HatCoatAndBoots Logo - the new composite logo
+export const LayeredHatCoatAndBoots: Story = {
   args: {
     children: null,
   },
   render: () => (
-    <LayeredHatsCoatsAndBootsLogo size={250} speed="slow" pauseOnHover={true} />
+    <LayeredHatCoatAndBootsLogo size={250} speed="slow" pauseOnHover={true} />
   ),
 };
 
-export const LayeredHatsCoatsAndBootsLarge: Story = {
+export const LayeredHatCoatAndBootsLarge: Story = {
   args: {
     children: null,
   },
   render: () => (
-    <LayeredHatsCoatsAndBootsLogo size={350} speed="slow" pauseOnHover={true} />
+    <LayeredHatCoatAndBootsLogo size={350} speed="slow" pauseOnHover={true} />
   ),
 };
 
-export const HatsCoatsAndBootsLarge: Story = {
+export const HatCoatAndBootsLarge: Story = {
   args: {
-    children: <HatsCoatsAndBootsLogo />,
+    children: <HatCoatAndBootsLogo />,
     size: 350,
     pauseOnHover: true,
   },
 };
 
-export const HatsCoatsAndBootsFast: Story = {
+export const HatCoatAndBootsFast: Story = {
   args: {
-    children: <HatsCoatsAndBootsLogo />,
+    children: <HatCoatAndBootsLogo />,
     size: 250,
     speed: 'fast',
     pauseOnHover: true,
   },
 };
 
-export const HatsCoatsAndBootsVerySlow: Story = {
+export const HatCoatAndBootsVerySlow: Story = {
   args: {
-    children: <HatsCoatsAndBootsLogo />,
+    children: <HatCoatAndBootsLogo />,
     size: 250,
     speed: 60, // 60 second rotation - ultra smooth
     pauseOnHover: true,
   },
 };
 
-export const HatsCoatsAndBootsStatic: Story = {
+export const HatCoatAndBootsStatic: Story = {
   args: {
-    children: <HatsCoatsAndBootsLogo />,
+    children: <HatCoatAndBootsLogo />,
     size: 250,
     isSpinning: false,
   },
 };
 
-export const HatsCoatsAndBootsCounterClockwise: Story = {
+export const HatCoatAndBootsCounterClockwise: Story = {
   args: {
-    children: <HatsCoatsAndBootsLogo />,
+    children: <HatCoatAndBootsLogo />,
     size: 250,
     direction: 'counter-clockwise',
     pauseOnHover: true,
@@ -238,26 +238,26 @@ export const ThemeShowcase: Story = {
     <div className="flex flex-col gap-8">
       <div>
         <p className="text-base-content/80 mb-2 text-sm">
-          HatsCoatsAndBoots logo — adapts to current theme via text-primary
+          HatCoatAndBoots logo — adapts to current theme via text-primary
         </p>
         <div className="flex items-center gap-8">
-          <LayeredHatsCoatsAndBootsLogo size={150} speed="slow" pauseOnHover />
-          <LayeredHatsCoatsAndBootsLogo size={100} speed="slow" pauseOnHover />
+          <LayeredHatCoatAndBootsLogo size={150} speed="slow" pauseOnHover />
+          <LayeredHatCoatAndBootsLogo size={100} speed="slow" pauseOnHover />
         </div>
       </div>
       <div className="flex flex-col gap-3">
         <p className="text-base-content/80 text-sm">On surfaces</p>
         <div className="bg-base-100 flex items-center gap-6 rounded-lg p-4">
           <span className="text-base-content/80 text-sm">base-100:</span>
-          <LayeredHatsCoatsAndBootsLogo size={80} speed="slow" pauseOnHover />
+          <LayeredHatCoatAndBootsLogo size={80} speed="slow" pauseOnHover />
         </div>
         <div className="bg-base-200 flex items-center gap-6 rounded-lg p-4">
           <span className="text-base-content/80 text-sm">base-200:</span>
-          <LayeredHatsCoatsAndBootsLogo size={80} speed="slow" pauseOnHover />
+          <LayeredHatCoatAndBootsLogo size={80} speed="slow" pauseOnHover />
         </div>
         <div className="bg-neutral flex items-center gap-6 rounded-lg p-4">
           <span className="text-neutral-content/80 text-sm">neutral:</span>
-          <LayeredHatsCoatsAndBootsLogo size={80} speed="slow" pauseOnHover />
+          <LayeredHatCoatAndBootsLogo size={80} speed="slow" pauseOnHover />
         </div>
       </div>
     </div>

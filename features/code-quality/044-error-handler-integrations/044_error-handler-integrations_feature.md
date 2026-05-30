@@ -2,7 +2,7 @@
 
 **Feature ID**: 044
 **Category**: code-quality
-**Source**: HatsCoatsAndBoots README (SPEC-060)
+**Source**: HatCoatAndBoots README (SPEC-060)
 **Status**: Ready for SpecKit
 **Depends on**: 019-analytics-consent
 

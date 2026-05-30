@@ -4,9 +4,9 @@ export default function ThemeScript() {
       function getSystemTheme() {
         // Check if user prefers dark mode
         if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-          return 'hatscoatsandboots-dark';
+          return 'hatcoatandboots-dark';
         }
-        return 'hatscoatsandboots-light';
+        return 'hatcoatandboots-light';
       }
 
       function applyTheme(theme) {

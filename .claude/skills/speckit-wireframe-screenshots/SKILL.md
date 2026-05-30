@@ -7,7 +7,7 @@ metadata:
   source: wireframe:commands/screenshots.md
 ---
 
-> **HatsCoatsAndBoots note:** wireframes live at `features/<category>/<NNN-name>/wireframes/`
+> **HatCoatAndBoots note:** wireframes live at `features/<category>/<NNN-name>/wireframes/`
 > (not `specs/<feature>/`). Screenshots output to
 > `features/<cat>/<NNN-name>/wireframes/screenshots/` per `wireframe-config.yml`.
 

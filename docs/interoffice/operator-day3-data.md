@@ -60,7 +60,7 @@ Read full context below, then run startup sequence.
 <!-- WRONG -->
 <text x="960" y="1060" text-anchor="middle" ...>
 <!-- CORRECT -->
-<text x="40" y="1060" font-size="18" font-weight="bold" fill="#374151">NNN:NN | Feature Name | HatsCoatsAndBoots</text>
+<text x="40" y="1060" font-size="18" font-weight="bold" fill="#374151">NNN:NN | Feature Name | HatCoatAndBoots</text>
 ```
 
 **Rounded Corners (G-044):**
@@ -81,8 +81,8 @@ Read full context below, then run startup sequence.
 
 ### Startup Sequence
 
-1. `tmux attach -t hatscoatsandboots`
+1. `tmux attach -t hatcoatandboots`
 2. Reprime Inspector: `/clear` then `/prime inspector`
-3. Check terminals: `for win in PreviewHost WireframeQA Validator Inspector Auditor; do tmux capture-pane -t hatscoatsandboots:$win -p | grep "% free"; done`
+3. Check terminals: `for win in PreviewHost WireframeQA Validator Inspector Auditor; do tmux capture-pane -t hatcoatandboots:$win -p | grep "% free"; done`
 4. Dispatch PATCH tasks to Generator terminals
 5. Push 28 commits when ready

@@ -1,6 +1,6 @@
 # Creating Components Guide
 
-This guide explains how to create new components in HatsCoatsAndBoots following our enforced component structure standards.
+This guide explains how to create new components in HatCoatAndBoots following our enforced component structure standards.
 
 ## Quick Start
 
@@ -8,7 +8,7 @@ To create a new component, use the Plop generator:
 
 ```bash
 # Docker (recommended)
-docker compose exec hatscoatsandboots pnpm run generate:component
+docker compose exec hatcoatandboots pnpm run generate:component
 
 # Local
 pnpm run generate:component
@@ -171,10 +171,10 @@ After creating a component, verify it meets standards:
 
 ```bash
 # Check component structure compliance
-docker compose exec hatscoatsandboots pnpm run audit:components
+docker compose exec hatcoatandboots pnpm run audit:components
 
 # Validate for CI/CD (exits with error if non-compliant)
-docker compose exec hatscoatsandboots pnpm run validate:structure
+docker compose exec hatcoatandboots pnpm run validate:structure
 ```
 
 ## Manual Component Creation
@@ -192,7 +192,7 @@ If you have non-compliant components, use the migration tool:
 
 ```bash
 # Auto-fix non-compliant components
-docker compose exec hatscoatsandboots pnpm run migrate:components
+docker compose exec hatcoatandboots pnpm run migrate:components
 ```
 
 ⚠️ **Note**: The migration creates generic test templates that may need updating.
@@ -327,7 +327,7 @@ if (error) {
 Run the audit to see what's missing:
 
 ```bash
-docker compose exec hatscoatsandboots pnpm run audit:components -- --verbose
+docker compose exec hatcoatandboots pnpm run audit:components -- --verbose
 ```
 
 ### Tests Failing After Generation

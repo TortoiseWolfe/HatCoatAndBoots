@@ -1,6 +1,6 @@
-# Contributing to HatsCoatsAndBoots
+# Contributing to HatCoatAndBoots
 
-Thank you for your interest in contributing to HatsCoatsAndBoots. This guide will help you get started.
+Thank you for your interest in contributing to HatCoatAndBoots. This guide will help you get started.
 
 ## Table of Contents
 
@@ -40,11 +40,11 @@ Be respectful, inclusive, and constructive. We welcome contributors of all exper
 # 1. Fork the repository on GitHub
 
 # 2. Clone your fork
-git clone https://github.com/YOUR_USERNAME/HatsCoatsAndBoots.git
-cd HatsCoatsAndBoots
+git clone https://github.com/YOUR_USERNAME/HatCoatAndBoots.git
+cd HatCoatAndBoots
 
 # 3. Add upstream remote
-git remote add upstream https://github.com/ORIGINAL_OWNER/HatsCoatsAndBoots.git
+git remote add upstream https://github.com/ORIGINAL_OWNER/HatCoatAndBoots.git
 
 # 4. Start the development environment
 docker compose up -d
@@ -84,7 +84,7 @@ docker compose up
 Validate wireframes with the shipped 40+ rule validator:
 
 ```bash
-docker compose exec hatscoatsandboots \
+docker compose exec hatcoatandboots \
   python3 .specify/extensions/wireframe/scripts/validate.py --all --summary
 ```
 
@@ -93,7 +93,7 @@ docker compose exec hatscoatsandboots \
 ## Project Structure
 
 ```
-HatsCoatsAndBoots/
+HatCoatAndBoots/
 ├── features/                    # Feature specifications (PRPs)
 │   ├── foundation/              # Core features (000-006)
 │   ├── core-features/           # Main features (007-012)
@@ -137,7 +137,7 @@ git checkout -b feature/your-feature-name
 
 ### Workflow for Features
 
-HatsCoatsAndBoots uses the SpecKit workflow for feature development:
+HatCoatAndBoots uses the SpecKit workflow for feature development:
 
 ```bash
 # 1. Specification phase
@@ -470,8 +470,8 @@ export const User = ({ name, email }) => <div>{name}</div>;
 
 ## Getting Help
 
-- **Questions**: Open a [Discussion](https://github.com/OWNER/HatsCoatsAndBoots/discussions)
-- **Bugs**: Open an [Issue](https://github.com/OWNER/HatsCoatsAndBoots/issues)
+- **Questions**: Open a [Discussion](https://github.com/OWNER/HatCoatAndBoots/discussions)
+- **Bugs**: Open an [Issue](https://github.com/OWNER/HatCoatAndBoots/issues)
 - **Security**: Email security@example.com (do not open public issues)
 
 ---
@@ -482,4 +482,4 @@ By contributing, you agree that your contributions will be licensed under the sa
 
 ---
 
-Thank you for contributing to HatsCoatsAndBoots!
+Thank you for contributing to HatCoatAndBoots!

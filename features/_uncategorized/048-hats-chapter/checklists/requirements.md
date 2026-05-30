@@ -45,7 +45,7 @@
   remains free of [NEEDS CLARIFICATION].
 - **i18n carved out (Session 2026-05-29, post-clarify):** the multilingual scope clarified
   above was subsequently **carved out of this slice** into its own feature, GitHub issue
-  [#2](https://github.com/TortoiseWolfe/HatsCoatsAndBoots/issues/2) (`049-i18n-multilingual`),
+  [#2](https://github.com/TortoiseWolfe/HatCoatAndBoots/issues/2) (`049-i18n-multilingual`),
   with the Hats chapter as its first consumer. This slice now ships **English-only**; FR-016 is
   reframed as "author text as externally-referenced strings so 049 has no rework," and the
   former FR-016a/016b, SC-009/010, and the language User Story were removed from the spec.

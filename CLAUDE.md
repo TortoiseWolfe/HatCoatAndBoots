@@ -4,7 +4,7 @@ This file provides guidance to Claude Code when working with this repository.
 
 ## What This Project Is
 
-**HatsCoatsAndBoots** is a children's book on **sustainable natural building** —
+**HatCoatAndBoots** is a children's book on **sustainable natural building** —
 teaching kids how good buildings work via the **Hats, Coats, and Boots** mnemonic
 (hat = roof overhang; coat = insulated thermal envelope; boots = a foundation
 that lifts the structure above wet ground). It is the successor to the author's
@@ -72,8 +72,8 @@ yarn install
 npx <anything>
 
 # ✅ CORRECT - Always use Docker
-docker compose exec hatscoatsandboots pnpm install
-docker compose exec hatscoatsandboots pnpm add <package>
+docker compose exec hatcoatandboots pnpm install
+docker compose exec hatcoatandboots pnpm add <package>
 ```
 
 **Why this is critical:**
@@ -87,7 +87,7 @@ docker compose exec hatscoatsandboots pnpm add <package>
 
 ```bash
 docker compose down
-docker compose run --rm hatscoatsandboots rm -rf node_modules
+docker compose run --rm hatcoatandboots rm -rf node_modules
 docker compose up
 ```
 
@@ -101,8 +101,8 @@ sudo chown -R $USER:$USER .next
 sudo rm -rf node_modules
 
 # ✅ CORRECT - Use Docker
-docker compose exec hatscoatsandboots rm -rf .next
-docker compose exec hatscoatsandboots rm -rf node_modules
+docker compose exec hatcoatandboots rm -rf .next
+docker compose exec hatcoatandboots rm -rf node_modules
 docker compose down && docker compose up
 ```
 
@@ -111,7 +111,7 @@ docker compose down && docker compose up
 **Permission errors? Always try:**
 
 1. `docker compose down && docker compose up` (restarts container, cleans .next)
-2. `docker compose exec hatscoatsandboots pnpm run docker:clean`
+2. `docker compose exec hatcoatandboots pnpm run docker:clean`
 
 ### Essential Commands
 
@@ -120,24 +120,24 @@ docker compose down && docker compose up
 docker compose up
 
 # Development server
-docker compose exec hatscoatsandboots pnpm run dev
+docker compose exec hatcoatandboots pnpm run dev
 
 # Run tests
-docker compose exec hatscoatsandboots pnpm test
-docker compose exec hatscoatsandboots pnpm run test:suite    # Full suite
+docker compose exec hatcoatandboots pnpm test
+docker compose exec hatcoatandboots pnpm run test:suite    # Full suite
 
 # Storybook
-docker compose exec hatscoatsandboots pnpm run storybook
+docker compose exec hatcoatandboots pnpm run storybook
 
 # E2E tests
-docker compose exec hatscoatsandboots pnpm exec playwright test
+docker compose exec hatcoatandboots pnpm exec playwright test
 
 # Type checking & linting
-docker compose exec hatscoatsandboots pnpm run type-check
-docker compose exec hatscoatsandboots pnpm run lint
+docker compose exec hatcoatandboots pnpm run type-check
+docker compose exec hatcoatandboots pnpm run lint
 
 # Clean start if issues
-docker compose exec hatscoatsandboots pnpm run docker:clean
+docker compose exec hatcoatandboots pnpm run docker:clean
 ```
 
 ### Git Commits from Docker
@@ -150,8 +150,8 @@ GIT_AUTHOR_NAME=Your Name
 GIT_AUTHOR_EMAIL=your@email.com
 
 # Commit from container (hooks run correctly)
-docker compose exec hatscoatsandboots git add -A
-docker compose exec hatscoatsandboots git commit -m "Your commit message"
+docker compose exec hatcoatandboots git add -A
+docker compose exec hatcoatandboots git commit -m "Your commit message"
 
 # Push from host (uses your SSH keys)
 git push
@@ -162,7 +162,7 @@ git push
 Supabase Cloud free tier auto-pauses after 7 days. If paused:
 
 ```bash
-docker compose exec hatscoatsandboots pnpm run prime
+docker compose exec hatcoatandboots pnpm run prime
 ```
 
 ## Component Structure (MANDATORY)
@@ -181,7 +181,7 @@ ComponentName/
 **Always use the generator:**
 
 ```bash
-docker compose exec hatscoatsandboots pnpm run generate:component
+docker compose exec hatcoatandboots pnpm run generate:component
 ```
 
 See `docs/CREATING_COMPONENTS.md` for details.
@@ -281,7 +281,7 @@ docker compose down && docker compose up
 Instance paused after inactivity:
 
 ```bash
-docker compose exec hatscoatsandboots pnpm run prime
+docker compose exec hatcoatandboots pnpm run prime
 ```
 
 ### Tailwind CSS Not Loading
@@ -461,7 +461,7 @@ Apply this any time test code sets `scrollTop` and expects a scroll-event-driven
 
 ## Planning Factory (Multi-Terminal Workflow)
 
-This repo also contains the planning factory tooling from the HatsCoatsAndBoots planning template. The sections below govern the multi-terminal spec-driven workflow.
+This repo also contains the planning factory tooling from the HatCoatAndBoots planning template. The sections below govern the multi-terminal spec-driven workflow.
 
 ### Multi-Terminal Assembly Line
 
@@ -516,7 +516,7 @@ When operating as a terminal in the multi-terminal workflow:
 
 ### Fork Guide
 
-After forking HatsCoatsAndBoots:
+After forking HatCoatAndBoots:
 
 1. Run `/refresh-inventories` — Regenerates context files for your specs
 2. Update `.claude/inventories/` — Reflects your project's features

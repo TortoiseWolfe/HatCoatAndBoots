@@ -106,13 +106,13 @@ Only add to completedToday when .issues.md shows 0 open issues:
 
 Validator must check:
 
-| Check         | Expected Value                                        |
-| ------------- | ----------------------------------------------------- |
-| G-037         | No `fill="#6b7280"` in annotation panel               |
-| G-044         | Footer/nav have `rx="4-8"`                            |
-| G-047         | Key Concepts at `x=40, y=940`                         |
-| SIGNATURE-003 | Signature at `x="40"`, no `text-anchor="middle"`      |
-| SIGNATURE-004 | Format: `NNN:NN \| Feature Name \| HatsCoatsAndBoots` |
+| Check         | Expected Value                                      |
+| ------------- | --------------------------------------------------- |
+| G-037         | No `fill="#6b7280"` in annotation panel             |
+| G-044         | Footer/nav have `rx="4-8"`                          |
+| G-047         | Key Concepts at `x=40, y=940`                       |
+| SIGNATURE-003 | Signature at `x="40"`, no `text-anchor="middle"`    |
+| SIGNATURE-004 | Format: `NNN:NN \| Feature Name \| HatCoatAndBoots` |
 
 ---
 

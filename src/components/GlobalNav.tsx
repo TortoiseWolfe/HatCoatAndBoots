@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { LayeredHatsCoatsAndBootsLogo } from '@/components/atomic/SpinningLogo';
+import { LayeredHatCoatAndBootsLogo } from '@/components/atomic/SpinningLogo';
 import { AnimatedLogo } from '@/components/atomic/AnimatedLogo';
 import { ColorblindToggle } from '@/components/molecular/ColorblindToggle';
 import { FontSizeControl } from '@/components/navigation/FontSizeControl';
@@ -49,7 +49,7 @@ export function GlobalNav() {
     const savedTheme =
       localStorage.getItem('theme') ||
       document.documentElement.getAttribute('data-theme') ||
-      'hatscoatsandboots-dark';
+      'hatcoatandboots-dark';
     setTheme(savedTheme);
     document.documentElement.setAttribute('data-theme', savedTheme);
 
@@ -129,8 +129,8 @@ export function GlobalNav() {
   ];
 
   const themes = [
-    'hatscoatsandboots-dark',
-    'hatscoatsandboots-light',
+    'hatcoatandboots-dark',
+    'hatcoatandboots-light',
     'light',
     'dark',
     'cupcake',
@@ -176,7 +176,7 @@ export function GlobalNav() {
               className="flex items-center gap-2 transition-opacity hover:opacity-80"
             >
               <div className="h-8 w-8">
-                <LayeredHatsCoatsAndBootsLogo
+                <LayeredHatCoatAndBootsLogo
                   size={32}
                   speed="slow"
                   className="drop-shadow-sm"

@@ -7,7 +7,7 @@
 # ]
 # ///
 """
-Local semantic-RAG MCP server for HatsCoatsAndBoots.
+Local semantic-RAG MCP server for HatCoatAndBoots.
 
 Exposes `search_transcripts(query, k)` — semantic search over the William
 McDonough cradle-to-cradle construction transcripts (TED 2007 + WEF 2015),
@@ -129,7 +129,7 @@ else:
     mat /= np.linalg.norm(mat, axis=1, keepdims=True)
     print(f"[index] embedded {len(chunks)} chunks from {CORPUS_DIR}", file=sys.stderr)
 
-mcp = FastMCP("hatscoatsandboots-transcript-rag")
+mcp = FastMCP("hatcoatandboots-transcript-rag")
 
 
 @mcp.tool()

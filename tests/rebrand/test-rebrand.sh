@@ -2,7 +2,7 @@
 # Test harness for scripts/rebrand.sh
 #
 # SAFETY: All tests run in isolated temporary directories.
-#         The actual HatsCoatsAndBoots repo is NEVER modified.
+#         The actual HatCoatAndBoots repo is NEVER modified.
 #
 # Usage: ./tests/rebrand/test-rebrand.sh [test_name]
 # Run all tests: ./tests/rebrand/test-rebrand.sh
@@ -16,7 +16,7 @@ REBRAND_SCRIPT="$REPO_ROOT/scripts/rebrand.sh"
 
 # SAFETY CHECK: Never run rebrand on the actual repo
 SAFETY_FILE="$REPO_ROOT/.git/config"
-if [ -f "$SAFETY_FILE" ] && grep -q "HatsCoatsAndBoots" "$SAFETY_FILE" 2>/dev/null; then
+if [ -f "$SAFETY_FILE" ] && grep -q "HatCoatAndBoots" "$SAFETY_FILE" 2>/dev/null; then
     ACTUAL_REPO=true
 else
     ACTUAL_REPO=false
@@ -52,22 +52,22 @@ run_test() {
     echo -e "\n${YELLOW}Running${NC}: $test_name"
 }
 
-# Create temporary test directory with mock HatsCoatsAndBoots structure
+# Create temporary test directory with mock HatCoatAndBoots structure
 setup_temp_dir() {
     TEMP_DIR=$(mktemp -d)
     trap "rm -rf $TEMP_DIR" EXIT
 
-    # Create mock HatsCoatsAndBoots repo structure in temp dir
+    # Create mock HatCoatAndBoots repo structure in temp dir
     cd "$TEMP_DIR"
     git init -q
-    git remote add origin "https://github.com/TortoiseWolfe/HatsCoatsAndBoots.git"
+    git remote add origin "https://github.com/TortoiseWolfe/HatCoatAndBoots.git"
 
-    # Create essential files with HatsCoatsAndBoots references
+    # Create essential files with HatCoatAndBoots references
     mkdir -p src/components
-    echo '{"name": "hatscoatsandboots", "description": "HatsCoatsAndBoots template"}' > package.json
-    echo "# HatsCoatsAndBoots" > README.md
-    echo "hatscoatsandboots.com" > CNAME
-    echo "export const projectName = 'HatsCoatsAndBoots';" > src/components/Logo.tsx
+    echo '{"name": "hatcoatandboots", "description": "HatCoatAndBoots template"}' > package.json
+    echo "# HatCoatAndBoots" > README.md
+    echo "hatcoatandboots.com" > CNAME
+    echo "export const projectName = 'HatCoatAndBoots';" > src/components/Logo.tsx
 
     # Copy the rebrand script to temp dir
     cp "$REBRAND_SCRIPT" "$TEMP_DIR/scripts/" 2>/dev/null || {
@@ -212,17 +212,17 @@ test_dry_run_no_changes() {
 test_rerebrand_detection() {
     run_test "test_rerebrand_detection"
 
-    # Create a DIFFERENT temp dir for this test (without HatsCoatsAndBoots refs)
+    # Create a DIFFERENT temp dir for this test (without HatCoatAndBoots refs)
     local REREBRAND_TEMP
     REREBRAND_TEMP=$(mktemp -d)
     trap "rm -rf $REREBRAND_TEMP" RETURN
 
-    # Create a repo WITHOUT "HatsCoatsAndBoots" references (simulating already rebranded)
+    # Create a repo WITHOUT "HatCoatAndBoots" references (simulating already rebranded)
     cd "$REREBRAND_TEMP"
     git init -q
     git remote add origin "https://github.com/testuser/other-project.git"
 
-    # Create files WITHOUT HatsCoatsAndBoots (already rebranded scenario)
+    # Create files WITHOUT HatCoatAndBoots (already rebranded scenario)
     mkdir -p scripts src/components
     echo '{"name": "otherproject", "description": "Other project"}' > package.json
     echo "# OtherProject" > README.md
@@ -235,7 +235,7 @@ test_rerebrand_detection() {
     local output
     output=$("$REREBRAND_TEMP/scripts/rebrand.sh" "MyApp" "testuser" "Test desc" --dry-run 2>&1 || true)
 
-    if echo "$output" | grep -qi "already.*rebranded\|no.*hatscoatsandboots.*found\|WARNING"; then
+    if echo "$output" | grep -qi "already.*rebranded\|no.*hatcoatandboots.*found\|WARNING"; then
         log_pass "Re-rebrand scenario detected and warned"
     else
         log_fail "Re-rebrand detection" "warning about already rebranded" "${output:0:200}"

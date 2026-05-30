@@ -36,7 +36,7 @@ User flagged v2 (one small building icon) still didn't convey the metaphor. Redr
 
 ## Update: 2026-05-29 — singular chapter names
 
-Singularized the mnemonic per user: Hats→Hat, Coats→Coat (Boots stays plural — a building wears a hat, a coat, and boots). Routes singularized to /book/hat, /book/coat (/book/boots unchanged). Project proper-noun "HatsCoatsAndBoots" preserved (separate rename task queued). Re-validated PASS and render-verified.
+Singularized the mnemonic per user: Hats→Hat, Coats→Coat (Boots stays plural — a building wears a hat, a coat, and boots). Routes singularized to /book/hat, /book/coat (/book/boots unchanged). Project proper-noun "HatCoatAndBoots" preserved (separate rename task queued). Re-validated PASS and render-verified.
 
 ## Rebuilt 2026-05-29 — shared-registration layers (transparency stack)
 

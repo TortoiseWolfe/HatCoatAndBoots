@@ -41,7 +41,7 @@ type Story = StoryObj<typeof AnimatedLogo>;
 
 export const Default: Story = {
   args: {
-    text: 'HatsCoatsAndBoots',
+    text: 'HatCoatAndBoots',
     size: 'xl',
     animationSpeed: 'normal',
   },
@@ -106,7 +106,7 @@ export const LongText: Story = {
 
 export const ThemeShowcase: Story = {
   args: {
-    text: 'HatsCoatsAndBoots',
+    text: 'HatCoatAndBoots',
   },
   render: () => (
     <div className="flex flex-col gap-8">
@@ -114,19 +114,19 @@ export const ThemeShowcase: Story = {
         <p className="text-base-content/80 mb-2 text-sm">
           Uses text-primary — adapts to current theme
         </p>
-        <AnimatedLogo text="HatsCoatsAndBoots" size="2xl" />
+        <AnimatedLogo text="HatCoatAndBoots" size="2xl" />
       </div>
       <div className="flex flex-col gap-4">
         <p className="text-base-content/80 text-sm">All sizes</p>
-        <AnimatedLogo text="HatsCoatsAndBoots" size="sm" />
-        <AnimatedLogo text="HatsCoatsAndBoots" size="md" />
-        <AnimatedLogo text="HatsCoatsAndBoots" size="lg" />
-        <AnimatedLogo text="HatsCoatsAndBoots" size="xl" />
+        <AnimatedLogo text="HatCoatAndBoots" size="sm" />
+        <AnimatedLogo text="HatCoatAndBoots" size="md" />
+        <AnimatedLogo text="HatCoatAndBoots" size="lg" />
+        <AnimatedLogo text="HatCoatAndBoots" size="xl" />
       </div>
       <div>
         <p className="text-base-content/80 mb-2 text-sm">On neutral surface</p>
         <div className="bg-neutral rounded-box inline-block p-6">
-          <AnimatedLogo text="HatsCoatsAndBoots" size="xl" />
+          <AnimatedLogo text="HatCoatAndBoots" size="xl" />
         </div>
       </div>
     </div>

@@ -11,7 +11,7 @@
 
 // Default configuration
 const defaultConfig = {
-  projectName: 'HatsCoatsAndBoots',
+  projectName: 'HatCoatAndBoots',
   projectOwner: 'TortoiseWolfe',
   projectDescription:
     'Opinionated Next.js template with PWA, theming, and interactive components',

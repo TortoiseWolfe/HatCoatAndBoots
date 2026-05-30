@@ -71,27 +71,27 @@ By participating in this project, you agree to abide by our code of conduct:
 docker compose up
 
 # Run commands in container
-docker compose exec hatscoatsandboots pnpm dev       # Dev server
-docker compose exec hatscoatsandboots pnpm test      # Run tests
-docker compose exec hatscoatsandboots pnpm lint      # Run linting
-docker compose exec hatscoatsandboots pnpm format    # Format code
-docker compose exec hatscoatsandboots pnpm storybook  # Storybook
-docker compose exec hatscoatsandboots pnpm type-check # TypeScript
+docker compose exec hatcoatandboots pnpm dev       # Dev server
+docker compose exec hatcoatandboots pnpm test      # Run tests
+docker compose exec hatcoatandboots pnpm lint      # Run linting
+docker compose exec hatcoatandboots pnpm format    # Format code
+docker compose exec hatcoatandboots pnpm storybook  # Storybook
+docker compose exec hatcoatandboots pnpm type-check # TypeScript
 ```
 
 ### Available Scripts (Run Inside Docker)
 
-| Script                                                     | Description                      |
-| ---------------------------------------------------------- | -------------------------------- |
-| `docker compose exec hatscoatsandboots pnpm dev`           | Start Next.js development server |
-| `docker compose exec hatscoatsandboots pnpm build`         | Build for production             |
-| `docker compose exec hatscoatsandboots pnpm test`          | Run Vitest tests                 |
-| `docker compose exec hatscoatsandboots pnpm test:coverage` | Generate coverage report         |
-| `docker compose exec hatscoatsandboots pnpm lint`          | Run ESLint                       |
-| `docker compose exec hatscoatsandboots pnpm format`        | Format code with Prettier        |
-| `docker compose exec hatscoatsandboots pnpm format:check`  | Check formatting without changes |
-| `docker compose exec hatscoatsandboots pnpm type-check`    | Run TypeScript type checking     |
-| `docker compose exec hatscoatsandboots pnpm storybook`     | Start Storybook development      |
+| Script                                                   | Description                      |
+| -------------------------------------------------------- | -------------------------------- |
+| `docker compose exec hatcoatandboots pnpm dev`           | Start Next.js development server |
+| `docker compose exec hatcoatandboots pnpm build`         | Build for production             |
+| `docker compose exec hatcoatandboots pnpm test`          | Run Vitest tests                 |
+| `docker compose exec hatcoatandboots pnpm test:coverage` | Generate coverage report         |
+| `docker compose exec hatcoatandboots pnpm lint`          | Run ESLint                       |
+| `docker compose exec hatcoatandboots pnpm format`        | Format code with Prettier        |
+| `docker compose exec hatcoatandboots pnpm format:check`  | Check formatting without changes |
+| `docker compose exec hatcoatandboots pnpm type-check`    | Run TypeScript type checking     |
+| `docker compose exec hatcoatandboots pnpm storybook`     | Start Storybook development      |
 
 ## Coding Standards
 
@@ -172,13 +172,13 @@ docs: update installation instructions
 
 ```bash
 # Run all tests (inside Docker)
-docker compose exec hatscoatsandboots pnpm test
+docker compose exec hatcoatandboots pnpm test
 
 # Run tests in watch mode
-docker compose exec hatscoatsandboots pnpm test:watch
+docker compose exec hatcoatandboots pnpm test:watch
 
 # Generate coverage report
-docker compose exec hatscoatsandboots pnpm test:coverage
+docker compose exec hatcoatandboots pnpm test:coverage
 ```
 
 ### Coverage Requirements
@@ -306,7 +306,7 @@ CRUDkit/
 ## Getting Help
 
 - Check the [documentation](./docs/)
-- Review [existing issues](https://github.com/TortoiseWolfe/HatsCoatsAndBoots/issues)
+- Review [existing issues](https://github.com/TortoiseWolfe/HatCoatAndBoots/issues)
 - Ask in discussions
 - Read the [README](./README.md)
 

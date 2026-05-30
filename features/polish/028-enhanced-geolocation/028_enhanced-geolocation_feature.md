@@ -2,7 +2,7 @@
 
 **Feature ID**: 028
 **Category**: polish
-**Source**: HatsCoatsAndBoots/docs/specs/015-enhanced-geolocation
+**Source**: HatCoatAndBoots/docs/specs/015-enhanced-geolocation
 **Status**: Ready for SpecKit
 
 ## Description

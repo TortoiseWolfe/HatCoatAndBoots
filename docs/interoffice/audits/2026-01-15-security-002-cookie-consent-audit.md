@@ -308,5 +308,5 @@ Feature 002 demonstrates exemplary privacy-by-design principles. The spec explic
 ---
 
 **Security Lead**
-HatsCoatsAndBoots Council
+HatCoatAndBoots Council
 2026-01-15

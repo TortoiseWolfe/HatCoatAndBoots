@@ -1,12 +1,12 @@
 #!/bin/bash
-# Context window monitor for hatscoatsandboots multi-terminal workflow
+# Context window monitor for hatcoatandboots multi-terminal workflow
 # Usage: ./tmux-context-monitor.sh [--clear ROLE]
 #
 # Scans all 21 tmux windows and reports context usage from Claude Code's
 # prompt line ("X% free"). Identifies terminals that need /clear + re-priming.
 
-SESSION="hatscoatsandboots"
-PROJECT_DIR="$HOME/repos/000_Mega_Plates/HatsCoatsAndBoots"
+SESSION="hatcoatandboots"
+PROJECT_DIR="$HOME/repos/000_Mega_Plates/HatCoatAndBoots"
 WARNING_THRESHOLD=20   # Yellow: 20% or less free
 CRITICAL_THRESHOLD=10  # Red: 10% or less free
 
@@ -325,7 +325,7 @@ case "${1:-}" in
   --help|-h)
     echo "Usage: $0 [--clear ROLE | --update-names | --reset-names]"
     echo ""
-    echo "Monitor context window usage across all hatscoatsandboots terminals."
+    echo "Monitor context window usage across all hatcoatandboots terminals."
     echo ""
     echo "Commands:"
     echo "  (none)          Show context status for all 21 terminals"

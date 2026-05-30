@@ -1,21 +1,21 @@
 import React from 'react';
 import Image from 'next/image';
 
-export interface HatsCoatsAndBootsLogoProps {
+export interface HatCoatAndBootsLogoProps {
   className?: string;
   width?: number;
   height?: number;
 }
 
-export const HatsCoatsAndBootsLogo: React.FC<HatsCoatsAndBootsLogoProps> = ({
+export const HatCoatAndBootsLogo: React.FC<HatCoatAndBootsLogoProps> = ({
   className = 'w-full h-full',
   width = 400,
   height = 400,
 }) => {
   return (
     <Image
-      src="/hatscoatsandboots-logo.svg"
-      alt="HatsCoatsAndBoots Logo"
+      src="/hatcoatandboots-logo.svg"
+      alt="HatCoatAndBoots Logo"
       width={width}
       height={height}
       className={className}
@@ -25,4 +25,4 @@ export const HatsCoatsAndBootsLogo: React.FC<HatsCoatsAndBootsLogoProps> = ({
   );
 };
 
-HatsCoatsAndBootsLogo.displayName = 'HatsCoatsAndBootsLogo';
+HatCoatAndBootsLogo.displayName = 'HatCoatAndBootsLogo';

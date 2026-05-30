@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
-# HatsCoatsAndBoots SpecKit harness config — sourced by every bash helper in this dir.
+# HatCoatAndBoots SpecKit harness config — sourced by every bash helper in this dir.
 #
-# Why this file exists: HatsCoatsAndBoots keeps specs under `features/<category>/<NNN-name>/`
+# Why this file exists: HatCoatAndBoots keeps specs under `features/<category>/<NNN-name>/`
 # instead of upstream SpecKit's flat `specs/<NNN-name>/`. Rather than fork the whole
 # upstream toolchain, we override the search root + gloss the recursive lookup here.
 #
 # Upstream layout:   specs/004-foo/spec.md
-# HatsCoatsAndBoots:      features/foundation/004-foo/spec.md
+# HatCoatAndBoots:      features/foundation/004-foo/spec.md
 #                    features/auth-oauth/013-oauth-messaging-password/spec.md
 #                    etc.
 #

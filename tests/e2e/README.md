@@ -327,7 +327,7 @@ pnpm exec playwright install --list
 pnpm exec playwright test homepage.spec.ts --debug
 
 # Generate codegen
-pnpm exec playwright codegen http://localhost:3000/HatsCoatsAndBoots
+pnpm exec playwright codegen http://localhost:3000/HatCoatAndBoots
 ```
 
 ## Performance
@@ -380,4 +380,4 @@ pnpm exec playwright codegen http://localhost:3000/HatsCoatsAndBoots
 
 ## License
 
-Part of the HatsCoatsAndBoots project. See main LICENSE file.
+Part of the HatCoatAndBoots project. See main LICENSE file.

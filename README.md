@@ -1,16 +1,16 @@
-# HatsCoatsAndBoots - Modern Next.js Template with PWA
+# HatCoatAndBoots - Modern Next.js Template with PWA
 
-[![GitHub](https://img.shields.io/badge/GitHub-Repository-blue)](https://github.com/TortoiseWolfe/HatsCoatsAndBoots)
-[![Use Template](https://img.shields.io/badge/Use%20this%20template-2ea44f?style=for-the-badge)](https://github.com/TortoiseWolfe/HatsCoatsAndBoots/generate)
-[![Stars](https://img.shields.io/github/stars/TortoiseWolfe/HatsCoatsAndBoots?style=social)](https://github.com/TortoiseWolfe/HatsCoatsAndBoots)
+[![GitHub](https://img.shields.io/badge/GitHub-Repository-blue)](https://github.com/TortoiseWolfe/HatCoatAndBoots)
+[![Use Template](https://img.shields.io/badge/Use%20this%20template-2ea44f?style=for-the-badge)](https://github.com/TortoiseWolfe/HatCoatAndBoots/generate)
+[![Stars](https://img.shields.io/github/stars/TortoiseWolfe/HatCoatAndBoots?style=social)](https://github.com/TortoiseWolfe/HatCoatAndBoots)
 
 A comprehensive Next.js starter kit featuring 32 themes, PWA capabilities, component gallery, and extensive testing infrastructure.
 
 ## 🚀 Live Demos
 
-- **Main App**: [https://www.hatscoatsandboots.com/](https://www.hatscoatsandboots.com/)
-- **Storybook**: [https://www.hatscoatsandboots.com/storybook/](https://www.hatscoatsandboots.com/storybook/)
-- **Status Dashboard**: [https://www.hatscoatsandboots.com/status](https://www.hatscoatsandboots.com/status)
+- **Main App**: [https://www.hatcoatandboots.com/](https://www.hatcoatandboots.com/)
+- **Storybook**: [https://www.hatcoatandboots.com/storybook/](https://www.hatcoatandboots.com/storybook/)
+- **Status Dashboard**: [https://www.hatcoatandboots.com/status](https://www.hatcoatandboots.com/status)
 
 ## ✨ Key Features
 
@@ -32,7 +32,7 @@ A comprehensive Next.js starter kit featuring 32 themes, PWA capabilities, compo
 
 ## 🚀 Quick Start
 
-> 💡 **New to HatsCoatsAndBoots?** Start at [`docs/FORK-CHECKLIST.md`](./docs/FORK-CHECKLIST.md) for the complete service-setup matrix — which env vars to set, which services are required vs. optional, where to sign up for each, and the suggested setup order. The Quick Start below is just the bare minimum to boot the dev server.
+> 💡 **New to HatCoatAndBoots?** Start at [`docs/FORK-CHECKLIST.md`](./docs/FORK-CHECKLIST.md) for the complete service-setup matrix — which env vars to set, which services are required vs. optional, where to sign up for each, and the suggested setup order. The Quick Start below is just the bare minimum to boot the dev server.
 
 ### Prerequisites
 
@@ -69,9 +69,9 @@ docker compose up     # Start everything (first build takes 5-10 minutes)
 
 ```bash
 # Run commands inside container
-docker compose exec hatscoatsandboots pnpm run dev         # Dev server
-docker compose exec hatscoatsandboots pnpm test            # Run tests
-docker compose exec hatscoatsandboots pnpm run storybook   # Storybook
+docker compose exec hatcoatandboots pnpm run dev         # Dev server
+docker compose exec hatcoatandboots pnpm test            # Run tests
+docker compose exec hatcoatandboots pnpm run storybook   # Storybook
 
 # Clean restart if needed
 docker compose down
@@ -107,7 +107,7 @@ Once configured, `/payment-demo` should work end-to-end against sandbox APIs. Th
 
 ## 🔐 Authentication Setup
 
-HatsCoatsAndBoots ships with full email/password + OAuth (GitHub, Google) authentication via Supabase. Out of the box, the app won't authenticate users until you create a Supabase project and configure your auth providers.
+HatCoatAndBoots ships with full email/password + OAuth (GitHub, Google) authentication via Supabase. Out of the box, the app won't authenticate users until you create a Supabase project and configure your auth providers.
 
 **For a brand-new forker**: start at [`docs/FORK-CHECKLIST.md`](./docs/FORK-CHECKLIST.md) — it's the master walkthrough covering every service this template integrates with.
 
@@ -201,7 +201,7 @@ Git pushes use **SSH authentication** - keeping you in control of what gets comm
 1. Go to **[GitHub Token Settings](https://github.com/settings/personal-access-tokens/new)** (fine-grained tokens)
 
 2. Configure the token:
-   - **Token name**: `HatsCoatsAndBoots` or `Claude Code`
+   - **Token name**: `HatCoatAndBoots` or `Claude Code`
    - **Expiration**: 90 days recommended
    - **Repository access**: Select "Only select repositories" → choose your repository
 
@@ -241,13 +241,13 @@ ssh -T git@github.com
 
 ## 🍴 Forking This Template
 
-The quickest way to create your own project from HatsCoatsAndBoots:
+The quickest way to create your own project from HatCoatAndBoots:
 
 ### 5-Minute Setup
 
 ```bash
 # 1. Fork and clone
-gh repo fork TortoiseWolfe/HatsCoatsAndBoots --clone
+gh repo fork TortoiseWolfe/HatCoatAndBoots --clone
 cd YourProjectName
 
 # 2. Run the rebrand script (updates 200+ files automatically)
@@ -289,7 +289,7 @@ For detailed setup instructions, see [docs/FORKING.md](./docs/FORKING.md).
 
 ```bash
 # Add upstream and pull changes
-git remote add upstream https://github.com/TortoiseWolfe/HatsCoatsAndBoots.git
+git remote add upstream https://github.com/TortoiseWolfe/HatCoatAndBoots.git
 git fetch upstream
 git merge upstream/main
 ```
@@ -448,15 +448,15 @@ See [docs/prp-docs/PRP-STATUS.md](./docs/prp-docs/PRP-STATUS.md) for detailed pr
 
 ## 🤝 Contributing
 
-1. Fork the repository (for contributing back to HatsCoatsAndBoots)
+1. Fork the repository (for contributing back to HatCoatAndBoots)
 2. Create your feature branch (`git checkout -b feature/amazing`)
-3. Run tests in Docker (`docker compose exec hatscoatsandboots pnpm test`)
+3. Run tests in Docker (`docker compose exec hatcoatandboots pnpm test`)
 4. Commit changes (`git commit -m 'Add feature'`)
 5. Push and open a PR
 
 ## Design System Redesign
 
-Custom HatsCoatsAndBoots theme (dark default + light variant) built on the existing DaisyUI/Tailwind stack. Storybook upgrade to v10, hierarchy cleanup, then bottom-up component reskin. Includes theme template tooling for forks.
+Custom HatCoatAndBoots theme (dark default + light variant) built on the existing DaisyUI/Tailwind stack. Storybook upgrade to v10, hierarchy cleanup, then bottom-up component reskin. Includes theme template tooling for forks.
 
 **Design doc**: [docs/plans/2026-02-13-design-system-redesign.md](./docs/plans/2026-02-13-design-system-redesign.md)
 **Implementation plan**: [docs/plans/2026-02-13-design-system-implementation.md](./docs/plans/2026-02-13-design-system-implementation.md)
@@ -483,16 +483,16 @@ Read these files to pick up the design system redesign:
 1. CLAUDE.md - Project rules, Docker setup, component standards
 2. docs/plans/2026-02-13-design-system-redesign.md - Approved design (Phase 4 section)
 3. docs/plans/2026-02-13-design-system-implementation.md - Task-by-task plan
-4. src/app/globals.css - Custom theme definitions (hatscoatsandboots-dark, hatscoatsandboots-light)
+4. src/app/globals.css - Custom theme definitions (hatcoatandboots-dark, hatcoatandboots-light)
 
 Use superpowers:executing-plans to work through the implementation plan.
 Phases 0-6 complete. Next: final polish or new feature work.
 
 Key context:
-- Everything runs inside Docker: docker compose exec hatscoatsandboots <command>
+- Everything runs inside Docker: docker compose exec hatcoatandboots <command>
 - pnpm, not npm
 - DaisyUI beta with Tailwind v4 CSS-first config (@plugin syntax)
-- HatsCoatsAndBoots is a template, design must be bold but also easy to rebrand
+- HatCoatAndBoots is a template, design must be bold but also easy to rebrand
 - Brand colors: silver/steel (primary), warm amber (secondary), electric accent, charcoal base
 - Dark theme default, light variant available
 - Both themes pass WCAG AAA (7:1) contrast

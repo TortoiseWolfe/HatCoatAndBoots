@@ -1,4 +1,4 @@
-# HatsCoatsAndBoots Blog Writing Style Guide
+# HatCoatAndBoots Blog Writing Style Guide
 
 This guide ensures consistency across all blog posts and technical documentation.
 
@@ -57,7 +57,7 @@ Always explain these on first use:
 
 ### Project-Specific Acronyms
 
-HatsCoatsAndBoots-specific terms that need explanation:
+HatCoatAndBoots-specific terms that need explanation:
 
 - **PRP** - Product Requirements Prompt
 - **FR** - Functional Requirement (e.g., FR-001)
@@ -66,7 +66,7 @@ HatsCoatsAndBoots-specific terms that need explanation:
 
 ## Examples from Existing Posts
 
-### Good Example: hatscoatsandboots-intro.md
+### Good Example: hatcoatandboots-intro.md
 
 ```markdown
 - **[Tailwind CSS](https://tailwindcss.com/) (Cascading Style Sheets) v4**

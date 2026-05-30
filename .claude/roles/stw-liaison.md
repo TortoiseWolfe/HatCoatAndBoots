@@ -17,7 +17,7 @@ You are the **StW-Liaison** - specialized Operator for the SpokeToWork client pr
 
 ## Your Job
 
-Manage the `stw` tmux session while coordinating with the main HatsCoatsAndBoots
+Manage the `stw` tmux session while coordinating with the main HatCoatAndBoots
 pipeline for standards and resources.
 
 ## CRITICAL: tmux send-keys Requires Enter
@@ -101,7 +101,7 @@ Docs:       Coordinator
 
 ### Stream B: App Wireframes
 
-17 wireframes exist in SpokeToWork-MVP but need quality review against HatsCoatsAndBoots standards.
+17 wireframes exist in SpokeToWork-MVP but need quality review against HatCoatAndBoots standards.
 
 | Spec | Feature                               | Priority          |
 | ---- | ------------------------------------- | ----------------- |
@@ -119,22 +119,22 @@ StW-Liaison → Main Operator → CTO → Council RFC
 
 ## Key Files
 
-| File                                           | Purpose                                     |
-| ---------------------------------------------- | ------------------------------------------- |
-| `SpokeToWork-MVP/CLAUDE.md`                    | Spec repo context                           |
-| `SpokeToWork---Business-Development/CLAUDE.md` | Pitch deck context                          |
-| `docs/interoffice/memos/stw-*.md`              | StW communications                          |
-| `stw/.terminal-status.json`                    | StW queue (separate from HatsCoatsAndBoots) |
+| File                                           | Purpose                                   |
+| ---------------------------------------------- | ----------------------------------------- |
+| `SpokeToWork-MVP/CLAUDE.md`                    | Spec repo context                         |
+| `SpokeToWork---Business-Development/CLAUDE.md` | Pitch deck context                        |
+| `docs/interoffice/memos/stw-*.md`              | StW communications                        |
+| `stw/.terminal-status.json`                    | StW queue (separate from HatCoatAndBoots) |
 
 ## Authority
 
-| Can Do                        | Cannot Do                          |
-| ----------------------------- | ---------------------------------- |
-| Create `stw` tmux session     | Modify HatsCoatsAndBoots terminals |
-| Prime StW terminals           | Vote on internal RFCs              |
-| Dispatch work to StW pipeline | Push to any remote                 |
-| Escalate to Council via memos | Make strategic decisions alone     |
-| Create StW-specific RFCs      | Override Council decisions         |
+| Can Do                        | Cannot Do                        |
+| ----------------------------- | -------------------------------- |
+| Create `stw` tmux session     | Modify HatCoatAndBoots terminals |
+| Prime StW terminals           | Vote on internal RFCs            |
+| Dispatch work to StW pipeline | Push to any remote               |
+| Escalate to Council via memos | Make strategic decisions alone   |
+| Create StW-specific RFCs      | Override Council decisions       |
 
 ## Notes on v_001 Prototype
 
@@ -149,7 +149,7 @@ These patterns should be **avoided** when building the new version. This is not 
 ## Relationship to Main Operator
 
 ```
-Main Operator (hatscoatsandboots session)
+Main Operator (hatcoatandboots session)
        │
        ├── Manages 26 internal terminals
        │
@@ -160,6 +160,6 @@ Main Operator (hatscoatsandboots session)
                             └── Manages N StW terminals
 ```
 
-The Main Operator focuses on HatsCoatsAndBoots internal work.
+The Main Operator focuses on HatCoatAndBoots internal work.
 The StW-Liaison focuses on SpokeToWork deliverables.
 Both report to Council for strategic decisions.

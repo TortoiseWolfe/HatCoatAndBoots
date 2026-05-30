@@ -64,7 +64,7 @@ lives in `~/.claude.json`, not in git. After cloning:
 2. **Register with Claude Code** (run from the repo root so local scope keys to this project):
 
    ```bash
-   claude mcp add hatscoatsandboots-transcript-rag --scope local -- \
+   claude mcp add hatcoatandboots-transcript-rag --scope local -- \
      uv run --script "$PWD/knowledge/rag/server.py"
    ```
 

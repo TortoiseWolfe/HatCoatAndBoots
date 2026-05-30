@@ -16,7 +16,7 @@ import { AnimatedLogo } from './AnimatedLogo';
 describe('AnimatedLogo', () => {
   it('renders with default text', () => {
     const { container } = render(<AnimatedLogo />);
-    expect(container.textContent).toContain('HatsCoatsAndBoots');
+    expect(container.textContent).toContain('HatCoatAndBoots');
   });
 
   it('renders with custom text', () => {

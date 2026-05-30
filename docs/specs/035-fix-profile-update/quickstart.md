@@ -70,7 +70,7 @@ if (updateError) {
 
 ```bash
 # Run unit tests
-docker compose exec hatscoatsandboots pnpm test src/components/auth/AccountSettings
+docker compose exec hatcoatandboots pnpm test src/components/auth/AccountSettings
 
 # Manual test
 1. Sign in

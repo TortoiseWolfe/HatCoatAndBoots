@@ -1,8 +1,8 @@
 {
   "project": {
-    "name": "HatsCoatsAndBoots",
+    "name": "HatCoatAndBoots",
     "description": "Opinionated Next.js PWA Template",
-    "repository": "https://github.com/TortoiseWolfe/HatsCoatsAndBoots",
+    "repository": "https://github.com/TortoiseWolfe/HatCoatAndBoots",
     "startDate": "2025-09-10",
     "isTemplate": true,
     "version": "0.0.1",

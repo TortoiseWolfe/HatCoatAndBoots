@@ -19,9 +19,9 @@
 
 ### Other Issues
 
-| ID   | Issue                                                                | Code          | Classification |
-| ---- | -------------------------------------------------------------------- | ------------- | -------------- |
-| X-01 | Signature format wrong: 'HatsCoatsAndBoots v0.1 - E2E Testing CI/... | SIGNATURE-004 | REGENERATE     |
+| ID   | Issue                                                              | Code          | Classification |
+| ---- | ------------------------------------------------------------------ | ------------- | -------------- |
+| X-01 | Signature format wrong: 'HatCoatAndBoots v0.1 - E2E Testing CI/... | SIGNATURE-004 | REGENERATE     |
 
 ### Annotation Issues
 

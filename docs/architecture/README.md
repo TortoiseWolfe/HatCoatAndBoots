@@ -1,4 +1,4 @@
-# HatsCoatsAndBoots Architecture
+# HatCoatAndBoots Architecture
 
 System design reference for developers and architects.
 
@@ -21,7 +21,7 @@ System design reference for developers and architects.
 
 ## Architecture Overview
 
-HatsCoatsAndBoots is a **static-first web application** designed for deployment on GitHub Pages with Supabase as the backend-as-a-service.
+HatCoatAndBoots is a **static-first web application** designed for deployment on GitHub Pages with Supabase as the backend-as-a-service.
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -105,7 +105,7 @@ HatsCoatsAndBoots is a **static-first web application** designed for deployment 
 
 ### The Constraint
 
-HatsCoatsAndBoots deploys to **GitHub Pages**, which only serves static files. This means:
+HatCoatAndBoots deploys to **GitHub Pages**, which only serves static files. This means:
 
 ```
 ❌ NO server-side rendering (SSR)

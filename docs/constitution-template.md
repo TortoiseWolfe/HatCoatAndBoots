@@ -60,7 +60,7 @@
 
 ## Implementation Base
 
-This project uses [HatsCoatsAndBoots.com](https://hatscoatsandboots.com) as the implementation template.
+This project uses [HatCoatAndBoots.com](https://hatcoatandboots.com) as the implementation template.
 
 ---
 

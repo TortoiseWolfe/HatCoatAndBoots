@@ -100,7 +100,7 @@ serve(async (req) => {
         req,
         {
           error:
-            'session is not associated with a HatsCoatsAndBoots payment_intent',
+            'session is not associated with a HatCoatAndBoots payment_intent',
         },
         403
       );

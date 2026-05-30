@@ -111,7 +111,7 @@ test.describe('Cross-Page Navigation', () => {
 
       // Check key navigation links are present
       const homeLink = page
-        .locator('a:has-text("Home"), a:has-text("HatsCoatsAndBoots")')
+        .locator('a:has-text("Home"), a:has-text("HatCoatAndBoots")')
         .first();
       await expect(homeLink).toBeVisible();
 
@@ -162,7 +162,7 @@ test.describe('Cross-Page Navigation', () => {
     // Check for 404 content or redirect to home
     const has404Content =
       (await page.locator('text=/404|not found/i').count()) > 0;
-    const isHomePage = await page.url().includes('/HatsCoatsAndBoots');
+    const isHomePage = await page.url().includes('/HatCoatAndBoots');
 
     expect(has404Content || isHomePage).toBe(true);
   });

@@ -12,7 +12,7 @@
  *
  * Run from inside the Docker container:
  *   docker exec -e SKIP_WEBSERVER=1 -e BASE_URL=http://localhost:3000 \
- *     hatscoatsandboots-hatscoatsandboots-1 npx playwright test tests/e2e/admin/admin-user-pagination.spec.ts --project=chromium
+ *     hatcoatandboots-hatcoatandboots-1 npx playwright test tests/e2e/admin/admin-user-pagination.spec.ts --project=chromium
  */
 
 import { test, expect } from '@playwright/test';
@@ -22,12 +22,12 @@ import * as http from 'http';
 const ADMIN_EMAIL = 'test@example.com';
 const ADMIN_PASSWORD = 'TestPassword123!';
 
-// Next.js basePath — empty in local dev, '/HatsCoatsAndBoots' in CI/prod
+// Next.js basePath — empty in local dev, '/HatCoatAndBoots' in CI/prod
 const BP = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
 // Docker DNS — test process resolves Docker hostnames; browser cannot
 const SUPABASE_DOCKER_HOST =
-  process.env.SUPABASE_DOCKER_HOST || 'hatscoatsandboots-supabase-kong-1';
+  process.env.SUPABASE_DOCKER_HOST || 'hatcoatandboots-supabase-kong-1';
 const SUPABASE_DOCKER_URL = `http://${SUPABASE_DOCKER_HOST}:8000`;
 const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
 

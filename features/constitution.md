@@ -1,4 +1,4 @@
-# HatsCoatsAndBoots Constitution
+# HatCoatAndBoots Constitution
 
 ## Core Principles
 

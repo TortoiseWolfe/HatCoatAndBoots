@@ -10,7 +10,7 @@
 
 ```bash
 # Using Docker (recommended)
-docker compose exec hatscoatsandboots pnpm add leaflet react-leaflet @types/leaflet
+docker compose exec hatcoatandboots pnpm add leaflet react-leaflet @types/leaflet
 
 # Or directly
 pnpm add leaflet react-leaflet @types/leaflet
@@ -21,7 +21,7 @@ pnpm add leaflet react-leaflet @types/leaflet
 ```bash
 # With Docker
 docker compose up
-docker compose exec hatscoatsandboots pnpm dev
+docker compose exec hatcoatandboots pnpm dev
 
 # Or directly
 pnpm dev

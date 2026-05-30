@@ -18,17 +18,17 @@
 
 ## Exit Codes
 
-| Code | Meaning                                                         |
-| ---- | --------------------------------------------------------------- |
-| 0    | Success                                                         |
-| 1    | Invalid arguments                                               |
-| 2    | Re-rebrand scenario (no HatsCoatsAndBoots found), user declined |
-| 3    | Git not installed or not a git repo                             |
+| Code | Meaning                                                       |
+| ---- | ------------------------------------------------------------- |
+| 0    | Success                                                       |
+| 1    | Invalid arguments                                             |
+| 2    | Re-rebrand scenario (no HatCoatAndBoots found), user declined |
+| 3    | Git not installed or not a git repo                           |
 
 ## Output Format
 
 ```
-Rebranding HatsCoatsAndBoots → MyApp
+Rebranding HatCoatAndBoots → MyApp
 Owner: myuser
 Description: My awesome app
 
@@ -41,8 +41,8 @@ Updating file contents...
   ... (200+ files)
 
 Renaming files...
-  ✓ HatsCoatsAndBootsLogo.tsx → MyAppLogo.tsx
-  ✓ LayeredHatsCoatsAndBootsLogo.tsx → LayeredMyAppLogo.tsx
+  ✓ HatCoatAndBootsLogo.tsx → MyAppLogo.tsx
+  ✓ LayeredHatCoatAndBootsLogo.tsx → LayeredMyAppLogo.tsx
 
 Updating git remote...
   ✓ origin → github.com/myuser/my-app
@@ -73,11 +73,11 @@ Input               → Output
 
 ### Re-rebrand Detection
 
-If grep finds 0 occurrences of "HatsCoatsAndBoots":
+If grep finds 0 occurrences of "HatCoatAndBoots":
 
 ```
 WARNING: This repository appears to have been rebranded already.
-No "HatsCoatsAndBoots" references found.
+No "HatCoatAndBoots" references found.
 
 Current project name appears to be: OtherProject
 Do you want to rebrand from "OtherProject" to "MyApp"? [y/N]

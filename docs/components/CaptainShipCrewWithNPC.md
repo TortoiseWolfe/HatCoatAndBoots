@@ -204,7 +204,7 @@ Comprehensive test suite covering:
 Run tests with:
 
 ```bash
-docker compose exec hatscoatsandboots pnpm test src/components/atomic/CaptainShipCrewWithNPC/
+docker compose exec hatcoatandboots pnpm test src/components/atomic/CaptainShipCrewWithNPC/
 ```
 
 ## Storybook Stories

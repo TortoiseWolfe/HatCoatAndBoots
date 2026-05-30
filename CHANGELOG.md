@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to HatsCoatsAndBoots are documented here.
+All notable changes to HatCoatAndBoots are documented here.
 
 ## [Unreleased] - 2026-01-16
 

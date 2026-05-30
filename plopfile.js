@@ -16,7 +16,7 @@ const CATEGORY_TITLE_MAP = {
   privacy: 'Features/Privacy',
   forms: 'Features/Forms',
   game: 'Features/Game',
-  // Book content categories (HatsCoatsAndBoots project)
+  // Book content categories (HatCoatAndBoots project)
   architecture: 'Book/Architecture',
   materials: 'Book/Materials',
   systems: 'Book/Systems',
