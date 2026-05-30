@@ -11,15 +11,41 @@
     <rect width="1280" height="720" rx="8" fill="#e8d4b8" stroke="#b8a080"/>
     <use href="includes/header-desktop.svg#desktop-header" x="0" y="0"/>
 
-    <!-- Page heading, top-left of the building -->
-    <text x="40" y="100" font-family="system-ui, sans-serif" font-size="28" font-weight="700" fill="#1f2937">Hat, Coat &amp; Boots</text>
-    <text x="40" y="128" font-family="system-ui, sans-serif" font-size="16" fill="#4b5563">One building wears all three. Pick a part.</text>
+    <!-- LEFT RAIL (25%): Chapter focus (NONE active) + Guided views (disabled) + aria-live intro -->
+    <g id="left-rail" transform="translate(16, 96)">
+      <rect width="314" height="540" rx="8" fill="#dcc8a8" stroke="#b8a080"/>
+      <text x="16" y="28" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#1f2937">Chapter</text>
+      <g transform="translate(16, 40)">
+        <rect width="282" height="44" rx="8" fill="#f5f0e6" stroke="#b8a080" stroke-width="2"/>
+        <text x="141" y="29" text-anchor="middle" font-family="system-ui, sans-serif" font-size="15" fill="#374151">Hat - the roof</text>
+      </g>
+      <g transform="translate(16, 92)">
+        <rect width="138" height="44" rx="8" fill="#f5f0e6" stroke="#b8a080" stroke-width="2"/>
+        <text x="69" y="29" text-anchor="middle" font-family="system-ui, sans-serif" font-size="15" fill="#374151">Coat</text>
+      </g>
+      <g transform="translate(160, 92)">
+        <rect width="138" height="44" rx="8" fill="#f5f0e6" stroke="#b8a080" stroke-width="2"/>
+        <text x="69" y="29" text-anchor="middle" font-family="system-ui, sans-serif" font-size="15" fill="#374151">Boots</text>
+      </g>
 
-    <!-- Language switcher, top-right (three 44px pills) -->
-    <g id="lang-switcher" transform="translate(1010, 90)">
-      <a href="#lang-en"><rect x="0" y="0" width="44" height="44" rx="8" fill="#8b5cf6" stroke="#6d28d9" stroke-width="2"/><text x="22" y="28" text-anchor="middle" font-family="system-ui, sans-serif" font-size="15" font-weight="700" fill="#f5f0e6">EN</text></a>
-      <a href="#lang-es"><rect x="52" y="0" width="44" height="44" rx="8" fill="#f5f0e6" stroke="#b8a080" stroke-width="2"/><text x="74" y="28" text-anchor="middle" font-family="system-ui, sans-serif" font-size="15" font-weight="700" fill="#4b5563">ES</text></a>
-      <a href="#lang-zh"><rect x="104" y="0" width="44" height="44" rx="8" fill="#f5f0e6" stroke="#b8a080" stroke-width="2"/><text x="126" y="29" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#4b5563">中文</text></a>
+      <text x="16" y="172" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#6b7280">Guided views</text>
+      <g transform="translate(16, 184)">
+        <rect width="282" height="44" rx="8" fill="#dcc8a8" stroke="#b8a080" stroke-width="2" stroke-dasharray="4 4"/>
+        <text x="141" y="29" text-anchor="middle" font-family="system-ui, sans-serif" font-size="15" fill="#6b7280">Pick a chapter to start</text>
+      </g>
+
+      <g transform="translate(16, 248)">
+        <rect width="282" height="272" rx="8" fill="#f5f0e6" stroke="#b8a080" stroke-width="2"/>
+        <text x="14" y="30" font-family="system-ui, sans-serif" font-size="15" font-weight="700" fill="#374151">Welcome</text>
+        <text x="14" y="58" font-family="system-ui, sans-serif" font-size="14" fill="#4b5563">One building wears all three:</text>
+        <text x="14" y="78" font-family="system-ui, sans-serif" font-size="14" fill="#4b5563">a hat, a coat, and boots.</text>
+        <text x="14" y="110" font-family="system-ui, sans-serif" font-size="14" fill="#4b5563">Pick a chapter to explore</text>
+        <text x="14" y="130" font-family="system-ui, sans-serif" font-size="14" fill="#4b5563">the roof, the walls, or the</text>
+        <text x="14" y="150" font-family="system-ui, sans-serif" font-size="14" fill="#4b5563">foundation.</text>
+        <text x="14" y="190" font-family="system-ui, sans-serif" font-size="14" font-style="italic" fill="#4b5563">aria-live (polite):</text>
+        <text x="14" y="210" font-family="system-ui, sans-serif" font-size="14" font-style="italic" fill="#4b5563">No chapter selected.</text>
+        <text x="14" y="230" font-family="system-ui, sans-serif" font-size="14" font-style="italic" fill="#4b5563">The whole building is shown.</text>
+      </g>
     </g>
 
     <!-- ===== CANONICAL BUILDING (identical in every wireframe; translate fixed at 360,150) ===== -->
@@ -61,111 +87,138 @@
       </g>
     </g>
 
-    <!-- Three chapter CTA rows, right of the building (x>=820) -->
-    <g id="chapter-rows" transform="translate(820, 180)">
-      <!-- leader lines from building layers to rows -->
-      <line x1="-110" y1="40" x2="0" y2="40" stroke="#b8a080" stroke-width="1" stroke-dasharray="3 4"/>
-      <line x1="-110" y1="130" x2="0" y2="130" stroke="#b8a080" stroke-width="1" stroke-dasharray="3 4"/>
-      <line x1="-110" y1="220" x2="0" y2="220" stroke="#b8a080" stroke-width="1" stroke-dasharray="3 4"/>
-
-      <!-- Hat row: AVAILABLE -->
-      <g transform="translate(0, 0)">
-        <rect x="0" y="0" width="380" height="74" rx="8" fill="#f5f0e6" stroke="#b8a080" stroke-width="2"/>
-        <text x="18" y="34" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#1f2937">Hat - the roof</text>
-        <rect x="18" y="44" width="96" height="22" rx="11" fill="#16a34a"/>
-        <text x="66" y="60" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#f5f0e6">AVAILABLE</text>
-        <a href="#read-hat"><rect x="276" y="16" width="88" height="44" rx="8" fill="#8b5cf6" stroke="#6d28d9" stroke-width="2"/><text x="320" y="44" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#f5f0e6">Read</text></a>
+    <!-- RIGHT RAIL (20%): language + per-layer toggles (neutral, disabled until a chapter is picked) -->
+    <g id="right-rail" transform="translate(946, 96)">
+      <rect width="302" height="540" rx="8" fill="#dcc8a8" stroke="#b8a080"/>
+      <text x="16" y="28" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#1f2937">Language</text>
+      <g transform="translate(16, 40)">
+        <rect width="86" height="44" rx="8" fill="#8b5cf6" stroke="#6d28d9" stroke-width="2"/>
+        <text x="43" y="29" text-anchor="middle" font-family="system-ui, sans-serif" font-size="15" font-weight="700" fill="#f5f0e6">EN</text>
+      </g>
+      <g transform="translate(108, 40)">
+        <rect width="86" height="44" rx="8" fill="#f5f0e6" stroke="#b8a080" stroke-width="2"/>
+        <text x="43" y="29" text-anchor="middle" font-family="system-ui, sans-serif" font-size="15" fill="#374151">ES</text>
+      </g>
+      <g transform="translate(200, 40)">
+        <rect width="86" height="44" rx="8" fill="#f5f0e6" stroke="#b8a080" stroke-width="2"/>
+        <text x="43" y="29" text-anchor="middle" font-family="system-ui, sans-serif" font-size="15" fill="#374151">中文</text>
       </g>
 
-      <!-- Coat row: Coming soon -->
-      <g transform="translate(0, 90)">
-        <rect x="0" y="0" width="380" height="74" rx="8" fill="#f5f0e6" stroke="#b8a080" stroke-width="2"/>
-        <text x="18" y="34" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#6b7280">Coat - the walls</text>
-        <rect x="18" y="44" width="124" height="22" rx="11" fill="#dcc8a8" stroke="#b8a080" stroke-width="1"/>
-        <text x="80" y="60" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#7c6f57">Coming soon</text>
+      <text x="16" y="120" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#6b7280">Per-layer toggles</text>
+      <g transform="translate(16, 132)">
+        <text x="0" y="28" font-family="system-ui, sans-serif" font-size="15" fill="#6b7280">Wall</text>
+        <rect x="186" y="6" width="100" height="34" rx="17" fill="#6b7280"/>
+        <circle cx="203" cy="23" r="13" fill="#f5f0e6"/>
+      </g>
+      <g transform="translate(16, 176)">
+        <text x="0" y="28" font-family="system-ui, sans-serif" font-size="15" fill="#6b7280">Overhang</text>
+        <rect x="186" y="6" width="100" height="34" rx="17" fill="#6b7280"/>
+        <circle cx="203" cy="23" r="13" fill="#f5f0e6"/>
+      </g>
+      <g transform="translate(16, 220)">
+        <text x="0" y="28" font-family="system-ui, sans-serif" font-size="15" fill="#6b7280">Summer sun</text>
+        <rect x="186" y="6" width="100" height="34" rx="17" fill="#6b7280"/>
+        <circle cx="203" cy="23" r="13" fill="#f5f0e6"/>
+      </g>
+      <g transform="translate(16, 264)">
+        <text x="0" y="28" font-family="system-ui, sans-serif" font-size="15" fill="#6b7280">Winter sun</text>
+        <rect x="186" y="6" width="100" height="34" rx="17" fill="#6b7280"/>
+        <circle cx="203" cy="23" r="13" fill="#f5f0e6"/>
+      </g>
+      <g transform="translate(16, 308)">
+        <text x="0" y="28" font-family="system-ui, sans-serif" font-size="15" fill="#6b7280">Rain</text>
+        <rect x="186" y="6" width="100" height="34" rx="17" fill="#6b7280"/>
+        <circle cx="203" cy="23" r="13" fill="#f5f0e6"/>
+      </g>
+      <g transform="translate(16, 352)">
+        <text x="0" y="28" font-family="system-ui, sans-serif" font-size="15" fill="#6b7280">Labels</text>
+        <rect x="186" y="6" width="100" height="34" rx="17" fill="#6b7280"/>
+        <circle cx="203" cy="23" r="13" fill="#f5f0e6"/>
       </g>
 
-      <!-- Boots row: Coming soon -->
-      <g transform="translate(0, 180)">
-        <rect x="0" y="0" width="380" height="74" rx="8" fill="#f5f0e6" stroke="#b8a080" stroke-width="2"/>
-        <text x="18" y="34" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#6b7280">Boots - the foundation</text>
-        <rect x="18" y="44" width="124" height="22" rx="11" fill="#dcc8a8" stroke="#b8a080" stroke-width="1"/>
-        <text x="80" y="60" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#7c6f57">Coming soon</text>
+      <g transform="translate(16, 404)">
+        <rect width="270" height="116" rx="8" fill="#f5f0e6" stroke="#b8a080" stroke-width="2"/>
+        <text x="14" y="30" font-family="system-ui, sans-serif" font-size="15" font-weight="700" fill="#374151">No chapter selected</text>
+        <text x="14" y="56" font-family="system-ui, sans-serif" font-size="14" fill="#4b5563">Toggles activate once you</text>
+        <text x="14" y="76" font-family="system-ui, sans-serif" font-size="14" fill="#4b5563">pick a chapter. The whole</text>
+        <text x="14" y="96" font-family="system-ui, sans-serif" font-size="14" fill="#4b5563">building is shown for now.</text>
       </g>
     </g>
 
-    <!-- Red callouts on HAT, COAT, BOOTS zones + language switcher -->
-    <!-- HAT zone: building(360,150)+layer-hat text ~ (360+180,150+96)=(540,246) -->
-    <circle cx="540" cy="226" r="14" fill="#dc2626"/>
-    <text x="540" y="232" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#f5f0e6">2</text>
-    <!-- COAT zone: (360+180,150+210)=(540,360) -->
-    <circle cx="540" cy="360" r="14" fill="#dc2626"/>
-    <text x="540" y="366" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#f5f0e6">1</text>
-    <!-- BOOTS zone: (360+180,150+317)=(540,467) -->
-    <circle cx="540" cy="467" r="14" fill="#dc2626"/>
-    <text x="540" y="473" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#f5f0e6">3</text>
-    <!-- Language switcher zone: (1010+126, 90+44)=(1136,134) below 中文 pill -->
-    <circle cx="1136" cy="158" r="14" fill="#dc2626"/>
-    <text x="1136" y="164" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#f5f0e6">4</text>
-
     <use href="includes/footer-desktop.svg#site-footer" x="0" y="640"/>
+
+    <!-- Callouts -->
+    <circle cx="173" cy="158" r="14" fill="#dc2626"/>
+    <text x="173" y="164" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#f5f0e6">1</text>
+    <circle cx="540" cy="270" r="14" fill="#dc2626"/>
+    <text x="540" y="276" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#f5f0e6">2</text>
+    <circle cx="173" cy="280" r="14" fill="#dc2626"/>
+    <text x="173" y="286" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#f5f0e6">3</text>
+    <circle cx="1005" cy="158" r="14" fill="#dc2626"/>
+    <text x="1005" y="164" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#f5f0e6">4</text>
   </g>
 
   <g id="mobile" transform="translate(1360, 60)">
     <rect width="360" height="720" rx="24" fill="#e8d4b8" stroke="#b8a080"/>
     <use href="includes/header-mobile.svg#mobile-header-group" x="0" y="0"/>
 
-    <!-- Heading -->
-    <text x="20" y="112" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#1f2937">Hat, Coat &amp; Boots</text>
-    <text x="20" y="134" font-family="system-ui, sans-serif" font-size="14" fill="#4b5563">One building wears all three.</text>
-
-    <!-- Language switcher (three 44px pills) -->
-    <g transform="translate(20, 146)">
-      <a href="#m-lang-en"><rect x="0" y="0" width="44" height="44" rx="8" fill="#8b5cf6" stroke="#6d28d9" stroke-width="2"/><text x="22" y="28" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#f5f0e6">EN</text></a>
-      <a href="#m-lang-es"><rect x="52" y="0" width="44" height="44" rx="8" fill="#f5f0e6" stroke="#b8a080" stroke-width="2"/><text x="74" y="28" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#4b5563">ES</text></a>
-      <a href="#m-lang-zh"><rect x="104" y="0" width="44" height="44" rx="8" fill="#f5f0e6" stroke="#b8a080" stroke-width="2"/><text x="126" y="29" text-anchor="middle" font-family="system-ui, sans-serif" font-size="15" font-weight="700" fill="#4b5563">中文</text></a>
+    <!-- Chapter focus row (none active) -->
+    <g>
+      <rect x="16" y="96" width="106" height="44" rx="8" fill="#f5f0e6" stroke="#b8a080" stroke-width="2"/>
+      <text x="69" y="124" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#374151">Hat</text>
+      <rect x="128" y="96" width="106" height="44" rx="8" fill="#f5f0e6" stroke="#b8a080" stroke-width="2"/>
+      <text x="181" y="124" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#374151">Coat</text>
+      <rect x="240" y="96" width="104" height="44" rx="8" fill="#f5f0e6" stroke="#b8a080" stroke-width="2"/>
+      <text x="292" y="124" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#374151">Boots</text>
     </g>
 
-    <!-- Simplified stacked building echo (HAT / COAT / BOOTS) -->
-    <g id="mobile-building" transform="translate(130, 210)">
-      <polygon points="-20,40 50,0 120,40" fill="#b07a4a" stroke="#3a6ea5" stroke-width="2"/>
-      <rect x="-26" y="40" width="152" height="10" rx="2" fill="#b07a4a" stroke="#3a6ea5" stroke-width="2"/>
-      <text x="50" y="34" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#f5f0e6">HAT</text>
-      <rect x="10" y="50" width="80" height="80" fill="#f3e2c7" stroke="#3a6ea5" stroke-width="2"/>
-      <rect x="30" y="74" width="40" height="34" fill="#bfe3ec" stroke="#3a6ea5" stroke-width="2"/>
-      <text x="50" y="124" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#1f2937">COAT</text>
-      <rect x="0" y="130" width="100" height="16" fill="#3a6ea5" stroke="#26527a" stroke-width="2"/>
-      <text x="50" y="143" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#f5f0e6">BOOTS</text>
+    <!-- Small stacked building echo (HAT/COAT/BOOTS), all full -->
+    <g id="mobile-building" transform="translate(110, 160)">
+      <polygon points="20,90 70,30 120,90" fill="#b07a4a" stroke="#3a6ea5" stroke-width="2"/>
+      <rect x="6" y="90" width="128" height="12" rx="2" fill="#b07a4a" stroke="#3a6ea5" stroke-width="2"/>
+      <text x="70" y="74" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#f5f0e6">HAT</text>
+      <rect x="30" y="102" width="80" height="76" fill="#f3e2c7" stroke="#3a6ea5" stroke-width="2"/>
+      <rect x="50" y="122" width="40" height="36" fill="#bfe3ec" stroke="#3a6ea5" stroke-width="2"/>
+      <text x="70" y="174" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#1f2937">COAT</text>
+      <rect x="14" y="178" width="112" height="16" fill="#3a6ea5" stroke="#26527a" stroke-width="2"/>
+      <text x="70" y="191" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#f5f0e6">BOOTS</text>
+      <line x1="14" y1="36" x2="44" y2="90" stroke="#e8821e" stroke-width="2" stroke-dasharray="4 5"/>
     </g>
 
-    <!-- Chapter rows -->
-    <g transform="translate(20, 400)">
-      <rect x="0" y="0" width="320" height="56" rx="8" fill="#f5f0e6" stroke="#b8a080" stroke-width="2"/>
-      <text x="14" y="26" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#1f2937">Hat - the roof</text>
-      <rect x="14" y="32" width="90" height="18" rx="9" fill="#16a34a"/>
-      <text x="59" y="46" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#f5f0e6">AVAILABLE</text>
-      <a href="#m-read-hat"><rect x="232" y="6" width="80" height="44" rx="8" fill="#8b5cf6" stroke="#6d28d9" stroke-width="2"/><text x="272" y="34" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#f5f0e6">Read</text></a>
-    </g>
-    <g transform="translate(20, 466)">
-      <rect x="0" y="0" width="320" height="48" rx="8" fill="#f5f0e6" stroke="#b8a080" stroke-width="2"/>
-      <text x="14" y="22" font-family="system-ui, sans-serif" font-size="15" font-weight="700" fill="#6b7280">Coat - the walls</text>
-      <rect x="200" y="14" width="106" height="20" rx="10" fill="#dcc8a8" stroke="#b8a080" stroke-width="1"/>
-      <text x="253" y="28" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#7c6f57">Coming soon</text>
-    </g>
-    <g transform="translate(20, 524)">
-      <rect x="0" y="0" width="320" height="48" rx="8" fill="#f5f0e6" stroke="#b8a080" stroke-width="2"/>
-      <text x="14" y="22" font-family="system-ui, sans-serif" font-size="15" font-weight="700" fill="#6b7280">Boots - the foundation</text>
-      <rect x="200" y="14" width="106" height="20" rx="10" fill="#dcc8a8" stroke="#b8a080" stroke-width="1"/>
-      <text x="253" y="28" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#7c6f57">Coming soon</text>
+    <!-- Guided views (mobile, disabled prompt) -->
+    <g>
+      <rect x="16" y="376" width="328" height="44" rx="8" fill="#dcc8a8" stroke="#b8a080" stroke-width="2" stroke-dasharray="4 4"/>
+      <text x="180" y="404" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#6b7280">Pick a chapter to start</text>
     </g>
 
-    <!-- Mobile callouts (r=11) on HAT and language switcher -->
-    <circle cx="180" cy="227" r="11" fill="#dc2626"/>
-    <text x="180" y="232" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#f5f0e6">2</text>
-    <circle cx="160" cy="168" r="11" fill="#dc2626"/>
-    <text x="160" y="173" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#f5f0e6">4</text>
+    <!-- Language row (mobile) -->
+    <g>
+      <rect x="16" y="432" width="100" height="44" rx="8" fill="#8b5cf6" stroke="#6d28d9" stroke-width="2"/>
+      <text x="66" y="460" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#f5f0e6">EN</text>
+      <rect x="122" y="432" width="100" height="44" rx="8" fill="#f5f0e6" stroke="#b8a080" stroke-width="2"/>
+      <text x="172" y="460" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#374151">ES</text>
+      <rect x="228" y="432" width="116" height="44" rx="8" fill="#f5f0e6" stroke="#b8a080" stroke-width="2"/>
+      <text x="286" y="460" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#374151">中文</text>
+    </g>
+
+    <!-- intro note (mobile) -->
+    <g>
+      <rect x="16" y="488" width="328" height="164" rx="8" fill="#f5f0e6" stroke="#b8a080" stroke-width="2"/>
+      <text x="30" y="516" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#374151">Welcome</text>
+      <text x="30" y="542" font-family="system-ui, sans-serif" font-size="14" fill="#4b5563">One building wears all three:</text>
+      <text x="30" y="562" font-family="system-ui, sans-serif" font-size="14" fill="#4b5563">a hat, a coat, and boots.</text>
+      <text x="30" y="594" font-family="system-ui, sans-serif" font-size="14" fill="#4b5563">Pick a chapter to explore the</text>
+      <text x="30" y="614" font-family="system-ui, sans-serif" font-size="14" fill="#4b5563">roof, the walls, or the</text>
+      <text x="30" y="634" font-family="system-ui, sans-serif" font-size="14" fill="#4b5563">foundation.</text>
+    </g>
 
     <use href="includes/footer-mobile.svg#mobile-bottom-nav" x="0" y="664"/>
+
+    <!-- Mobile callouts -->
+    <circle cx="180" cy="190" r="11" fill="#dc2626"/>
+    <text x="180" y="195" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#f5f0e6">1</text>
+    <circle cx="320" cy="398" r="11" fill="#dc2626"/>
+    <text x="320" y="403" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#f5f0e6">2</text>
   </g>
 
   <g id="annotations" transform="translate(40, 800)">
@@ -174,44 +227,52 @@
     <g transform="translate(20, 16)">
       <circle cx="12" cy="12" r="12" fill="#dc2626"/>
       <text x="12" y="17" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#f5f0e6">1</text>
-      <text x="38" y="18" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#1f2937">One building, drawn once</text>
-      <a href="#us-001" transform="translate(38, 28)"><rect width="56" height="22" rx="11" fill="#0891b2"/><text x="28" y="17" text-anchor="middle" fill="#f5f0e6" font-size="14" font-weight="700">US-001</text></a>
-      <a href="#fr-001a" transform="translate(102, 28)"><rect width="64" height="22" rx="11" fill="#2563eb"/><text x="32" y="17" text-anchor="middle" fill="#f5f0e6" font-size="14" font-weight="700">FR-001a</text></a>
-      <text x="38" y="76" font-family="system-ui, sans-serif" font-size="14" fill="#4b5563">The canonical building renders once at a fixed</text>
-      <text x="38" y="94" font-family="system-ui, sans-serif" font-size="14" fill="#4b5563">transform so all chapters register as layers.</text>
+      <text x="34" y="17" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#1f2937">The index IS the viewer (no focus)</text>
+      <a href="#us-001" transform="translate(34,28)"><rect width="56" height="22" rx="11" fill="#0891b2"/><text x="28" y="17" text-anchor="middle" fill="#f5f0e6" font-size="14" font-weight="700">US-001</text></a>
+      <a href="#fr-007" transform="translate(98,28)"><rect width="56" height="22" rx="11" fill="#2563eb"/><text x="28" y="17" text-anchor="middle" fill="#f5f0e6" font-size="14" font-weight="700">FR-007</text></a>
+      <text x="38" y="76" font-family="system-ui, sans-serif" font-size="14" fill="#4b5563">/book is the SAME shared viewer as the chapters, with</text>
+      <text x="38" y="94" font-family="system-ui, sans-serif" font-size="14" fill="#4b5563">no chapter active - one consistent UI, not a card page.</text>
     </g>
 
     <g transform="translate(520, 16)">
       <circle cx="12" cy="12" r="12" fill="#dc2626"/>
       <text x="12" y="17" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#f5f0e6">2</text>
-      <text x="38" y="18" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#1f2937">Hat = roof, available</text>
-      <a href="#us-001" transform="translate(38, 28)"><rect width="56" height="22" rx="11" fill="#0891b2"/><text x="28" y="17" text-anchor="middle" fill="#f5f0e6" font-size="14" font-weight="700">US-001</text></a>
-      <a href="#fr-007" transform="translate(102, 28)"><rect width="56" height="22" rx="11" fill="#2563eb"/><text x="28" y="17" text-anchor="middle" fill="#f5f0e6" font-size="14" font-weight="700">FR-007</text></a>
-      <text x="38" y="76" font-family="system-ui, sans-serif" font-size="14" fill="#4b5563">The Hat chapter ships first: green AVAILABLE</text>
-      <text x="38" y="94" font-family="system-ui, sans-serif" font-size="14" fill="#4b5563">pill and a purple Read call-to-action.</text>
+      <text x="34" y="17" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#1f2937">Whole building, balanced</text>
+      <a href="#us-001" transform="translate(34,28)"><rect width="56" height="22" rx="11" fill="#0891b2"/><text x="28" y="17" text-anchor="middle" fill="#f5f0e6" font-size="14" font-weight="700">US-001</text></a>
+      <a href="#fr-001a" transform="translate(98,28)"><rect width="64" height="22" rx="11" fill="#2563eb"/><text x="32" y="17" text-anchor="middle" fill="#f5f0e6" font-size="14" font-weight="700">FR-001a</text></a>
+      <a href="#sc-009" transform="translate(170,28)"><rect width="56" height="22" rx="11" fill="#ea580c"/><text x="28" y="17" text-anchor="middle" fill="#f5f0e6" font-size="14" font-weight="700">SC-009</text></a>
+      <text x="38" y="76" font-family="system-ui, sans-serif" font-size="14" fill="#4b5563">No focus = no region dimmed; all of Hat / Coat / Boots</text>
+      <text x="38" y="94" font-family="system-ui, sans-serif" font-size="14" fill="#4b5563">at full opacity, the same building at the same coords.</text>
     </g>
 
     <g transform="translate(1020, 16)">
       <circle cx="12" cy="12" r="12" fill="#dc2626"/>
       <text x="12" y="17" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#f5f0e6">3</text>
-      <text x="38" y="18" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#1f2937">Coat &amp; Boots coming soon</text>
-      <a href="#us-001" transform="translate(38, 28)"><rect width="56" height="22" rx="11" fill="#0891b2"/><text x="28" y="17" text-anchor="middle" fill="#f5f0e6" font-size="14" font-weight="700">US-001</text></a>
-      <a href="#fr-007b" transform="translate(102, 28)"><rect width="64" height="22" rx="11" fill="#2563eb"/><text x="32" y="17" text-anchor="middle" fill="#f5f0e6" font-size="14" font-weight="700">FR-007b</text></a>
-      <text x="38" y="76" font-family="system-ui, sans-serif" font-size="14" fill="#4b5563">Future chapters are visible but disabled with</text>
-      <text x="38" y="94" font-family="system-ui, sans-serif" font-size="14" fill="#4b5563">tan Coming soon pills, not hidden away.</text>
+      <text x="34" y="17" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#1f2937">Focus tabs ARE the navigation</text>
+      <a href="#us-001" transform="translate(34,28)"><rect width="56" height="22" rx="11" fill="#0891b2"/><text x="28" y="17" text-anchor="middle" fill="#f5f0e6" font-size="14" font-weight="700">US-001</text></a>
+      <a href="#fr-007b" transform="translate(98,28)"><rect width="64" height="22" rx="11" fill="#2563eb"/><text x="32" y="17" text-anchor="middle" fill="#f5f0e6" font-size="14" font-weight="700">FR-007b</text></a>
+      <text x="38" y="76" font-family="system-ui, sans-serif" font-size="14" fill="#4b5563">Picking Hat / Coat / Boots IS choosing a chapter; the</text>
+      <text x="38" y="94" font-family="system-ui, sans-serif" font-size="14" fill="#4b5563">guided views + toggles activate once a chapter is set.</text>
     </g>
 
     <g transform="translate(20, 116)">
       <circle cx="12" cy="12" r="12" fill="#dc2626"/>
       <text x="12" y="17" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#f5f0e6">4</text>
-      <text x="38" y="18" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#1f2937">Language + a11y</text>
-      <a href="#us-003" transform="translate(38, 28)"><rect width="56" height="22" rx="11" fill="#0891b2"/><text x="28" y="17" text-anchor="middle" fill="#f5f0e6" font-size="14" font-weight="700">US-003</text></a>
-      <a href="#us-004" transform="translate(102, 28)"><rect width="56" height="22" rx="11" fill="#0891b2"/><text x="28" y="17" text-anchor="middle" fill="#f5f0e6" font-size="14" font-weight="700">US-004</text></a>
-      <a href="#fr-016" transform="translate(166, 28)"><rect width="56" height="22" rx="11" fill="#2563eb"/><text x="28" y="17" text-anchor="middle" fill="#f5f0e6" font-size="14" font-weight="700">FR-016</text></a>
-      <text x="38" y="76" font-family="system-ui, sans-serif" font-size="14" fill="#4b5563">EN / ES / 中文 switch with 44px targets; the</text>
-      <text x="38" y="94" font-family="system-ui, sans-serif" font-size="14" fill="#4b5563">whole index is keyboard and screen-reader safe.</text>
+      <text x="34" y="17" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#1f2937">Language + a11y</text>
+      <a href="#us-003" transform="translate(34,28)"><rect width="56" height="22" rx="11" fill="#0891b2"/><text x="28" y="17" text-anchor="middle" fill="#f5f0e6" font-size="14" font-weight="700">US-003</text></a>
+      <a href="#us-004" transform="translate(98,28)"><rect width="56" height="22" rx="11" fill="#0891b2"/><text x="28" y="17" text-anchor="middle" fill="#f5f0e6" font-size="14" font-weight="700">US-004</text></a>
+      <a href="#fr-016" transform="translate(162,28)"><rect width="56" height="22" rx="11" fill="#2563eb"/><text x="28" y="17" text-anchor="middle" fill="#f5f0e6" font-size="14" font-weight="700">FR-016</text></a>
+      <text x="38" y="76" font-family="system-ui, sans-serif" font-size="14" fill="#4b5563">EN active; ES / 中文 stub (feature 049). Skip link,</text>
+      <text x="38" y="94" font-family="system-ui, sans-serif" font-size="14" fill="#4b5563">44px targets, single-column reflow at &#8804;640px.</text>
+    </g>
+
+    <g transform="translate(520, 116)">
+      <circle cx="12" cy="12" r="12" fill="#dc2626"/>
+      <text x="12" y="17" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#1f2937">Reading order</text>
+      <text x="0" y="44" font-family="system-ui, sans-serif" font-size="14" fill="#4b5563">From /book a reader picks a chapter (focus tab) and the</text>
+      <text x="0" y="64" font-family="system-ui, sans-serif" font-size="14" fill="#4b5563">viewer foregrounds that region - one UI, no page jump.</text>
     </g>
   </g>
 
-  <text x="40" y="1060" font-family="system-ui, sans-serif" font-size="18" font-weight="bold" fill="#4b5563">048:01 | Hat Chapter - Book Index | ScriptHammer</text>
+  <text x="40" y="1060" font-family="system-ui, sans-serif" font-size="18" font-weight="bold" fill="#4b5563">048:01 | Book Index (shared viewer, no focus) | ScriptHammer</text>
 </svg>
