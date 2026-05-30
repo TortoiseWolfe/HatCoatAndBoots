@@ -69,7 +69,7 @@ src/
 ├── app/
 │   └── book/
 │       ├── layout.tsx              # chapter chrome + prev/next nav
-│       ├── page.tsx                # /book index (one building → 3 chapters)
+│       ├── page.tsx                # /book index = shared viewer, no focus (chapterFocus=null, balanced)
 │       ├── hat/page.tsx            # Server Component: SSR full composite + <ErrorBoundary><HatViewer/>
 │       ├── coat/page.tsx           # same viewer, envelope focus, "coming soon"
 │       └── boots/page.tsx          # same viewer, foundation focus, "coming soon"

@@ -79,8 +79,11 @@ import type { DiagramManifest } from './hat.manifest';
 export interface LayeredDiagramProps {
   /** The ONE building manifest, region-tagged. Same building for every chapter. */
   manifest: DiagramManifest;
-  /** Which region is foregrounded; the others are dimmed (NOT moved). */
-  chapterFocus: 'roof' | 'envelope' | 'foundation';
+  /** Which region is foregrounded; the others are dimmed (NOT moved).
+   *  `null` = the /book index neutral state: no region foregrounded, NOTHING
+   *  dimmed (the whole building at full opacity), controls inert until a chapter
+   *  is chosen. */
+  chapterFocus: 'roof' | 'envelope' | 'foundation' | null;
   /** Optional starting preset id; must exist in manifest.presets.
    *  Defaults to manifest.defaultPresetId ('everything'). */
   initialPresetId?: string;
@@ -99,7 +102,7 @@ export interface LayeredDiagramProps {
 ### Behavioral contract — guarantees
 
 - **G-LD-1 (no geometry shift on toggle):** toggling any layer or switching any preset changes only `visibleIds` → opacity, never layout. Calls `renderLayerStack(manifest.layers, visibleIds)`; the full set of layers is always mounted (FR-006, SC-009).
-- **G-LD-2 (focus = foreground+dim, never move):** `chapterFocus` foregrounds its region's layers and **may dim** the other regions (e.g. via `atmosphereOpacity` / reduced opacity on out-of-focus regions). Changing `chapterFocus` from `roof`→`envelope`→`foundation` moves **zero** elements (SC-009, FR-007b).
+- **G-LD-2 (focus = foreground+dim, never move):** `chapterFocus` foregrounds its region's layers and **may dim** the other regions (e.g. via `atmosphereOpacity` / reduced opacity on out-of-focus regions). Changing `chapterFocus` from `null`→`roof`→`envelope`→`foundation` moves **zero** elements (SC-009, FR-007b). When `chapterFocus === null` (the `/book` index), **no region is dimmed** — every region renders at full opacity (the balanced composite) and the guided-views/toggle controls are inert until a chapter is chosen.
 - **G-LD-3 (preset application):** selecting a preset sets `visibleIds = new Set(preset.visibleLayerIds)` and `activePresetId = preset.id`. A manual single-layer toggle afterward sets `activePresetId = 'custom'` (the custom state is intentionally NOT URL-encoded — FR-007a).
 - **G-LD-4 (default-on resilience):** `initialPresetId` that is missing/unknown resolves to `manifest.defaultPresetId`. The engine never renders an empty stack.
 - **G-LD-5 (reduced motion / colorblind):** consumes `src/hooks/useReducedMotion.ts` and `src/hooks/useColorblindMode.ts`; any opacity transition is disabled when reduced motion is requested. No dependency on motion for correctness.
@@ -226,13 +229,13 @@ All routes are **real static-export pages** (pre-rendered HTML files). One build
 
 ### 6.0 `/book` — index — `src/app/book/page.tsx`
 
-| Aspect      | Contract                                                                                                                                                                                                                                       |
-| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Path        | `/book`                                                                                                                                                                                                                                        |
-| Split       | **Server Component**, fully static.                                                                                                                                                                                                            |
-| SSR renders | The book index: ONE building presented with links into its three chapter focuses (`/book/hat`, `/book/coat`, `/book/boots`). May render a static composite via `renderLayerStack(manifest.layers, allVisible)` for a complete labeled preview. |
-| Hash state  | None required.                                                                                                                                                                                                                                 |
-| No-JS       | Fully usable: all three chapter links are real `<a href>`.                                                                                                                                                                                     |
+| Aspect      | Contract                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Path        | `/book`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| Split       | **Server Component**, fully static.                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| SSR renders | The **same shared viewer in the neutral no-focus state** (`chapterFocus={null}`): the full balanced composite via `renderLayerStack(manifest.layers, allVisible)` — every region at full opacity, none dimmed — with the chapter-focus tabs (Hat / Coat / Boots) all inactive, the guided-views list disabled with a "pick a chapter to start" prompt, and an intro explanation. NOT a separate card/landing layout; it reuses the `LayeredDiagram`/viewer composition with `chapterFocus={null}`. |
+| Hash state  | None required (no focus, no view).                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| No-JS       | Fully usable: the full labeled composite renders server-side; the chapter-focus tabs are real `<a href>` links to `/book/hat\|coat\|boots`.                                                                                                                                                                                                                                                                                                                                                        |
 
 ### 6.1 `/book/hat` — roof focus, full content — `src/app/book/hat/page.tsx`
 

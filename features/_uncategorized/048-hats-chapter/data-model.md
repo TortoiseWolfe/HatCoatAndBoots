@@ -328,6 +328,8 @@ export interface ChapterFocus {
 }
 ```
 
+> **No-focus / index state.** There are exactly **three** `ChapterFocus` records (hat/coat/boots) — the `/book` index is **not** a fourth record. The index is the same viewer mounted with the **`chapterFocus` prop set to `null`** (see `LayeredDiagram` contract): no region foregrounded, nothing dimmed (the balanced full-opacity composite), controls inert until the reader picks a chapter. So the prop type is `DiagramRegion | null` while the registry stays the three chapters.
+
 **Fields**:
 
 - `id: 'hat' | 'coat' | 'boots'` — the chapter discriminator and URL segment.
