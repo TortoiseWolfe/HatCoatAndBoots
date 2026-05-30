@@ -1,12 +1,26 @@
 name: E2E Tests
 
+# NOTE (HatCoatAndBoots): the E2E suite tests ScriptHammer's auth/messaging
+# features and REQUIRES a live Supabase backend — 5 GitHub secrets:
+# NEXT_PUBLIC_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_ANON_KEY,
+# SUPABASE_SERVICE_ROLE_KEY, TEST_USER_PRIMARY_EMAIL, TEST_USER_PRIMARY_PASSWORD.
+# This kids'-book fork has no backend wired up yet, so the automatic triggers
+# (push / pull_request / schedule) are commented out — they only ever hard-fail
+# the prerequisite check on every push. The suite itself is preserved.
+#
+# TO RE-ENABLE when the book grows backend features:
+#   1. Create a Supabase project, add the 5 secrets above to GitHub.
+#   2. Uncomment the push/pull_request/schedule triggers below.
+# Until then, run it manually via the Actions tab (workflow_dispatch) once
+# the secrets exist.
+
 on:
-  push:
-    branches: [main, develop]
-  pull_request:
-    branches: [main]
-  schedule:
-    - cron: '0 6 * * 1'  # Monday 6 AM UTC — full 3-browser run
+  # push:
+  #   branches: [main, develop]
+  # pull_request:
+  #   branches: [main]
+  # schedule:
+  #   - cron: '0 6 * * 1'  # Monday 6 AM UTC — full 3-browser run
   workflow_dispatch:
 
 concurrency:
