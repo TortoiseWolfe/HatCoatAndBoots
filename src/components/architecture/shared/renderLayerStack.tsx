@@ -50,6 +50,10 @@ export function renderLayerStack(
         }}
       >
         {layer.src ? (
+          // Plain <img> is deliberate (G-RLS-2): under `output:'export'` +
+          // `images.unoptimized` next/image adds weight with zero optimization
+          // benefit, and the Server-Component Hat gate needs a hookless render.
+          // eslint-disable-next-line @next/next/no-img-element
           <img
             src={`${detectedConfig.basePath}/${layer.src}`}
             data-file={layer.src.split('/').pop()}

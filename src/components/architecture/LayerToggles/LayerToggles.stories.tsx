@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import LayerToggles from './LayerToggles';
+import { hatManifest } from '../manifests/hat.manifest';
 
 const meta: Meta<typeof LayerToggles> = {
   title: 'Book/Architecture/LayerToggles',
@@ -8,39 +9,29 @@ const meta: Meta<typeof LayerToggles> = {
     layout: 'centered',
     docs: {
       description: {
-        component: 'LayerToggles component for the architecture category.',
+        component:
+          'Controlled per-layer toggle toolbar (roving tabindex, aria-pressed, ' +
+          '44px targets) for the Hat chapter.',
       },
     },
   },
   tags: ['autodocs'],
-  argTypes: {
-    children: {
-      control: 'text',
-      description: 'Content to display inside the component',
-    },
-    className: {
-      control: 'text',
-      description: 'Additional CSS classes',
-    },
+  args: {
+    layers: hatManifest.layers,
+    visibleIds: new Set(hatManifest.layers.map((l) => l.id)),
+    onToggle: () => {},
   },
 };
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-  args: {
-    children: 'Default LayerToggles content',
-  },
-};
+export const AllOn: Story = {};
 
-export const WithCustomClass: Story = {
+export const RoofHidden: Story = {
   args: {
-    children: 'LayerToggles with custom styling',
-    className: 'p-4 bg-primary text-white rounded',
+    visibleIds: new Set(
+      hatManifest.layers.map((l) => l.id).filter((id) => id !== 'roof-overhang')
+    ),
   },
-};
-
-export const Empty: Story = {
-  args: {},
 };

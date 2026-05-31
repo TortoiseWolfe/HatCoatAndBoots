@@ -1,24 +1,103 @@
-import React from 'react';
+'use client';
+
+import React, { useRef } from 'react';
+import type { DiagramPreset } from '../manifests/types';
 
 export interface GuidedViewsProps {
-  /** Optional children elements */
-  children?: React.ReactNode;
-  /** Additional CSS classes */
+  /** The chapter's presets (guided views), in display order. */
+  presets: readonly DiagramPreset[];
+  /** Active preset id (controlled). May be 'custom' when the reader diverged. */
+  activePresetId: string;
+  /** Intent to switch guided view. */
+  onSelect: (presetId: string) => void;
+  /** Accessible name for the radiogroup. */
+  label?: string;
   className?: string;
 }
 
 /**
- * GuidedViews component
+ * Controlled guided-view selector — a single-select radiogroup whose active
+ * option's explanation is announced via an aria-live region (G-GV). Owns no
+ * state; selecting fires `onSelect` with an allowlisted preset id only.
  *
  * @category architecture
  */
 export default function GuidedViews({
-  children,
+  presets,
+  activePresetId,
+  onSelect,
+  label = 'Guided views',
   className = '',
 }: GuidedViewsProps) {
+  const refs = useRef<Array<HTMLButtonElement | null>>([]);
+  const active = presets.find((p) => p.id === activePresetId);
+
+  function focusAt(index: number) {
+    const count = presets.length;
+    const next = ((index % count) + count) % count;
+    refs.current[next]?.focus();
+    onSelect(presets[next].id);
+  }
+
+  function handleKeyDown(e: React.KeyboardEvent, index: number) {
+    switch (e.key) {
+      case 'ArrowDown':
+      case 'ArrowRight':
+        e.preventDefault();
+        focusAt(index + 1);
+        break;
+      case 'ArrowUp':
+      case 'ArrowLeft':
+        e.preventDefault();
+        focusAt(index - 1);
+        break;
+      default:
+        break;
+    }
+  }
+
+  // The active radio holds the single tab stop (radiogroup pattern).
+  const tabStopIndex = Math.max(
+    0,
+    presets.findIndex((p) => p.id === activePresetId)
+  );
+
   return (
-    <div className={`guided-views${className ? ` ${className}` : ''}`}>
-      {children}
+    <div className={className}>
+      <div role="radiogroup" aria-label={label} className="flex flex-col gap-2">
+        {presets.map((preset, i) => {
+          const checked = preset.id === activePresetId;
+          return (
+            <button
+              key={preset.id}
+              ref={(el) => {
+                refs.current[i] = el;
+              }}
+              type="button"
+              role="radio"
+              aria-checked={checked}
+              tabIndex={i === tabStopIndex ? 0 : -1}
+              onClick={() => onSelect(preset.id)}
+              onKeyDown={(e) => handleKeyDown(e, i)}
+              className={`min-h-11 w-full rounded-lg border px-3 py-2 text-left text-sm font-medium transition-colors ${
+                checked
+                  ? 'border-primary bg-primary/15 text-base-content'
+                  : 'border-base-300 bg-base-200/40 text-base-content/70 hover:bg-base-200'
+              }`}
+            >
+              {preset.label}
+            </button>
+          );
+        })}
+      </div>
+
+      <p
+        aria-live="polite"
+        data-testid="guided-view-description"
+        className="text-base-content/80 mt-3 text-sm leading-relaxed"
+      >
+        {active?.description ?? ''}
+      </p>
     </div>
   );
 }

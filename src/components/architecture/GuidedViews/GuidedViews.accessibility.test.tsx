@@ -1,40 +1,57 @@
-import { describe, it, expect } from 'vitest';
-import { render } from '@testing-library/react';
+import { describe, it, expect, vi } from 'vitest';
+import { render, screen } from '@testing-library/react';
 import { axe, toHaveNoViolations } from 'jest-axe';
 import GuidedViews from './GuidedViews';
+import type { DiagramPreset } from '../manifests/types';
 
 expect.extend(toHaveNoViolations);
 
+const presets: DiagramPreset[] = [
+  {
+    id: 'everything',
+    label: 'Full Picture',
+    description: 'Everything explanation.',
+    visibleLayerIds: ['wall'],
+  },
+  {
+    id: 'bare-wall',
+    label: 'No Roof Yet',
+    description: 'Bare wall explanation.',
+    visibleLayerIds: ['wall'],
+  },
+];
+
+function setup(active = 'everything') {
+  return render(
+    <GuidedViews presets={presets} activePresetId={active} onSelect={vi.fn()} />
+  );
+}
+
 describe('GuidedViews Accessibility', () => {
-  it('should have no accessibility violations', async () => {
-    const { container } = render(<GuidedViews />);
+  it('has no accessibility violations', async () => {
+    const { container } = setup();
     const results = await axe(container);
     expect(results).toHaveNoViolations();
   });
 
-  it('should have focusable elements in proper tab order', () => {
-    const { container } = render(<GuidedViews />);
-
-    const focusableElements = container.querySelectorAll(
-      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-    );
-
-    // All focusable elements should be visible
-    focusableElements.forEach((element) => {
-      expect(element).toBeVisible();
-    });
+  it('G-GV-1: the description lives in an aria-live=polite region', () => {
+    const { container } = setup();
+    expect(container.querySelector('[aria-live="polite"]')).toBeInTheDocument();
   });
 
-  it('should have proper semantic HTML', () => {
-    const { container } = render(<GuidedViews />);
+  it('G-GV-2: radiogroup with one checked radio', () => {
+    setup('bare-wall');
+    expect(screen.getByRole('radiogroup')).toBeInTheDocument();
+    const checked = screen
+      .getAllByRole('radio')
+      .filter((r) => r.getAttribute('aria-checked') === 'true');
+    expect(checked).toHaveLength(1);
+  });
 
-    // Verify component renders with proper HTML structure
-    expect(container.firstChild).toBeInTheDocument();
-
-    // Images should have alt text
-    const images = container.querySelectorAll('img');
-    images.forEach((img) => {
-      expect(img).toHaveAttribute('alt');
+  it('G-GV-5: each selectable control meets the 44px touch target', () => {
+    setup();
+    screen.getAllByRole('radio').forEach((r) => {
+      expect(r.className).toMatch(/min-h-11/);
     });
   });
 });

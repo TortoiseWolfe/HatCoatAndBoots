@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import GuidedViews from './GuidedViews';
+import { hatManifest } from '../manifests/hat.manifest';
 
 const meta: Meta<typeof GuidedViews> = {
   title: 'Book/Architecture/GuidedViews',
@@ -8,39 +9,25 @@ const meta: Meta<typeof GuidedViews> = {
     layout: 'centered',
     docs: {
       description: {
-        component: 'GuidedViews component for the architecture category.',
+        component:
+          'Controlled guided-view selector (radiogroup) with an aria-live ' +
+          'explanation for the Hat chapter.',
       },
     },
   },
   tags: ['autodocs'],
-  argTypes: {
-    children: {
-      control: 'text',
-      description: 'Content to display inside the component',
-    },
-    className: {
-      control: 'text',
-      description: 'Additional CSS classes',
-    },
+  args: {
+    presets: hatManifest.presets,
+    activePresetId: 'everything',
+    onSelect: () => {},
   },
 };
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-  args: {
-    children: 'Default GuidedViews content',
-  },
-};
-
-export const WithCustomClass: Story = {
-  args: {
-    children: 'GuidedViews with custom styling',
-    className: 'p-4 bg-primary text-white rounded',
-  },
-};
-
-export const Empty: Story = {
-  args: {},
+export const Everything: Story = { args: { activePresetId: 'everything' } };
+export const RoofLine: Story = { args: { activePresetId: 'roof-line' } };
+export const HowItShedsWater: Story = {
+  args: { activePresetId: 'how-it-sheds-water' },
 };

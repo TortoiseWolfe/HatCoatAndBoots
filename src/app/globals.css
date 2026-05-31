@@ -203,6 +203,13 @@
   size-adjust: 100%;
 }
 
+/* Layered-diagram cross-fade (feature 048). The engine adds
+ * .layer-stack--animated only when reduced motion is NOT requested (G-LD-5),
+ * so the opacity change between guided views fades instead of snapping. */
+.layer-stack--animated [data-layer-id] {
+  transition: opacity 0.3s ease;
+}
+
 /* Blueprint display face for the book's "illustrated blueprint" chapters
  * (feature 048, FR-013a). Self-hosted with a declared system-font fallback and
  * NO third-party request: resolves first to a locally-available characterful

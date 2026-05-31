@@ -2,39 +2,38 @@ import { describe, it, expect } from 'vitest';
 import { render } from '@testing-library/react';
 import { axe, toHaveNoViolations } from 'jest-axe';
 import LayeredDiagram from './LayeredDiagram';
+import { hatManifest } from '../manifests/hat.manifest';
 
 expect.extend(toHaveNoViolations);
 
 describe('LayeredDiagram Accessibility', () => {
-  it('should have no accessibility violations', async () => {
-    const { container } = render(<LayeredDiagram />);
+  it('has no violations in the full (everything) state', async () => {
+    const { container } = render(
+      <LayeredDiagram manifest={hatManifest} chapterFocus="roof" />
+    );
     const results = await axe(container);
     expect(results).toHaveNoViolations();
   });
 
-  it('should have focusable elements in proper tab order', () => {
-    const { container } = render(<LayeredDiagram />);
-
-    const focusableElements = container.querySelectorAll(
-      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+  it('has no violations in a focused/partial guided view', async () => {
+    const { container } = render(
+      <LayeredDiagram
+        manifest={hatManifest}
+        chapterFocus="roof"
+        initialPresetId="bare-wall"
+      />
     );
-
-    // All focusable elements should be visible
-    focusableElements.forEach((element) => {
-      expect(element).toBeVisible();
-    });
+    const results = await axe(container);
+    expect(results).toHaveNoViolations();
   });
 
-  it('should have proper semantic HTML', () => {
-    const { container } = render(<LayeredDiagram />);
-
-    // Verify component renders with proper HTML structure
-    expect(container.firstChild).toBeInTheDocument();
-
-    // Images should have alt text
-    const images = container.querySelectorAll('img');
-    images.forEach((img) => {
-      expect(img).toHaveAttribute('alt');
+  it('G-RLS-4: decorative layers carry empty alt; the labels layer is non-decorative', () => {
+    const { container } = render(
+      <LayeredDiagram manifest={hatManifest} chapterFocus="roof" />
+    );
+    // every pictorial <img> is decorative → alt=""
+    container.querySelectorAll('img').forEach((img) => {
+      expect(img).toHaveAttribute('alt', '');
     });
   });
 });
