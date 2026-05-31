@@ -203,10 +203,35 @@
   size-adjust: 100%;
 }
 
+/* Blueprint display face for the book's "illustrated blueprint" chapters
+ * (feature 048, FR-013a). Self-hosted with a declared system-font fallback and
+ * NO third-party request: resolves first to a locally-available characterful
+ * serif, and to a self-hosted woff2 if one is dropped in later. The fallback
+ * stack on --font-blueprint guarantees graceful rendering today (zero bytes,
+ * no network) — the Hat gate's "graceful failure" applied to typography. */
+@font-face {
+  font-family: 'Blueprint Display';
+  font-display: swap;
+  font-weight: 400 700;
+  src:
+    local('Iowan Old Style'),
+    local('Palatino Linotype'),
+    local('Palatino'),
+    local('URW Palladio L'),
+    url('/fonts/blueprint-display.woff2') format('woff2');
+}
+
 /* Accessibility Font Scaling System + Mobile-First Fluid Typography (PRP-017) */
 :root {
   /* Base scale factor - controlled by accessibility settings */
   --font-scale-factor: 1;
+
+  /* Book "illustrated blueprint" display family (feature 048, FR-013a).
+   * Self-hosted face first, then a robust system-serif fallback stack so the
+   * chapter chrome always renders without a third-party request. */
+  --font-blueprint:
+    'Blueprint Display', 'Iowan Old Style', 'Palatino Linotype', Palatino,
+    Georgia, 'Times New Roman', serif;
 
   /* Font loading optimization to reduce CLS */
   font-synthesis: none;

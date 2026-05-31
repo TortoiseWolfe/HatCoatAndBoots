@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 360" width="360" height="360" role="img" aria-hidden="true">
+  <!-- COAT (context): the insulated wall sitting on the piers. The wall is the
+       thermal envelope; the window opening is a separate layer so it can be
+       toggled independently. Warm blueprint: cream stud bay with ink outline,
+       a hint of batt-insulation texture. Shared 0 0 360 360 space. -->
+  <defs>
+    <pattern id="wall-insulation" width="12" height="18" patternUnits="userSpaceOnUse">
+      <path d="M0 0 Q6 9 0 18 M12 0 Q6 9 12 18" fill="none" stroke="#c9a86a" stroke-width="1" opacity="0.55"/>
+    </pattern>
+  </defs>
+  <!-- wall body, resting on the piers (top of piers at y=300) -->
+  <rect x="150" y="120" width="92" height="180" fill="#f3ead6" stroke="#2d3a4a" stroke-width="2.5"/>
+  <!-- insulation texture inside the wall -->
+  <rect x="153" y="123" width="86" height="174" fill="url(#wall-insulation)"/>
+  <!-- top plate -->
+  <rect x="148" y="116" width="96" height="8" rx="1" fill="#e3d4b4" stroke="#2d3a4a" stroke-width="2"/>
+  <!-- bottom plate / sill on piers -->
+  <rect x="148" y="296" width="96" height="8" rx="1" fill="#e3d4b4" stroke="#2d3a4a" stroke-width="2"/>
+</svg>
