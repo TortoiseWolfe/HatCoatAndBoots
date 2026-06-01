@@ -31,7 +31,12 @@ export default function HatViewer({
   initialViewId,
   className = '',
 }: HatViewerProps) {
-  // Start from the prop (SSR-provided); refine from the live hash after mount.
+  // Seeds LayeredDiagram's INITIAL preset only. We set it on mount (from the
+  // prop, then refined from the live hash). We deliberately do NOT update it on
+  // every preset change — LayeredDiagram owns the live preset state, and echoing
+  // the active id back through initialPresetId caused a prop/state feedback race
+  // that reset the view on the slower CI runner. The hash is still kept in sync
+  // for shareability/reload, but it does not drive live state.
   const [viewId, setViewId] = useState<string | undefined>(initialViewId);
 
   useEffect(() => {
@@ -40,8 +45,8 @@ export default function HatViewer({
   }, []);
 
   function handlePresetChange(presetId: string) {
-    setViewId(presetId);
-    // Reflect to the hash without a navigation or scroll jump (FR-007a).
+    // Reflect to the hash without a navigation or scroll jump (FR-007a). Do NOT
+    // call setViewId here — that would echo back into initialPresetId.
     const url = `${window.location.pathname}${window.location.search}#view=${presetId}`;
     window.history.replaceState(null, '', url);
   }

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import type { DiagramManifest, ChapterFocus } from '../manifests/types';
 import { renderLayerStack } from '../shared/renderLayerStack';
 import GuidedViews from '../GuidedViews';
@@ -79,8 +79,16 @@ export default function LayeredDiagram({
   );
   const reducedMotion = useReducedMotion();
 
-  // Re-sync when the initial preset prop changes (e.g. hash hydration).
+  // The last initialPresetId we applied. Guards against the prop "echo": when a
+  // click emits onPresetChange, the parent feeds the new id back in as
+  // initialPresetId; without this guard the effect would re-apply (and, mid
+  // re-render, could reset the just-changed state back to the default — a race
+  // that only surfaced on the slower CI runner). We re-sync ONLY when the parent
+  // pushes a genuinely new external value (e.g. hash hydration on load).
+  const appliedInitialRef = useRef<string | undefined>(initialPresetId);
   useEffect(() => {
+    if (initialPresetId === appliedInitialRef.current) return;
+    appliedInitialRef.current = initialPresetId;
     const resolved = resolveInitialPreset(manifest, initialPresetId);
     setActivePresetId(resolved);
     setVisibleIds(presetVisibleSet(manifest, resolved));
