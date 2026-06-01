@@ -134,12 +134,15 @@ export default function Home() {
                           Read now
                         </span>
                       ) : (
-                        <span className="badge badge-ghost badge-sm">
+                        // badge-neutral (not badge-ghost) so "Coming soon" meets
+                        // AAA 7:1 contrast on the light theme (#21/AAA gate).
+                        <span className="badge badge-neutral badge-sm">
                           Coming soon
                         </span>
                       )}
                     </div>
-                    <p className="text-base-content/70 text-sm font-medium">
+                    {/* full text-base-content (no /70 opacity) for AAA 7:1 */}
+                    <p className="text-base-content text-sm font-medium">
                       {blurb.tagline}
                     </p>
                     <p className="text-base-content/80 text-sm leading-relaxed">
@@ -159,7 +162,10 @@ export default function Home() {
                       {card}
                     </Link>
                   ) : (
-                    <div className="card bg-base-100 border-base-300 h-full border opacity-70 shadow-sm">
+                    // No opacity dim — opacity-70 on the whole card drops the
+                    // text contrast below AAA 7:1. The "Coming soon" badge +
+                    // lighter border already signal the disabled state.
+                    <div className="card bg-base-100 border-base-300 h-full border shadow-sm">
                       {card}
                     </div>
                   )}
@@ -168,7 +174,7 @@ export default function Home() {
             })}
           </ul>
 
-          <p className="text-base-content/70 mx-auto max-w-2xl text-center text-sm leading-relaxed">
+          <p className="text-base-content mx-auto max-w-2xl text-center text-sm leading-relaxed">
             It’s one building, drawn once — every chapter just brings a
             different part into focus. The best-designed things don’t only avoid
             harm; they give something back, the way a tree gives shade.
