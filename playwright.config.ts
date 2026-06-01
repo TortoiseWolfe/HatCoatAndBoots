@@ -86,6 +86,78 @@ export default defineConfig({
   /* Note: storageState is set per-project (setup uses base, others use authenticated) */
   projects: [
     // ============================================================
+    // BOOK LANE (BLOCKING): the book chapter specs. Backend-free — runs
+    // against the static export only with NO setup dependency, NO
+    // authenticated storageState, NO Supabase. Runs in CI via
+    // `--project=book` with BOOK_E2E=1 (which short-circuits global-setup).
+    // This is the gating lane for the book feature (e.g. the Hat chapter,
+    // feature 048) and is independently verified green. Kept first so it is
+    // obvious this lane is independent of the auth chain.
+    // ============================================================
+    {
+      name: 'book',
+      testMatch: [/book-.*\.spec\.ts$/],
+      use: {
+        ...devices['Desktop Chrome'],
+      },
+    },
+
+    // ============================================================
+    // STATIC LANE (NON-BLOCKING): the other backend-free static specs
+    // (theme switching, mobile UX, PWA, a11y, homepage, etc.). Same
+    // secret-free mechanism (BOOK_E2E=1, no setup dep, no storageState),
+    // but run as a separate `--project=static` job with continue-on-error
+    // in CI: these upstream specs predate this fork and some are flaky or
+    // failing against the static export (e.g. game-3d asserts zero console
+    // 404s), so they REPORT signal on every PR without gating merges. A
+    // spec graduates to the blocking `book` lane once it is confirmed green
+    // in real CI.
+    //
+    // testMatch is an EXPLICIT ALLOW-LIST, never a directory glob — the
+    // safety boundary that keeps any auth/messaging/payment spec (and any
+    // future backend spec dropped into tests/e2e/) out of the secret-free
+    // lane. Each entry was verified backend-free (imports only
+    // @playwright/test + the inert dismissCookieBanner UI helper; visits
+    // only public/static routes; asserts only on DOM/CSS/localStorage).
+    // map.spec.ts and broken-links.spec.ts are omitted (backend-free but
+    // flaky on external resources); mobile-touch-targets is omitted
+    // (genuinely auth-coupled by default project routing).
+    // ============================================================
+    {
+      name: 'static',
+      testMatch: [
+        /game-3d\.spec\.ts$/,
+        /color-contrast\.spec\.ts$/,
+        /mobile-check\.spec\.ts$/,
+        /mobile-dropdown-screenshot\.spec\.ts$/,
+        /accessibility\/colorblind-toggle\.spec\.ts$/,
+        /accessibility\/contact-form-keyboard\.spec\.ts$/,
+        /tests\/accessibility\.spec\.ts$/,
+        /tests\/blog-mobile-ux-iphone\.spec\.ts$/,
+        /tests\/blog-mobile-ux-pixel\.spec\.ts$/,
+        /tests\/blog-touch-targets\.spec\.ts$/,
+        /tests\/cross-page-navigation\.spec\.ts$/,
+        /tests\/form-submission\.spec\.ts$/,
+        /tests\/homepage\.spec\.ts$/,
+        /tests\/mobile-buttons\.spec\.ts$/,
+        /tests\/mobile-card-layout\.spec\.ts$/,
+        /tests\/mobile-footer\.spec\.ts$/,
+        /tests\/mobile-form-inputs\.spec\.ts$/,
+        /tests\/mobile-horizontal-scroll\.spec\.ts$/,
+        /tests\/mobile-images\.spec\.ts$/,
+        /tests\/mobile-navigation\.spec\.ts$/,
+        /tests\/mobile-orientation\.spec\.ts$/,
+        /tests\/mobile-typography\.spec\.ts$/,
+        /tests\/pwa-installation\.spec\.ts$/,
+        /tests\/theme-switching\.spec\.ts$/,
+        /examples\/homepage-with-pom\.spec\.ts$/,
+      ],
+      use: {
+        ...devices['Desktop Chrome'],
+      },
+    },
+
+    // ============================================================
     // AUTH SETUP: Runs once, saves authenticated browser state
     // All parallel projects depend on this and reuse the cached state.
     // ============================================================

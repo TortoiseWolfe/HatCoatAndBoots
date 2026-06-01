@@ -19,6 +19,17 @@ interface PrerequisiteError {
 }
 
 async function globalSetup(): Promise<void> {
+  // Backend-free lane (the book chapters + other static specs). These specs run
+  // against the static export only and need no Supabase / auth / test users, so
+  // skip the prerequisite checks entirely when BOOK_E2E=1. The Supabase auth +
+  // messaging suite runs WITHOUT this flag and still gets the full validation.
+  if (process.env.BOOK_E2E === '1') {
+    console.log(
+      '\n📚 BOOK_E2E=1 — skipping Supabase prerequisite checks (backend-free static lane).\n'
+    );
+    return;
+  }
+
   console.log('\n🔍 Running E2E prerequisite checks...\n');
 
   const errors: PrerequisiteError[] = [];
