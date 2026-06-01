@@ -57,7 +57,10 @@ export function SetupBanner({
     <div
       role="alert"
       aria-live="polite"
-      className="alert alert-warning mb-4 shadow-lg"
+      // alert-vertical below sm so the icon/message/dismiss stack and the
+      // dismiss button stays inside the viewport at 320px (DaisyUI's default
+      // horizontal alert grid overflows narrow screens — issue #17).
+      className="alert alert-vertical alert-warning sm:alert-horizontal mb-4 shadow-lg"
       data-testid="setup-banner"
     >
       <svg
