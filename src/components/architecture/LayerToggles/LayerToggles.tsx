@@ -91,7 +91,7 @@ export default function LayerToggles({
             className={`flex min-h-11 min-w-11 items-center gap-2 rounded-md border px-3 py-2 text-left text-sm transition-colors ${
               pressed
                 ? 'border-primary bg-primary/15 text-base-content'
-                : 'border-base-300 bg-base-200/40 text-base-content/60'
+                : 'border-base-300 bg-base-200/40 text-base-content'
             }`}
           >
             <span

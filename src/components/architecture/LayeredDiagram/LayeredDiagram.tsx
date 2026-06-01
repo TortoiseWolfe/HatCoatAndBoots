@@ -155,7 +155,7 @@ export default function LayeredDiagram({
             {manifest.labels.map((lbl) => (
               <span
                 key={lbl.id}
-                className="text-base-content/90 absolute -translate-y-1/2 text-[0.7rem] font-semibold whitespace-nowrap"
+                className="text-base-content absolute -translate-y-1/2 text-[0.7rem] font-semibold whitespace-nowrap"
                 style={{
                   left: `${(lbl.x / vbW) * 100}%`,
                   top: `${(lbl.y / vbH) * 100}%`,

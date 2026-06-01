@@ -82,7 +82,7 @@ export default function GuidedViews({
               className={`min-h-11 w-full rounded-lg border px-3 py-2 text-left text-sm font-medium transition-colors ${
                 checked
                   ? 'border-primary bg-primary/15 text-base-content'
-                  : 'border-base-300 bg-base-200/40 text-base-content/70 hover:bg-base-200'
+                  : 'border-base-300 bg-base-200/40 text-base-content hover:bg-base-200'
               }`}
             >
               {preset.label}
@@ -94,7 +94,7 @@ export default function GuidedViews({
       <p
         aria-live="polite"
         data-testid="guided-view-description"
-        className="text-base-content/80 mt-3 text-sm leading-relaxed"
+        className="text-base-content mt-3 text-sm leading-relaxed"
       >
         {active?.description ?? ''}
       </p>

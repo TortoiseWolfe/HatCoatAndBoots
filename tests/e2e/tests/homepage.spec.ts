@@ -1,38 +1,56 @@
 import { test, expect } from '@playwright/test';
 import { dismissCookieBanner } from '../utils/test-user-factory';
 
-// The homepage is the book's front door (the Hats-Coats-Boots premise +
-// chapter entry). These tests bind that content, not the old ScriptHammer
-// template landing.
+// The homepage IS the book: you land on the interactive building blueprint and
+// take it apart. These tests bind that — the viewer is the centerpiece, with
+// chapter entry points below — not a text cover page or the old template.
 
-test.describe('Homepage — the book front door', () => {
+test.describe('Homepage — the interactive book', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/');
     await dismissCookieBanner(page);
   });
 
-  test('loads with a title and a heading', async ({ page }) => {
+  test('loads with the book title and the hook heading', async ({ page }) => {
     await expect(page).toHaveTitle(/Hats, Coats, and Boots/i);
-    await expect(page.locator('h1').first()).toBeVisible();
-  });
-
-  test('states the book premise', async ({ page }) => {
     await expect(
-      page.getByText(/why does a good building wear a hat, a coat, and boots/i)
+      page.getByRole('heading', {
+        name: /why does a good building wear a hat, a coat, and boots/i,
+      })
     ).toBeVisible();
   });
 
-  test('primary CTA goes to the Hat chapter', async ({ page }) => {
-    await page.getByRole('link', { name: /start reading: the hat/i }).click();
-    await expect(page).toHaveURL(/\/book\/hat\/?$/);
+  test('mounts the interactive building viewer on the front page', async ({
+    page,
+  }) => {
+    // The shared building: all manifest layers are rendered (the no-JS composite
+    // SSRs them, the island hydrates over it).
+    await expect(page.locator('[data-layer-id]').first()).toBeVisible();
+    expect(
+      await page.locator('[data-layer-id]').count()
+    ).toBeGreaterThanOrEqual(6);
+    // The guided-views rail (radiogroup) and the per-layer toggle toolbar.
+    await expect(page.getByRole('radiogroup')).toBeVisible();
+    await expect(page.getByRole('toolbar')).toBeVisible();
   });
 
-  test('"browse all chapters" goes to the book index', async ({ page }) => {
-    await page.getByRole('link', { name: /browse all chapters/i }).click();
-    await expect(page).toHaveURL(/\/book\/?$/);
+  test('the guided views drive the building on the homepage', async ({
+    page,
+  }) => {
+    const live = page.getByTestId('guided-view-description');
+    await page.getByRole('radio', { name: 'No Roof Yet' }).click();
+    await expect(
+      page.getByRole('radio', { name: 'No Roof Yet' })
+    ).toBeChecked();
+    await expect(live).toContainText(/no overhang at all/i);
+    // switching to a roof view hides the overhang layer (opacity, still in DOM)
+    await page.getByRole('radio', { name: 'One Roof, Two Seasons' }).click();
+    await expect(page.locator('[data-layer-id="roof-overhang"]')).toHaveCount(
+      1
+    );
   });
 
-  test('shows the three chapter cards with the Hat readable', async ({
+  test('shows the three chapter entry points; the Hat is readable', async ({
     page,
   }) => {
     await expect(
@@ -44,7 +62,6 @@ test.describe('Homepage — the book front door', () => {
     await expect(
       page.getByRole('heading', { name: /^the boots$/i })
     ).toBeVisible();
-    // Hat is available now; Coat/Boots are coming soon
     await expect(page.getByText('Read now').first()).toBeVisible();
     await expect(page.getByText('Coming soon').first()).toBeVisible();
   });
@@ -58,7 +75,6 @@ test.describe('Homepage — the book front door', () => {
   });
 
   test('the "Book" nav link reaches the book', async ({ page }) => {
-    // The nav exposes a "The Book" link (mobile may collapse it into a menu).
     const bookLink = page
       .locator('a[href$="/book"], a[href*="/book/"]')
       .first();
