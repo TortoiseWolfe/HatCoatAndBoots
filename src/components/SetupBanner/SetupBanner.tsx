@@ -57,10 +57,11 @@ export function SetupBanner({
     <div
       role="alert"
       aria-live="polite"
-      // alert-vertical below sm so the icon/message/dismiss stack and the
-      // dismiss button stays inside the viewport at 320px (DaisyUI's default
-      // horizontal alert grid overflows narrow screens — issue #17).
-      className="alert alert-vertical alert-warning sm:alert-horizontal mb-4 shadow-lg"
+      // Plain flex (NOT DaisyUI's `alert`, whose grid auto-sizes to content and
+      // forced the long message ~647px wide → page overflow at 320px, #17).
+      // `flex-wrap` lets the dismiss button drop below the message; the message
+      // div gets `min-w-0` + `break-words` so the sentence wraps within 320px.
+      className="bg-warning text-warning-content mb-4 flex w-full flex-wrap items-center gap-3 rounded-lg p-4 shadow-lg"
       data-testid="setup-banner"
     >
       <svg
@@ -77,7 +78,10 @@ export function SetupBanner({
           d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
         />
       </svg>
-      <div className="flex-1">
+      {/* min-w-0 + break-words let this flex child shrink below the message's
+          intrinsic width so the long sentence wraps instead of forcing the
+          banner (and the page) wider than the 320px viewport (#17). */}
+      <div className="min-w-0 flex-1 break-words">
         <span>{message}</span>
         {docsUrl && (
           <a

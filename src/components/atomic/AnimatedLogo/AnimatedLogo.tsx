@@ -36,7 +36,13 @@ export const AnimatedLogo: React.FC<AnimatedLogoProps> = ({
 
   return (
     <span
-      className={`${styles.animatedLogo} ${sizeClasses[size]} ${className} text-primary inline-flex cursor-pointer font-bold`}
+      // flex-wrap + max-w-full: the per-letter spans are laid out with flex,
+      // which by default does NOT wrap — at narrow viewports (≤320px) the
+      // (unbreakable) project name forced the whole hero column ~60px wider than
+      // its container, causing horizontal page overflow (#17). Allowing the
+      // letters to wrap and capping at the container width fixes it without
+      // changing the desktop appearance.
+      className={`${styles.animatedLogo} ${sizeClasses[size]} ${className} text-primary inline-flex max-w-full cursor-pointer flex-wrap font-bold`}
       style={{
         filter: 'drop-shadow(2px 2px 2px rgb(0 0 0 / 0.8))',
       }}

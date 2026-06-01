@@ -68,7 +68,9 @@ export function CookieConsent({
         className={`fixed right-0 left-0 ${positionClasses} bg-base-100 border-base-300 z-[60] border-t-2 shadow-lg backdrop-blur-md ${className}`}
       >
         <div className="container mx-auto px-4 py-3">
-          <div className="flex items-center justify-between gap-4">
+          {/* Stack message above the action buttons below sm so the buttons
+              don't overflow the viewport at 320px (#17); row layout at sm+. */}
+          <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
             {/* Message Section - Compact */}
             <div className="flex flex-1 items-center gap-2">
               <span className="text-lg" role="img" aria-label="Cookie">
