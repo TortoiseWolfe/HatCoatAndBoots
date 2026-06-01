@@ -32,6 +32,14 @@ jobs:
     name: Build static export
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    # Build the export WITHOUT a basePath so it can be served at the root by
+    # `npx serve out -l 3000` and the tests can navigate to `/book/hat/`.
+    # detect-project.js only applies the GitHub-Pages basePath (/HatCoatAndBoots)
+    # when GITHUB_ACTIONS === 'true'; forcing it empty at the job level keeps the
+    # asset/JS URLs root-relative so the page actually hydrates in CI. (The real
+    # Pages deploy keeps the basePath — that's deploy.yml's job, not this lane.)
+    env:
+      GITHUB_ACTIONS: ''
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -50,8 +58,6 @@ jobs:
         run: node scripts/detect-project.js
       - name: Build application (static export -> out/)
         run: pnpm build
-        env:
-          GITHUB_ACTIONS: false
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
