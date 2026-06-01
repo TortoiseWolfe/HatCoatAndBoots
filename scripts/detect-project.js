@@ -114,12 +114,16 @@ function generateConfig() {
     path.join(__dirname, '..', 'public', 'CNAME')
   );
 
-  // Base path: prefer explicit env var, fall back to auto-detection in GitHub Actions
+  // Base path: an EXPLICITLY set NEXT_PUBLIC_BASE_PATH wins (even when empty —
+  // e.g. the book-e2e lane forces '' to serve the export at root); otherwise
+  // auto-detect the GitHub-Pages project path in CI. Using `!== undefined` (not
+  // `||`) is what lets an intentional empty string override the auto-detection.
   const basePath =
-    process.env.NEXT_PUBLIC_BASE_PATH ||
-    (isGitHubActions && info.isGitHub && !cnameExists
-      ? `/${info.projectName}`
-      : '');
+    process.env.NEXT_PUBLIC_BASE_PATH !== undefined
+      ? process.env.NEXT_PUBLIC_BASE_PATH
+      : isGitHubActions && info.isGitHub && !cnameExists
+        ? `/${info.projectName}`
+        : '';
 
   const config = {
     projectName: info.projectName,

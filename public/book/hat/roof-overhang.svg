@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 360" width="360" height="360" role="img" aria-hidden="true">
+  <!-- HAT (the lesson): a gable roof with a GENEROUSLY projecting eave. The right
+       (south) eave reaches well past the wall face so it can shade the high summer
+       sun yet let the low winter sun pass beneath. Warm blueprint: terracotta roof
+       plane, ink linework, a visible rafter tail, and the soft shadow the eave
+       throws on the wall just below it. Shared 0 0 360 360 space; the wall is
+       x=150..242 / top y=120, so the eaves project past x=110 and x=290. -->
+  <defs>
+    <linearGradient id="roof-plane" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#c8714a"/>
+      <stop offset="1" stop-color="#a8542f"/>
+    </linearGradient>
+  </defs>
+  <!-- soft shade the eave casts on the upper wall (depth cue, not the sun layer) -->
+  <path d="M196 118 L242 118 L242 150 Z" fill="#2d3a4a" opacity="0.08"/>
+  <!-- roof plane: apex centered over the wall, eaves projecting both sides -->
+  <polygon points="196,62 110,120 290,120"
+           fill="url(#roof-plane)" stroke="#2d3a4a" stroke-width="2.5" stroke-linejoin="round"/>
+  <!-- ridge cap -->
+  <line x1="196" y1="62" x2="196" y2="70" stroke="#2d3a4a" stroke-width="3" stroke-linecap="round"/>
+  <!-- fascia board along the eave -->
+  <line x1="110" y1="120" x2="290" y2="120" stroke="#7a3c22" stroke-width="4" stroke-linecap="round"/>
+  <!-- rafter tail at the projecting south (right) eave -->
+  <path d="M290 120 l8 4 l-2 6 l-8 -4 z" fill="#a8542f" stroke="#2d3a4a" stroke-width="1.8" stroke-linejoin="round"/>
+  <!-- a couple of batten lines for texture -->
+  <line x1="153" y1="105" x2="247" y2="105" stroke="#7a3c22" stroke-width="1" opacity="0.5"/>
+  <line x1="170" y1="90" x2="222" y2="90" stroke="#7a3c22" stroke-width="1" opacity="0.5"/>
+</svg>

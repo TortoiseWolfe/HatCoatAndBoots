@@ -65,6 +65,7 @@
     "test:a11y:ci": "start-server-and-test 'serve out -p 3000' http://localhost:3000 test:a11y",
     "test:a11y:watch": "nodemon --watch src --ext tsx,ts --exec 'pnpm test:a11y:dev'",
     "test:a11y:audit": "pa11y-ci --config config/pa11yci.json --reporter json > a11y-audit.json && echo 'Audit complete: a11y-audit.json'",
+    "test:e2e:book": "BOOK_E2E=1 playwright test --project=book --no-deps",
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:debug": "playwright test --debug",
     "test:e2e:report": "playwright show-report",

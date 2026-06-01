@@ -1,0 +1,128 @@
+name: Book E2E
+
+# Backend-free E2E lanes. These exercise the book chapters + the other static
+# specs that need NO Supabase / auth / test users — against the static export
+# only. This is what actually runs the Hat chapter viewer (feature 048) on every
+# PR. The Supabase-dependent auth/messaging/payment suite lives in e2e.yml and
+# stays manual (workflow_dispatch) because this fork has no backend wired up.
+#
+# NO secrets are referenced here on purpose: BOOK_E2E=1 short-circuits
+# tests/e2e/global-setup.ts, and the `book`/`static` Playwright projects have no
+# auth setup dependency and no authenticated storageState.
+#
+# Two lanes:
+#   * book-e2e    — BLOCKING. The book chapter specs (project=book). Proven green.
+#   * static-e2e  — NON-BLOCKING (continue-on-error). The other backend-free
+#                   static specs (project=static). Some upstream specs are flaky
+#                   or failing against the export; they report signal without
+#                   gating merges until each is confirmed green and promoted to
+#                   the book lane.
+#
+# To add a spec to a lane, edit the EXPLICIT testMatch allow-list of the matching
+# project in playwright.config.ts — never widen it to a directory glob.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    name: Build static export
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    # Build the export WITHOUT a basePath so it can be served at the root by
+    # `npx serve out -l 3000` and the tests can navigate to `/book/hat/`. An
+    # explicitly-empty NEXT_PUBLIC_BASE_PATH overrides detect-project.js's
+    # GitHub-Pages auto-detection (which would otherwise bake in /HatCoatAndBoots
+    # and 404 the JS/SVGs when served at root → the page never hydrates).
+    # NOTE: GITHUB_ACTIONS is a reserved runner var and CANNOT be overridden via
+    # env:, so NEXT_PUBLIC_BASE_PATH is the correct lever. (The real Pages deploy
+    # keeps the basePath — that's deploy.yml's job, not this lane.)
+    env:
+      NEXT_PUBLIC_BASE_PATH: ''
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.16.1
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+          cache: 'pnpm'
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Generate project configuration
+        run: node scripts/detect-project.js
+      - name: Build application (static export -> out/)
+        run: pnpm build
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: book-e2e-build
+          path: out/
+          retention-days: 1
+
+  book-e2e:
+    name: Book E2E (blocking)
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.16.1
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+          cache: 'pnpm'
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: book-e2e-build
+          path: out/
+      - name: Install Playwright (chromium only)
+        run: |
+          for i in 1 2 3; do
+            pnpm exec playwright install --with-deps chromium && break
+            echo "Retry $i: playwright install failed, retrying in 10s..."
+            sleep 10
+          done
+      - name: Start static server
+        run: |
+          set -euo pipefail
+          npx serve out -l 3000 > serve.log 2>&1 &
+          SERVE_PID=$!
+          sleep 2
+          if ! kill -0 "$SERVE_PID" 2>/dev/null; then
+            echo "::error::serve exited early"; cat serve.log || true; exit 1
+          fi
+          if ! npx wait-on http://localhost:3000 --timeout 60000 --verbose; then
+            echo "::error::wait-on timed out"; cat serve.log || true; exit 1
+          fi
+      - name: Run book E2E (no Supabase, no auth)
+        run: pnpm exec playwright test --project=book --no-deps --reporter=list
+        env:
+          CI: 'true'
+          BOOK_E2E: '1'
+          SKIP_WEBSERVER: 'true'
+          BASE_URL: http://localhost:3000
+      - name: Upload report on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: book-e2e-report
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 7

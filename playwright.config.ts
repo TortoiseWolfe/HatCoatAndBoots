@@ -86,6 +86,23 @@ export default defineConfig({
   /* Note: storageState is set per-project (setup uses base, others use authenticated) */
   projects: [
     // ============================================================
+    // BOOK LANE (BLOCKING): the book chapter specs. Backend-free — runs
+    // against the static export only with NO setup dependency, NO
+    // authenticated storageState, NO Supabase. Runs in CI via
+    // `--project=book` with BOOK_E2E=1 (which short-circuits global-setup).
+    // This is the gating lane for the book feature (e.g. the Hat chapter,
+    // feature 048) and is independently verified green. Kept first so it is
+    // obvious this lane is independent of the auth chain.
+    // ============================================================
+    {
+      name: 'book',
+      testMatch: [/book-.*\.spec\.ts$/],
+      use: {
+        ...devices['Desktop Chrome'],
+      },
+    },
+
+    // ============================================================
     // AUTH SETUP: Runs once, saves authenticated browser state
     // All parallel projects depend on this and reuse the cached state.
     // ============================================================

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 360" width="360" height="360" role="img" aria-hidden="true">
+  <!-- COAT (context): the south-facing window opening on the wall's sunny face.
+       This is the opening the summer sun must be kept out of and the winter sun
+       let into. Glass given a faint sky tint + a single sash bar. The sill juts
+       slightly to read as a real sill. Shared 0 0 360 360 space; aligned to the
+       wall layer (wall x=150..242, y=120..300). -->
+  <!-- glass -->
+  <rect x="186" y="150" width="46" height="96" fill="#cfe3ee" stroke="#2d3a4a" stroke-width="2.5"/>
+  <!-- subtle glass sheen -->
+  <polygon points="186,150 210,150 186,200" fill="#ffffff" opacity="0.35"/>
+  <!-- muntin (sash bar) -->
+  <line x1="186" y1="198" x2="232" y2="198" stroke="#2d3a4a" stroke-width="1.8"/>
+  <line x1="209" y1="150" x2="209" y2="246" stroke="#2d3a4a" stroke-width="1.8"/>
+  <!-- sill, slightly proud of the wall face -->
+  <rect x="182" y="246" width="54" height="7" rx="1" fill="#dcc8a8" stroke="#2d3a4a" stroke-width="2"/>
+</svg>

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 360" width="360" height="360" role="img" aria-hidden="true">
+  <!-- RAIN (the third job): rain falls onto the roof, runs to the projecting eave,
+       and is thrown CLEAR of the wall base — landing on the ground away from the
+       building so water doesn't run down the wall face or pool at the footing.
+       Slate-blue droplets + a drip-line arc off the right eave tip (x≈290,y=120)
+       to the ground (y=300) well outside the wall (wall right face x=242). Shared
+       0 0 360 360 space. -->
+  <!-- falling rain streaks above and around the roof -->
+  <g stroke="#5b86a8" stroke-width="2.2" stroke-linecap="round" opacity="0.85">
+    <line x1="150" y1="40" x2="146" y2="54"/>
+    <line x1="180" y1="34" x2="176" y2="48"/>
+    <line x1="210" y1="40" x2="206" y2="54"/>
+    <line x1="240" y1="46" x2="236" y2="60"/>
+    <line x1="120" y1="60" x2="116" y2="74"/>
+    <line x1="270" y1="58" x2="266" y2="72"/>
+  </g>
+  <!-- the throw: water leaves the eave tip (x=290) and arcs OUTWARD, bulging well
+       past the wall base (wall right face x=242) before landing at x≈312 — clearly
+       "thrown clear", not running down the wall corner -->
+  <path d="M290 122 Q330 220 312 296"
+        fill="none" stroke="#5b86a8" stroke-width="2.4" stroke-dasharray="2 6"
+        stroke-linecap="round" opacity="0.9"/>
+  <!-- a few drops along the throw arc -->
+  <g fill="#5b86a8" opacity="0.9">
+    <ellipse cx="312" cy="175" rx="2.4" ry="4" />
+    <ellipse cx="322" cy="225" rx="2.4" ry="4" />
+    <ellipse cx="316" cy="268" rx="2.4" ry="4" />
+  </g>
+  <!-- splash where it lands, well clear of the wall base -->
+  <g stroke="#5b86a8" stroke-width="2" stroke-linecap="round" opacity="0.85">
+    <line x1="312" y1="298" x2="306" y2="291"/>
+    <line x1="312" y1="298" x2="318" y2="291"/>
+    <line x1="312" y1="298" x2="312" y2="289"/>
+  </g>
+  <!-- dry-zone bracket along the wall base showing the water misses it -->
+  <path d="M246 301 q26 -7 52 -1" fill="none" stroke="#5b86a8" stroke-width="1.6"
+        stroke-dasharray="3 4" opacity="0.7"/>
+</svg>
