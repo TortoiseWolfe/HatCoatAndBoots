@@ -126,3 +126,68 @@ jobs:
             playwright-report/
             test-results/
           retention-days: 7
+
+  static-e2e:
+    name: Static E2E
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    # Non-gating for now: this runs the backend-free mobile/UX/a11y/theme/pwa
+    # specs against the stable static export (the 320px overflow blockers are
+    # fixed, #17). Kept continue-on-error until one clean CI run confirms the
+    # full set is green on `serve out`, then it graduates to a blocking gate.
+    continue-on-error: true
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.16.1
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+          cache: 'pnpm'
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: book-e2e-build
+          path: out/
+      - name: Install Playwright (chromium only)
+        run: |
+          for i in 1 2 3; do
+            pnpm exec playwright install --with-deps chromium && break
+            echo "Retry $i: playwright install failed, retrying in 10s..."
+            sleep 10
+          done
+      - name: Start static server
+        run: |
+          set -euo pipefail
+          npx serve out -l 3000 > serve.log 2>&1 &
+          SERVE_PID=$!
+          sleep 2
+          if ! kill -0 "$SERVE_PID" 2>/dev/null; then
+            echo "::error::serve exited early"; cat serve.log || true; exit 1
+          fi
+          if ! npx wait-on http://localhost:3000 --timeout 60000 --verbose; then
+            echo "::error::wait-on timed out"; cat serve.log || true; exit 1
+          fi
+      - name: Run static E2E (no Supabase, no auth)
+        run: pnpm exec playwright test --project=static --no-deps --reporter=list
+        env:
+          CI: 'true'
+          BOOK_E2E: '1'
+          SKIP_WEBSERVER: 'true'
+          BASE_URL: http://localhost:3000
+      - name: Upload report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: static-e2e-report
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 7
