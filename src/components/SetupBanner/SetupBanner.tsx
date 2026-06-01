@@ -97,7 +97,9 @@ export function SetupBanner({
       <button
         type="button"
         onClick={handleDismiss}
-        className="btn btn-sm btn-ghost"
+        // min-h-11/min-w-11 = 44px so it meets the mobile touch-target minimum
+        // (btn-sm alone is 32px and fails the a11y touch-target E2E specs).
+        className="btn btn-ghost btn-sm min-h-11 min-w-11"
         aria-label="Dismiss setup banner"
       >
         <svg
