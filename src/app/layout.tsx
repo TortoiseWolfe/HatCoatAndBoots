@@ -125,7 +125,11 @@ export default function RootLayout({
             <AccessibilityProvider>
               <GlobalNav />
               <CountdownBanner />
-              <SetupBanner />
+              {/* This is a kids' book site, not a Supabase app — the
+                  "configure Supabase" dev banner has no place on the public
+                  pages. (The auth/messaging demo features still work if a fork
+                  wires up Supabase; they just don't nag the reader.) */}
+              <SetupBanner show={false} />
               <ErrorBoundary level="page">
                 <div className="bg-base-200 min-h-0 flex-1 overflow-hidden pb-14">
                   {children}
