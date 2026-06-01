@@ -1,35 +1,18 @@
-import Link from 'next/link';
 import type { Metadata } from 'next';
-import { LayeredHatCoatAndBootsLogo } from '@/components/atomic/SpinningLogo';
-import { AnimatedLogo } from '@/components/atomic/AnimatedLogo';
-import { detectedConfig } from '@/config/project-detected';
-import { chapters } from '@/components/architecture/manifests/chapters';
+import ErrorBoundary from '@/components/ErrorBoundary';
+import HomeViewer from '@/components/architecture/HatViewer/HomeViewer';
 
-// ── The book's front door. Audience is a curious reader (ages 13–18) — and
-//     anyone who lands on the site. The home page IS the book's cover: the
-//     Hats-Coats-Boots premise, then a clear way into the chapters. Server
-//     component; the spinning logo + animated title are 'use client' islands.
+// ── The home page IS the book. You land inside the shared building viewer — the
+//     interactive blueprint dominates the screen, full-bleed. A one-line hook,
+//     then the building: chapter-focus tabs to navigate, guided views to step
+//     the lesson, per-layer toggles to take it apart. (FR-007 + wireframe
+//     01-book-index — the index is the same viewer in its landing state.)
+//     Server component; HomeViewer is the 'use client' island.
 
 export const metadata: Metadata = {
-  title: 'Hats, Coats, and Boots — a book on building with nature',
+  title: 'Hats, Coats, and Boots — an interactive book on building with nature',
   description:
-    'Why does a good building wear a hat, a coat, and boots? An illustrated, interactive book on sustainable natural building — start with the Hat: the roof overhang.',
-};
-
-// One-line "what this part does" for each chapter, keyed to the registry.
-const CHAPTER_BLURB: Record<string, { tagline: string; body: string }> = {
-  hat: {
-    tagline: 'the roof overhang',
-    body: 'A generous eave blocks the high summer sun, lets in the low winter sun, and throws rain clear of the wall — comfort for free, no machines.',
-  },
-  coat: {
-    tagline: 'the insulated walls',
-    body: 'The thermal envelope that keeps warmth in and weather out — how a building stays comfortable through the seasons.',
-  },
-  boots: {
-    tagline: 'the foundation',
-    body: 'What lifts the structure off the wet ground and keeps it standing dry, year after year.',
-  },
+    'Take the building apart layer by layer. An interactive, illustrated book on sustainable natural building — why a good building wears a hat (roof overhang), a coat (insulated walls), and boots (a dry foundation).',
 };
 
 export default function Home() {
@@ -43,143 +26,29 @@ export default function Home() {
         Skip to main content
       </a>
 
-      {/* ── Hero: the premise ───────────────────────────────────────────── */}
+      {/* Full-bleed: the viewer fills the screen. Only a slim padding so the
+          building dominates edge to edge. */}
       <section
         id="main-content"
         aria-labelledby="hero-heading"
-        className="mx-auto w-full max-w-6xl flex-1 px-4 py-16 sm:px-6 lg:px-8 lg:py-24"
+        className="flex w-full flex-1 flex-col px-3 py-4 sm:px-4 lg:px-6"
       >
-        <div className="flex flex-col items-center gap-8 lg:flex-row lg:gap-16">
-          <div className="flex-shrink-0">
-            <div className="h-48 w-48 sm:h-52 sm:w-52 md:h-56 md:w-56 lg:h-[350px] lg:w-[350px]">
-              <LayeredHatCoatAndBootsLogo speed="slow" pauseOnHover />
-            </div>
-          </div>
-
-          <div className="text-center lg:text-left">
-            <h1 id="hero-heading" className="mb-4 sm:mb-6">
-              <AnimatedLogo
-                text={detectedConfig.projectName}
-                className="!text-2xl font-bold sm:!text-3xl md:!text-5xl lg:!text-6xl"
-                animationSpeed="normal"
-              />
-            </h1>
-
-            <p
-              className="text-base-content/90 mb-3 text-xl font-semibold sm:text-2xl"
-              style={{ fontFamily: 'var(--font-blueprint)' }}
-            >
-              Why does a good building wear a hat, a coat, and boots?
-            </p>
-
-            <p className="text-base-content/80 mb-8 max-w-2xl text-lg leading-relaxed">
-              An interactive, illustrated book on building with nature instead
-              of against it. Each chapter is a living blueprint you can take
-              apart one layer at a time — to see <em>why</em> the old,
-              low-energy ways of building actually work. Start with the Hat: the
-              roof overhang that cools you in summer and warms you in winter,
-              with no machines at all.
-            </p>
-
-            <nav
-              aria-label="Primary actions"
-              className="flex flex-col items-center gap-4 sm:flex-row lg:items-start"
-            >
-              <Link
-                href="/book/hat"
-                className="btn btn-primary btn-lg min-h-11 min-w-11"
-              >
-                Start reading: the Hat
-              </Link>
-              <Link
-                href="/book"
-                className="link link-hover text-base-content inline-flex min-h-11 items-center gap-2 text-sm"
-              >
-                or browse all chapters
-                <span aria-hidden="true">→</span>
-              </Link>
-            </nav>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Chapter cards ───────────────────────────────────────────────── */}
-      <section
-        aria-label="Chapters"
-        className="px-4 pt-4 pb-16 sm:px-6 lg:px-8"
-      >
-        <div className="mx-auto flex max-w-6xl flex-col gap-6">
-          <h2
-            className="text-center text-2xl font-bold sm:text-left"
+        <div className="mb-3 text-center">
+          <h1
+            id="hero-heading"
+            className="text-2xl leading-tight font-bold sm:text-3xl"
             style={{ fontFamily: 'var(--font-blueprint)' }}
           >
-            The three chapters
-          </h2>
-
-          <ul className="grid grid-cols-1 gap-4 md:grid-cols-3">
-            {chapters.map((chapter) => {
-              const blurb = CHAPTER_BLURB[chapter.id];
-              const card = (
-                <>
-                  <div className="card-body gap-2 p-6">
-                    <div className="flex items-center justify-between">
-                      <h3
-                        className="card-title text-2xl"
-                        style={{ fontFamily: 'var(--font-blueprint)' }}
-                      >
-                        The {chapter.label}
-                      </h3>
-                      {chapter.available ? (
-                        <span className="badge badge-primary badge-sm">
-                          Read now
-                        </span>
-                      ) : (
-                        // badge-neutral (not badge-ghost) so "Coming soon" meets
-                        // AAA 7:1 contrast on the light theme (#21/AAA gate).
-                        <span className="badge badge-neutral badge-sm">
-                          Coming soon
-                        </span>
-                      )}
-                    </div>
-                    {/* full text-base-content (no /70 opacity) for AAA 7:1 */}
-                    <p className="text-base-content text-sm font-medium">
-                      {blurb.tagline}
-                    </p>
-                    <p className="text-base-content/80 text-sm leading-relaxed">
-                      {blurb.body}
-                    </p>
-                  </div>
-                </>
-              );
-
-              return (
-                <li key={chapter.id}>
-                  {chapter.available ? (
-                    <Link
-                      href={chapter.href}
-                      className="card bg-base-100 border-base-300 focus-within:ring-primary block h-full border shadow-md transition-all focus-within:ring-2 hover:-translate-y-1 hover:shadow-lg"
-                    >
-                      {card}
-                    </Link>
-                  ) : (
-                    // No opacity dim — opacity-70 on the whole card drops the
-                    // text contrast below AAA 7:1. The "Coming soon" badge +
-                    // lighter border already signal the disabled state.
-                    <div className="card bg-base-100 border-base-300 h-full border shadow-sm">
-                      {card}
-                    </div>
-                  )}
-                </li>
-              );
-            })}
-          </ul>
-
-          <p className="text-base-content mx-auto max-w-2xl text-center text-sm leading-relaxed">
-            It’s one building, drawn once — every chapter just brings a
-            different part into focus. The best-designed things don’t only avoid
-            harm; they give something back, the way a tree gives shade.
+            Why does a good building wear a hat, a coat, and boots?
+          </h1>
+          <p className="text-base-content mt-1 text-sm">
+            Here’s the whole building — take it apart, one layer at a time.
           </p>
         </div>
+
+        <ErrorBoundary level="section">
+          <HomeViewer className="flex-1" />
+        </ErrorBoundary>
       </section>
     </main>
   );

@@ -21,6 +21,9 @@ export interface LayeredDiagramProps {
   onPresetChange?: (presetId: string) => void;
   /** When false the controls are inert (the index neutral state). */
   interactive?: boolean;
+  /** Max width of the central building stage (Tailwind class). Default 'max-w-xl';
+   *  the full-bleed index uses a larger cap so the building dominates. */
+  stageMaxWidthClass?: string;
   className?: string;
 }
 
@@ -70,6 +73,7 @@ export default function LayeredDiagram({
   initialPresetId,
   onPresetChange,
   interactive = true,
+  stageMaxWidthClass = 'max-w-xl',
   className = '',
 }: LayeredDiagramProps) {
   const startPreset = resolveInitialPreset(manifest, initialPresetId);
@@ -139,7 +143,7 @@ export default function LayeredDiagram({
       {/* CENTER: the building stage + labels overlay */}
       <div className="order-1 md:order-2">
         <div
-          className={`border-base-300 bg-base-100/60 relative mx-auto aspect-square w-full max-w-xl rounded-xl border ${
+          className={`border-base-300 bg-base-100/60 relative mx-auto aspect-square w-full ${stageMaxWidthClass} rounded-xl border ${
             reducedMotion ? '' : 'layer-stack--animated'
           }`}
         >
@@ -155,7 +159,7 @@ export default function LayeredDiagram({
             {manifest.labels.map((lbl) => (
               <span
                 key={lbl.id}
-                className="text-base-content/90 absolute -translate-y-1/2 text-[0.7rem] font-semibold whitespace-nowrap"
+                className="text-base-content absolute -translate-y-1/2 text-[0.7rem] font-semibold whitespace-nowrap"
                 style={{
                   left: `${(lbl.x / vbW) * 100}%`,
                   top: `${(lbl.y / vbH) * 100}%`,
