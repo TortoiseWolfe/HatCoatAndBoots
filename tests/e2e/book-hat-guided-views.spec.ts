@@ -1,4 +1,5 @@
-import { test, expect, type Page } from '@playwright/test';
+import { test, expect } from '@playwright/test';
+import { dismissCookieBanner } from './utils/test-user-factory';
 
 /**
  * T021 [US1] — the Hat chapter guided-view walkthrough.
@@ -7,6 +8,14 @@ import { test, expect, type Page } from '@playwright/test';
  * URL-hash write + reload-restore (FR-007a, H-1/H-2), unknown-hash fallback
  * (H-1, Edge Case), no-shift on view change (FR-006/SC-009), and the no-JS Hat
  * gate (FR-008/SC-002).
+ *
+ * Uses the canonical `dismissCookieBanner` helper (force-click + waits for the
+ * consent to persist to localStorage AND dismisses the promotional countdown
+ * banner). The hand-rolled version missed the countdown banner + persist wait,
+ * which let those overlays intercept the control clicks in CI (the slower,
+ * fresh-context runner) even though it passed against a warm local profile.
+ * `dismissCookieBanner` makes no Supabase calls, so it is safe in this
+ * backend-free lane.
  */
 
 const HAT = '/book/hat/';
@@ -21,20 +30,12 @@ const VIEWS = [
   },
 ];
 
-/** Dismiss the site cookie banner if present (it overlays the lower UI). */
-async function dismissCookies(page: Page) {
-  const accept = page.getByRole('button', { name: /accept all/i });
-  if (await accept.isVisible().catch(() => false)) {
-    await accept.click();
-  }
-}
-
 test.describe('Hat chapter — guided views', () => {
   test('steps through the 4 views with a matching explanation each', async ({
     page,
   }) => {
     await page.goto(HAT);
-    await dismissCookies(page);
+    await dismissCookieBanner(page);
     // The chapter's own explanation region (scoped — the page has other live regions).
     const live = page.getByTestId('guided-view-description');
 
@@ -49,7 +50,7 @@ test.describe('Hat chapter — guided views', () => {
     page,
   }) => {
     await page.goto(HAT);
-    await dismissCookies(page);
+    await dismissCookieBanner(page);
     await page.getByRole('radio', { name: 'One Roof, Two Seasons' }).click();
     await expect(page).toHaveURL(/#view=roof-line/);
 
@@ -61,7 +62,7 @@ test.describe('Hat chapter — guided views', () => {
 
   test('an unknown hash view falls back to Full Picture', async ({ page }) => {
     await page.goto(`${HAT}#view=bogus`);
-    await dismissCookies(page);
+    await dismissCookieBanner(page);
     await expect(
       page.getByRole('radio', { name: 'Full Picture' })
     ).toBeChecked();
@@ -71,7 +72,7 @@ test.describe('Hat chapter — guided views', () => {
     page,
   }) => {
     await page.goto(HAT);
-    await dismissCookies(page);
+    await dismissCookieBanner(page);
 
     // All layers are absolutely positioned in one shared box, so the wall and the
     // overhang occupy the SAME rectangle (registration). That invariant must hold
