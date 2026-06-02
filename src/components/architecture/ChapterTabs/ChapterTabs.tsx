@@ -28,7 +28,7 @@ export default function ChapterTabs({
 }: ChapterTabsProps) {
   return (
     <nav aria-label="Chapters" className={className}>
-      <h2 className="text-base-content mb-2 text-sm font-bold tracking-wide uppercase">
+      <h2 className="text-base-content mb-2 hidden text-sm font-bold tracking-wide uppercase md:block">
         Chapters
       </h2>
       <ul className="flex flex-col gap-2">
@@ -37,21 +37,22 @@ export default function ChapterTabs({
           const tagline = taglines[chapter.id];
           const inner = (
             <>
-              <span className="flex items-center justify-between gap-2">
+              <span className="flex items-center justify-between gap-1">
                 <span
-                  className="text-base font-semibold"
+                  className="text-sm font-semibold md:text-base"
                   style={{ fontFamily: 'var(--font-blueprint)' }}
                 >
                   The {chapter.label}
                 </span>
                 {!chapter.available && (
-                  <span className="badge badge-neutral badge-sm shrink-0">
+                  <span className="badge badge-neutral badge-sm hidden shrink-0 md:inline-flex">
                     Soon
                   </span>
                 )}
               </span>
+              {/* Tagline is supplementary — hidden on the narrow mobile column. */}
               {tagline && (
-                <span className="text-base-content mt-0.5 block text-xs leading-snug">
+                <span className="text-base-content mt-0.5 hidden text-xs leading-snug md:block">
                   {tagline}
                 </span>
               )}
@@ -59,7 +60,7 @@ export default function ChapterTabs({
           );
 
           const base =
-            'block rounded-lg border px-3 py-2 text-left transition-colors';
+            'block rounded-lg border px-2 py-2 text-left transition-colors md:px-3';
           const state = active
             ? 'border-primary bg-primary/15'
             : 'border-base-300 bg-base-100 hover:bg-base-200';

@@ -85,10 +85,14 @@ export default function LayerToggles({
             }}
             type="button"
             aria-pressed={pressed}
+            // On mobile the column is too narrow for the text label, so the
+            // button is an icon chip; the name is still announced via aria-label.
+            aria-label={layer.label}
+            title={layer.label}
             tabIndex={i === tabStopIndex ? 0 : -1}
             onClick={() => onToggle(layer.id)}
             onKeyDown={(e) => handleKeyDown(e, i)}
-            className={`flex min-h-11 min-w-11 items-center gap-2 rounded-md border px-3 py-2 text-left text-sm transition-colors ${
+            className={`flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-md border px-0 py-2 text-left text-sm transition-colors md:justify-start md:px-3 ${
               pressed
                 ? 'border-primary bg-primary/15 text-base-content'
                 : 'border-base-300 bg-base-200/40 text-base-content'
@@ -100,7 +104,7 @@ export default function LayerToggles({
                 pressed ? 'border-primary bg-primary' : 'border-base-content/40'
               }`}
             />
-            {layer.label}
+            <span className="hidden md:inline">{layer.label}</span>
           </button>
         );
       })}

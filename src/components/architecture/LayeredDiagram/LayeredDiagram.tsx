@@ -179,13 +179,17 @@ export default function LayeredDiagram({
     // is no static intro and no duplicate prose: the band IS the chapter text for
     // the current view, so the whole spread reads in one screen with no scroll.
     <div className={`flex min-h-0 flex-col gap-4 ${className}`}>
-      <div className="flex min-h-0 flex-row flex-wrap items-start gap-4 lg:flex-nowrap">
-        {/* LEFT (~25%): chapter nav (slim) → the guided-view plates. */}
-        <div className="order-2 flex w-full min-w-0 flex-col gap-3 md:w-[48%] lg:order-1 lg:w-1/4">
+      {/* Horizontal at EVERY width: nowrap so the spread never stacks vertically
+          on phones. Base mobile widths ~26/48/26 keep all three columns on one
+          screen with no horizontal scroll; md/lg widen them to 48/–/48 then the
+          true 25/55/20. gap shrinks on mobile to buy column width. */}
+      <div className="flex min-h-0 flex-row flex-nowrap items-start gap-2 sm:gap-3 lg:gap-4">
+        {/* LEFT: chapter nav (slim) → the guided-view plates. */}
+        <div className="order-1 flex w-[26%] min-w-0 flex-col gap-3 md:w-[24%] lg:w-1/4">
           {leftRail}
           {interactive && (
             <div>
-              <h2 className="text-base-content mb-2 text-xs font-bold tracking-wider uppercase">
+              <h2 className="text-base-content mb-2 hidden text-xs font-bold tracking-wider uppercase md:block">
                 Guided views
               </h2>
               <GuidedViews
@@ -197,11 +201,13 @@ export default function LayeredDiagram({
           )}
         </div>
 
-        {/* CENTRE (~55%): the building. Anchored top so its y never depends on
-            the rails' height (keeps it byte-identical across pages). */}
-        <div className="order-1 flex w-full min-w-0 flex-col items-center md:order-first md:w-full lg:order-2 lg:w-[55%]">
+        {/* CENTRE: the building. Top-anchored so its y never depends on the
+            rails' height (keeps it byte-identical across pages). On mobile it is
+            width-capped (not height-capped) so it shrinks with its ~48% column
+            and never overflows the screen; ≥lg the 68vh height cap takes over. */}
+        <div className="order-2 flex w-[48%] min-w-0 flex-col items-center md:w-[52%] lg:w-[55%]">
           <div
-            className={`border-base-300 bg-base-100/60 relative aspect-square max-h-[68vh] w-full max-w-[68vh] rounded-xl border ${
+            className={`border-base-300 bg-base-100/60 relative aspect-square w-full max-w-full rounded-xl border lg:max-h-[68vh] lg:max-w-[68vh] ${
               reducedMotion ? '' : 'layer-stack--animated'
             }`}
           >
@@ -233,12 +239,12 @@ export default function LayeredDiagram({
         {/* RIGHT (20%): per-layer toggles → reset → "how to read it" legend. The
           legend keys the drawing's invisible-physics marks and fills the column
           beside the building's lower third, balancing the left-hand narrative. */}
-        <div className="order-3 flex w-full min-w-0 flex-col gap-3 md:w-[48%] lg:w-1/5">
+        <div className="order-3 flex w-[26%] min-w-0 flex-col gap-3 md:w-[24%] lg:w-1/5">
           {rightRail}
           {interactive && (
             <>
               <div>
-                <h2 className="text-base-content mb-2 text-xs font-bold tracking-wider uppercase">
+                <h2 className="text-base-content mb-2 hidden text-xs font-bold tracking-wider uppercase md:block">
                   Layer controls
                 </h2>
                 <LayerToggles
@@ -251,16 +257,23 @@ export default function LayeredDiagram({
                 type="button"
                 onClick={() => selectPreset(manifest.defaultPresetId)}
                 aria-disabled={activePresetId === manifest.defaultPresetId}
-                className={`border-base-300 text-base-content min-h-11 rounded-md border px-3 py-2 text-sm font-medium transition-colors ${
+                aria-label="Rebuild the whole building"
+                title="Rebuild the whole building"
+                className={`border-base-300 text-base-content flex min-h-11 items-center justify-center rounded-md border px-0 py-2 text-sm font-medium transition-colors md:justify-start md:px-3 ${
                   activePresetId === manifest.defaultPresetId
                     ? 'bg-base-200/40 cursor-not-allowed'
                     : 'bg-base-100 hover:bg-base-200'
                 }`}
               >
-                ↺ Rebuild the whole building
+                <span aria-hidden="true">↺</span>
+                <span className="ml-1 hidden md:inline">
+                  Rebuild the whole building
+                </span>
               </button>
 
-              <div className="border-base-300 mt-1 border-t pt-3">
+              {/* The legend is supplementary; hide it below md so the narrow
+                  mobile column stays short (the narrative band carries the lesson). */}
+              <div className="border-base-300 mt-1 hidden border-t pt-3 md:block">
                 <h2 className="text-base-content mb-2 text-xs font-bold tracking-wider uppercase">
                   How to read it
                 </h2>
