@@ -73,11 +73,10 @@ test.describe('Theme Switching', () => {
   });
 
   test('theme switcher is accessible from homepage', async ({ page }) => {
-    await page.goto('/', { waitUntil: 'domcontentloaded' });
+    // The homepage is now the book viewer (no "32 Themes" stats card); the full
+    // theme selector lives on the /themes page.
+    await page.goto('/themes', { waitUntil: 'domcontentloaded' });
     await dismissCookieBanner(page);
-
-    // Navigate to themes page via the 32 Themes stats link
-    await page.getByRole('link', { name: '32 Themes' }).first().click();
     await expect(page).toHaveURL(/.*themes/);
 
     // Check that theme buttons are visible

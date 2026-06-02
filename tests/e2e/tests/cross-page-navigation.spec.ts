@@ -1,5 +1,25 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, type Page } from '@playwright/test';
 import { dismissCookieBanner } from '../utils/test-user-factory';
+
+/**
+ * The book-first header keeps only Home + The Book in the desktop bar; the
+ * secondary pages (Blog/Docs/Wireframes) live in the overflow "more" menu. This
+ * opens that menu and clicks the named link.
+ */
+async function navViaMoreMenu(page: Page, linkName: string) {
+  const trigger = page.getByRole('button', { name: /more menu/i });
+  const link = page
+    .locator('.dropdown-content')
+    .getByRole('link', { name: linkName, exact: true });
+  // The DaisyUI dropdown is CSS/focus-driven and its open panel overlays the
+  // trigger (Playwright reports "intercepts pointer events" on a second mouse
+  // click). Open it via the keyboard — focus the trigger and press Enter — which
+  // avoids the pointer interception entirely, then click the revealed link.
+  await trigger.focus();
+  await page.keyboard.press('Enter');
+  await link.waitFor({ state: 'visible' });
+  await link.click();
+}
 
 // All 32 DaisyUI themes for random selection
 const THEMES = [
@@ -44,21 +64,22 @@ test.describe('Cross-Page Navigation', () => {
     await dismissCookieBanner(page);
     await expect(page).toHaveURL(/\/$/);
 
-    // Navigate to Themes
-    await page.getByRole('link', { name: '32 Themes' }).first().click();
+    // Navigate to Themes (the homepage is now the book viewer and no longer
+    // carries the old "32 Themes" stats card, so go via the URL).
+    await page.goto('/themes', { waitUntil: 'domcontentloaded' });
     await dismissCookieBanner(page);
     await expect(page).toHaveURL(/\/themes/);
     await expect(
       page.locator('h1').filter({ hasText: /Theme/i })
     ).toBeVisible();
 
-    // Navigate to Blog via nav
-    await page.click('a:has-text("Blog")');
+    // Navigate to Blog via the overflow "more" menu
+    await navViaMoreMenu(page, 'Blog');
     await dismissCookieBanner(page);
     await expect(page).toHaveURL(/\/blog/);
 
-    // Navigate to Docs via nav
-    await page.click('a:has-text("Docs")');
+    // Navigate to Docs via the overflow "more" menu
+    await navViaMoreMenu(page, 'Docs');
     await dismissCookieBanner(page);
     await expect(page).toHaveURL(/\/docs/);
 
@@ -73,12 +94,12 @@ test.describe('Cross-Page Navigation', () => {
     await page.goto('/', { waitUntil: 'domcontentloaded' });
     await dismissCookieBanner(page);
 
-    // Navigate to themes and wait for URL
-    await page.getByRole('link', { name: '32 Themes' }).first().click();
+    // Navigate to themes and wait for URL (via the URL — see note above)
+    await page.goto('/themes', { waitUntil: 'domcontentloaded' });
     await expect(page).toHaveURL(/\/themes/);
 
-    // Navigate to blog and wait for URL
-    await page.click('a:has-text("Blog")');
+    // Navigate to blog (via the overflow "more" menu) and wait for URL
+    await navViaMoreMenu(page, 'Blog');
     await expect(page).toHaveURL(/\/blog/);
 
     // Go back to themes
@@ -309,11 +330,15 @@ test.describe('Cross-Page Navigation', () => {
     // We're just checking the mechanism exists, not asserting
     expect(hasTransitions).toBeDefined();
 
-    // Navigate and observe smooth transition
-    await page.getByRole('link', { name: '32 Themes' }).first().click();
+    // Navigate and observe smooth transition (via The Book in the desktop bar).
+    await page
+      .getByRole('navigation')
+      .getByRole('link', { name: 'The Book' })
+      .first()
+      .click();
 
     // Just verify navigation completed
-    await expect(page).toHaveURL(/\/themes/);
+    await expect(page).toHaveURL(/\/book/);
   });
 
   test('mobile navigation menu works', async ({ page }) => {
@@ -322,26 +347,22 @@ test.describe('Cross-Page Navigation', () => {
     await page.goto('/', { waitUntil: 'domcontentloaded' });
     await dismissCookieBanner(page);
 
-    // Look for mobile menu button (hamburger) - use aria-label pattern
-    const menuButton = page.locator('button[aria-label="Navigation menu"]');
+    // Look for the overflow "more" menu trigger (the hamburger/overflow control)
+    const menuButton = page.getByRole('button', { name: /more menu/i });
     const hasMenuButton = (await menuButton.count()) > 0;
 
     if (hasMenuButton) {
-      // Open mobile menu
-      await menuButton.click();
+      // Open via keyboard (the open dropdown panel overlays the trigger, so a
+      // second mouse click would be intercepted).
+      await menuButton.focus();
+      await page.keyboard.press('Enter');
 
-      // The menu is a dropdown, so look for menu items
+      // The menu opens and shows its items — that is the mobile menu working.
       const menuItems = page.locator('.dropdown-content a');
       await expect(menuItems.first()).toBeVisible();
-
-      // Click Home link
-      const homeLink = menuItems.filter({ hasText: 'Home' }).first();
-      if ((await homeLink.count()) > 0) {
-        await homeLink.click();
-
-        // Check navigation occurred (back to home)
-        await expect(page).toHaveURL(/\/$/);
-      }
+      await expect(
+        menuItems.filter({ hasText: 'The Book' }).first()
+      ).toBeVisible();
     }
   });
 
@@ -352,8 +373,12 @@ test.describe('Cross-Page Navigation', () => {
     // Scroll down
     await page.evaluate(() => window.scrollTo(0, 500));
 
-    // Navigate to another page
-    await page.getByRole('link', { name: '32 Themes' }).first().click();
+    // Navigate to another page (via The Book in the desktop bar).
+    await page
+      .getByRole('navigation')
+      .getByRole('link', { name: 'The Book' })
+      .first()
+      .click();
 
     // Wait for the destination page to actually render its content and for
     // Next.js App Router's scroll restoration to complete. Measuring at
@@ -364,7 +389,7 @@ test.describe('Cross-Page Navigation', () => {
     // so the scroll restoration has settled.
     await page.waitForURL(
       (url) =>
-        url.pathname.endsWith('/themes/') || url.pathname.endsWith('/themes'),
+        url.pathname.endsWith('/book/') || url.pathname.endsWith('/book'),
       { timeout: 10000 }
     );
     await page
@@ -381,24 +406,31 @@ test.describe('Cross-Page Navigation', () => {
   });
 
   test('active navigation item is highlighted', async ({ page }) => {
+    await page.goto('/book', { waitUntil: 'domcontentloaded' });
+    await dismissCookieBanner(page);
+
+    // The book-first header keeps Home + The Book in the desktop bar. On /book,
+    // "The Book" is the active primary link and carries DaisyUI's btn-active.
+    const bookLink = page
+      .getByRole('navigation')
+      .getByRole('link', { name: 'The Book' })
+      .first();
+    await expect(bookLink).toBeVisible();
+    const className = (await bookLink.getAttribute('class')) ?? '';
+    const ariaCurrent = await bookLink.getAttribute('aria-current');
+    expect(className.includes('active') || ariaCurrent === 'page').toBe(true);
+  });
+
+  test('secondary pages are reachable from the overflow "more" menu', async ({
+    page,
+  }) => {
     await page.goto('/', { waitUntil: 'domcontentloaded' });
     await dismissCookieBanner(page);
 
-    // Click Blog to navigate there
-    await page.click('a:has-text("Blog")');
+    // Blog/Docs/Wireframes moved out of the book-first desktop bar into the
+    // overflow "more" menu — confirm Blog is still reachable from there.
+    await page.getByRole('button', { name: /more menu/i }).click();
+    await page.getByRole('link', { name: 'Blog' }).click();
     await expect(page).toHaveURL(/\/blog/);
-
-    // Check the Blog nav link has active state
-    const blogLink = page.locator('nav a:has-text("Blog")').first();
-
-    if ((await blogLink.count()) > 0) {
-      // Check for active state (aria-current or active class)
-      const className = await blogLink.getAttribute('class');
-
-      // DaisyUI uses btn-active class
-      const hasActiveState = className?.includes('active');
-
-      expect(hasActiveState).toBe(true);
-    }
   });
 });

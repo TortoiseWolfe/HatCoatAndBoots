@@ -339,6 +339,7 @@ export function GlobalNav() {
             <div className="dropdown dropdown-end">
               <label
                 tabIndex={0}
+                role="button"
                 className="btn btn-ghost btn-circle min-h-11 min-w-11"
                 aria-label="More menu"
               >
