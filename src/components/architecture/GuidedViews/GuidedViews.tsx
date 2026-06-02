@@ -75,16 +75,23 @@ export default function GuidedViews({
               type="button"
               role="radio"
               aria-checked={checked}
+              // On mobile the column is too narrow for the full label, so the
+              // chip shows the step number; the name is announced via aria-label.
+              aria-label={preset.label}
+              title={preset.label}
               tabIndex={i === tabStopIndex ? 0 : -1}
               onClick={() => onSelect(preset.id)}
               onKeyDown={(e) => handleKeyDown(e, i)}
-              className={`min-h-11 w-full rounded-lg border px-3 py-2 text-left text-sm font-medium transition-colors ${
+              className={`flex min-h-11 w-full items-center justify-center rounded-lg border px-0 py-2 text-center text-sm font-medium transition-colors md:justify-start md:px-3 md:text-left ${
                 checked
                   ? 'border-primary bg-primary/15 text-base-content'
                   : 'border-base-300 bg-base-200/40 text-base-content hover:bg-base-200'
               }`}
             >
-              {preset.label}
+              <span aria-hidden="true" className="md:hidden">
+                {i + 1}
+              </span>
+              <span className="hidden md:inline">{preset.label}</span>
             </button>
           );
         })}
