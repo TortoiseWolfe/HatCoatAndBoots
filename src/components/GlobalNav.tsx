@@ -337,7 +337,10 @@ export function GlobalNav() {
             {/* Overflow "more" menu — shown at ALL sizes now (the desktop bar is
                 book-minimal, so Blog/Docs/Wireframes + Account live here). */}
             <div className="dropdown dropdown-end">
-              <label
+              {/* A div (not a label) carries role="button": axe's
+                  aria-allowed-role rejects role="button" on a <label>. DaisyUI's
+                  dropdown opens on focus of this trigger all the same. */}
+              <div
                 tabIndex={0}
                 role="button"
                 className="btn btn-ghost btn-circle min-h-11 min-w-11"
@@ -357,7 +360,7 @@ export function GlobalNav() {
                     d="M4 6h16M4 12h16M4 18h16"
                   />
                 </svg>
-              </label>
+              </div>
               <ul
                 tabIndex={0}
                 className="menu menu-sm dropdown-content bg-base-100 rounded-box -right-2 z-[1] mt-3 w-40 max-w-[calc(100vw-4rem)] p-2 shadow sm:w-44"
