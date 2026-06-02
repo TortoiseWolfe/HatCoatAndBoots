@@ -30,7 +30,6 @@ export default function GuidedViews({
   className = '',
 }: GuidedViewsProps) {
   const refs = useRef<Array<HTMLButtonElement | null>>([]);
-  const active = presets.find((p) => p.id === activePresetId);
 
   function focusAt(index: number) {
     const count = presets.length;
@@ -90,14 +89,6 @@ export default function GuidedViews({
           );
         })}
       </div>
-
-      <p
-        aria-live="polite"
-        data-testid="guided-view-description"
-        className="text-base-content mt-3 text-sm leading-relaxed"
-      >
-        {active?.description ?? ''}
-      </p>
     </div>
   );
 }

@@ -53,9 +53,11 @@ test.describe('Homepage — the interactive book viewer', () => {
     page,
   }) => {
     const live = page.getByTestId('guided-view-description');
-    await page.getByRole('radio', { name: 'No Roof Yet' }).click();
+    await page
+      .getByRole('radio', { name: 'The Problem: Summer Glare' })
+      .click();
     await expect(
-      page.getByRole('radio', { name: 'No Roof Yet' })
+      page.getByRole('radio', { name: 'The Problem: Summer Glare' })
     ).toBeChecked();
     await expect(live).toContainText(/no overhang at all/i);
   });

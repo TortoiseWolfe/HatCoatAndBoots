@@ -122,6 +122,7 @@ export default function LayeredDiagram({
   }
 
   const labelsVisible = visibleIds.has('labels');
+  const activePreset = manifest.presets.find((p) => p.id === activePresetId);
   const stack = useMemo(
     () => renderLayerStack(manifest.layers, visibleIds),
     [manifest.layers, visibleIds]
@@ -131,21 +132,23 @@ export default function LayeredDiagram({
   const [, , vbW, vbH] = manifest.viewBox.split(/\s+/).map(Number);
 
   return (
-    // THCB's three-column layout: flex 25% | 55% | 20%, side-by-side on desktop
-    // so the presets, building, and toggles are ALL visible in one screen. At
-    // <lg (≈1024px) it wraps to two columns (rails ~half each, building full-
-    // width on top); at <md (768px) it stacks. The building is NOT aspect-square
-    // — it fills its column's height — so it can never grow taller than the row
-    // and push the controls below the fold.
+    // The drafting bench: three columns side-by-side — plate selector (left) |
+    // the drawing + its caption (centre) | the parts checklist (right). Flex
+    // 25/55/20 (THCB), nowrap ≥lg so presets + building + toggles are ALL in one
+    // screen. Each rail is TOP-aligned (items-start) — never stretched — so a
+    // short rail leaves no dead space, and the building's y never depends on rail
+    // height (keeps it byte-identically aligned across pages). At <lg it wraps to
+    // two columns (building full-width on top); at <md it stacks.
     <div
-      className={`flex min-h-0 flex-row flex-wrap items-stretch gap-4 lg:flex-nowrap ${className}`}
+      className={`flex min-h-0 flex-row flex-wrap items-start gap-4 lg:flex-nowrap ${className}`}
     >
-      {/* LEFT (25%): chapter content (tabs + intro) above the guided views */}
-      <div className="order-2 flex w-full min-w-0 flex-col gap-4 md:w-[48%] lg:order-1 lg:w-1/4">
+      {/* LEFT (25%): chapter nav (slim) THEN the guided-view plates first — the
+          primary control sits at the top of the column, never below long copy. */}
+      <div className="order-2 flex w-full min-w-0 flex-col gap-3 md:w-[48%] lg:order-1 lg:w-1/4">
         {leftRail}
         {interactive && (
           <div>
-            <h2 className="text-base-content mb-2 text-sm font-bold tracking-wide uppercase">
+            <h2 className="text-base-content mb-2 text-xs font-bold tracking-wider uppercase">
               Guided views
             </h2>
             <GuidedViews
@@ -157,12 +160,12 @@ export default function LayeredDiagram({
         )}
       </div>
 
-      {/* CENTER (55%): the building — anchored to the TOP of the row so its
-          vertical position never depends on how tall the side rails are (keeps
-          the building byte-identically aligned across pages). */}
-      <div className="order-1 flex w-full min-w-0 items-start justify-center md:order-first md:w-full lg:order-2 lg:w-[55%]">
+      {/* CENTER (55%): the building, then its caption directly beneath it. The
+          caption is the aria-live preset description — it belongs under the
+          drawing it describes, and moving it here keeps the side rails short. */}
+      <div className="order-1 flex w-full min-w-0 flex-col items-center gap-2 md:order-first md:w-full lg:order-2 lg:w-[55%]">
         <div
-          className={`border-base-300 bg-base-100/60 relative mx-auto aspect-square h-full max-h-[78vh] w-full max-w-[78vh] rounded-xl border ${
+          className={`border-base-300 bg-base-100/60 relative aspect-square max-h-[68vh] w-full max-w-[68vh] rounded-xl border ${
             reducedMotion ? '' : 'layer-stack--animated'
           }`}
         >
@@ -189,22 +192,60 @@ export default function LayeredDiagram({
             ))}
           </div>
         </div>
+
+        {/* Caption plate: what you're looking at right now — a titled card under
+            the drawing, like the caption block under a drafting plate. aria-live
+            so the view change is announced; line-clamped to keep the one-screen
+            layout (the full text is in the chapter prose below the viewer). */}
+        {interactive && activePreset?.description && (
+          <figcaption
+            aria-live="polite"
+            data-testid="guided-view-description"
+            className="border-base-300 bg-base-100/70 mx-auto w-full max-w-md rounded-lg border px-4 py-3 text-center"
+          >
+            <span
+              className="text-base-content block text-sm font-bold tracking-wide"
+              style={{ fontFamily: 'var(--font-blueprint)' }}
+            >
+              {activePreset.label}
+            </span>
+            <span className="text-base-content mt-1 line-clamp-3 block text-sm leading-relaxed">
+              {activePreset.description}
+            </span>
+          </figcaption>
+        )}
       </div>
 
-      {/* RIGHT (20%): language stub + per-layer toggles */}
-      <div className="order-3 flex w-full min-w-0 flex-col gap-4 md:w-[48%] lg:w-1/5">
+      {/* RIGHT (20%): language stub + per-layer toggles (top-aligned, snug),
+          then a reset that rebuilds the full view — useful after taking parts
+          away, and it gives the column a purposeful footer. */}
+      <div className="order-3 flex w-full min-w-0 flex-col gap-3 md:w-[48%] lg:w-1/5">
         {rightRail}
         {interactive && (
-          <div>
-            <h2 className="text-base-content mb-2 text-sm font-bold tracking-wide uppercase">
-              Layer controls
-            </h2>
-            <LayerToggles
-              layers={manifest.layers}
-              visibleIds={visibleIds}
-              onToggle={toggleLayer}
-            />
-          </div>
+          <>
+            <div>
+              <h2 className="text-base-content mb-2 text-xs font-bold tracking-wider uppercase">
+                Layer controls
+              </h2>
+              <LayerToggles
+                layers={manifest.layers}
+                visibleIds={visibleIds}
+                onToggle={toggleLayer}
+              />
+            </div>
+            <button
+              type="button"
+              onClick={() => selectPreset(manifest.defaultPresetId)}
+              aria-disabled={activePresetId === manifest.defaultPresetId}
+              className={`border-base-300 text-base-content min-h-11 rounded-md border px-3 py-2 text-sm font-medium transition-colors ${
+                activePresetId === manifest.defaultPresetId
+                  ? 'bg-base-200/40 cursor-not-allowed'
+                  : 'bg-base-100 hover:bg-base-200'
+              }`}
+            >
+              ↺ Rebuild the whole building
+            </button>
+          </>
         )}
       </div>
     </div>

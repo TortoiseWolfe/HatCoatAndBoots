@@ -66,26 +66,31 @@ export default function BookShell({
     window.history.replaceState(null, '', url);
   }
 
+  // The rail carries ONLY the chapter nav — kept short so the guided-view plates
+  // below it stay above the fold. Chapter copy/hook renders BELOW the viewer,
+  // never stacked in the rail above the controls (which pushed them off-screen).
   const leftRail = (
-    <div className="flex flex-col gap-4">
-      <ChapterTabs
-        chapters={chapters}
-        taglines={CHAPTER_TAGLINES}
-        activeId={activeChapterId}
-      />
-      {chapterContent}
-    </div>
+    <ChapterTabs
+      chapters={chapters}
+      taglines={CHAPTER_TAGLINES}
+      activeId={activeChapterId}
+    />
   );
 
   return (
-    <LayeredDiagram
-      manifest={hatManifest}
-      chapterFocus={chapterFocus}
-      initialPresetId={viewId}
-      onPresetChange={handlePresetChange}
-      interactive={interactive}
-      leftRail={leftRail}
-      className={className}
-    />
+    <div className={`flex min-h-0 flex-col ${className}`}>
+      <LayeredDiagram
+        manifest={hatManifest}
+        chapterFocus={chapterFocus}
+        initialPresetId={viewId}
+        onPresetChange={handlePresetChange}
+        interactive={interactive}
+        leftRail={leftRail}
+        className="flex-1"
+      />
+      {chapterContent && (
+        <div className="mx-auto mt-4 w-full max-w-3xl">{chapterContent}</div>
+      )}
+    </div>
   );
 }

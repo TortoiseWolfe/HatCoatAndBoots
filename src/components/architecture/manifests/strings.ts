@@ -41,11 +41,14 @@ export const hatStrings = {
     'At a typical mid-latitude, the noon sun sits about 47 degrees higher in midsummer than in midwinter — a huge swing of sky that a fixed roof edge can turn to your advantage.',
 
   /** Guided-view button labels, keyed by preset id. */
+  // Each label names the LESSON of that view, in teaching order: see the whole
+  // system, then the problem (a bare wall overheats), then the fix (one overhang,
+  // two seasons), then the bonus (it also throws rain clear).
   presetLabels: {
-    everything: 'Full Picture',
-    'bare-wall': 'No Roof Yet',
-    'roof-line': 'One Roof, Two Seasons',
-    'how-it-sheds-water': 'Throwing Rain Clear',
+    everything: 'The Whole System',
+    'bare-wall': 'The Problem: Summer Glare',
+    'roof-line': 'The Fix: Two Seasons, One Roof',
+    'how-it-sheds-water': 'The Bonus: Rain Thrown Clear',
   } as Record<string, string>,
 
   /** Guided-view explanations (announced via aria-live), keyed by preset id. */

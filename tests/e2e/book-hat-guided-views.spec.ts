@@ -21,11 +21,11 @@ import { dismissCookieBanner } from './utils/test-user-factory';
 const HAT = '/book/hat/';
 
 const VIEWS = [
-  { label: 'Full Picture', snippet: 'whole system at a glance' },
-  { label: 'No Roof Yet', snippet: 'no overhang at all' },
-  { label: 'One Roof, Two Seasons', snippet: 'add the overhang' },
+  { label: 'The Whole System', snippet: 'whole system at a glance' },
+  { label: 'The Problem: Summer Glare', snippet: 'no overhang at all' },
+  { label: 'The Fix: Two Seasons, One Roof', snippet: 'add the overhang' },
   {
-    label: 'Throwing Rain Clear',
+    label: 'The Bonus: Rain Thrown Clear',
     snippet: 'lands away from the base of the wall',
   },
 ];
@@ -51,12 +51,14 @@ test.describe('Hat chapter — guided views', () => {
   }) => {
     await page.goto(HAT);
     await dismissCookieBanner(page);
-    await page.getByRole('radio', { name: 'One Roof, Two Seasons' }).click();
+    await page
+      .getByRole('radio', { name: 'The Fix: Two Seasons, One Roof' })
+      .click();
     await expect(page).toHaveURL(/#view=roof-line/);
 
     await page.reload();
     await expect(
-      page.getByRole('radio', { name: 'One Roof, Two Seasons' })
+      page.getByRole('radio', { name: 'The Fix: Two Seasons, One Roof' })
     ).toBeChecked();
   });
 
@@ -64,7 +66,7 @@ test.describe('Hat chapter — guided views', () => {
     await page.goto(`${HAT}#view=bogus`);
     await dismissCookieBanner(page);
     await expect(
-      page.getByRole('radio', { name: 'Full Picture' })
+      page.getByRole('radio', { name: 'The Whole System' })
     ).toBeChecked();
   });
 
@@ -87,7 +89,9 @@ test.describe('Hat chapter — guided views', () => {
     expect(overhangBefore?.height).toBeCloseTo(wallBefore?.height ?? -1, 0);
 
     // switch to bare-wall: the overhang is hidden via opacity but stays registered
-    await page.getByRole('radio', { name: 'No Roof Yet' }).click();
+    await page
+      .getByRole('radio', { name: 'The Problem: Summer Glare' })
+      .click();
     await expect(overhang).toHaveCount(1); // still mounted
     await expect(overhang).toHaveCSS('opacity', '0'); // hidden, not removed
 
