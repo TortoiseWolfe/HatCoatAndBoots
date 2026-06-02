@@ -1,4 +1,4 @@
-import { render, screen, within } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
 import BookShell from './BookShell';
 
@@ -10,7 +10,7 @@ describe('BookShell', () => {
     ).toBeGreaterThanOrEqual(6);
   });
 
-  it('renders the chapter-focus tabs + the chapter narrative in the left rail', () => {
+  it('renders the chapter-focus tabs and the page-specific narrative content', () => {
     render(
       <BookShell
         chapterFocus="roof"
@@ -21,14 +21,9 @@ describe('BookShell', () => {
     expect(
       screen.getByRole('navigation', { name: /chapters/i })
     ).toBeInTheDocument();
-    // The narrative renders in the labelled "Chapter narrative" rail section,
-    // beside the building (not below the viewer).
-    const narrative = screen.getByRole('region', {
-      name: /chapter narrative/i,
-    });
-    expect(
-      within(narrative).getByText('chapter intro here')
-    ).toBeInTheDocument();
+    // The narrative content (chapter-level extras) is rendered once under the
+    // viewer's full-width narrative band — present and visible.
+    expect(screen.getByText('chapter intro here')).toBeInTheDocument();
   });
 
   it('applies a custom className', () => {
