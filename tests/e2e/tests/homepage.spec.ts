@@ -11,12 +11,12 @@ test.describe('Homepage — the interactive book viewer', () => {
     await dismissCookieBanner(page);
   });
 
-  test('loads with the book title and the hook heading', async ({ page }) => {
+  test('loads with the book title and the premise', async ({ page }) => {
     await expect(page).toHaveTitle(/Hats, Coats, and Boots/i);
+    // The premise lives in the viewer's rail (so it doesn't push the building
+    // out of position); it is visible on the page.
     await expect(
-      page.getByRole('heading', {
-        name: /why does a good building wear a hat, a coat, and boots/i,
-      })
+      page.getByText(/why does a good building wear a hat, a coat, and boots/i)
     ).toBeVisible();
   });
 

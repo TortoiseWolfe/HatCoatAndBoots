@@ -24,6 +24,13 @@ export interface LayeredDiagramProps {
   /** Max width of the central building stage (Tailwind class). Default 'max-w-xl';
    *  the full-bleed index uses a larger cap so the building dominates. */
   stageMaxWidthClass?: string;
+  /** Content rendered in the LEFT rail ABOVE the guided views — the chapter-focus
+   *  tabs + the chapter's intro/explanation/"coming soon" copy. Putting chapter
+   *  content here (not above the grid) keeps the centre building in the SAME
+   *  position on every page (FR-001a / SC-009). */
+  leftRail?: React.ReactNode;
+  /** Content rendered in the RIGHT rail above the toggles (e.g. language stub). */
+  rightRail?: React.ReactNode;
   className?: string;
 }
 
@@ -74,6 +81,8 @@ export default function LayeredDiagram({
   onPresetChange,
   interactive = true,
   stageMaxWidthClass = 'max-w-xl',
+  leftRail,
+  rightRail,
   className = '',
 }: LayeredDiagramProps) {
   const startPreset = resolveInitialPreset(manifest, initialPresetId);
@@ -129,8 +138,9 @@ export default function LayeredDiagram({
     <div
       className={`grid gap-4 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)_minmax(0,1fr)] ${className}`}
     >
-      {/* LEFT: guided views */}
-      <div className="order-2 md:order-1">
+      {/* LEFT: chapter content (tabs + intro/coming-soon) ABOVE the guided views */}
+      <div className="order-2 flex flex-col gap-4 md:order-1">
+        {leftRail}
         {interactive && (
           <GuidedViews
             presets={manifest.presets}
@@ -172,8 +182,9 @@ export default function LayeredDiagram({
         </div>
       </div>
 
-      {/* RIGHT: per-layer toggles */}
-      <div className="order-3">
+      {/* RIGHT: language stub + per-layer toggles */}
+      <div className="order-3 flex flex-col gap-4">
+        {rightRail}
         {interactive && (
           <LayerToggles
             layers={manifest.layers}
