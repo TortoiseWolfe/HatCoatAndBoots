@@ -33,12 +33,27 @@ export default function HatChapterPage() {
         className="flex w-full flex-1 flex-col px-3 py-4 sm:px-4 lg:px-6"
       >
         <ErrorBoundary level="section">
-          {/* No chapterContent here: the viewer fills the screen, and ALL the
-              chapter prose lives below it (title + intro + sources). */}
+          {/* The hook (title + subtitle + first paragraph) renders in the rail
+              BESIDE the building — visible without scrolling. The full intro,
+              sourced aside, why-it-matters, and sources stay below for deep
+              reading. */}
           <BookShell
             chapterFocus="roof"
             activeChapterId="hat"
             className="flex-1"
+            narrative={
+              <div>
+                <p
+                  className="text-base-content text-base leading-snug font-bold italic"
+                  style={{ fontFamily: 'var(--font-blueprint)' }}
+                >
+                  {hatStrings.chapterSubtitle}
+                </p>
+                <p className="text-base-content mt-2 leading-relaxed">
+                  {hatStrings.intro[0]}
+                </p>
+              </div>
+            }
           />
         </ErrorBoundary>
       </section>

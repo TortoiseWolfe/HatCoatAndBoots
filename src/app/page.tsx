@@ -42,15 +42,15 @@ export default function Home() {
             chapterFocus={null}
             activeChapterId={null}
             className="flex-1"
-            chapterContent={
-              <div className="border-base-300 bg-base-100 rounded-lg border p-3">
+            narrative={
+              <div>
                 <p
                   className="text-base-content text-base font-bold"
                   style={{ fontFamily: 'var(--font-blueprint)' }}
                 >
                   Why does a good building wear a hat, a coat, and boots?
                 </p>
-                <p className="text-base-content mt-1 text-sm leading-relaxed">
+                <p className="text-base-content mt-1 leading-relaxed">
                   Here’s the whole building. Pick a chapter to explore the roof,
                   the walls, or the foundation — or just take it apart, one
                   layer at a time.

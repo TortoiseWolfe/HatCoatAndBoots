@@ -34,19 +34,19 @@ export default function BootsChapterPage() {
             chapterFocus="foundation"
             activeChapterId="boots"
             className="flex-1"
-            chapterContent={
-              <div className="border-base-300 bg-base-100 rounded-lg border p-3">
+            narrative={
+              <div>
                 <h1
                   className="text-base leading-tight font-bold"
                   style={{ fontFamily: 'var(--font-blueprint)' }}
                 >
                   The Boots — the foundation
                 </h1>
-                <p className="text-base-content mt-2 text-sm leading-relaxed">
+                <p className="text-base-content mt-2 leading-relaxed">
                   What lifts the structure off the wet ground and keeps it
                   standing dry. This chapter is <strong>coming soon</strong> —
-                  but the footing is already part of the building above; explore
-                  the whole structure while you wait.
+                  but the footing is already part of the building beside this
+                  text; explore the whole structure while you wait.
                 </p>
               </div>
             }

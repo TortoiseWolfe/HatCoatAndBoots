@@ -19,9 +19,12 @@ export interface BookShellProps {
   chapterFocus: ChapterFocus;
   /** The active chapter id for the tab highlight (null on the index/home). */
   activeChapterId?: 'hat' | 'coat' | 'boots' | null;
-  /** Chapter-specific copy for the left rail (intro for an available chapter,
-   *  a "coming soon" note for one not yet written, or the index welcome). Goes
-   *  in the rail so it never pushes the building out of position. */
+  /** Short chapter narrative (intro/hook, or a "coming soon" note) rendered in the
+   *  LEFT column beside the building — visible without scrolling. Lives in the
+   *  rail column so its per-page height never moves the building. */
+  narrative?: React.ReactNode;
+  /** Long-form chapter copy rendered BELOW the viewer (sources, why-it-matters).
+   *  Optional; deep reading that doesn't need to be above the fold. */
   chapterContent?: React.ReactNode;
   /** When false the guided-views/toggles are inert (neutral index state). */
   interactive?: boolean;
@@ -43,6 +46,7 @@ export interface BookShellProps {
 export default function BookShell({
   chapterFocus,
   activeChapterId = null,
+  narrative,
   chapterContent,
   interactive = true,
   className = '',
@@ -86,6 +90,7 @@ export default function BookShell({
         onPresetChange={handlePresetChange}
         interactive={interactive}
         leftRail={leftRail}
+        narrativeRail={narrative}
         className="flex-1"
       />
       {chapterContent && (

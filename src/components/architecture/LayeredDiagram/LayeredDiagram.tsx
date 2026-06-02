@@ -26,6 +26,12 @@ export interface LayeredDiagramProps {
    *  content here (not above the grid) keeps the centre building in the SAME
    *  position on every page (FR-001a / SC-009). */
   leftRail?: React.ReactNode;
+  /** Page-specific chapter narrative rendered in the LEFT column BELOW the guided
+   *  views — it flows into the empty space beside the building's lower half, so
+   *  the prose is visible WITHOUT scrolling. It lives in the left column (not the
+   *  centre), so its per-page height never moves the building (FR-001a / SC-009).
+   *  Long-form prose (sources, etc.) still belongs below the viewer on the page. */
+  narrativeRail?: React.ReactNode;
   /** Content rendered in the RIGHT rail above the toggles (e.g. language stub). */
   rightRail?: React.ReactNode;
   className?: string;
@@ -78,6 +84,7 @@ export default function LayeredDiagram({
   onPresetChange,
   interactive = true,
   leftRail,
+  narrativeRail,
   rightRail,
   className = '',
 }: LayeredDiagramProps) {
@@ -142,9 +149,12 @@ export default function LayeredDiagram({
     <div
       className={`flex min-h-0 flex-row flex-wrap items-start gap-4 lg:flex-nowrap ${className}`}
     >
-      {/* LEFT (25%): chapter nav (slim) THEN the guided-view plates first — the
-          primary control sits at the top of the column, never below long copy. */}
-      <div className="order-2 flex w-full min-w-0 flex-col gap-3 md:w-[48%] lg:order-1 lg:w-1/4">
+      {/* LEFT (~30%): chapter nav (slim) → the guided-view plates → the chapter
+          narrative. The narrative flows into the space BESIDE the building's lower
+          half (the empty lower-left), so the prose is in view without scrolling.
+          Because this is a separate flex column with items-start, its per-page
+          height never moves the centre building (FR-001a / SC-009). */}
+      <div className="order-2 flex w-full min-w-0 flex-col gap-3 md:w-[48%] lg:order-1 lg:w-[30%]">
         {leftRail}
         {interactive && (
           <div>
@@ -158,12 +168,20 @@ export default function LayeredDiagram({
             />
           </div>
         )}
+        {narrativeRail && (
+          <section
+            aria-label="Chapter narrative"
+            className="border-base-300 text-base-content border-t pt-3 text-sm leading-relaxed"
+          >
+            {narrativeRail}
+          </section>
+        )}
       </div>
 
       {/* CENTER (55%): the building, then its caption directly beneath it. The
           caption is the aria-live preset description — it belongs under the
           drawing it describes, and moving it here keeps the side rails short. */}
-      <div className="order-1 flex w-full min-w-0 flex-col items-center gap-2 md:order-first md:w-full lg:order-2 lg:w-[55%]">
+      <div className="order-1 flex w-full min-w-0 flex-col items-center gap-2 md:order-first md:w-full lg:order-2 lg:w-[48%]">
         <div
           className={`border-base-300 bg-base-100/60 relative aspect-square max-h-[68vh] w-full max-w-[68vh] rounded-xl border ${
             reducedMotion ? '' : 'layer-stack--animated'
