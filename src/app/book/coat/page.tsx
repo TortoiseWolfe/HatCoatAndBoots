@@ -34,19 +34,19 @@ export default function CoatChapterPage() {
             chapterFocus="envelope"
             activeChapterId="coat"
             className="flex-1"
-            chapterContent={
-              <div className="border-base-300 bg-base-100 rounded-lg border p-3">
+            narrative={
+              <div>
                 <h1
                   className="text-base leading-tight font-bold"
                   style={{ fontFamily: 'var(--font-blueprint)' }}
                 >
                   The Coat — the insulated walls
                 </h1>
-                <p className="text-base-content mt-2 text-sm leading-relaxed">
+                <p className="text-base-content mt-2 leading-relaxed">
                   The thermal envelope that keeps warmth in and weather out.
                   This chapter is <strong>coming soon</strong> — but the wall
-                  and window are already part of the building above; explore the
-                  whole structure while you wait.
+                  and window are already part of the building beside this text;
+                  explore the whole structure while you wait.
                 </p>
               </div>
             }
