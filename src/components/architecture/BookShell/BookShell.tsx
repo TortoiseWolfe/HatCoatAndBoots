@@ -84,9 +84,6 @@ export default function BookShell({
       initialPresetId={viewId}
       onPresetChange={handlePresetChange}
       interactive={interactive}
-      // SAME stage width on every page → the building is the same size and
-      // position whether you're on home, hat, coat, or boots.
-      stageMaxWidthClass="max-w-2xl"
       leftRail={leftRail}
       className={className}
     />

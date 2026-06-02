@@ -21,9 +21,6 @@ export interface LayeredDiagramProps {
   onPresetChange?: (presetId: string) => void;
   /** When false the controls are inert (the index neutral state). */
   interactive?: boolean;
-  /** Max width of the central building stage (Tailwind class). Default 'max-w-xl';
-   *  the full-bleed index uses a larger cap so the building dominates. */
-  stageMaxWidthClass?: string;
   /** Content rendered in the LEFT rail ABOVE the guided views — the chapter-focus
    *  tabs + the chapter's intro/explanation/"coming soon" copy. Putting chapter
    *  content here (not above the grid) keeps the centre building in the SAME
@@ -80,7 +77,6 @@ export default function LayeredDiagram({
   initialPresetId,
   onPresetChange,
   interactive = true,
-  stageMaxWidthClass = 'max-w-xl',
   leftRail,
   rightRail,
   className = '',
@@ -135,25 +131,38 @@ export default function LayeredDiagram({
   const [, , vbW, vbH] = manifest.viewBox.split(/\s+/).map(Number);
 
   return (
+    // THCB's three-column layout: flex 25% | 55% | 20%, side-by-side on desktop
+    // so the presets, building, and toggles are ALL visible in one screen. At
+    // <lg (≈1024px) it wraps to two columns (rails ~half each, building full-
+    // width on top); at <md (768px) it stacks. The building is NOT aspect-square
+    // — it fills its column's height — so it can never grow taller than the row
+    // and push the controls below the fold.
     <div
-      className={`grid gap-4 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)_minmax(0,1fr)] ${className}`}
+      className={`flex min-h-0 flex-row flex-wrap items-stretch gap-4 lg:flex-nowrap ${className}`}
     >
-      {/* LEFT: chapter content (tabs + intro/coming-soon) ABOVE the guided views */}
-      <div className="order-2 flex flex-col gap-4 md:order-1">
+      {/* LEFT (25%): chapter content (tabs + intro) above the guided views */}
+      <div className="order-2 flex w-full min-w-0 flex-col gap-4 md:w-[48%] lg:order-1 lg:w-1/4">
         {leftRail}
         {interactive && (
-          <GuidedViews
-            presets={manifest.presets}
-            activePresetId={activePresetId}
-            onSelect={selectPreset}
-          />
+          <div>
+            <h2 className="text-base-content mb-2 text-sm font-bold tracking-wide uppercase">
+              Guided views
+            </h2>
+            <GuidedViews
+              presets={manifest.presets}
+              activePresetId={activePresetId}
+              onSelect={selectPreset}
+            />
+          </div>
         )}
       </div>
 
-      {/* CENTER: the building stage + labels overlay */}
-      <div className="order-1 md:order-2">
+      {/* CENTER (55%): the building — anchored to the TOP of the row so its
+          vertical position never depends on how tall the side rails are (keeps
+          the building byte-identically aligned across pages). */}
+      <div className="order-1 flex w-full min-w-0 items-start justify-center md:order-first md:w-full lg:order-2 lg:w-[55%]">
         <div
-          className={`border-base-300 bg-base-100/60 relative mx-auto aspect-square w-full ${stageMaxWidthClass} rounded-xl border ${
+          className={`border-base-300 bg-base-100/60 relative mx-auto aspect-square h-full max-h-[78vh] w-full max-w-[78vh] rounded-xl border ${
             reducedMotion ? '' : 'layer-stack--animated'
           }`}
         >
@@ -182,15 +191,20 @@ export default function LayeredDiagram({
         </div>
       </div>
 
-      {/* RIGHT: language stub + per-layer toggles */}
-      <div className="order-3 flex flex-col gap-4">
+      {/* RIGHT (20%): language stub + per-layer toggles */}
+      <div className="order-3 flex w-full min-w-0 flex-col gap-4 md:w-[48%] lg:w-1/5">
         {rightRail}
         {interactive && (
-          <LayerToggles
-            layers={manifest.layers}
-            visibleIds={visibleIds}
-            onToggle={toggleLayer}
-          />
+          <div>
+            <h2 className="text-base-content mb-2 text-sm font-bold tracking-wide uppercase">
+              Layer controls
+            </h2>
+            <LayerToggles
+              layers={manifest.layers}
+              visibleIds={visibleIds}
+              onToggle={toggleLayer}
+            />
+          </div>
         )}
       </div>
     </div>

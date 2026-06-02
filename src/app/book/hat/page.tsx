@@ -38,6 +38,8 @@ export default function HatChapterPage() {
             activeChapterId="hat"
             className="flex-1"
             chapterContent={
+              // Short hook in the rail (kept compact so the rail doesn't grow
+              // taller than the building). The full intro is below the viewer.
               <div className="border-base-300 bg-base-100 rounded-lg border p-3">
                 <h1
                   className="text-base leading-tight font-bold"
@@ -48,24 +50,22 @@ export default function HatChapterPage() {
                 <p className="text-base-content mt-1 text-sm italic">
                   {hatStrings.chapterSubtitle}
                 </p>
-                <div className="mt-2 space-y-2">
-                  {hatStrings.intro.map((para, i) => (
-                    <p
-                      key={i}
-                      className="text-base-content text-sm leading-relaxed"
-                    >
-                      {para}
-                    </p>
-                  ))}
-                </div>
               </div>
             }
           />
         </ErrorBoundary>
       </section>
 
-      {/* Long-form chapter text BELOW the fixed-position viewer. */}
+      {/* Long-form chapter text BELOW the one-screen viewer. */}
       <div className="mx-auto w-full max-w-3xl px-4 pb-12">
+        <section className="prose mt-4 max-w-none">
+          {hatStrings.intro.map((para, i) => (
+            <p key={i} className="text-base-content mb-3 leading-relaxed">
+              {para}
+            </p>
+          ))}
+        </section>
+
         <aside className="border-base-300 bg-base-100 mt-4 rounded-lg border p-4">
           <p className="text-base-content text-sm leading-relaxed">
             {hatStrings.sourcedAside}
