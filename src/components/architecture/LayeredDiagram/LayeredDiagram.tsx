@@ -173,171 +173,162 @@ export default function LayeredDiagram({
   const [, , vbW, vbH] = manifest.viewBox.split(/\s+/).map(Number);
 
   return (
-    // The drafting bench: three columns side-by-side — plate selector (left) |
-    // the drawing + its caption (centre) | the parts checklist (right). Flex
-    // 25/55/20 (THCB), nowrap ≥lg so presets + building + toggles are ALL in one
-    // screen. Each rail is TOP-aligned (items-start) — never stretched — so a
-    // short rail leaves no dead space, and the building's y never depends on rail
-    // height (keeps it byte-identically aligned across pages). At <lg it wraps to
-    // two columns (building full-width on top); at <md it stacks.
-    <div
-      className={`flex min-h-0 flex-row flex-wrap items-start gap-4 lg:flex-nowrap ${className}`}
-    >
-      {/* LEFT (~30%): chapter nav (slim) → the guided-view plates → the chapter
-          narrative. The narrative flows into the space BESIDE the building's lower
-          half (the empty lower-left), so the prose is in view without scrolling.
-          Because this is a separate flex column with items-start, its per-page
-          height never moves the centre building (FR-001a / SC-009). */}
-      <div className="order-2 flex w-full min-w-0 flex-col gap-3 md:w-[48%] lg:order-1 lg:w-[30%]">
-        {leftRail}
-        {interactive && (
-          <div>
-            <h2 className="text-base-content mb-2 text-xs font-bold tracking-wider uppercase">
-              Guided views
-            </h2>
-            <GuidedViews
-              presets={manifest.presets}
-              activePresetId={activePresetId}
-              onSelect={selectPreset}
-            />
-          </div>
-        )}
-        {narrativeRail && (
-          <section
-            aria-label="Chapter narrative"
-            className="border-base-300 text-base-content border-t pt-3 text-sm leading-relaxed"
-          >
-            {narrativeRail}
-          </section>
-        )}
-      </div>
+    // The interactive spread: a row of three columns — guided-view plates (left)
+    // | the drawing (centre) | the parts checklist + legend (right) — over ONE
+    // full-width narrative band that CHANGES with the active guided view. There
+    // is no static intro and no duplicate prose: the band IS the chapter text for
+    // the current view, so the whole spread reads in one screen with no scroll.
+    <div className={`flex min-h-0 flex-col gap-4 ${className}`}>
+      <div className="flex min-h-0 flex-row flex-wrap items-start gap-4 lg:flex-nowrap">
+        {/* LEFT (~25%): chapter nav (slim) → the guided-view plates. */}
+        <div className="order-2 flex w-full min-w-0 flex-col gap-3 md:w-[48%] lg:order-1 lg:w-1/4">
+          {leftRail}
+          {interactive && (
+            <div>
+              <h2 className="text-base-content mb-2 text-xs font-bold tracking-wider uppercase">
+                Guided views
+              </h2>
+              <GuidedViews
+                presets={manifest.presets}
+                activePresetId={activePresetId}
+                onSelect={selectPreset}
+              />
+            </div>
+          )}
+        </div>
 
-      {/* CENTER (55%): the building, then its caption directly beneath it. The
-          caption is the aria-live preset description — it belongs under the
-          drawing it describes, and moving it here keeps the side rails short. */}
-      <div className="order-1 flex w-full min-w-0 flex-col items-center gap-2 md:order-first md:w-full lg:order-2 lg:w-[48%]">
-        <div
-          className={`border-base-300 bg-base-100/60 relative aspect-square max-h-[68vh] w-full max-w-[68vh] rounded-xl border ${
-            reducedMotion ? '' : 'layer-stack--animated'
-          }`}
-        >
-          {stack}
-
-          {/* In-drawing labels: HTML text over the SVG (translatable; FR-001),
-              shown with the labels layer. */}
+        {/* CENTRE (~55%): the building. Anchored top so its y never depends on
+            the rails' height (keeps it byte-identical across pages). */}
+        <div className="order-1 flex w-full min-w-0 flex-col items-center md:order-first md:w-full lg:order-2 lg:w-[55%]">
           <div
-            aria-hidden={labelsVisible ? undefined : true}
-            className="pointer-events-none absolute inset-0"
-            style={{ opacity: labelsVisible ? 1 : 0 }}
+            className={`border-base-300 bg-base-100/60 relative aspect-square max-h-[68vh] w-full max-w-[68vh] rounded-xl border ${
+              reducedMotion ? '' : 'layer-stack--animated'
+            }`}
           >
-            {manifest.labels.map((lbl) => (
-              <span
-                key={lbl.id}
-                className="text-base-content absolute -translate-y-1/2 text-[0.7rem] font-semibold whitespace-nowrap"
-                style={{
-                  left: `${(lbl.x / vbW) * 100}%`,
-                  top: `${(lbl.y / vbH) * 100}%`,
-                }}
-              >
-                {lbl.text}
-              </span>
-            ))}
+            {stack}
+
+            {/* In-drawing labels: HTML text over the SVG (translatable; FR-001),
+                shown with the labels layer. */}
+            <div
+              aria-hidden={labelsVisible ? undefined : true}
+              className="pointer-events-none absolute inset-0"
+              style={{ opacity: labelsVisible ? 1 : 0 }}
+            >
+              {manifest.labels.map((lbl) => (
+                <span
+                  key={lbl.id}
+                  className="text-base-content absolute -translate-y-1/2 text-[0.7rem] font-semibold whitespace-nowrap"
+                  style={{
+                    left: `${(lbl.x / vbW) * 100}%`,
+                    top: `${(lbl.y / vbH) * 100}%`,
+                  }}
+                >
+                  {lbl.text}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
 
-        {/* Caption plate: what you're looking at right now — a titled card under
-            the drawing, like the caption block under a drafting plate. aria-live
-            so the view change is announced; line-clamped to keep the one-screen
-            layout (the full text is in the chapter prose below the viewer). */}
-        {interactive && activePreset?.description && (
-          <figcaption
-            aria-live="polite"
-            data-testid="guided-view-description"
-            className="border-base-300 bg-base-100/70 mx-auto w-full max-w-md rounded-lg border px-4 py-3 text-center"
-          >
-            <span
-              className="text-base-content block text-sm font-bold tracking-wide"
-              style={{ fontFamily: 'var(--font-blueprint)' }}
-            >
-              {activePreset.label}
-            </span>
-            <span className="text-base-content mt-1 line-clamp-3 block text-sm leading-relaxed">
-              {activePreset.description}
-            </span>
-          </figcaption>
-        )}
-      </div>
-
-      {/* RIGHT (20%): per-layer toggles → reset → "how to read it" legend. The
+        {/* RIGHT (20%): per-layer toggles → reset → "how to read it" legend. The
           legend keys the drawing's invisible-physics marks and fills the column
           beside the building's lower third, balancing the left-hand narrative. */}
-      <div className="order-3 flex w-full min-w-0 flex-col gap-3 md:w-[48%] lg:w-1/5">
-        {rightRail}
-        {interactive && (
-          <>
-            <div>
-              <h2 className="text-base-content mb-2 text-xs font-bold tracking-wider uppercase">
-                Layer controls
-              </h2>
-              <LayerToggles
-                layers={manifest.layers}
-                visibleIds={visibleIds}
-                onToggle={toggleLayer}
-              />
-            </div>
-            <button
-              type="button"
-              onClick={() => selectPreset(manifest.defaultPresetId)}
-              aria-disabled={activePresetId === manifest.defaultPresetId}
-              className={`border-base-300 text-base-content min-h-11 rounded-md border px-3 py-2 text-sm font-medium transition-colors ${
-                activePresetId === manifest.defaultPresetId
-                  ? 'bg-base-200/40 cursor-not-allowed'
-                  : 'bg-base-100 hover:bg-base-200'
-              }`}
-            >
-              ↺ Rebuild the whole building
-            </button>
+        <div className="order-3 flex w-full min-w-0 flex-col gap-3 md:w-[48%] lg:w-1/5">
+          {rightRail}
+          {interactive && (
+            <>
+              <div>
+                <h2 className="text-base-content mb-2 text-xs font-bold tracking-wider uppercase">
+                  Layer controls
+                </h2>
+                <LayerToggles
+                  layers={manifest.layers}
+                  visibleIds={visibleIds}
+                  onToggle={toggleLayer}
+                />
+              </div>
+              <button
+                type="button"
+                onClick={() => selectPreset(manifest.defaultPresetId)}
+                aria-disabled={activePresetId === manifest.defaultPresetId}
+                className={`border-base-300 text-base-content min-h-11 rounded-md border px-3 py-2 text-sm font-medium transition-colors ${
+                  activePresetId === manifest.defaultPresetId
+                    ? 'bg-base-200/40 cursor-not-allowed'
+                    : 'bg-base-100 hover:bg-base-200'
+                }`}
+              >
+                ↺ Rebuild the whole building
+              </button>
 
-            <div className="border-base-300 mt-1 border-t pt-3">
-              <h2 className="text-base-content mb-2 text-xs font-bold tracking-wider uppercase">
-                How to read it
-              </h2>
-              <ul className="flex flex-col gap-2.5">
-                {LEGEND.map((item) => (
-                  <li key={item.label} className="flex items-start gap-3">
-                    <svg
-                      width="34"
-                      height="14"
-                      viewBox="0 0 34 14"
-                      aria-hidden="true"
-                      className="mt-0.5 shrink-0"
-                    >
-                      <line
-                        x1="1"
-                        y1="7"
-                        x2="33"
-                        y2="7"
-                        stroke={item.color}
-                        strokeWidth="3"
-                        strokeLinecap="round"
-                        strokeDasharray={item.dashed ? '5 4' : undefined}
-                      />
-                    </svg>
-                    <span className="leading-snug">
-                      <span className="text-base-content text-sm font-semibold">
-                        {item.label}
+              <div className="border-base-300 mt-1 border-t pt-3">
+                <h2 className="text-base-content mb-2 text-xs font-bold tracking-wider uppercase">
+                  How to read it
+                </h2>
+                <ul className="flex flex-col gap-2.5">
+                  {LEGEND.map((item) => (
+                    <li key={item.label} className="flex items-start gap-3">
+                      <svg
+                        width="34"
+                        height="14"
+                        viewBox="0 0 34 14"
+                        aria-hidden="true"
+                        className="mt-0.5 shrink-0"
+                      >
+                        <line
+                          x1="1"
+                          y1="7"
+                          x2="33"
+                          y2="7"
+                          stroke={item.color}
+                          strokeWidth="3"
+                          strokeLinecap="round"
+                          strokeDasharray={item.dashed ? '5 4' : undefined}
+                        />
+                      </svg>
+                      <span className="leading-snug">
+                        <span className="text-base-content text-sm font-semibold">
+                          {item.label}
+                        </span>
+                        <span className="text-base-content block text-xs">
+                          {item.hint}
+                        </span>
                       </span>
-                      <span className="text-base-content block text-xs">
-                        {item.hint}
-                      </span>
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </>
-        )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </>
+          )}
+        </div>
       </div>
+
+      {/* FULL-WIDTH NARRATIVE BAND — the one and only chapter text, spanning all
+          three columns. It CHANGES with the active guided view (aria-live), so
+          there is no static intro and no duplicate prose below. With the labels
+          layer the band carries the active view's explanation; the heading names
+          the view. This is the chapter, told one variable at a time. */}
+      {interactive && activePreset?.description && (
+        <figcaption
+          aria-live="polite"
+          data-testid="guided-view-description"
+          className="border-base-300 bg-base-100/60 w-full rounded-xl border px-5 py-4"
+        >
+          <h2
+            className="text-base-content text-base font-bold tracking-wide"
+            style={{ fontFamily: 'var(--font-blueprint)' }}
+          >
+            {activePreset.label}
+          </h2>
+          <p className="text-base-content mt-1 leading-relaxed">
+            {activePreset.description}
+          </p>
+        </figcaption>
+      )}
+
+      {/* Chapter-level extras (heading for SEO/no-JS, sources) — page-specific,
+          compact, rendered ONCE under the band. NOT a duplicate of the changing
+          narrative. */}
+      {narrativeRail}
     </div>
   );
 }

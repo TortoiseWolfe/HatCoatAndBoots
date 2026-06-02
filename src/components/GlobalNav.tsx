@@ -121,13 +121,19 @@ export function GlobalNav() {
     setDeferredPrompt(null);
   };
 
-  const navItems = [
+  // Book-first header: only the two book-relevant links sit in the desktop bar.
+  // The rest (Blog/Docs/Wireframes — template/dev pages) live in the hamburger
+  // so the header stays uncluttered for young readers.
+  const primaryNavItems = [
     { href: '/', label: 'Home' },
     { href: '/book', label: 'The Book' },
+  ];
+  const secondaryNavItems = [
     { href: '/blog', label: 'Blog' },
     { href: '/docs', label: 'Docs' },
     { href: '/wireframes', label: 'Wireframes' },
   ];
+  const navItems = [...primaryNavItems, ...secondaryNavItems];
 
   const themes = [
     'hatcoatandboots-dark',
@@ -193,9 +199,9 @@ export function GlobalNav() {
             </Link>
           </div>
 
-          {/* Main Navigation */}
+          {/* Main Navigation — book-first: only the primary links on desktop. */}
           <nav className="hidden items-center gap-1 lg:flex">
-            {navItems.map((item) => (
+            {primaryNavItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
@@ -247,102 +253,94 @@ export function GlobalNav() {
             {/* Auth Buttons */}
             {/* User account dropdown (logged in) or auth buttons (logged out) */}
             {/* Auth buttons hidden on mobile - they're in the hamburger menu */}
-            {user ? (
-              <div className="dropdown dropdown-end">
-                <label
-                  tabIndex={0}
-                  className="btn btn-ghost btn-circle min-h-11 min-w-11"
-                  aria-label="User account menu"
-                >
-                  <AvatarDisplay
-                    avatarUrl={
-                      profile?.avatar_url ||
-                      (user.user_metadata?.avatar_url as string) ||
-                      null
-                    }
-                    displayName={profile?.display_name || user.email || 'User'}
-                    size="sm"
-                  />
-                </label>
-                <ul
-                  tabIndex={0}
-                  className="menu menu-sm dropdown-content bg-base-100 rounded-box -right-2 z-[1] mt-3 w-48 max-w-[calc(100vw-4rem)] p-2 shadow sm:w-52"
-                >
-                  <li className="menu-title">
-                    <span>{user.email}</span>
-                  </li>
-                  <li>
-                    <Link href="/profile">Profile</Link>
-                  </li>
-                  <li>
-                    <Link href="/account">Account Settings</Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/messages"
-                      className="flex items-center justify-between"
-                    >
-                      <span>Messages</span>
-                      {unreadCount > 0 && (
-                        <span className="badge badge-primary badge-sm">
-                          {unreadCount}
-                        </span>
-                      )}
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/messages?tab=connections">Connections</Link>
-                  </li>
-                  {isAdmin && (
-                    <li>
-                      <Link href="/admin">Admin Dashboard</Link>
+            {
+              user ? (
+                <div className="dropdown dropdown-end">
+                  <label
+                    tabIndex={0}
+                    className="btn btn-ghost btn-circle min-h-11 min-w-11"
+                    aria-label="User account menu"
+                  >
+                    <AvatarDisplay
+                      avatarUrl={
+                        profile?.avatar_url ||
+                        (user.user_metadata?.avatar_url as string) ||
+                        null
+                      }
+                      displayName={
+                        profile?.display_name || user.email || 'User'
+                      }
+                      size="sm"
+                    />
+                  </label>
+                  <ul
+                    tabIndex={0}
+                    className="menu menu-sm dropdown-content bg-base-100 rounded-box -right-2 z-[1] mt-3 w-48 max-w-[calc(100vw-4rem)] p-2 shadow sm:w-52"
+                  >
+                    <li className="menu-title">
+                      <span>{user.email}</span>
                     </li>
-                  )}
-                  <li>
-                    <button
-                      type="button"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        // Close dropdown
-                        if (document.activeElement instanceof HTMLElement) {
-                          document.activeElement.blur();
-                        }
-                        // signOut() handles the window.location.href='/'
-                        // redirect internally; setting it again here races
-                        // with the in-flight navigation on Firefox and
-                        // manifests as NS_BINDING_ABORTED in Playwright's
-                        // page.waitForURL.
-                        void signOut();
-                      }}
-                    >
-                      Sign Out
-                    </button>
-                  </li>
-                </ul>
-              </div>
-            ) : (
-              <>
-                <Link
-                  href="/sign-in"
-                  className="btn btn-ghost btn-sm hidden min-h-11 min-w-11 lg:inline-flex"
-                >
-                  Sign In
-                </Link>
-                <Link
-                  href="/sign-up"
-                  className="btn btn-primary btn-sm hidden min-h-11 min-w-11 lg:inline-flex"
-                >
-                  Sign Up
-                </Link>
-              </>
-            )}
+                    <li>
+                      <Link href="/profile">Profile</Link>
+                    </li>
+                    <li>
+                      <Link href="/account">Account Settings</Link>
+                    </li>
+                    <li>
+                      <Link
+                        href="/messages"
+                        className="flex items-center justify-between"
+                      >
+                        <span>Messages</span>
+                        {unreadCount > 0 && (
+                          <span className="badge badge-primary badge-sm">
+                            {unreadCount}
+                          </span>
+                        )}
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/messages?tab=connections">Connections</Link>
+                    </li>
+                    {isAdmin && (
+                      <li>
+                        <Link href="/admin">Admin Dashboard</Link>
+                      </li>
+                    )}
+                    <li>
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          // Close dropdown
+                          if (document.activeElement instanceof HTMLElement) {
+                            document.activeElement.blur();
+                          }
+                          // signOut() handles the window.location.href='/'
+                          // redirect internally; setting it again here races
+                          // with the in-flight navigation on Firefox and
+                          // manifests as NS_BINDING_ABORTED in Playwright's
+                          // page.waitForURL.
+                          void signOut();
+                        }}
+                      >
+                        Sign Out
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+              ) : null
+              /* Logged-out: no Sign In / Sign Up in the book-first desktop bar —
+               they live in the hamburger menu's Account section. */
+            }
 
-            {/* Mobile/tablet menu (visible below lg) - 44px touch target */}
-            <div className="dropdown dropdown-end lg:hidden">
+            {/* Overflow "more" menu — shown at ALL sizes now (the desktop bar is
+                book-minimal, so Blog/Docs/Wireframes + Account live here). */}
+            <div className="dropdown dropdown-end">
               <label
                 tabIndex={0}
                 className="btn btn-ghost btn-circle min-h-11 min-w-11"
-                aria-label="Navigation menu"
+                aria-label="More menu"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

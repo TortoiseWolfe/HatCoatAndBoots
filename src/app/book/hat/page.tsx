@@ -11,11 +11,13 @@ export const metadata: Metadata = {
 /**
  * `/book/hat` — roof focus. The SAME BookShell as every other book page, so the
  * building is byte-identically positioned when you navigate here (FR-001a /
- * SC-009). The chapter title + intro live in the LEFT RAIL (chapterContent), NOT
- * above the building — that is what keeps the centre stage from moving. The
- * default `everything` view SSRs the full labelled composite (the no-JS Hat
- * gate, FR-008 / SC-002); the controls hydrate over it. Sources + why-it-matters
- * sit BELOW the fixed-position viewer. Prose is web-research fact-checked
+ * SC-009). The ENTIRE chapter narrative lives in the LEFT RAIL beside the
+ * building (it scrolls within its own column if long) — there is NO duplicate
+ * prose block below the viewer, so the page is one screen with no page-level
+ * scroll. The default `everything` view SSRs the full labelled composite (the
+ * no-JS Hat gate, FR-008 / SC-002) and the rail prose is plain SSR'd HTML, so
+ * the heading, body, and sources are all readable with JavaScript disabled.
+ * Prose is web-research fact-checked
  * (see features/_uncategorized/048-hats-chapter/content-source.md).
  */
 export default function HatChapterPage() {
@@ -33,83 +35,52 @@ export default function HatChapterPage() {
         className="flex w-full flex-1 flex-col px-3 py-4 sm:px-4 lg:px-6"
       >
         <ErrorBoundary level="section">
-          {/* The hook (title + subtitle + first paragraph) renders in the rail
-              BESIDE the building — visible without scrolling. The full intro,
-              sourced aside, why-it-matters, and sources stay below for deep
-              reading. */}
+          {/* The CHANGING per-view explanation is the chapter narrative (the
+              full-width band, owned by LayeredDiagram). The `narrative` slot here
+              carries only the compact chapter-level extras that aren't tied to a
+              view: the chapter <h1> (heading; also the no-JS/SEO anchor) and the
+              sources. One short row, not a duplicate of the changing text. */}
           <BookShell
             chapterFocus="roof"
             activeChapterId="hat"
             className="flex-1"
             narrative={
-              <div>
-                <p
-                  className="text-base-content text-base leading-snug font-bold italic"
+              <section
+                aria-label="About this chapter"
+                className="text-base-content flex flex-wrap items-baseline gap-x-3 gap-y-1 text-xs"
+              >
+                <h1
+                  className="text-sm font-bold"
                   style={{ fontFamily: 'var(--font-blueprint)' }}
                 >
-                  {hatStrings.chapterSubtitle}
-                </p>
-                <p className="text-base-content mt-2 leading-relaxed">
-                  {hatStrings.intro[0]}
-                </p>
-              </div>
+                  {hatStrings.chapterTitle}
+                </h1>
+                <span className="text-base-content italic">
+                  no shutters, no sensors, no machines.
+                </span>
+                <span className="text-base-content ml-auto">
+                  <span className="font-semibold">
+                    {hatStrings.sourcesHeading}:{' '}
+                  </span>
+                  {hatStrings.sources.map((src, i) => (
+                    <span key={src.url}>
+                      {i > 0 && ' · '}
+                      <a
+                        href={src.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="link"
+                      >
+                        {src.title}
+                      </a>
+                    </span>
+                  ))}
+                </span>
+              </section>
             }
           />
         </ErrorBoundary>
       </section>
-
-      {/* Long-form chapter text BELOW the one-screen viewer. */}
-      <div className="mx-auto w-full max-w-3xl px-4 pb-12">
-        <header className="mt-4">
-          <h1
-            className="text-2xl leading-tight font-bold"
-            style={{ fontFamily: 'var(--font-blueprint)' }}
-          >
-            {hatStrings.chapterTitle}
-          </h1>
-          <p className="text-base-content mt-1 text-base italic">
-            {hatStrings.chapterSubtitle}
-          </p>
-        </header>
-
-        <section className="prose mt-4 max-w-none">
-          {hatStrings.intro.map((para, i) => (
-            <p key={i} className="text-base-content mb-3 leading-relaxed">
-              {para}
-            </p>
-          ))}
-        </section>
-
-        <aside className="border-base-300 bg-base-100 mt-4 rounded-lg border p-4">
-          <p className="text-base-content text-sm leading-relaxed">
-            {hatStrings.sourcedAside}
-          </p>
-        </aside>
-
-        <section className="border-base-300 mt-6 border-t pt-6">
-          <p className="text-base-content leading-relaxed">
-            {hatStrings.whyItMatters}
-          </p>
-        </section>
-
-        <footer className="border-base-300 mt-8 border-t pt-4 text-sm">
-          <h2 className="mb-2 font-semibold">{hatStrings.sourcesHeading}</h2>
-          <ul className="text-base-content list-disc space-y-1 pl-5">
-            {hatStrings.sources.map((src) => (
-              <li key={src.url}>
-                <a
-                  href={src.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="link"
-                >
-                  {src.title}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </footer>
-      </div>
     </main>
   );
 }
