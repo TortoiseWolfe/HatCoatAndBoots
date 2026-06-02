@@ -73,30 +73,10 @@ describe('GuidedViews', () => {
     expect(onSelect).toHaveBeenCalledWith('roof-line');
   });
 
-  it('G-GV-1: renders the active description in an aria-live=polite region that updates', () => {
-    const { container, rerender } = render(
-      <GuidedViews
-        presets={presets}
-        activePresetId="everything"
-        onSelect={vi.fn()}
-      />
-    );
-    const live = container.querySelector('[aria-live="polite"]');
-    expect(live).toBeInTheDocument();
-    expect(live).toHaveTextContent('Everything explanation.');
-
-    // Description updates together with the active view (FR-003).
-    rerender(
-      <GuidedViews
-        presets={presets}
-        activePresetId="bare-wall"
-        onSelect={vi.fn()}
-      />
-    );
-    expect(container.querySelector('[aria-live="polite"]')).toHaveTextContent(
-      'Bare wall explanation.'
-    );
-  });
+  // G-GV-1 (the aria-live description) now lives as a caption UNDER the building
+  // in LayeredDiagram (so the tall paragraph can't push the rail past the fold).
+  // It is asserted in LayeredDiagram.test.tsx, not here — GuidedViews is now just
+  // the controlled radiogroup.
 
   it('G-GV-3: onSelect only ever receives an allowlisted preset id', () => {
     const onSelect = vi.fn();

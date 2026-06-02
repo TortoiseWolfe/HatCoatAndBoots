@@ -33,31 +33,30 @@ export default function HatChapterPage() {
         className="flex w-full flex-1 flex-col px-3 py-4 sm:px-4 lg:px-6"
       >
         <ErrorBoundary level="section">
+          {/* No chapterContent here: the viewer fills the screen, and ALL the
+              chapter prose lives below it (title + intro + sources). */}
           <BookShell
             chapterFocus="roof"
             activeChapterId="hat"
             className="flex-1"
-            chapterContent={
-              // Short hook in the rail (kept compact so the rail doesn't grow
-              // taller than the building). The full intro is below the viewer.
-              <div className="border-base-300 bg-base-100 rounded-lg border p-3">
-                <h1
-                  className="text-base leading-tight font-bold"
-                  style={{ fontFamily: 'var(--font-blueprint)' }}
-                >
-                  {hatStrings.chapterTitle}
-                </h1>
-                <p className="text-base-content mt-1 text-sm italic">
-                  {hatStrings.chapterSubtitle}
-                </p>
-              </div>
-            }
           />
         </ErrorBoundary>
       </section>
 
       {/* Long-form chapter text BELOW the one-screen viewer. */}
       <div className="mx-auto w-full max-w-3xl px-4 pb-12">
+        <header className="mt-4">
+          <h1
+            className="text-2xl leading-tight font-bold"
+            style={{ fontFamily: 'var(--font-blueprint)' }}
+          >
+            {hatStrings.chapterTitle}
+          </h1>
+          <p className="text-base-content mt-1 text-base italic">
+            {hatStrings.chapterSubtitle}
+          </p>
+        </header>
+
         <section className="prose mt-4 max-w-none">
           {hatStrings.intro.map((para, i) => (
             <p key={i} className="text-base-content mb-3 leading-relaxed">

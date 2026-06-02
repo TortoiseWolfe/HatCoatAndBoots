@@ -10,8 +10,9 @@ const meta: Meta<typeof GuidedViews> = {
     docs: {
       description: {
         component:
-          'Controlled guided-view selector (radiogroup) with an aria-live ' +
-          'explanation for the Hat chapter.',
+          'Controlled guided-view selector (radiogroup) for the Hat chapter. ' +
+          'The active view’s explanation renders as an aria-live caption under ' +
+          'the building (in LayeredDiagram), not inside this control.',
       },
     },
   },

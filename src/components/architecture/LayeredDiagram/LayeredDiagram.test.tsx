@@ -73,6 +73,26 @@ describe('LayeredDiagram', () => {
     expect(isShown(container, 'sun-high')).toBe(false);
   });
 
+  it('G-GV-1: the active view’s description is a caption under the building, in an aria-live=polite region that updates with the view', () => {
+    const { container } = render(
+      <LayeredDiagram manifest={hatManifest} chapterFocus="roof" />
+    );
+    const caption = screen.getByTestId('guided-view-description');
+    expect(caption).toHaveAttribute('aria-live', 'polite');
+    const everything = hatManifest.presets.find((p) => p.id === 'everything')!;
+    expect(caption).toHaveTextContent(everything.description);
+
+    // switching the view updates the same live region (FR-003)
+    fireEvent.click(
+      screen.getByRole('radio', { name: hatManifest.presets[1].label })
+    );
+    const bareWall = hatManifest.presets.find((p) => p.id === 'bare-wall')!;
+    expect(screen.getByTestId('guided-view-description')).toHaveTextContent(
+      bareWall.description
+    );
+    void container;
+  });
+
   it('G-LD-3: a manual layer toggle diverges to the custom state and flips only that layer', () => {
     const { container } = render(
       <LayeredDiagram manifest={hatManifest} chapterFocus="roof" />

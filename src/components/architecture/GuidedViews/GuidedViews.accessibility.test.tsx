@@ -34,10 +34,9 @@ describe('GuidedViews Accessibility', () => {
     expect(results).toHaveNoViolations();
   });
 
-  it('G-GV-1: the description lives in an aria-live=polite region', () => {
-    const { container } = setup();
-    expect(container.querySelector('[aria-live="polite"]')).toBeInTheDocument();
-  });
+  // G-GV-1 (the active description in an aria-live=polite region) now lives as a
+  // caption under the building in LayeredDiagram — asserted in
+  // LayeredDiagram.accessibility.test.tsx, not here.
 
   it('G-GV-2: radiogroup with one checked radio', () => {
     setup('bare-wall');
