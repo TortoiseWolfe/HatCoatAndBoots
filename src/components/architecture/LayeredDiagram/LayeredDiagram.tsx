@@ -204,8 +204,12 @@ export default function LayeredDiagram({
             </div>
           )}
           {interactive && activePreset?.takeaway && (
-            <aside
-              aria-live="polite"
+            // A plain <div>, not <aside> (a complementary landmark must be
+            // top-level, not nested — axe landmark-complementary-is-top-level)
+            // and not an aria-live region (the full-width band below already
+            // announces the active view; axe also rejects a display:none live
+            // region, and this card is hidden below lg). Visual desktop affordance.
+            <div
               data-testid="guided-view-takeaway"
               className="border-base-300 bg-base-100/60 hidden rounded-xl border px-4 py-3 lg:block"
             >
@@ -218,7 +222,7 @@ export default function LayeredDiagram({
               <p className="text-base-content mt-1 text-sm leading-relaxed">
                 {activePreset.takeaway}
               </p>
-            </aside>
+            </div>
           )}
         </div>
 
