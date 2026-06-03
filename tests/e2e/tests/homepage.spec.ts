@@ -31,22 +31,39 @@ test.describe('Homepage — the interactive book viewer', () => {
     await expect(page.getByRole('toolbar')).toBeVisible();
   });
 
-  test('the chapter-focus tabs are the navigation', async ({ page }) => {
-    const tabs = page.getByRole('navigation', { name: /chapters/i });
+  test('the navbar leads into the book, where the chapter tabs live', async ({
+    page,
+  }) => {
+    // The chapter nav (Hat/Coat/Boots) moved to the navbar and appears on
+    // /book/* pages, not on the home/index. From the homepage you enter the book
+    // via the "The Book" link in the navbar.
+    await expect(
+      page.getByRole('navigation', { name: /chapters/i })
+    ).toHaveCount(0);
+
+    await page
+      .getByRole('navigation')
+      .getByRole('link', { name: 'The Book' })
+      .first()
+      .click();
+    await expect(page).toHaveURL(/\/book\/?$/);
+
+    // Inside the book, the chapter tabs are present in the navbar.
+    const tabs = page.getByRole('navigation', { name: /book chapters/i });
     await expect(tabs).toBeVisible();
-    await expect(tabs.getByText('The Hat')).toBeVisible();
-    await expect(tabs.getByText('The Coat')).toBeVisible();
-    await expect(tabs.getByText('The Boots')).toBeVisible();
-    // Hat is the live chapter; Coat/Boots are "Soon".
-    await expect(tabs.getByText('Soon').first()).toBeVisible();
+    await expect(tabs.getByText('The Hat', { exact: true })).toBeVisible();
+    await expect(tabs.getByText('The Coat', { exact: true })).toBeVisible();
+    await expect(tabs.getByText('The Boots', { exact: true })).toBeVisible();
   });
 
-  test('the Hat tab navigates into the Hat chapter', async ({ page }) => {
+  test('the chapter tabs navigate into a chapter', async ({ page }) => {
+    await page.goto('/book/hat/');
+    await dismissCookieBanner(page);
     await page
-      .getByRole('navigation', { name: /chapters/i })
-      .getByRole('link', { name: /the hat/i })
+      .getByRole('navigation', { name: /book chapters/i })
+      .getByRole('link', { name: 'The Coat' })
       .click();
-    await expect(page).toHaveURL(/\/book\/hat\/?$/);
+    await expect(page).toHaveURL(/\/book\/coat\/?$/);
   });
 
   test('the guided views drive the building on the homepage', async ({
