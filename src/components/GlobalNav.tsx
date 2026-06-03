@@ -203,23 +203,29 @@ export function GlobalNav() {
             </Link>
           </div>
 
-          {/* Main Navigation — book-first: only the primary links on desktop. */}
-          <nav className="hidden items-center gap-1 lg:flex">
-            {primaryNavItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`btn btn-ghost btn-sm ${
-                  pathname === item.href ||
-                  (pathname?.startsWith(item.href + '/') && item.href !== '/')
-                    ? 'btn-active'
-                    : ''
-                }`}
-              >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
+          {/* Main Navigation — book-first. Inside the book the chapter tabs ARE
+              the nav (Hat/Coat/Boots) right in this row; Home/The Book move to
+              the overflow menu. Off the book, the primary links show here. */}
+          {isBookPage ? (
+            <ChapterNav className="flex" />
+          ) : (
+            <nav className="hidden items-center gap-1 lg:flex">
+              {primaryNavItems.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`btn btn-ghost btn-sm ${
+                    pathname === item.href ||
+                    (pathname?.startsWith(item.href + '/') && item.href !== '/')
+                      ? 'btn-active'
+                      : ''
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </nav>
+          )}
 
           {/* Right Section: Auth, Theme & PWA - Mobile-first spacing (PRP-017 T025) */}
           {/* Use flex-shrink-0 to prevent items from shrinking, overflow-hidden to prevent horizontal scroll */}
@@ -520,16 +526,6 @@ export function GlobalNav() {
           </div>
         </div>
       </nav>
-
-      {/* Second row: the book's chapter tabs (Hat / Coat / Boots), shown only
-          inside the book so the chapter nav lives in the navbar, not the viewer. */}
-      {isBookPage && (
-        <div className="border-base-300 border-t">
-          <div className="container mx-auto px-4">
-            <ChapterNav className="py-1" />
-          </div>
-        </div>
-      )}
     </header>
   );
 }

@@ -12,6 +12,10 @@ export interface LayerTogglesProps {
   onToggle: (layerId: string) => void;
   /** Accessible name for the toolbar group. */
   label?: string;
+  /** Layout: a vertical list (default), a horizontal wrapping chip strip, or
+   *  'responsive' — a vertical list below lg and a horizontal chip strip at lg
+   *  (one toolbar in the DOM, repositioned by CSS). */
+  orientation?: 'vertical' | 'horizontal' | 'responsive';
   className?: string;
 }
 
@@ -27,8 +31,11 @@ export default function LayerToggles({
   visibleIds,
   onToggle,
   label = 'Show or hide building parts',
+  orientation = 'vertical',
   className = '',
 }: LayerTogglesProps) {
+  const horizontal = orientation === 'horizontal';
+  const responsive = orientation === 'responsive';
   const refs = useRef<Array<HTMLButtonElement | null>>([]);
 
   function focusAt(index: number) {
@@ -72,8 +79,14 @@ export default function LayerToggles({
     <div
       role="toolbar"
       aria-label={label}
-      aria-orientation="vertical"
-      className={`flex flex-col gap-1${className ? ` ${className}` : ''}`}
+      aria-orientation={horizontal ? 'horizontal' : 'vertical'}
+      className={`flex ${
+        horizontal
+          ? 'flex-row flex-wrap gap-2'
+          : responsive
+            ? 'flex-col gap-1 lg:flex-row lg:flex-wrap lg:gap-2'
+            : 'flex-col gap-1'
+      }${className ? ` ${className}` : ''}`}
     >
       {layers.map((layer, i) => {
         const pressed = visibleIds.has(layer.id);
@@ -92,7 +105,11 @@ export default function LayerToggles({
             tabIndex={i === tabStopIndex ? 0 : -1}
             onClick={() => onToggle(layer.id)}
             onKeyDown={(e) => handleKeyDown(e, i)}
-            className={`flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-md border px-0 py-2 text-left text-sm transition-colors md:justify-start md:px-3 ${
+            className={`flex min-h-11 min-w-11 items-center gap-2 rounded-md border py-2 text-left text-sm transition-colors ${
+              horizontal
+                ? 'justify-start px-3'
+                : 'justify-center px-0 md:justify-start md:px-3'
+            } ${
               pressed
                 ? 'border-primary bg-primary/15 text-base-content'
                 : 'border-base-300 bg-base-200/40 text-base-content'
@@ -104,7 +121,9 @@ export default function LayerToggles({
                 pressed ? 'border-primary bg-primary' : 'border-base-content/40'
               }`}
             />
-            <span className="hidden md:inline">{layer.label}</span>
+            <span className={horizontal ? '' : 'hidden md:inline'}>
+              {layer.label}
+            </span>
           </button>
         );
       })}

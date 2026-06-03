@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900" width="1440" height="900" font-family="Georgia, 'Times New Roman', serif">
+  <rect width="1440" height="900" fill="#1a1a2e"/>
+  <text x="720" y="28" text-anchor="middle" fill="#8b97a8" font-size="16" font-family="sans-serif">01:02 | Option B — wordmark, building hero, narrative band overlaps up | book-editorial</text>
+  <!-- graph paper texture -->
+  <g stroke="#212137" stroke-width="1" opacity="0.7">
+    <line x1="0" y1="200" x2="1440" y2="200"/><line x1="0" y1="340" x2="1440" y2="340"/><line x1="0" y1="480" x2="1440" y2="480"/><line x1="0" y1="620" x2="1440" y2="620"/>
+    <line x1="240" y1="64" x2="240" y2="824"/><line x1="480" y1="64" x2="480" y2="824"/><line x1="720" y1="64" x2="720" y2="824"/><line x1="960" y1="64" x2="960" y2="824"/><line x1="1200" y1="64" x2="1200" y2="824"/>
+  </g>
+
+  <!-- navbar -->
+  <rect width="1440" height="64" fill="#16162a"/>
+  <line x1="0" y1="64" x2="1440" y2="64" stroke="#25254a"/>
+  <circle cx="40" cy="32" r="13" fill="#a8b2c1"/>
+  <text x="64" y="39" fill="#e8d4b8" font-size="20" font-weight="bold">HatCoatAndBoots</text>
+  <text x="520" y="39" fill="#a8b2c1" font-size="17">The Hat&#160;&#160;·&#160;&#160;</text>
+  <text x="640" y="39" fill="#38bdf8" font-size="17" font-weight="bold">The Coat</text>
+  <rect x="638" y="49" width="78" height="2.5" fill="#38bdf8"/>
+  <text x="744" y="39" fill="#a8b2c1" font-size="17">·&#160;&#160;The Boots</text>
+  <g fill="none" stroke="#a8b2c1" stroke-width="2"><circle cx="1330" cy="32" r="12"/><circle cx="1370" cy="32" r="12"/><circle cx="1410" cy="32" r="12"/></g>
+
+  <text x="640" y="92" fill="#5b6b7d" font-size="13" font-family="sans-serif" font-style="italic">OPTION B — big wordmark · building hero · narrative band overlaps up</text>
+
+  <!-- huge chapter wordmark -->
+  <text x="60" y="180" fill="#e8d4b8" font-size="78" font-weight="bold" letter-spacing="3">THE COAT</text>
+  <text x="64" y="214" fill="#8b97a8" font-size="18" font-style="italic">What a wall knows about the cold</text>
+
+  <!-- building hero with dramatic shadow -->
+  <ellipse cx="540" cy="650" rx="210" ry="26" fill="#000" opacity="0.5"/>
+  <polygon points="540,250 385,390 695,390" fill="#a8542f" stroke="#2d3a4a" stroke-width="2"/>
+  <rect x="450" y="390" width="180" height="250" fill="#3a3f4d" stroke="#e2e8f0" stroke-width="2"/>
+  <rect x="490" y="444" width="100" height="130" fill="#cfe3ee" stroke="#2d3a4a" stroke-width="1.5"/>
+  <rect x="470" y="402" width="16" height="238" fill="#5b86a8" opacity="0.85"/>
+  <rect x="468" y="640" width="44" height="34" fill="#9aa7b3"/><rect x="568" y="640" width="44" height="34" fill="#9aa7b3"/>
+
+  <!-- guided index right -->
+  <text x="930" y="260" fill="#a8b2c1" font-size="12" letter-spacing="2" font-family="sans-serif">GUIDED VIEWS</text>
+  <g font-family="sans-serif" font-size="18" fill="#e2e8f0">
+    <text x="930" y="300" fill="#38bdf8" font-weight="bold">①  The Whole System</text>
+    <rect x="924" y="312" width="220" height="2.5" fill="#38bdf8"/>
+    <text x="930" y="352" fill="#cbd3df">②  The Problem</text>
+    <text x="930" y="392" fill="#cbd3df">③  The Fix</text>
+    <text x="930" y="432" fill="#cbd3df">④  The Bonus</text>
+  </g>
+  <rect x="924" y="462" width="210" height="40" rx="20" fill="#16162a" stroke="#25254a"/>
+  <text x="946" y="487" fill="#a8b2c1" font-size="14" font-family="sans-serif">⌃  how to read it</text>
+  <!-- layer chips -->
+  <g font-family="sans-serif" font-size="13" fill="#e2e8f0">
+    <rect x="924" y="524" width="80" height="32" rx="16" fill="#25254a"/><text x="939" y="545">● wall</text>
+    <rect x="1012" y="524" width="98" height="32" rx="16" fill="#25254a"/><text x="1027" y="545">● window</text>
+    <rect x="924" y="564" width="120" height="32" rx="16" fill="#1d3a55"/><text x="939" y="585" fill="#9fd0ee">● insulation</text>
+  </g>
+
+  <!-- narrative band overlapping UP into the fold -->
+  <rect x="60" y="700" width="1320" height="118" rx="14" fill="#12121e" stroke="#38bdf8" stroke-width="2"/>
+  <text x="92" y="740" fill="#e8d4b8" font-size="24" font-weight="bold">The Whole System</text>
+  <g fill="#e2e8f0" font-size="18">
+    <text x="92" y="772">Here is the whole system: framing surrounded by cavity insulation, wrapped in a continuous outer</text>
+    <text x="92" y="798">layer, sealed by an air-and-vapor membrane, and backed by thermal mass. Each layer has a job.</text>
+  </g>
+
+  <!-- footer sources -->
+  <text x="60" y="858" fill="#8b97a8" font-size="14" font-family="sans-serif">Sources: DOE · Building Science Corp · LBNL · ICC IECC</text>
+</svg>
