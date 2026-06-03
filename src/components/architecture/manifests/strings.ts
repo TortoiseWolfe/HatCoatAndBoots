@@ -51,6 +51,20 @@ export const hatStrings = {
     'how-it-sheds-water': 'The Bonus: Rain Thrown Clear',
   } as Record<string, string>,
 
+  /** Short per-view takeaway — the lesson distilled to a line or two for the
+   *  card beside the building. Restates the matching `presetDescriptions` entry
+   *  (no new claims); both change together as the reader steps through views. */
+  presetTakeaways: {
+    everything:
+      'One building, six parts, each with a job. Step through the views to see how the roof earns its keep.',
+    'bare-wall':
+      'No overhang: the high summer sun pours straight through the glass and bakes the room. This is the problem.',
+    'roof-line':
+      'One fixed roof edge. Summer sun is blocked, winter sun slips underneath. Two seasons, no moving parts.',
+    'how-it-sheds-water':
+      'The eave also throws rain clear of the wall — so water never pools at the foundation. The hat keeps the boots dry.',
+  } as Record<string, string>,
+
   /** Guided-view explanations (announced via aria-live), keyed by preset id. */
   presetDescriptions: {
     everything:
