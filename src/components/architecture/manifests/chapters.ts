@@ -19,14 +19,14 @@ export const chapters: ChapterFocusRecord[] = [
     id: 'coat',
     label: 'Coat',
     region: 'envelope',
-    available: false,
+    available: true,
     href: '/book/coat',
   },
   {
     id: 'boots',
     label: 'Boots',
     region: 'foundation',
-    available: false,
+    available: true,
     href: '/book/boots',
   },
 ];

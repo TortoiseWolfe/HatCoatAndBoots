@@ -22,13 +22,13 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const IndexNeutral: Story = {
-  args: { chapterFocus: null, activeChapterId: null },
+  args: { chapterFocus: null },
 };
 
 export const HatFocus: Story = {
-  args: { chapterFocus: 'roof', activeChapterId: 'hat' },
+  args: { chapterFocus: 'roof' },
 };
 
-export const CoatComingSoon: Story = {
-  args: { chapterFocus: 'envelope', activeChapterId: 'coat' },
+export const EnvelopeFocus: Story = {
+  args: { chapterFocus: 'envelope' },
 };

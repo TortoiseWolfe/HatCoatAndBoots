@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import ErrorBoundary from '@/components/ErrorBoundary';
 import BookShell from '@/components/architecture/BookShell';
+import { hatManifest } from '@/components/architecture/manifests/hat.manifest';
 import { hatStrings } from '@/components/architecture/manifests/strings';
 
 export const metadata: Metadata = {
@@ -42,7 +43,7 @@ export default function HatChapterPage() {
               sources. One short row, not a duplicate of the changing text. */}
           <BookShell
             chapterFocus="roof"
-            activeChapterId="hat"
+            manifest={hatManifest}
             className="flex-1"
             narrative={
               <section

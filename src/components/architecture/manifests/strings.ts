@@ -105,6 +105,28 @@ export const hatStrings = {
     'lbl-boots': 'BOOTS',
   } as Record<string, string>,
 
+  /** "How to read it" legend — keys the drawing's invisible-physics marks.
+   *  Colours mirror the actual SVG strokes. */
+  legend: [
+    {
+      color: '#e8a02e',
+      label: 'Summer sun',
+      hint: 'high & hot — blocked by the eave',
+      dashed: true,
+    },
+    {
+      color: '#e6b455',
+      label: 'Winter sun',
+      hint: 'low & welcome — slips underneath',
+    },
+    {
+      color: '#5b86a8',
+      label: 'Rain',
+      hint: 'thrown clear of the wall',
+      dashed: true,
+    },
+  ],
+
   /** Sources section heading + citations (verified in Step 0). */
   sourcesHeading: 'Sources',
   sources: [

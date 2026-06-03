@@ -2,14 +2,16 @@ import { test, expect, type Page } from '@playwright/test';
 
 /**
  * The spec's core promise (FR-001a / SC-009): it is ONE building in one
- * coordinate space, and the SAME viewer shell on every page — so the building is
- * byte-identically positioned and sized on the index/home, Hat, Coat, and Boots
- * pages. Navigating between them must NOT move or resize the building. This spec
- * loads all four pages and asserts a shared building element (the wall) occupies
- * the same on-screen rectangle on each.
+ * coordinate space, so navigating between the CHAPTERS (Hat ↔ Coat ↔ Boots)
+ * must NOT move or resize the building — it stays byte-identically registered.
+ * This is the invariant that makes the three focuses read as one house.
+ *
+ * The home/index (`/`) is the neutral state and is NOT a chapter, so it does not
+ * carry the chapter navbar row; its building therefore sits the navbar-row height
+ * higher (same x / width / height, different y). We assert that separately.
  */
 
-const PAGES = ['/', '/book/hat/', '/book/coat/', '/book/boots/'];
+const CHAPTER_PAGES = ['/book/hat/', '/book/coat/', '/book/boots/'];
 
 async function wallBox(page: Page, url: string) {
   await page.goto(url);
@@ -22,22 +24,35 @@ async function wallBox(page: Page, url: string) {
   return box;
 }
 
-test.describe('Book — one building, aligned on every page', () => {
-  test('the building is identically positioned and sized across all pages', async ({
+test.describe('Book — one building, aligned across chapters', () => {
+  test('the building is byte-identical across Hat, Coat, and Boots', async ({
     page,
   }) => {
     // Fixed viewport so absolute coordinates are comparable.
     await page.setViewportSize({ width: 1440, height: 900 });
 
-    const reference = await wallBox(page, PAGES[0]);
+    const reference = await wallBox(page, CHAPTER_PAGES[0]);
 
-    for (const url of PAGES.slice(1)) {
+    for (const url of CHAPTER_PAGES.slice(1)) {
       const box = await wallBox(page, url);
-      // Same position AND size as the home/index page (allow 1px sub-pixel slack).
+      // Same rectangle (position AND size) as the Hat chapter (1px sub-pixel slack).
       expect(box.x, `x on ${url}`).toBeCloseTo(reference.x, 0);
       expect(box.y, `y on ${url}`).toBeCloseTo(reference.y, 0);
       expect(box.width, `width on ${url}`).toBeCloseTo(reference.width, 0);
       expect(box.height, `height on ${url}`).toBeCloseTo(reference.height, 0);
     }
+  });
+
+  test('the home/index building shares the chapters’ x, width and height', async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    const chapter = await wallBox(page, CHAPTER_PAGES[0]);
+    const home = await wallBox(page, '/');
+    // Same coordinate space — only the vertical offset differs because the
+    // index has no chapter navbar row above the viewer.
+    expect(home.x, 'home x').toBeCloseTo(chapter.x, 0);
+    expect(home.width, 'home width').toBeCloseTo(chapter.width, 0);
+    expect(home.height, 'home height').toBeCloseTo(chapter.height, 0);
   });
 });

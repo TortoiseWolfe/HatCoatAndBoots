@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 360" width="360" height="360" role="img" aria-hidden="true">
+  <!-- COAT (the lesson): insulation packed into the stud cavities of the wall.
+       Drawn inside the shared wall envelope (wall body x=150..242, y=120..300),
+       between the studs, as a warm amber batt texture. Language-neutral; the
+       words are HTML overlays. Shared 0 0 360 360 space. -->
+  <defs>
+    <pattern id="coat-batt" width="10" height="14" patternUnits="userSpaceOnUse">
+      <path d="M0 0 Q5 7 0 14 M10 0 Q5 7 10 14" fill="none" stroke="#c9a86a" stroke-width="1.4" opacity="0.85"/>
+    </pattern>
+  </defs>
+  <!-- stud lines (the framing the insulation fills between) -->
+  <g stroke="#8a6f3f" stroke-width="3" opacity="0.85">
+    <line x1="162" y1="124" x2="162" y2="296"/>
+    <line x1="196" y1="124" x2="196" y2="296"/>
+    <line x1="230" y1="124" x2="230" y2="296"/>
+  </g>
+  <!-- batt fill in the three bays (warm amber), avoiding the window opening -->
+  <rect x="153" y="124" width="84" height="22" fill="url(#coat-batt)"/>
+  <rect x="153" y="248" width="84" height="48" fill="url(#coat-batt)"/>
+  <!-- left bay full height (window is on the right/sunny face) -->
+  <rect x="153" y="124" width="30" height="172" fill="url(#coat-batt)"/>
+</svg>

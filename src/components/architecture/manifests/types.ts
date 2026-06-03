@@ -85,6 +85,22 @@ export interface DiagramPreset {
   visibleLayerIds: string[];
 }
 
+/**
+ * One row of the chapter's "How to read it" legend — keys an invisible-physics
+ * mark in the drawing (a coloured line glyph) to what it means. Per-chapter, so
+ * the Coat/Boots legends never show the Hat's sun/rain rows.
+ */
+export interface LegendEntry {
+  /** Swatch colour; mirrors the actual SVG stroke of the thing being keyed. */
+  color: string;
+  /** Short bold name (resolved EN). */
+  label: string;
+  /** One-line plain-language hint (resolved EN). */
+  hint: string;
+  /** Draw the swatch as a broken line (the "blocked / falling / break" mark). */
+  dashed?: boolean;
+}
+
 /** The single region-tagged building + its guided views (the "Building"). */
 export interface DiagramManifest {
   /** Building identity, e.g. `'house-cross-section'`. */
@@ -101,6 +117,8 @@ export interface DiagramManifest {
   presets: DiagramPreset[];
   /** The default preset id; must resolve to an existing preset (`'everything'`). */
   defaultPresetId: string;
+  /** Optional "How to read it" legend rows for this chapter (omit → no legend). */
+  legend?: readonly LegendEntry[];
 }
 
 /**

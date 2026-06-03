@@ -189,6 +189,7 @@ export const hatManifest: DiagramManifest = {
   labels,
   presets,
   defaultPresetId: 'everything',
+  legend: hatStrings.legend,
 };
 
 // --- Compile-time allow-list guard (preset ids ⊆ layer ids) -----------------

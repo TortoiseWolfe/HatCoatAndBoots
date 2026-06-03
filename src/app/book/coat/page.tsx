@@ -1,19 +1,23 @@
 import type { Metadata } from 'next';
 import ErrorBoundary from '@/components/ErrorBoundary';
 import BookShell from '@/components/architecture/BookShell';
+import { coatManifest } from '@/components/architecture/manifests/coat.manifest';
+import { coatStrings } from '@/components/architecture/manifests/coat.strings';
 
 export const metadata: Metadata = {
-  title: 'The Coat — Hats, Coats, and Boots',
-  description:
-    'The insulated thermal envelope — the walls that hold comfort in. Coming soon.',
+  title: coatStrings.chapterTitle,
+  description: coatStrings.chapterSubtitle,
 };
 
 /**
- * `/book/coat` — envelope focus. The SAME shared viewer as every page (FR-007):
- * the whole building stays visible and byte-identically positioned, focused on
- * the wall/window (envelope) region, while the chapter's teaching content shows
- * a "coming soon" state in the rail. NOT a blank page — the building is here and
- * aligned with the Hat and Boots views.
+ * `/book/coat` — envelope focus. The SAME BookShell as every book page, driven by
+ * the Coat manifest (which shares the identical wall/window/footing/roof geometry
+ * so the building stays byte-identically registered, FR-001a / SC-009). The
+ * changing per-view explanation is the full-width band owned by LayeredDiagram;
+ * the `narrative` slot carries only the compact chapter-level extras (the <h1> +
+ * tagline + sources), which are plain SSR'd HTML so the heading, a key line, and
+ * a sources link are readable with JavaScript disabled (the no-JS gate).
+ * Prose is web-research fact-checked (see coat.strings.ts header).
  */
 export default function CoatChapterPage() {
   return (
@@ -32,23 +36,41 @@ export default function CoatChapterPage() {
         <ErrorBoundary level="section">
           <BookShell
             chapterFocus="envelope"
-            activeChapterId="coat"
+            manifest={coatManifest}
             className="flex-1"
             narrative={
-              <div>
+              <section
+                aria-label="About this chapter"
+                className="text-base-content flex flex-wrap items-baseline gap-x-3 gap-y-1 text-xs"
+              >
                 <h1
-                  className="text-base leading-tight font-bold"
+                  className="text-sm font-bold"
                   style={{ fontFamily: 'var(--font-blueprint)' }}
                 >
-                  The Coat — the insulated walls
+                  {coatStrings.chapterTitle}
                 </h1>
-                <p className="text-base-content mt-2 leading-relaxed">
-                  The thermal envelope that keeps warmth in and weather out.
-                  This chapter is <strong>coming soon</strong> — but the wall
-                  and window are already part of the building beside this text;
-                  explore the whole structure while you wait.
-                </p>
-              </div>
+                <span className="text-base-content italic">
+                  warmth in, moisture out — without a furnace.
+                </span>
+                <span className="text-base-content ml-auto">
+                  <span className="font-semibold">
+                    {coatStrings.sourcesHeading}:{' '}
+                  </span>
+                  {coatStrings.sources.map((src, i) => (
+                    <span key={src.url}>
+                      {i > 0 && ' · '}
+                      <a
+                        href={src.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="link"
+                      >
+                        {src.title}
+                      </a>
+                    </span>
+                  ))}
+                </span>
+              </section>
             }
           />
         </ErrorBoundary>

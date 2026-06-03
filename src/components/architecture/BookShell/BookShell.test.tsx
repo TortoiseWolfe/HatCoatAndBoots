@@ -10,20 +10,18 @@ describe('BookShell', () => {
     ).toBeGreaterThanOrEqual(6);
   });
 
-  it('renders the chapter-focus tabs and the page-specific narrative content', () => {
+  it('renders the page-specific narrative content (chapter nav now lives in the navbar)', () => {
     render(
-      <BookShell
-        chapterFocus="roof"
-        activeChapterId="hat"
-        narrative={<p>chapter intro here</p>}
-      />
+      <BookShell chapterFocus="roof" narrative={<p>chapter intro here</p>} />
     );
-    expect(
-      screen.getByRole('navigation', { name: /chapters/i })
-    ).toBeInTheDocument();
     // The narrative content (chapter-level extras) is rendered once under the
     // viewer's full-width narrative band — present and visible.
     expect(screen.getByText('chapter intro here')).toBeInTheDocument();
+    // The chapter nav (Hat/Coat/Boots) is NO LONGER in BookShell — it moved to
+    // the navbar (GlobalNav → ChapterNav).
+    expect(
+      screen.queryByRole('navigation', { name: /chapters/i })
+    ).not.toBeInTheDocument();
   });
 
   it('applies a custom className', () => {

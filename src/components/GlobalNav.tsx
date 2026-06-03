@@ -7,6 +7,7 @@ import { LayeredHatCoatAndBootsLogo } from '@/components/atomic/SpinningLogo';
 import { AnimatedLogo } from '@/components/atomic/AnimatedLogo';
 import { ColorblindToggle } from '@/components/molecular/ColorblindToggle';
 import { FontSizeControl } from '@/components/navigation/FontSizeControl';
+import ChapterNav from '@/components/architecture/ChapterNav';
 import { detectedConfig } from '@/config/project-detected';
 import { useAuth } from '@/contexts/AuthContext';
 import { useUserProfile } from '@/hooks/useUserProfile';
@@ -22,6 +23,9 @@ interface BeforeInstallPromptEvent extends Event {
 
 export function GlobalNav() {
   const pathname = usePathname();
+  // The chapter nav (Hat/Coat/Boots) appears as a second navbar row only inside
+  // the book, so the global header stays uncluttered everywhere else.
+  const isBookPage = (pathname ?? '').startsWith('/book');
   const { user, signOut } = useAuth();
   const { profile } = useUserProfile();
   const unreadCount = useUnreadCount();
@@ -516,6 +520,16 @@ export function GlobalNav() {
           </div>
         </div>
       </nav>
+
+      {/* Second row: the book's chapter tabs (Hat / Coat / Boots), shown only
+          inside the book so the chapter nav lives in the navbar, not the viewer. */}
+      {isBookPage && (
+        <div className="border-base-300 border-t">
+          <div className="container mx-auto px-4">
+            <ChapterNav className="py-1" />
+          </div>
+        </div>
+      )}
     </header>
   );
 }
