@@ -210,6 +210,44 @@
   transition: opacity 0.3s ease;
 }
 
+/* The building stage's subtle graph-paper backdrop (the "drafting table" feel).
+ * Pure CSS gradient lines over the theme's base; faint enough to never affect
+ * text contrast (no text sits on it — only the SVG layers). */
+.book-stage {
+  background-image:
+    linear-gradient(
+      to right,
+      color-mix(in oklch, var(--color-base-content) 7%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      color-mix(in oklch, var(--color-base-content) 7%, transparent) 1px,
+      transparent 1px
+    );
+  background-size: 28px 28px;
+}
+
+/* "How to read it" legend disclosure (Option A). A native <details>/<summary>,
+ * closed by default — the reader expands it to reveal the keys. Works with no
+ * JavaScript (the browser toggles <details> natively); the caret rotates when
+ * open, gated on reduced motion. */
+.legend-disclosure > summary {
+  user-select: none;
+}
+.legend-disclosure .legend-caret {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+.legend-disclosure[open] .legend-caret {
+  transform: rotate(90deg);
+}
+@media (prefers-reduced-motion: reduce) {
+  .legend-disclosure .legend-caret {
+    transition: none;
+  }
+}
+
 /* Blueprint display face for the book's "illustrated blueprint" chapters
  * (feature 048, FR-013a). Self-hosted with a declared system-font fallback and
  * NO third-party request: resolves first to a locally-available characterful
