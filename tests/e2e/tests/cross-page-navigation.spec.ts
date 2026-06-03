@@ -406,19 +406,23 @@ test.describe('Cross-Page Navigation', () => {
   });
 
   test('active navigation item is highlighted', async ({ page }) => {
-    await page.goto('/book', { waitUntil: 'domcontentloaded' });
+    // Inside the book the navbar shows the chapter tabs (Hat/Coat/Boots) instead
+    // of Home/The Book. On /book/hat the "The Hat" tab is the active one and
+    // carries aria-current="page".
+    await page.goto('/book/hat/', { waitUntil: 'domcontentloaded' });
     await dismissCookieBanner(page);
 
-    // The book-first header keeps Home + The Book in the desktop bar. On /book,
-    // "The Book" is the active primary link and carries DaisyUI's btn-active.
-    const bookLink = page
-      .getByRole('navigation')
-      .getByRole('link', { name: 'The Book' })
-      .first();
-    await expect(bookLink).toBeVisible();
-    const className = (await bookLink.getAttribute('class')) ?? '';
-    const ariaCurrent = await bookLink.getAttribute('aria-current');
-    expect(className.includes('active') || ariaCurrent === 'page').toBe(true);
+    const hatTab = page
+      .getByRole('navigation', { name: /book chapters/i })
+      .getByRole('link', { name: 'The Hat' });
+    await expect(hatTab).toBeVisible();
+    await expect(hatTab).toHaveAttribute('aria-current', 'page');
+
+    // A non-active chapter tab is not marked current.
+    const coatTab = page
+      .getByRole('navigation', { name: /book chapters/i })
+      .getByRole('link', { name: 'The Coat' });
+    await expect(coatTab).not.toHaveAttribute('aria-current');
   });
 
   test('secondary pages are reachable from the overflow "more" menu', async ({
