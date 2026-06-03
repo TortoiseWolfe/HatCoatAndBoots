@@ -13,18 +13,21 @@ const presets: DiagramPreset[] = [
     id: 'everything',
     label: 'Full Picture',
     description: 'Everything explanation.',
+    takeaway: 'Everything takeaway.',
     visibleLayerIds: ['wall', 'roof-overhang'],
   },
   {
     id: 'bare-wall',
     label: 'No Roof Yet',
     description: 'Bare wall explanation.',
+    takeaway: 'Bare wall takeaway.',
     visibleLayerIds: ['wall'],
   },
   {
     id: 'roof-line',
     label: 'One Roof, Two Seasons',
     description: 'Roof line explanation.',
+    takeaway: 'Roof line takeaway.',
     visibleLayerIds: ['wall', 'roof-overhang'],
   },
 ];

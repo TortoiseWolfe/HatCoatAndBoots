@@ -139,6 +139,7 @@ const presets: DiagramPreset[] = [
     id: 'everything',
     label: hatStrings.presetLabels['everything'],
     description: hatStrings.presetDescriptions['everything'],
+    takeaway: hatStrings.presetTakeaways['everything'],
     visibleLayerIds: [
       'sun-high',
       'sun-low',
@@ -154,18 +155,21 @@ const presets: DiagramPreset[] = [
     id: 'bare-wall',
     label: hatStrings.presetLabels['bare-wall'],
     description: hatStrings.presetDescriptions['bare-wall'],
+    takeaway: hatStrings.presetTakeaways['bare-wall'],
     visibleLayerIds: ['footing', 'wall', 'window', 'labels'],
   },
   {
     id: 'roof-line',
     label: hatStrings.presetLabels['roof-line'],
     description: hatStrings.presetDescriptions['roof-line'],
+    takeaway: hatStrings.presetTakeaways['roof-line'],
     visibleLayerIds: ['footing', 'wall', 'window', 'roof-overhang', 'labels'],
   },
   {
     id: 'how-it-sheds-water',
     label: hatStrings.presetLabels['how-it-sheds-water'],
     description: hatStrings.presetDescriptions['how-it-sheds-water'],
+    takeaway: hatStrings.presetTakeaways['how-it-sheds-water'],
     visibleLayerIds: [
       'footing',
       'wall',

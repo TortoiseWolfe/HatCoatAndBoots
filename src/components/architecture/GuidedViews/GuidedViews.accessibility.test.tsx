@@ -11,12 +11,14 @@ const presets: DiagramPreset[] = [
     id: 'everything',
     label: 'Full Picture',
     description: 'Everything explanation.',
+    takeaway: 'Everything takeaway.',
     visibleLayerIds: ['wall'],
   },
   {
     id: 'bare-wall',
     label: 'No Roof Yet',
     description: 'Bare wall explanation.',
+    takeaway: 'Bare wall takeaway.',
     visibleLayerIds: ['wall'],
   },
 ];

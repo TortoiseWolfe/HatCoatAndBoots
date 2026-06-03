@@ -184,7 +184,11 @@ export default function LayeredDiagram({
           screen with no horizontal scroll; md/lg widen them to 48/–/48 then the
           true 25/55/20. gap shrinks on mobile to buy column width. */}
       <div className="flex min-h-0 flex-row flex-nowrap items-start gap-2 sm:gap-3 lg:gap-4">
-        {/* LEFT: chapter nav (slim) → the guided-view plates. */}
+        {/* LEFT: chapter nav (slim) → the guided-view plates → the takeaway card.
+            The card fills the empty lower-left beside the building and CHANGES
+            with the view (alongside the full-width band below). Hidden below lg —
+            on small screens the band carries the lesson and the column is too
+            narrow for a card. */}
         <div className="order-1 flex w-[26%] min-w-0 flex-col gap-3 md:w-[24%] lg:w-1/4">
           {leftRail}
           {interactive && (
@@ -198,6 +202,23 @@ export default function LayeredDiagram({
                 onSelect={selectPreset}
               />
             </div>
+          )}
+          {interactive && activePreset?.takeaway && (
+            <aside
+              aria-live="polite"
+              data-testid="guided-view-takeaway"
+              className="border-base-300 bg-base-100/60 hidden rounded-xl border px-4 py-3 lg:block"
+            >
+              <h3
+                className="text-base-content text-sm font-bold tracking-wide"
+                style={{ fontFamily: 'var(--font-blueprint)' }}
+              >
+                {activePreset.label}
+              </h3>
+              <p className="text-base-content mt-1 text-sm leading-relaxed">
+                {activePreset.takeaway}
+              </p>
+            </aside>
           )}
         </div>
 

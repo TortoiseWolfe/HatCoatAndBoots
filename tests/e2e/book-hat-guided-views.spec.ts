@@ -21,12 +21,25 @@ import { dismissCookieBanner } from './utils/test-user-factory';
 const HAT = '/book/hat/';
 
 const VIEWS = [
-  { label: 'The Whole System', snippet: 'whole system at a glance' },
-  { label: 'The Problem: Summer Glare', snippet: 'no overhang at all' },
-  { label: 'The Fix: Two Seasons, One Roof', snippet: 'add the overhang' },
+  {
+    label: 'The Whole System',
+    snippet: 'whole system at a glance',
+    takeaway: 'each with a job',
+  },
+  {
+    label: 'The Problem: Summer Glare',
+    snippet: 'no overhang at all',
+    takeaway: 'bakes the room',
+  },
+  {
+    label: 'The Fix: Two Seasons, One Roof',
+    snippet: 'add the overhang',
+    takeaway: 'no moving parts',
+  },
   {
     label: 'The Bonus: Rain Thrown Clear',
     snippet: 'lands away from the base of the wall',
+    takeaway: 'keeps the boots dry',
   },
 ];
 
@@ -36,13 +49,17 @@ test.describe('Hat chapter — guided views', () => {
   }) => {
     await page.goto(HAT);
     await dismissCookieBanner(page);
-    // The chapter's own explanation region (scoped — the page has other live regions).
-    const live = page.getByTestId('guided-view-description');
+    // Both per-view regions update together: the full-width band (description)
+    // and the lower-left takeaway card. (The card is desktop-only; this project
+    // runs at a desktop viewport, so it is present.)
+    const band = page.getByTestId('guided-view-description');
+    const card = page.getByTestId('guided-view-takeaway');
 
     for (const view of VIEWS) {
       await page.getByRole('radio', { name: view.label }).click();
       await expect(page.getByRole('radio', { name: view.label })).toBeChecked();
-      await expect(live).toContainText(view.snippet);
+      await expect(band).toContainText(view.snippet);
+      await expect(card).toContainText(view.takeaway);
     }
   });
 

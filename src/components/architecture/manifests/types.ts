@@ -74,6 +74,9 @@ export interface DiagramPreset {
   label: string;
   /** Resolved EN explanation, announced via `aria-live` while active (FR-003). */
   description: string;
+  /** Short distilled takeaway for the card beside the building; changes with the
+   *  view alongside `description` (restates it, no new claims). */
+  takeaway: string;
   /**
    * The exact layer ids this view makes visible.
    * Invariant: every id MUST exist in `manifest.layers` (preset ids ⊆ layer ids),
