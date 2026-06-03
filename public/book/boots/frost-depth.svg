@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 360" width="360" height="360" role="img" aria-hidden="true">
+  <!-- BOOTS (the lesson): the frost line — a dashed horizontal below grade with a
+       lightly shaded freeze zone above it — showing that the footing must reach
+       BELOW it. Ground line y=300; footing pads at y=330..340 sit below the frost
+       line drawn at y=322. Depth is climate-specific (the words say so). Shared
+       0 0 360 360 space. -->
+  <!-- freeze zone shading (between grade y=300 and the frost line y=322) -->
+  <rect x="40" y="300" width="280" height="22" fill="#bcd3e6" opacity="0.45"/>
+  <!-- the dashed frost line, full width -->
+  <line x1="40" y1="322" x2="320" y2="322" stroke="#5b86a8" stroke-width="2.4" stroke-dasharray="7 5" stroke-linecap="round"/>
+  <!-- ice crystal ticks in the freeze zone -->
+  <g stroke="#7fb0d6" stroke-width="1.4" stroke-linecap="round" opacity="0.85">
+    <path d="M70 308 l0 8 M66 312 l8 0 M67 309 l6 6 M73 309 l-6 6"/>
+    <path d="M300 308 l0 8 M296 312 l8 0 M297 309 l6 6 M303 309 l-6 6"/>
+  </g>
+  <!-- arrow pointing to the footing safely below the line -->
+  <g stroke="#2d3a4a" stroke-width="1.8" fill="none" stroke-linecap="round">
+    <path d="M186 326 L186 338"/>
+    <path d="M182 334 l4 5 l4 -5"/>
+  </g>
+</svg>

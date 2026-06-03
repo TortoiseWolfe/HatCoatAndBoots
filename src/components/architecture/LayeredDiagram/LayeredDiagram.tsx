@@ -39,40 +39,6 @@ export interface LayeredDiagramProps {
 
 const CUSTOM = 'custom';
 
-/**
- * "How to read the drawing" legend — keys the three invisible-physics marks a
- * reader can't decode from the picture alone (which ray is which season, what
- * the dashes mean). Colours mirror the actual SVG strokes
- * (sun-high `#e8a02e`, sun-low `#e6b455`, rain `#5b86a8`). It sits under the
- * layer toggles, filling the right column beside the building's lower third and
- * balancing the chapter narrative on the left. `swatch` is the legend glyph;
- * `dashed` draws it as a broken line (the "blocked / falling" convention).
- */
-const LEGEND: ReadonlyArray<{
-  color: string;
-  label: string;
-  hint: string;
-  dashed?: boolean;
-}> = [
-  {
-    color: '#e8a02e',
-    label: 'Summer sun',
-    hint: 'high & hot — blocked by the eave',
-    dashed: true,
-  },
-  {
-    color: '#e6b455',
-    label: 'Winter sun',
-    hint: 'low & welcome — slips underneath',
-  },
-  {
-    color: '#5b86a8',
-    label: 'Rain',
-    hint: 'thrown clear of the wall',
-    dashed: true,
-  },
-];
-
 function resolveInitialPreset(
   manifest: DiagramManifest,
   initialPresetId?: string
@@ -296,45 +262,49 @@ export default function LayeredDiagram({
                 </span>
               </button>
 
-              {/* The legend is supplementary; hide it below md so the narrow
-                  mobile column stays short (the narrative band carries the lesson). */}
-              <div className="border-base-300 mt-1 hidden border-t pt-3 md:block">
-                <h2 className="text-base-content mb-2 text-xs font-bold tracking-wider uppercase">
-                  How to read it
-                </h2>
-                <ul className="flex flex-col gap-2.5">
-                  {LEGEND.map((item) => (
-                    <li key={item.label} className="flex items-start gap-3">
-                      <svg
-                        width="34"
-                        height="14"
-                        viewBox="0 0 34 14"
-                        aria-hidden="true"
-                        className="mt-0.5 shrink-0"
-                      >
-                        <line
-                          x1="1"
-                          y1="7"
-                          x2="33"
-                          y2="7"
-                          stroke={item.color}
-                          strokeWidth="3"
-                          strokeLinecap="round"
-                          strokeDasharray={item.dashed ? '5 4' : undefined}
-                        />
-                      </svg>
-                      <span className="leading-snug">
-                        <span className="text-base-content text-sm font-semibold">
-                          {item.label}
+              {/* The legend is per-chapter (from the manifest) and supplementary;
+                  hide it below md so the narrow mobile column stays short (the
+                  narrative band carries the lesson). Omitted when a chapter has
+                  no legend. */}
+              {manifest.legend && manifest.legend.length > 0 && (
+                <div className="border-base-300 mt-1 hidden border-t pt-3 md:block">
+                  <h2 className="text-base-content mb-2 text-xs font-bold tracking-wider uppercase">
+                    How to read it
+                  </h2>
+                  <ul className="flex flex-col gap-2.5">
+                    {manifest.legend.map((item) => (
+                      <li key={item.label} className="flex items-start gap-3">
+                        <svg
+                          width="34"
+                          height="14"
+                          viewBox="0 0 34 14"
+                          aria-hidden="true"
+                          className="mt-0.5 shrink-0"
+                        >
+                          <line
+                            x1="1"
+                            y1="7"
+                            x2="33"
+                            y2="7"
+                            stroke={item.color}
+                            strokeWidth="3"
+                            strokeLinecap="round"
+                            strokeDasharray={item.dashed ? '5 4' : undefined}
+                          />
+                        </svg>
+                        <span className="leading-snug">
+                          <span className="text-base-content text-sm font-semibold">
+                            {item.label}
+                          </span>
+                          <span className="text-base-content block text-xs">
+                            {item.hint}
+                          </span>
                         </span>
-                        <span className="text-base-content block text-xs">
-                          {item.hint}
-                        </span>
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </>
           )}
         </div>

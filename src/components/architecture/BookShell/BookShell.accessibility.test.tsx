@@ -13,9 +13,7 @@ describe('BookShell Accessibility', () => {
   });
 
   it('has no violations in a chapter focus state', async () => {
-    const { container } = render(
-      <BookShell chapterFocus="roof" activeChapterId="hat" />
-    );
+    const { container } = render(<BookShell chapterFocus="roof" />);
     const results = await axe(container);
     expect(results).toHaveNoViolations();
   });

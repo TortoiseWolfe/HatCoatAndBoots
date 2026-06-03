@@ -40,7 +40,6 @@ export default function Home() {
         <ErrorBoundary level="section">
           <BookShell
             chapterFocus={null}
-            activeChapterId={null}
             className="flex-1"
             narrative={
               <div>

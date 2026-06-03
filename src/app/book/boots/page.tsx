@@ -1,19 +1,24 @@
 import type { Metadata } from 'next';
 import ErrorBoundary from '@/components/ErrorBoundary';
 import BookShell from '@/components/architecture/BookShell';
+import { bootsManifest } from '@/components/architecture/manifests/boots.manifest';
+import { bootsStrings } from '@/components/architecture/manifests/boots.strings';
 
 export const metadata: Metadata = {
-  title: 'The Boots — Hats, Coats, and Boots',
-  description:
-    'The foundation that lifts the structure above wet ground. Coming soon.',
+  title: bootsStrings.chapterTitle,
+  description: bootsStrings.chapterSubtitle,
 };
 
 /**
- * `/book/boots` — foundation focus. The SAME shared viewer as every page
- * (FR-007): the whole building stays visible and byte-identically positioned,
- * focused on the footing (foundation) region, while the chapter's teaching
- * content shows a "coming soon" state in the rail. NOT a blank page — the
- * building is here and aligned with the Hat and Coat views.
+ * `/book/boots` — foundation focus. The SAME BookShell as every book page, driven
+ * by the Boots manifest (which shares the identical wall/window/footing/roof
+ * geometry so the building stays byte-identically registered, FR-001a / SC-009).
+ * The changing per-view explanation is the full-width band owned by
+ * LayeredDiagram; the `narrative` slot carries only the compact chapter-level
+ * extras (the <h1> + tagline + sources), plain SSR'd HTML so the heading, a key
+ * line, and a sources link are readable with JavaScript disabled (the no-JS gate).
+ * Prose is web-research fact-checked (see boots.strings.ts header); frost depth is
+ * always stated as set by local code, never a universal number.
  */
 export default function BootsChapterPage() {
   return (
@@ -32,23 +37,41 @@ export default function BootsChapterPage() {
         <ErrorBoundary level="section">
           <BookShell
             chapterFocus="foundation"
-            activeChapterId="boots"
+            manifest={bootsManifest}
             className="flex-1"
             narrative={
-              <div>
+              <section
+                aria-label="About this chapter"
+                className="text-base-content flex flex-wrap items-baseline gap-x-3 gap-y-1 text-xs"
+              >
                 <h1
-                  className="text-base leading-tight font-bold"
+                  className="text-sm font-bold"
                   style={{ fontFamily: 'var(--font-blueprint)' }}
                 >
-                  The Boots — the foundation
+                  {bootsStrings.chapterTitle}
                 </h1>
-                <p className="text-base-content mt-2 leading-relaxed">
-                  What lifts the structure off the wet ground and keeps it
-                  standing dry. This chapter is <strong>coming soon</strong> —
-                  but the footing is already part of the building beside this
-                  text; explore the whole structure while you wait.
-                </p>
-              </div>
+                <span className="text-base-content italic">
+                  hold it up, and keep it dry.
+                </span>
+                <span className="text-base-content ml-auto">
+                  <span className="font-semibold">
+                    {bootsStrings.sourcesHeading}:{' '}
+                  </span>
+                  {bootsStrings.sources.map((src, i) => (
+                    <span key={src.url}>
+                      {i > 0 && ' · '}
+                      <a
+                        href={src.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="link"
+                      >
+                        {src.title}
+                      </a>
+                    </span>
+                  ))}
+                </span>
+              </section>
             }
           />
         </ErrorBoundary>

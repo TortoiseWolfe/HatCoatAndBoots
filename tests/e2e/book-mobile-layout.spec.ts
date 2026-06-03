@@ -11,54 +11,69 @@ import { test, expect } from '@playwright/test';
 
 const MOBILE_WIDTHS = [320, 375, 390, 428];
 
+// Every chapter must be a compact horizontal spread; Hat is checked at all four
+// phone widths, Coat and Boots at the representative 375px (they share the same
+// viewer shell, only the manifest differs).
+const CASES: { path: string; widths: number[] }[] = [
+  { path: '/book/hat/', widths: MOBILE_WIDTHS },
+  { path: '/book/coat/', widths: [375] },
+  { path: '/book/boots/', widths: [375] },
+];
+
 test.describe('Book — compact 3-column viewer on mobile', () => {
-  for (const width of MOBILE_WIDTHS) {
-    test(`at ${width}px: presets + building + toggles fit one row, no h-scroll`, async ({
-      page,
-    }) => {
-      await page.setViewportSize({ width, height: 780 });
-      await page.goto('/book/hat/');
-      await page.waitForLoadState('networkidle');
-      await page.waitForTimeout(300);
+  for (const { path, widths } of CASES)
+    for (const width of widths) {
+      test(`${path} at ${width}px: presets + building + toggles fit one row, no h-scroll`, async ({
+        page,
+      }) => {
+        await page.setViewportSize({ width, height: 780 });
+        await page.goto(path);
+        await page.waitForLoadState('networkidle');
+        await page.waitForTimeout(300);
 
-      // No horizontal scroll at any phone width.
-      const { scrollW, clientW } = await page.evaluate(() => ({
-        scrollW: document.documentElement.scrollWidth,
-        clientW: document.documentElement.clientWidth,
-      }));
-      expect(scrollW, `no horizontal scroll at ${width}px`).toBeLessThanOrEqual(
-        clientW + 1
-      );
-
-      // The three control regions are all present and laid out left → centre →
-      // right (presets left of the building, toggles right of it).
-      const presets = page.locator('[role="radiogroup"]');
-      const toggles = page.locator('[role="toolbar"]');
-      const wall = page.locator('[data-layer-id="wall"]');
-      await expect(presets).toHaveCount(1);
-      await expect(toggles).toHaveCount(1);
-
-      const pBox = await presets.boundingBox();
-      const tBox = await toggles.boundingBox();
-      const wBox = await wall.boundingBox();
-      if (!pBox || !tBox || !wBox) throw new Error('missing layout boxes');
-
-      // Side-by-side: presets start left of the building, toggles start right of
-      // the building's left edge (i.e. they flank it, not stacked under it).
-      expect(pBox.x, 'presets left of building').toBeLessThan(wBox.x);
-      expect(tBox.x, 'toggles right of building start').toBeGreaterThan(wBox.x);
-
-      // Every preset radio and layer toggle keeps a 44px touch target.
-      const controls = page.locator('[role="radio"], [role="toolbar"] button');
-      const n = await controls.count();
-      for (let i = 0; i < n; i++) {
-        const box = await controls.nth(i).boundingBox();
-        if (!box) continue;
+        // No horizontal scroll at any phone width.
+        const { scrollW, clientW } = await page.evaluate(() => ({
+          scrollW: document.documentElement.scrollWidth,
+          clientW: document.documentElement.clientWidth,
+        }));
         expect(
-          Math.min(box.width, box.height),
-          `control ${i} ≥44px at ${width}px`
-        ).toBeGreaterThanOrEqual(43.5);
-      }
-    });
-  }
+          scrollW,
+          `no horizontal scroll at ${width}px`
+        ).toBeLessThanOrEqual(clientW + 1);
+
+        // The three control regions are all present and laid out left → centre →
+        // right (presets left of the building, toggles right of it).
+        const presets = page.locator('[role="radiogroup"]');
+        const toggles = page.locator('[role="toolbar"]');
+        const wall = page.locator('[data-layer-id="wall"]');
+        await expect(presets).toHaveCount(1);
+        await expect(toggles).toHaveCount(1);
+
+        const pBox = await presets.boundingBox();
+        const tBox = await toggles.boundingBox();
+        const wBox = await wall.boundingBox();
+        if (!pBox || !tBox || !wBox) throw new Error('missing layout boxes');
+
+        // Side-by-side: presets start left of the building, toggles start right of
+        // the building's left edge (i.e. they flank it, not stacked under it).
+        expect(pBox.x, 'presets left of building').toBeLessThan(wBox.x);
+        expect(tBox.x, 'toggles right of building start').toBeGreaterThan(
+          wBox.x
+        );
+
+        // Every preset radio and layer toggle keeps a 44px touch target.
+        const controls = page.locator(
+          '[role="radio"], [role="toolbar"] button'
+        );
+        const n = await controls.count();
+        for (let i = 0; i < n; i++) {
+          const box = await controls.nth(i).boundingBox();
+          if (!box) continue;
+          expect(
+            Math.min(box.width, box.height),
+            `control ${i} ≥44px at ${width}px`
+          ).toBeGreaterThanOrEqual(43.5);
+        }
+      });
+    }
 });

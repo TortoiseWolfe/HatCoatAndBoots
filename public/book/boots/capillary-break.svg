@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 360" width="360" height="360" role="img" aria-hidden="true">
+  <!-- BOOTS (the lesson): a capillary break — a bright damp-proof band on TOP of the
+       footing / under the sill — that stops ground moisture wicking up the wall.
+       Below it, blue up-arrows (rising damp) are stopped at the band. Piers sit at
+       x=150..172 & x=220..242, top of piers at y=300; the break is drawn across the
+       pier tops at y≈297. Shared 0 0 360 360 space. -->
+  <!-- the capillary break band across both pier tops -->
+  <rect x="148" y="294" width="96" height="6" rx="1" fill="#38bdf8" stroke="#2d3a4a" stroke-width="1.6"/>
+  <!-- rising-damp arrows coming up the piers, stopped at the band -->
+  <g stroke="#5b86a8" stroke-width="2.2" fill="none" stroke-linecap="round">
+    <path d="M161 332 L161 304"/>
+    <path d="M157 310 l4 -6 l4 6"/>
+    <path d="M231 332 L231 304"/>
+    <path d="M227 310 l4 -6 l4 6"/>
+  </g>
+  <!-- small "stopped" ticks just under the band -->
+  <g stroke="#a8542f" stroke-width="2" stroke-linecap="round">
+    <line x1="153" y1="303" x2="169" y2="303"/>
+    <line x1="223" y1="303" x2="239" y2="303"/>
+  </g>
+</svg>
