@@ -1,12 +1,19 @@
 import type { ChapterManifest } from './types';
+import { hatStrings as s } from './hat.strings';
 
 // Geometry note: explodeOffset + bbox are in VIEWBOX UNITS (0..360), the shared
 // coordinate space all 7 layers are drawn in. bbox values are the real measured
 // ink bounds of each layer (see memory: hat-svg-real-bboxes). Offsets pull each
 // part away from the assembled centre so the building genuinely separates.
+// Reader-facing words come from hat.strings (the i18n seam); geometry stays here.
 export const hatManifest: ChapterManifest = {
   slug: 'hat',
   meta: { title: 'The Hat', kicker: 'Why a roof needs a brim' },
+  subtitle: s.chapterSubtitle,
+  intro: s.intro,
+  whyItMatters: s.whyItMatters,
+  sourcedAside: s.sourcedAside,
+  sources: s.sources,
   layers: [
     {
       id: 'footing',
@@ -86,42 +93,53 @@ export const hatManifest: ChapterManifest = {
       bbox: { x: 116, y: 34, w: 208, h: 60 },
     },
   ],
+  // Each step is one teaching view; heading/prose/takeaway come from the strings
+  // (the real authored narrative), dockedLayerIds say which parts assemble.
   steps: [
     {
-      id: 'whole',
-      heading: 'A house is layers',
-      prose:
-        'Every building is a stack of jobs. Pull a layer off to see what it does — start with the roof’s brim, the overhang.',
-      dockedLayerIds: ['footing', 'wall', 'window', 'roof-overhang'],
-      spotlightLayerId: 'roof-overhang',
-    },
-    {
-      id: 'summer',
-      heading: 'The summer sun is blocked',
-      prose:
-        'In summer the sun climbs high. The overhang reaches out past the wall and shades the window, so the room stays cool with no machine.',
+      id: 'everything',
+      heading: s.presetLabels['everything'],
+      prose: s.presetDescriptions['everything'],
+      takeaway: s.presetTakeaways['everything'],
       dockedLayerIds: [
         'footing',
         'wall',
         'window',
         'roof-overhang',
         'sun-high',
+        'sun-low',
+        'rain',
       ],
+      spotlightLayerId: 'roof-overhang',
+    },
+    {
+      id: 'bare-wall',
+      heading: s.presetLabels['bare-wall'],
+      prose: s.presetDescriptions['bare-wall'],
+      takeaway: s.presetTakeaways['bare-wall'],
+      dockedLayerIds: ['footing', 'wall', 'window'],
       spotlightLayerId: 'sun-high',
     },
     {
-      id: 'winter',
-      heading: 'The winter sun is let in',
-      prose:
-        'In winter the sun stays low. It slips under the same overhang and pours through the window, warming the room for free.',
-      dockedLayerIds: ['footing', 'wall', 'window', 'roof-overhang', 'sun-low'],
-      spotlightLayerId: 'sun-low',
+      id: 'roof-line',
+      heading: s.presetLabels['roof-line'],
+      prose: s.presetDescriptions['roof-line'],
+      takeaway: s.presetTakeaways['roof-line'],
+      dockedLayerIds: [
+        'footing',
+        'wall',
+        'window',
+        'roof-overhang',
+        'sun-high',
+        'sun-low',
+      ],
+      spotlightLayerId: 'roof-overhang',
     },
     {
-      id: 'rain',
-      heading: 'The rain is thrown clear',
-      prose:
-        'The overhang does one more job: it throws rain away from the wall’s base, so water never soaks the footing.',
+      id: 'how-it-sheds-water',
+      heading: s.presetLabels['how-it-sheds-water'],
+      prose: s.presetDescriptions['how-it-sheds-water'],
+      takeaway: s.presetTakeaways['how-it-sheds-water'],
       dockedLayerIds: ['footing', 'wall', 'window', 'roof-overhang', 'rain'],
       spotlightLayerId: 'rain',
     },

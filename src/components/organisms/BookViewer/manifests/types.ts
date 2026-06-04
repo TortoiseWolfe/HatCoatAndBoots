@@ -29,13 +29,21 @@ export interface Layer {
   bbox: { x: number; y: number; w: number; h: number };
 }
 
+/** A verified external source citation shown in the chapter's sources note. */
+export interface SourceCitation {
+  title: string;
+  url: string;
+}
+
 export interface Step {
   /** Stable id for the beat. */
   id: string;
   /** Short headline shown in the ribbon. */
   heading: string;
-  /** One or two sentences of narrative. */
+  /** The teaching prose for this beat (the rich per-view explanation). */
   prose: string;
+  /** Optional one-line distilled takeaway, shown under the prose. */
+  takeaway?: string;
   /** Layers DOCKED (visible, in place) at this beat; others explode out. */
   dockedLayerIds: LayerId[];
   /** Optional single layer to spotlight (halo) at this beat. */
@@ -48,6 +56,16 @@ export interface ChapterManifest {
   meta: { title: string; kicker: string };
   layers: Layer[];
   steps: Step[];
+  /** Long chapter subtitle (the full editorial subtitle, vs short meta.kicker). */
+  subtitle?: string;
+  /** Intro paragraphs rendered above the building (SSR/no-JS readable lead-in). */
+  intro?: string[];
+  /** Cradle-to-cradle "why it matters" note, shown in the sources disclosure. */
+  whyItMatters?: string;
+  /** A short, citable aside, shown in the sources disclosure. */
+  sourcedAside?: string;
+  /** Verified sources for the chapter's claims. */
+  sources?: SourceCitation[];
 }
 
 export function isChapterManifest(v: unknown): v is ChapterManifest {
