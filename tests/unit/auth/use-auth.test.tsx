@@ -53,6 +53,8 @@ vi.mock('@/lib/supabase/client', () => {
     createClient: vi.fn(() => mockSupabaseClient),
     supabase: mockSupabaseClient,
     setAllowAuthTokenRemoval: vi.fn(),
+    // Configured = true keeps these tests exercising the full session-init path.
+    isSupabaseConfigured: () => true,
   };
 });
 
