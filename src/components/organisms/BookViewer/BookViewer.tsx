@@ -80,10 +80,10 @@ export function ChapterViewer({ manifest }: ChapterViewerProps) {
           />
         </div>
 
-        {/* Narrative + controls column — capped to the building's height on
-            desktop so the ribbon's prose scrolls internally and the controls
-            (toggles, Back/Next) stay in the fold. */}
-        <div className="flex min-h-0 flex-col gap-3 lg:[grid-column:2] lg:max-h-[min(100%,68vh)]">
+        {/* Narrative + controls column — a fixed 72vh on desktop (matching the
+            building) so the ribbon's prose scrolls internally and the controls
+            stay in the fold; a tall intro can't balloon the grid row. */}
+        <div className="flex min-h-0 flex-col gap-3 lg:[grid-column:2] lg:h-[72vh]">
           <StoryRibbon
             heading={step.heading}
             prose={step.prose}
