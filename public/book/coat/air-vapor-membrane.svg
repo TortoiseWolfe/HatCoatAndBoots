@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 360" width="360" height="360" role="img" aria-hidden="true">
+  <!-- COAT (the lesson): the air + vapor barrier on the WARM (interior) face of the
+       wall, drawn as a vivid electric-blue line, with small arrows showing warm
+       indoor air pressing outward and being stopped at the membrane. Interior face
+       is the right side of the wall body (x≈242). Shared 0 0 360 360 space. -->
+  <!-- the continuous interior membrane line -->
+  <line x1="243.5" y1="122" x2="243.5" y2="298" stroke="#38bdf8" stroke-width="3" stroke-linecap="round"/>
+  <!-- warm-air arrows hitting the barrier and stopping (interior is to the right) -->
+  <g stroke="#a8542f" stroke-width="2" fill="none" stroke-linecap="round">
+    <path d="M268 160 L248 160"/>
+    <path d="M254 154 L246 160 L254 166"/>
+    <path d="M268 210 L248 210"/>
+    <path d="M254 204 L246 210 L254 216"/>
+    <path d="M268 260 L248 260"/>
+    <path d="M254 254 L246 260 L254 266"/>
+  </g>
+</svg>

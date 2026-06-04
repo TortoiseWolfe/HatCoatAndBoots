@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 360" width="360" height="360" role="img" aria-hidden="true">
+  <!-- COAT (the lesson): dense thermal mass (brick / rammed earth / masonry) lining
+       the INTERIOR face of the wall, drawn as a heavy ochre dot-grid band, with a
+       slow curved arrow suggesting heat stored by day and released by night.
+       Interior face is the right side of the wall body (x≈232..242). Shared space. -->
+  <defs>
+    <pattern id="coat-mass" width="9" height="9" patternUnits="userSpaceOnUse">
+      <circle cx="4.5" cy="4.5" r="1.5" fill="#b07a3c" opacity="0.9"/>
+    </pattern>
+  </defs>
+  <!-- the dense mass band on the interior face, full wall height -->
+  <rect x="231" y="124" width="11" height="172" fill="#e3cba0" stroke="#2d3a4a" stroke-width="1.4"/>
+  <rect x="231" y="124" width="11" height="172" fill="url(#coat-mass)"/>
+  <!-- slow store/release heat arrow (curved, in/out) -->
+  <g stroke="#a8542f" stroke-width="2" fill="none" stroke-linecap="round">
+    <path d="M252 210 Q238 200 252 190"/>
+    <path d="M252 190 l-6 -1 l3 6"/>
+    <path d="M252 210 l-6 1 l3 -6"/>
+  </g>
+</svg>

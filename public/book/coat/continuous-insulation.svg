@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 360" width="360" height="360" role="img" aria-hidden="true">
+  <!-- COAT (the lesson): a continuous exterior insulation wrap on the OUTSIDE face
+       of the wall (left/north face here), an unbroken band that covers the studs
+       end to end so no framing member bridges from warm to cold. A teal band
+       hugging the wall's outer face. Wall body x=150..242, y=120..300; the wrap
+       sits just outside the left face at x≈142..150. Shared 0 0 360 360 space. -->
+  <!-- the continuous wrap band, full wall height, unbroken -->
+  <rect x="141" y="118" width="9" height="184" fill="#5b86a8" stroke="#2d3a4a" stroke-width="1.6" opacity="0.92"/>
+  <!-- subtle vertical ticks to read as rigid board -->
+  <g stroke="#cfe3ee" stroke-width="0.8" opacity="0.7">
+    <line x1="145.5" y1="124" x2="145.5" y2="296"/>
+  </g>
+  <!-- a small "covers the stud" cap returning over the top plate -->
+  <rect x="141" y="112" width="103" height="7" rx="1" fill="#5b86a8" stroke="#2d3a4a" stroke-width="1.4" opacity="0.92"/>
+</svg>
