@@ -128,6 +128,15 @@ export function GlobalNav() {
     { href: '/wireframes', label: 'Wireframes' },
   ];
 
+  // Inside the book, the chapter tabs (Hat/Coat/Boots) ARE the main nav so a
+  // reader can move between chapters; the template links move to the overflow menu.
+  const isBookPage = (pathname ?? '').startsWith('/book');
+  const chapterTabs = [
+    { href: '/book/hat', label: 'The Hat' },
+    { href: '/book/coat', label: 'The Coat' },
+    { href: '/book/boots', label: 'The Boots' },
+  ];
+
   const themes = [
     'scripthammer-dark',
     'scripthammer-light',
@@ -192,23 +201,45 @@ export function GlobalNav() {
             </Link>
           </div>
 
-          {/* Main Navigation */}
-          <nav className="hidden items-center gap-1 lg:flex">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`btn btn-ghost btn-sm ${
-                  pathname === item.href ||
-                  (pathname?.startsWith(item.href + '/') && item.href !== '/')
-                    ? 'btn-active'
-                    : ''
-                }`}
-              >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
+          {/* Main Navigation — chapter tabs inside the book, template links elsewhere */}
+          {isBookPage ? (
+            <nav
+              aria-label="Book chapters"
+              className="flex items-center gap-1 lg:flex"
+            >
+              {chapterTabs.map((tab) => {
+                const active =
+                  pathname === tab.href || pathname?.startsWith(tab.href + '/');
+                return (
+                  <Link
+                    key={tab.href}
+                    href={tab.href}
+                    aria-current={active ? 'page' : undefined}
+                    className={`btn btn-ghost btn-sm ${active ? 'btn-active' : ''}`}
+                  >
+                    {tab.label}
+                  </Link>
+                );
+              })}
+            </nav>
+          ) : (
+            <nav className="hidden items-center gap-1 lg:flex">
+              {navItems.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`btn btn-ghost btn-sm ${
+                    pathname === item.href ||
+                    (pathname?.startsWith(item.href + '/') && item.href !== '/')
+                      ? 'btn-active'
+                      : ''
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </nav>
+          )}
 
           {/* Right Section: Auth, Theme & PWA - Mobile-first spacing (PRP-017 T025) */}
           {/* Use flex-shrink-0 to prevent items from shrinking, overflow-hidden to prevent horizontal scroll */}

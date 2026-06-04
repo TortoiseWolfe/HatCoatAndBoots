@@ -9,6 +9,20 @@ export function generateStaticParams() {
   return CHAPTER_SLUGS.map((chapter) => ({ chapter }));
 }
 
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ chapter: string }>;
+}) {
+  const { chapter } = await params;
+  const manifest = getChapter(chapter);
+  if (!manifest) return { title: 'The Book' };
+  return {
+    title: `${manifest.meta.title} — ${manifest.meta.kicker}`,
+    description: manifest.meta.kicker,
+  };
+}
+
 export default async function ChapterPage({
   params,
 }: {
