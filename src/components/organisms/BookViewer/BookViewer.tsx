@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { ExplodedBuilding } from '../ExplodedBuilding';
 import { StoryRibbon } from '../../molecular/StoryRibbon';
 import { ChapterLeadIn } from '../../molecular/ChapterLeadIn';
@@ -25,23 +25,30 @@ export interface ChapterViewerProps {
  * @category organisms
  */
 export function ChapterViewer({ manifest }: ChapterViewerProps) {
-  const allIds = manifest.layers.map((l) => l.id);
+  const allIds = useMemo(
+    () => manifest.layers.map((l) => l.id),
+    [manifest.layers]
+  );
 
   // The chapter intro is the FIRST slide, not a static block above the house: a
   // synthetic opening step that shows the whole assembled building while the
-  // ribbon carries the intro prose. The authored views follow.
-  const introStep: Step[] =
-    manifest.intro && manifest.intro.length > 0
-      ? [
-          {
-            id: 'intro',
-            heading: manifest.subtitle ?? 'Start here',
-            prose: manifest.intro.join('\n\n'),
-            dockedLayerIds: allIds,
-          },
-        ]
-      : [];
-  const steps: Step[] = [...introStep, ...manifest.steps];
+  // ribbon carries the intro prose. The authored views follow. Memoised so the
+  // step objects keep stable identity across renders (the syncStory effect below
+  // depends on step.dockedLayerIds — a fresh array each render would loop).
+  const steps: Step[] = useMemo(() => {
+    const introStep: Step[] =
+      manifest.intro && manifest.intro.length > 0
+        ? [
+            {
+              id: 'intro',
+              heading: manifest.subtitle ?? 'Start here',
+              prose: manifest.intro.join('\n\n'),
+              dockedLayerIds: allIds,
+            },
+          ]
+        : [];
+    return [...introStep, ...manifest.steps];
+  }, [manifest.intro, manifest.subtitle, manifest.steps, allIds]);
 
   const { activeStepIndex, goNext, goPrev, goTo, registerStep } =
     useScrollStory(steps.length);
