@@ -50,8 +50,7 @@ export function ChapterViewer({ manifest }: ChapterViewerProps) {
     return [...introStep, ...manifest.steps];
   }, [manifest.intro, manifest.subtitle, manifest.steps, allIds]);
 
-  const { activeStepIndex, goNext, goPrev, goTo, registerStep } =
-    useScrollStory(steps.length);
+  const { activeStepIndex, goNext, goPrev } = useScrollStory(steps.length);
   const step = steps[activeStepIndex];
   const { mode, isDocked, syncStory, toggle, resumeStory } = useLayerState(
     allIds,
@@ -70,8 +69,8 @@ export function ChapterViewer({ manifest }: ChapterViewerProps) {
           static block above the house. */}
       <ChapterLeadIn title={manifest.displayTitle ?? manifest.meta.title} />
 
-      <section className="relative flex min-h-0 flex-col gap-4 lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,34%)] lg:items-start">
-        {/* The building (hero). */}
+      <section className="relative flex min-h-0 flex-col gap-6 lg:grid lg:grid-cols-[auto_minmax(0,1fr)] lg:items-start">
+        {/* The building (hero) — sized to its own square, no dead margin. */}
         <div className="lg:[grid-column:1]">
           <ExplodedBuilding
             layers={manifest.layers}
@@ -123,22 +122,6 @@ export function ChapterViewer({ manifest }: ChapterViewerProps) {
             sourcedAside={manifest.sourcedAside}
             sources={manifest.sources}
           />
-        </div>
-
-        {/* Invisible scroll spine — one anchor per step drives the IO. */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 -z-10"
-        >
-          {steps.map((s, i) => (
-            <div
-              key={s.id}
-              data-step-index={i}
-              ref={registerStep(i)}
-              onFocus={() => goTo(i)}
-              className="h-screen"
-            />
-          ))}
         </div>
       </section>
     </div>
