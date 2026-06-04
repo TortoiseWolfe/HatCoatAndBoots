@@ -36,19 +36,122 @@
 
       <!-- CANONICAL BUILDING — real chapter SVGs, BIG + centred. HAT FOCUS: roof full,
            coat (wall+window) + boots (footing) dimmed to 0.4 IN PLACE (FR-006: nothing moves). -->
-      <g id="building" transform="translate(360, 20)">
+      <g id="building" transform="translate(360,20) scale(1.556)">
         <g id="layer-boots" opacity="0.4">
-          <image href="/book/hat/footing.svg" x="0" y="0" width="560" height="560"/>
+          <defs>
+    <pattern id="footing-earth" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="10" stroke="#7c6f5a" stroke-width="1" opacity="0.5"/>
+    </pattern>
+  </defs>
+  <line x1="40" y1="300" x2="320" y2="300" stroke="#2d3a4a" stroke-width="2.5" stroke-linecap="round"/>
+  <rect x="40" y="300" width="280" height="44" fill="url(#footing-earth)"/>
+  <rect x="150" y="300" width="22" height="34" fill="#9aa7b3" stroke="#2d3a4a" stroke-width="2"/>
+  <rect x="220" y="300" width="22" height="34" fill="#9aa7b3" stroke="#2d3a4a" stroke-width="2"/>
+  <rect x="142" y="330" width="38" height="10" rx="1.5" fill="#7f8c99" stroke="#2d3a4a" stroke-width="2"/>
+  <rect x="212" y="330" width="38" height="10" rx="1.5" fill="#7f8c99" stroke="#2d3a4a" stroke-width="2"/>
         </g>
         <g id="layer-coat" opacity="0.4">
-          <image href="/book/hat/wall.svg" x="0" y="0" width="560" height="560"/>
-          <image href="/book/hat/window.svg" x="0" y="0" width="560" height="560"/>
+          <defs>
+    <pattern id="wall-insulation" width="12" height="18" patternUnits="userSpaceOnUse">
+      <path d="M0 0 Q6 9 0 18 M12 0 Q6 9 12 18" fill="none" stroke="#c9a86a" stroke-width="1" opacity="0.55"/>
+    </pattern>
+  </defs>
+  <rect x="150" y="120" width="92" height="180" fill="#f3ead6" stroke="#2d3a4a" stroke-width="2.5"/>
+  <rect x="153" y="123" width="86" height="174" fill="url(#wall-insulation)"/>
+  <rect x="148" y="116" width="96" height="8" rx="1" fill="#e3d4b4" stroke="#2d3a4a" stroke-width="2"/>
+  <rect x="148" y="296" width="96" height="8" rx="1" fill="#e3d4b4" stroke="#2d3a4a" stroke-width="2"/>
+          <rect x="186" y="150" width="46" height="96" fill="#cfe3ee" stroke="#2d3a4a" stroke-width="2.5"/>
+  <polygon points="186,150 210,150 186,200" fill="#ffffff" opacity="0.35"/>
+  <line x1="186" y1="198" x2="232" y2="198" stroke="#2d3a4a" stroke-width="1.8"/>
+  <line x1="209" y1="150" x2="209" y2="246" stroke="#2d3a4a" stroke-width="1.8"/>
+  <rect x="182" y="246" width="54" height="7" rx="1" fill="#dcc8a8" stroke="#2d3a4a" stroke-width="2"/>
         </g>
         <g id="layer-hat" opacity="1">
-          <image href="/book/hat/roof-overhang.svg" x="0" y="0" width="560" height="560"/>
-          <image href="/book/hat/sun-high.svg" x="0" y="0" width="560" height="560"/>
-          <image href="/book/hat/sun-low.svg" x="0" y="0" width="560" height="560"/>
-          <image href="/book/hat/rain.svg" x="0" y="0" width="560" height="560"/>
+          <defs>
+    <linearGradient id="roof-plane" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#c8714a"/>
+      <stop offset="1" stop-color="#a8542f"/>
+    </linearGradient>
+  </defs>
+  <path d="M196 118 L242 118 L242 150 Z" fill="#2d3a4a" opacity="0.08"/>
+  <polygon points="196,62 110,120 290,120"
+           fill="url(#roof-plane)" stroke="#2d3a4a" stroke-width="2.5" stroke-linejoin="round"/>
+  <line x1="196" y1="62" x2="196" y2="70" stroke="#2d3a4a" stroke-width="3" stroke-linecap="round"/>
+  <line x1="110" y1="120" x2="290" y2="120" stroke="#7a3c22" stroke-width="4" stroke-linecap="round"/>
+  <path d="M290 120 l8 4 l-2 6 l-8 -4 z" fill="#a8542f" stroke="#2d3a4a" stroke-width="1.8" stroke-linejoin="round"/>
+  <line x1="153" y1="105" x2="247" y2="105" stroke="#7a3c22" stroke-width="1" opacity="0.5"/>
+  <line x1="170" y1="90" x2="222" y2="90" stroke="#7a3c22" stroke-width="1" opacity="0.5"/>
+          <defs>
+    <radialGradient id="sun-high-glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#f6c453"/>
+      <stop offset="1" stop-color="#e8a02e"/>
+    </radialGradient>
+  </defs>
+  <g transform="translate(300,46)">
+    <g stroke="#e8a02e" stroke-width="2.5" stroke-linecap="round">
+      <line x1="0" y1="-26" x2="0" y2="-17"/>
+      <line x1="18" y1="-18" x2="12" y2="-12"/>
+      <line x1="26" y1="0" x2="17" y2="0"/>
+      <line x1="18" y1="18" x2="12" y2="12"/>
+      <line x1="0" y1="26" x2="0" y2="17"/>
+      <line x1="-18" y1="18" x2="-12" y2="12"/>
+      <line x1="-26" y1="0" x2="-17" y2="0"/>
+      <line x1="-18" y1="-18" x2="-12" y2="-12"/>
+    </g>
+    <circle r="14" fill="url(#sun-high-glow)" stroke="#c8801f" stroke-width="1.5"/>
+  </g>
+  <g stroke="#e8a02e" stroke-width="2.4" stroke-dasharray="7 5" stroke-linecap="round" opacity="0.95">
+    <line x1="292" y1="68" x2="289" y2="116"/>
+    <line x1="304" y1="66" x2="293" y2="116"/>
+    <line x1="316" y1="70" x2="298" y2="117"/>
+  </g>
+  <line x1="282" y1="118" x2="302" y2="118" stroke="#a8542f" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M242 122 L242 250 L226 250 L234 122 Z" fill="#2d3a4a" opacity="0.16"/>
+          <defs>
+    <radialGradient id="sun-low-glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#ffd98a"/>
+      <stop offset="1" stop-color="#e6b455"/>
+    </radialGradient>
+  </defs>
+  <g transform="translate(326,196)">
+    <g stroke="#e6b455" stroke-width="2.5" stroke-linecap="round">
+      <line x1="-24" y1="-10" x2="-15" y2="-7"/>
+      <line x1="-26" y1="2" x2="-17" y2="2"/>
+      <line x1="-24" y1="14" x2="-15" y2="10"/>
+      <line x1="-14" y1="-20" x2="-9" y2="-13"/>
+    </g>
+    <circle r="13" fill="url(#sun-low-glow)" stroke="#c89436" stroke-width="1.5"/>
+  </g>
+  <g stroke="#e6b455" stroke-width="2.6" stroke-linecap="round" opacity="0.95">
+    <line x1="300" y1="192" x2="206" y2="214"/>
+    <line x1="300" y1="200" x2="210" y2="226"/>
+    <line x1="300" y1="208" x2="214" y2="238"/>
+  </g>
+  <path d="M214 238 l-12 -1 l6 -7 z" fill="#e6b455" opacity="0.95"/>
+  <ellipse cx="208" cy="244" rx="14" ry="3.5" fill="#ffd98a" opacity="0.55"/>
+          <g stroke="#5b86a8" stroke-width="2.2" stroke-linecap="round" opacity="0.85">
+    <line x1="150" y1="40" x2="146" y2="54"/>
+    <line x1="180" y1="34" x2="176" y2="48"/>
+    <line x1="210" y1="40" x2="206" y2="54"/>
+    <line x1="240" y1="46" x2="236" y2="60"/>
+    <line x1="120" y1="60" x2="116" y2="74"/>
+    <line x1="270" y1="58" x2="266" y2="72"/>
+  </g>
+  <path d="M290 122 Q330 220 312 296"
+        fill="none" stroke="#5b86a8" stroke-width="2.4" stroke-dasharray="2 6"
+        stroke-linecap="round" opacity="0.9"/>
+  <g fill="#5b86a8" opacity="0.9">
+    <ellipse cx="312" cy="175" rx="2.4" ry="4" />
+    <ellipse cx="322" cy="225" rx="2.4" ry="4" />
+    <ellipse cx="316" cy="268" rx="2.4" ry="4" />
+  </g>
+  <g stroke="#5b86a8" stroke-width="2" stroke-linecap="round" opacity="0.85">
+    <line x1="312" y1="298" x2="306" y2="291"/>
+    <line x1="312" y1="298" x2="318" y2="291"/>
+    <line x1="312" y1="298" x2="312" y2="289"/>
+  </g>
+  <path d="M246 301 q26 -7 52 -1" fill="none" stroke="#5b86a8" stroke-width="1.6"
+        stroke-dasharray="3 4" opacity="0.7"/>
         </g>
       </g>
 
@@ -116,10 +219,123 @@
     </g>
     <g transform="translate(0, 92)">
       <rect width="360" height="470" fill="url(#sky)"/>
-      <g id="m-building" transform="translate(60, 30)">
-        <g opacity="0.4"><image href="/book/hat/footing.svg" x="0" y="0" width="240" height="240"/></g>
-        <g opacity="0.4"><image href="/book/hat/wall.svg" x="0" y="0" width="240" height="240"/><image href="/book/hat/window.svg" x="0" y="0" width="240" height="240"/></g>
-        <g opacity="1"><image href="/book/hat/roof-overhang.svg" x="0" y="0" width="240" height="240"/><image href="/book/hat/sun-high.svg" x="0" y="0" width="240" height="240"/><image href="/book/hat/sun-low.svg" x="0" y="0" width="240" height="240"/><image href="/book/hat/rain.svg" x="0" y="0" width="240" height="240"/></g>
+      <g id="m-building" transform="translate(60,30) scale(0.667)">
+        <g id="layer-boots" opacity="0.4">
+          <defs>
+    <pattern id="footing-earth" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="10" stroke="#7c6f5a" stroke-width="1" opacity="0.5"/>
+    </pattern>
+  </defs>
+  <line x1="40" y1="300" x2="320" y2="300" stroke="#2d3a4a" stroke-width="2.5" stroke-linecap="round"/>
+  <rect x="40" y="300" width="280" height="44" fill="url(#footing-earth)"/>
+  <rect x="150" y="300" width="22" height="34" fill="#9aa7b3" stroke="#2d3a4a" stroke-width="2"/>
+  <rect x="220" y="300" width="22" height="34" fill="#9aa7b3" stroke="#2d3a4a" stroke-width="2"/>
+  <rect x="142" y="330" width="38" height="10" rx="1.5" fill="#7f8c99" stroke="#2d3a4a" stroke-width="2"/>
+  <rect x="212" y="330" width="38" height="10" rx="1.5" fill="#7f8c99" stroke="#2d3a4a" stroke-width="2"/>
+        </g>
+        <g id="layer-coat" opacity="0.4">
+          <defs>
+    <pattern id="wall-insulation" width="12" height="18" patternUnits="userSpaceOnUse">
+      <path d="M0 0 Q6 9 0 18 M12 0 Q6 9 12 18" fill="none" stroke="#c9a86a" stroke-width="1" opacity="0.55"/>
+    </pattern>
+  </defs>
+  <rect x="150" y="120" width="92" height="180" fill="#f3ead6" stroke="#2d3a4a" stroke-width="2.5"/>
+  <rect x="153" y="123" width="86" height="174" fill="url(#wall-insulation)"/>
+  <rect x="148" y="116" width="96" height="8" rx="1" fill="#e3d4b4" stroke="#2d3a4a" stroke-width="2"/>
+  <rect x="148" y="296" width="96" height="8" rx="1" fill="#e3d4b4" stroke="#2d3a4a" stroke-width="2"/>
+          <rect x="186" y="150" width="46" height="96" fill="#cfe3ee" stroke="#2d3a4a" stroke-width="2.5"/>
+  <polygon points="186,150 210,150 186,200" fill="#ffffff" opacity="0.35"/>
+  <line x1="186" y1="198" x2="232" y2="198" stroke="#2d3a4a" stroke-width="1.8"/>
+  <line x1="209" y1="150" x2="209" y2="246" stroke="#2d3a4a" stroke-width="1.8"/>
+  <rect x="182" y="246" width="54" height="7" rx="1" fill="#dcc8a8" stroke="#2d3a4a" stroke-width="2"/>
+        </g>
+        <g id="layer-hat" opacity="1">
+          <defs>
+    <linearGradient id="roof-plane" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#c8714a"/>
+      <stop offset="1" stop-color="#a8542f"/>
+    </linearGradient>
+  </defs>
+  <path d="M196 118 L242 118 L242 150 Z" fill="#2d3a4a" opacity="0.08"/>
+  <polygon points="196,62 110,120 290,120"
+           fill="url(#roof-plane)" stroke="#2d3a4a" stroke-width="2.5" stroke-linejoin="round"/>
+  <line x1="196" y1="62" x2="196" y2="70" stroke="#2d3a4a" stroke-width="3" stroke-linecap="round"/>
+  <line x1="110" y1="120" x2="290" y2="120" stroke="#7a3c22" stroke-width="4" stroke-linecap="round"/>
+  <path d="M290 120 l8 4 l-2 6 l-8 -4 z" fill="#a8542f" stroke="#2d3a4a" stroke-width="1.8" stroke-linejoin="round"/>
+  <line x1="153" y1="105" x2="247" y2="105" stroke="#7a3c22" stroke-width="1" opacity="0.5"/>
+  <line x1="170" y1="90" x2="222" y2="90" stroke="#7a3c22" stroke-width="1" opacity="0.5"/>
+          <defs>
+    <radialGradient id="sun-high-glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#f6c453"/>
+      <stop offset="1" stop-color="#e8a02e"/>
+    </radialGradient>
+  </defs>
+  <g transform="translate(300,46)">
+    <g stroke="#e8a02e" stroke-width="2.5" stroke-linecap="round">
+      <line x1="0" y1="-26" x2="0" y2="-17"/>
+      <line x1="18" y1="-18" x2="12" y2="-12"/>
+      <line x1="26" y1="0" x2="17" y2="0"/>
+      <line x1="18" y1="18" x2="12" y2="12"/>
+      <line x1="0" y1="26" x2="0" y2="17"/>
+      <line x1="-18" y1="18" x2="-12" y2="12"/>
+      <line x1="-26" y1="0" x2="-17" y2="0"/>
+      <line x1="-18" y1="-18" x2="-12" y2="-12"/>
+    </g>
+    <circle r="14" fill="url(#sun-high-glow)" stroke="#c8801f" stroke-width="1.5"/>
+  </g>
+  <g stroke="#e8a02e" stroke-width="2.4" stroke-dasharray="7 5" stroke-linecap="round" opacity="0.95">
+    <line x1="292" y1="68" x2="289" y2="116"/>
+    <line x1="304" y1="66" x2="293" y2="116"/>
+    <line x1="316" y1="70" x2="298" y2="117"/>
+  </g>
+  <line x1="282" y1="118" x2="302" y2="118" stroke="#a8542f" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M242 122 L242 250 L226 250 L234 122 Z" fill="#2d3a4a" opacity="0.16"/>
+          <defs>
+    <radialGradient id="sun-low-glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#ffd98a"/>
+      <stop offset="1" stop-color="#e6b455"/>
+    </radialGradient>
+  </defs>
+  <g transform="translate(326,196)">
+    <g stroke="#e6b455" stroke-width="2.5" stroke-linecap="round">
+      <line x1="-24" y1="-10" x2="-15" y2="-7"/>
+      <line x1="-26" y1="2" x2="-17" y2="2"/>
+      <line x1="-24" y1="14" x2="-15" y2="10"/>
+      <line x1="-14" y1="-20" x2="-9" y2="-13"/>
+    </g>
+    <circle r="13" fill="url(#sun-low-glow)" stroke="#c89436" stroke-width="1.5"/>
+  </g>
+  <g stroke="#e6b455" stroke-width="2.6" stroke-linecap="round" opacity="0.95">
+    <line x1="300" y1="192" x2="206" y2="214"/>
+    <line x1="300" y1="200" x2="210" y2="226"/>
+    <line x1="300" y1="208" x2="214" y2="238"/>
+  </g>
+  <path d="M214 238 l-12 -1 l6 -7 z" fill="#e6b455" opacity="0.95"/>
+  <ellipse cx="208" cy="244" rx="14" ry="3.5" fill="#ffd98a" opacity="0.55"/>
+          <g stroke="#5b86a8" stroke-width="2.2" stroke-linecap="round" opacity="0.85">
+    <line x1="150" y1="40" x2="146" y2="54"/>
+    <line x1="180" y1="34" x2="176" y2="48"/>
+    <line x1="210" y1="40" x2="206" y2="54"/>
+    <line x1="240" y1="46" x2="236" y2="60"/>
+    <line x1="120" y1="60" x2="116" y2="74"/>
+    <line x1="270" y1="58" x2="266" y2="72"/>
+  </g>
+  <path d="M290 122 Q330 220 312 296"
+        fill="none" stroke="#5b86a8" stroke-width="2.4" stroke-dasharray="2 6"
+        stroke-linecap="round" opacity="0.9"/>
+  <g fill="#5b86a8" opacity="0.9">
+    <ellipse cx="312" cy="175" rx="2.4" ry="4" />
+    <ellipse cx="322" cy="225" rx="2.4" ry="4" />
+    <ellipse cx="316" cy="268" rx="2.4" ry="4" />
+  </g>
+  <g stroke="#5b86a8" stroke-width="2" stroke-linecap="round" opacity="0.85">
+    <line x1="312" y1="298" x2="306" y2="291"/>
+    <line x1="312" y1="298" x2="318" y2="291"/>
+    <line x1="312" y1="298" x2="312" y2="289"/>
+  </g>
+  <path d="M246 301 q26 -7 52 -1" fill="none" stroke="#5b86a8" stroke-width="1.6"
+        stroke-dasharray="3 4" opacity="0.7"/>
+        </g>
       </g>
       <text x="16" y="300" font-size="15" font-weight="800" fill="#ffffff">The summer sun is blocked</text>
       <text x="16" y="324" font-size="14" fill="#dfe6f0">The overhang shades the window.</text>

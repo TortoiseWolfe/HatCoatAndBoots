@@ -11,19 +11,18 @@
 
 | Status | Count |
 | ------ | ----- |
-| Open   | 3     |
+| Open   | 2     |
 
 ---
 
 ## Open Issues (2026-06-04 Review)
 
-### Other Issues
+### Font Issues
 
-| ID   | Issue                                  | Code    | Classification |
-| ---- | -------------------------------------- | ------- | -------------- |
-| X-01 | Attribute 'y' has unquoted value '40'  | XML-004 | REGENERATE     |
-| X-02 | Attribute 'y' has unquoted value '110' | XML-004 | REGENERATE     |
-| X-03 | Attribute 'y' has unquoted value '180' | XML-004 | REGENERATE     |
+| ID   | Issue                                       | Code     | Classification |
+| ---- | ------------------------------------------- | -------- | -------------- |
+| F-01 | Font size 9.0px below minimum 14px: 'shade' | FONT-001 | PATCH          |
+| F-02 | Font size 9.0px below minimum 14px: 'shade' | FONT-001 | PATCH          |
 
 ---
 
