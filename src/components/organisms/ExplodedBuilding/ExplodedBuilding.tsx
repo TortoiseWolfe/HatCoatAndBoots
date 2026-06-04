@@ -50,7 +50,7 @@ export function ExplodedBuilding({
     <div
       role="group"
       aria-label="Explore the house — activate a part to show or hide it"
-      className={`book-sky relative aspect-square w-full overflow-hidden ${className}`}
+      className={`book-sky relative mx-auto aspect-square w-full max-w-[min(100%,68vh)] overflow-hidden rounded-xl ${className}`}
     >
       {/* The shared-coordinate-space building. One SVG, layers as <g> groups. */}
       <svg
