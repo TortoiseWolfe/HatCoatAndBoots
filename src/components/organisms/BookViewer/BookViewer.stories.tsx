@@ -15,6 +15,7 @@ const DEMO: ChapterManifest = {
       tabWord: 'WALL',
       z: 20,
       explodeOffset: { x: 0, y: 0 },
+      bbox: { x: 148, y: 116, w: 96, h: 188 },
     },
     {
       id: 'roof',
@@ -24,7 +25,8 @@ const DEMO: ChapterManifest = {
       tabColor: '#c8714a',
       tabWord: 'ROOF',
       z: 40,
-      explodeOffset: { x: 0, y: -60 },
+      explodeOffset: { x: 0, y: -75 },
+      bbox: { x: 110, y: 62, w: 188, h: 88 },
     },
   ],
   steps: [

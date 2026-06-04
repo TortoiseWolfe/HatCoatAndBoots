@@ -15,8 +15,18 @@ export interface Layer {
   tabWord: string;
   /** Stacking order in the shared 0 0 360 360 space (low draws behind). */
   z: number;
-  /** Translation applied when this layer is EXPLODED (docked = {0,0}). */
+  /**
+   * Translation applied when this layer is EXPLODED (docked = {0,0}), expressed
+   * in VIEWBOX UNITS (0..360), so the real geometry moves apart — not a pixel
+   * nudge on a full-canvas image.
+   */
   explodeOffset: { x: number; y: number };
+  /**
+   * The layer's real ink bounding box in viewBox units, used to place its tap
+   * control + colour tab on the actual part (not piled in a corner). Measured
+   * from the source SVG.
+   */
+  bbox: { x: number; y: number; w: number; h: number };
 }
 
 export interface Step {

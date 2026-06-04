@@ -26,6 +26,7 @@ const HAT: ChapterManifest = {
       tabWord: 'WALL',
       z: 20,
       explodeOffset: { x: 0, y: 0 },
+      bbox: { x: 148, y: 116, w: 96, h: 188 },
     },
     {
       id: 'roof',
@@ -36,6 +37,7 @@ const HAT: ChapterManifest = {
       tabWord: 'ROOF',
       z: 40,
       explodeOffset: { x: 0, y: -60 },
+      bbox: { x: 110, y: 62, w: 188, h: 88 },
     },
   ],
   steps: [

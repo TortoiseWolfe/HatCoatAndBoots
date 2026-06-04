@@ -1,5 +1,9 @@
 import type { ChapterManifest } from './types';
 
+// Geometry note: explodeOffset + bbox are in VIEWBOX UNITS (0..360), the shared
+// coordinate space all 7 layers are drawn in. bbox values are the real measured
+// ink bounds of each layer (see memory: hat-svg-real-bboxes). Offsets pull each
+// part away from the assembled centre so the building genuinely separates.
 export const hatManifest: ChapterManifest = {
   slug: 'hat',
   meta: { title: 'The Hat', kicker: 'Why a roof needs a brim' },
@@ -13,6 +17,7 @@ export const hatManifest: ChapterManifest = {
       tabWord: 'FOOTING',
       z: 10,
       explodeOffset: { x: 0, y: 70 },
+      bbox: { x: 40, y: 300, w: 280, h: 44 },
     },
     {
       id: 'wall',
@@ -22,17 +27,19 @@ export const hatManifest: ChapterManifest = {
       tabColor: '#c9a86a',
       tabWord: 'WALL',
       z: 20,
-      explodeOffset: { x: 0, y: 0 },
+      explodeOffset: { x: -70, y: 0 },
+      bbox: { x: 148, y: 116, w: 96, h: 188 },
     },
     {
       id: 'window',
       src: 'book/hat/window.svg',
       label: 'Window',
       alt: 'The window opening',
-      tabColor: '#cfe3ee',
+      tabColor: '#7fa8c9',
       tabWord: 'WINDOW',
       z: 30,
-      explodeOffset: { x: 90, y: 0 },
+      explodeOffset: { x: 95, y: 30 },
+      bbox: { x: 182, y: 150, w: 54, h: 103 },
     },
     {
       id: 'roof-overhang',
@@ -42,7 +49,8 @@ export const hatManifest: ChapterManifest = {
       tabColor: '#c8714a',
       tabWord: 'ROOF',
       z: 60,
-      explodeOffset: { x: 0, y: -80 },
+      explodeOffset: { x: 0, y: -75 },
+      bbox: { x: 110, y: 62, w: 188, h: 88 },
     },
     {
       id: 'sun-high',
@@ -52,7 +60,8 @@ export const hatManifest: ChapterManifest = {
       tabColor: '#e8a02e',
       tabWord: 'SUMMER',
       z: 50,
-      explodeOffset: { x: 60, y: -60 },
+      explodeOffset: { x: 70, y: -55 },
+      bbox: { x: 250, y: 20, w: 90, h: 90 },
     },
     {
       id: 'sun-low',
@@ -62,7 +71,8 @@ export const hatManifest: ChapterManifest = {
       tabColor: '#e6b455',
       tabWord: 'WINTER',
       z: 50,
-      explodeOffset: { x: 80, y: 20 },
+      explodeOffset: { x: 95, y: 35 },
+      bbox: { x: 280, y: 170, w: 70, h: 70 },
     },
     {
       id: 'rain',
@@ -72,7 +82,8 @@ export const hatManifest: ChapterManifest = {
       tabColor: '#5b86a8',
       tabWord: 'RAIN',
       z: 55,
-      explodeOffset: { x: 40, y: -40 },
+      explodeOffset: { x: 40, y: -45 },
+      bbox: { x: 116, y: 34, w: 208, h: 60 },
     },
   ],
   steps: [

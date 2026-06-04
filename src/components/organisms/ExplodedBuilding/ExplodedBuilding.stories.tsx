@@ -12,16 +12,18 @@ const LAYERS: Layer[] = [
     tabWord: 'WALL',
     z: 20,
     explodeOffset: { x: 0, y: 0 },
+    bbox: { x: 148, y: 116, w: 96, h: 188 },
   },
   {
-    id: 'roof',
+    id: 'roof-overhang',
     src: 'book/hat/roof-overhang.svg',
     label: 'Roof overhang',
     alt: 'The roof and its overhang',
     tabColor: '#c8714a',
     tabWord: 'ROOF',
     z: 40,
-    explodeOffset: { x: 0, y: -60 },
+    explodeOffset: { x: 0, y: -75 },
+    bbox: { x: 110, y: 62, w: 188, h: 88 },
   },
 ];
 
@@ -45,6 +47,7 @@ type Story = StoryObj<typeof meta>;
 
 export const AllDocked: Story = {
   args: {
+    chapter: 'hat',
     layers: LAYERS,
     isDocked: () => true,
     onToggle: () => {},
@@ -53,9 +56,10 @@ export const AllDocked: Story = {
 
 export const RoofExploded: Story = {
   args: {
+    chapter: 'hat',
     layers: LAYERS,
-    isDocked: (id: string) => id !== 'roof',
+    isDocked: (id: string) => id !== 'roof-overhang',
     onToggle: () => {},
-    spotlightId: 'roof',
+    spotlightId: 'roof-overhang',
   },
 };

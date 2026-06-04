@@ -16,6 +16,7 @@ const LAYERS: Layer[] = [
     tabWord: 'WALL',
     z: 20,
     explodeOffset: { x: 0, y: 0 },
+    bbox: { x: 148, y: 116, w: 96, h: 188 },
   },
 ];
 
@@ -23,6 +24,7 @@ describe('ExplodedBuilding Accessibility', () => {
   it('should have no accessibility violations', async () => {
     const { container } = render(
       <ExplodedBuilding
+        chapter="hat"
         layers={LAYERS}
         isDocked={() => true}
         onToggle={() => {}}
@@ -32,16 +34,16 @@ describe('ExplodedBuilding Accessibility', () => {
     expect(results).toHaveNoViolations();
   });
 
-  it('decorative layer images carry empty alt', () => {
+  it('the decorative building SVG is hidden from assistive tech', () => {
     const { container } = render(
       <ExplodedBuilding
+        chapter="hat"
         layers={LAYERS}
         isDocked={() => true}
         onToggle={() => {}}
       />
     );
-    container.querySelectorAll('img').forEach((img) => {
-      expect(img).toHaveAttribute('alt');
-    });
+    const svg = container.querySelector('svg');
+    expect(svg).toHaveAttribute('aria-hidden', 'true');
   });
 });
