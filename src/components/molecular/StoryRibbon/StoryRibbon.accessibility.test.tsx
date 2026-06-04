@@ -5,20 +5,15 @@ import { StoryRibbon } from './StoryRibbon';
 
 expect.extend(toHaveNoViolations);
 
-const LEGEND = [
-  { id: 'roof', tabColor: '#c8714a', docked: true },
-  { id: 'wall', tabColor: '#c9a86a', docked: false },
-];
-
 describe('StoryRibbon Accessibility', () => {
   it('should have no accessibility violations', async () => {
     const { container } = render(
       <StoryRibbon
         heading="Summer sun is blocked"
         prose="The overhang shades the window."
+        takeaway="One fixed roof edge, two seasons."
         stepIndex={1}
         stepCount={4}
-        legend={LEGEND}
         onPrev={() => {}}
         onNext={() => {}}
       />

@@ -2,11 +2,6 @@ import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { StoryRibbon } from './StoryRibbon';
 
-const LEGEND = [
-  { id: 'roof', tabColor: '#c8714a', docked: true },
-  { id: 'wall', tabColor: '#c9a86a', docked: false },
-];
-
 describe('StoryRibbon', () => {
   it('shows the heading and prose of the active beat', () => {
     render(
@@ -15,7 +10,6 @@ describe('StoryRibbon', () => {
         prose="The overhang shades the window."
         stepIndex={1}
         stepCount={4}
-        legend={LEGEND}
         onPrev={() => {}}
         onNext={() => {}}
       />
@@ -24,6 +18,21 @@ describe('StoryRibbon', () => {
       screen.getByRole('heading', { name: /summer sun is blocked/i })
     ).toBeInTheDocument();
     expect(screen.getByText(/overhang shades the window/i)).toBeInTheDocument();
+  });
+
+  it('shows the takeaway when provided', () => {
+    render(
+      <StoryRibbon
+        heading="h"
+        prose="p"
+        takeaway="One fixed roof edge, two seasons."
+        stepIndex={1}
+        stepCount={4}
+        onPrev={() => {}}
+        onNext={() => {}}
+      />
+    );
+    expect(screen.getByText(/two seasons/i)).toBeInTheDocument();
   });
 
   it('fires onPrev / onNext from the pills', () => {
@@ -35,7 +44,6 @@ describe('StoryRibbon', () => {
         prose="p"
         stepIndex={1}
         stepCount={4}
-        legend={LEGEND}
         onPrev={onPrev}
         onNext={onNext}
       />
@@ -53,7 +61,6 @@ describe('StoryRibbon', () => {
         prose="p"
         stepIndex={0}
         stepCount={3}
-        legend={LEGEND}
         onPrev={() => {}}
         onNext={() => {}}
       />
@@ -65,7 +72,6 @@ describe('StoryRibbon', () => {
         prose="p"
         stepIndex={2}
         stepCount={3}
-        legend={LEGEND}
         onPrev={() => {}}
         onNext={() => {}}
       />
@@ -73,21 +79,17 @@ describe('StoryRibbon', () => {
     expect(screen.getByRole('button', { name: /next/i })).toBeDisabled();
   });
 
-  it('renders one legend dot per layer, marking docked ones', () => {
+  it('shows the step counter', () => {
     render(
       <StoryRibbon
         heading="h"
         prose="p"
         stepIndex={1}
         stepCount={4}
-        legend={LEGEND}
         onPrev={() => {}}
         onNext={() => {}}
       />
     );
-    const dots = screen.getAllByTestId('legend-dot');
-    expect(dots).toHaveLength(2);
-    expect(dots[0]).toHaveAttribute('data-docked', 'true');
-    expect(dots[1]).toHaveAttribute('data-docked', 'false');
+    expect(screen.getByText('2 / 4')).toBeInTheDocument();
   });
 });

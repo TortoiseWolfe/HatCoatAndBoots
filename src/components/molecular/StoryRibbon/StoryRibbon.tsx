@@ -2,36 +2,31 @@
 
 import React from 'react';
 
-export interface LegendItem {
-  id: string;
-  tabColor: string;
-  docked: boolean;
-}
-
 export interface StoryRibbonProps {
   heading: string;
   prose: string;
+  /** Optional one-line distilled takeaway, shown under the prose. */
+  takeaway?: string;
   stepIndex: number;
   stepCount: number;
-  legend: LegendItem[];
   onPrev: () => void;
   onNext: () => void;
   className?: string;
 }
 
 /**
- * The narrative ribbon: active beat heading + prose, Back/Next pills (≥44px),
- * and a live legend (one dot per layer; filled = docked). Floats over the
- * building's low-information margin — never a column, never a totem.
+ * The narrative ribbon: active beat heading + the teaching prose + an optional
+ * one-line takeaway, with Back/Next pills (≥44px) and a step counter. Floats over
+ * the building's low-information margin — never a column, never a totem.
  *
  * @category molecular
  */
 export function StoryRibbon({
   heading,
   prose,
+  takeaway,
   stepIndex,
   stepCount,
-  legend,
   onPrev,
   onNext,
   className = '',
@@ -44,7 +39,12 @@ export function StoryRibbon({
       <p aria-live="polite" className="mt-1 text-sm leading-relaxed">
         {prose}
       </p>
-      <div className="mt-3 flex items-center gap-3">
+      {takeaway && (
+        <p className="border-primary/60 text-base-content/80 mt-3 border-l-2 pl-3 text-sm italic">
+          {takeaway}
+        </p>
+      )}
+      <div className="mt-3 flex items-center justify-between gap-3">
         <button
           type="button"
           onClick={onPrev}
@@ -53,21 +53,12 @@ export function StoryRibbon({
         >
           ‹ Back
         </button>
-        <ul className="flex flex-1 items-center justify-center gap-1.5">
-          {legend.map((l) => (
-            <li
-              key={l.id}
-              data-testid="legend-dot"
-              data-docked={l.docked}
-              aria-hidden="true"
-              className="h-2.5 w-2.5 rounded-full border"
-              style={{
-                background: l.docked ? l.tabColor : 'transparent',
-                borderColor: l.tabColor,
-              }}
-            />
-          ))}
-        </ul>
+        <span
+          aria-hidden="true"
+          className="text-base-content/60 text-xs font-medium"
+        >
+          {stepIndex + 1} / {stepCount}
+        </span>
         <button
           type="button"
           onClick={onNext}

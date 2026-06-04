@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeAll } from 'vitest';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, within } from '@testing-library/react';
 import { ChapterViewer } from './BookViewer';
 import type { ChapterManifest } from './manifests/types';
 
@@ -57,17 +57,22 @@ const HAT: ChapterManifest = {
 };
 
 describe('ChapterViewer', () => {
+  // The building parts and the visible LayerToggles share layer names, so scope
+  // part-button queries to the building's own group.
+  const building = () =>
+    within(screen.getByRole('group', { name: /explore the house/i }));
+
   it('shows step 0 heading + docks step 0 layers', () => {
     render(<ChapterViewer manifest={HAT} />);
     expect(
       screen.getByRole('heading', { name: /walls first/i })
     ).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /walls/i })).toHaveAttribute(
+    expect(building().getByRole('button', { name: /walls/i })).toHaveAttribute(
       'aria-pressed',
       'true'
     );
     expect(
-      screen.getByRole('button', { name: /roof overhang/i })
+      building().getByRole('button', { name: /roof overhang/i })
     ).toHaveAttribute('aria-pressed', 'false');
   });
 
@@ -78,14 +83,14 @@ describe('ChapterViewer', () => {
       screen.getByRole('heading', { name: /add the roof/i })
     ).toBeInTheDocument();
     expect(
-      screen.getByRole('button', { name: /roof overhang/i })
+      building().getByRole('button', { name: /roof overhang/i })
     ).toHaveAttribute('aria-pressed', 'true');
   });
 
   it('tapping a part flips to reader mode and shows "back to the story"', () => {
     render(<ChapterViewer manifest={HAT} />);
-    fireEvent.click(screen.getByRole('button', { name: /walls/i })); // undock wall
-    expect(screen.getByRole('button', { name: /walls/i })).toHaveAttribute(
+    fireEvent.click(building().getByRole('button', { name: /walls/i })); // undock wall
+    expect(building().getByRole('button', { name: /walls/i })).toHaveAttribute(
       'aria-pressed',
       'false'
     );
