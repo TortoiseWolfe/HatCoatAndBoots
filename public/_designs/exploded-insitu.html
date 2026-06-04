@@ -1,0 +1,302 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>exploded-insitu</title>
+  <style>
+    /*
+     * BRAINSTORM COMPANION FRAME TEMPLATE
+     *
+     * This template provides a consistent frame with:
+     * - OS-aware light/dark theming
+     * - Fixed header and selection indicator bar
+     * - Scrollable main content area
+     * - CSS helpers for common UI patterns
+     *
+     * Content is injected via placeholder comment in #claude-content.
+     */
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; overflow: hidden; }
+
+    /* ===== THEME VARIABLES ===== */
+    :root {
+      --bg-primary: #f5f5f7;
+      --bg-secondary: #ffffff;
+      --bg-tertiary: #e5e5e7;
+      --border: #d1d1d6;
+      --text-primary: #1d1d1f;
+      --text-secondary: #86868b;
+      --text-tertiary: #aeaeb2;
+      --accent: #0071e3;
+      --accent-hover: #0077ed;
+      --success: #34c759;
+      --warning: #ff9f0a;
+      --error: #ff3b30;
+      --selected-bg: #e8f4fd;
+      --selected-border: #0071e3;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-primary: #1d1d1f;
+        --bg-secondary: #2d2d2f;
+        --bg-tertiary: #3d3d3f;
+        --border: #424245;
+        --text-primary: #f5f5f7;
+        --text-secondary: #86868b;
+        --text-tertiary: #636366;
+        --accent: #0a84ff;
+        --accent-hover: #409cff;
+        --selected-bg: rgba(10, 132, 255, 0.15);
+        --selected-border: #0a84ff;
+      }
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      display: flex;
+      flex-direction: column;
+      line-height: 1.5;
+    }
+
+    /* ===== FRAME STRUCTURE ===== */
+    .header {
+      background: var(--bg-secondary);
+      padding: 0.5rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .header h1 { font-size: 0.85rem; font-weight: 500; color: var(--text-secondary); }
+    .header .status { font-size: 0.7rem; color: var(--success); display: flex; align-items: center; gap: 0.4rem; }
+    .header .status::before { content: ''; width: 6px; height: 6px; background: var(--success); border-radius: 50%; }
+
+    .main { flex: 1; overflow-y: auto; }
+    #claude-content { padding: 2rem; min-height: 100%; }
+
+    .indicator-bar {
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border);
+      padding: 0.5rem 1.5rem;
+      flex-shrink: 0;
+      text-align: center;
+    }
+    .indicator-bar span {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+    }
+    .indicator-bar .selected-text {
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    /* ===== TYPOGRAPHY ===== */
+    h2 { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.5rem; }
+    h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.25rem; }
+    .subtitle { color: var(--text-secondary); margin-bottom: 1.5rem; }
+    .section { margin-bottom: 2rem; }
+    .label { font-size: 0.7rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+
+    /* ===== OPTIONS (for A/B/C choices) ===== */
+    .options { display: flex; flex-direction: column; gap: 0.75rem; }
+    .option {
+      background: var(--bg-secondary);
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem 1.25rem;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    .option:hover { border-color: var(--accent); }
+    .option.selected { background: var(--selected-bg); border-color: var(--selected-border); }
+    .option .letter {
+      background: var(--bg-tertiary);
+      color: var(--text-secondary);
+      width: 1.75rem; height: 1.75rem;
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 600; font-size: 0.85rem; flex-shrink: 0;
+    }
+    .option.selected .letter { background: var(--accent); color: white; }
+    .option .content { flex: 1; }
+    .option .content h3 { font-size: 0.95rem; margin-bottom: 0.15rem; }
+    .option .content p { color: var(--text-secondary); font-size: 0.85rem; margin: 0; }
+
+    /* ===== CARDS (for showing designs/mockups) ===== */
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; }
+    .card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    .card.selected { border-color: var(--selected-border); border-width: 2px; }
+    .card-image { background: var(--bg-tertiary); aspect-ratio: 16/10; display: flex; align-items: center; justify-content: center; }
+    .card-body { padding: 1rem; }
+    .card-body h3 { margin-bottom: 0.25rem; }
+    .card-body p { color: var(--text-secondary); font-size: 0.85rem; }
+
+    /* ===== MOCKUP CONTAINER ===== */
+    .mockup {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+    }
+    .mockup-header {
+      background: var(--bg-tertiary);
+      padding: 0.5rem 1rem;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--border);
+    }
+    .mockup-body { padding: 1.5rem; }
+
+    /* ===== SPLIT VIEW (side-by-side comparison) ===== */
+    .split { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    @media (max-width: 700px) { .split { grid-template-columns: 1fr; } }
+
+    /* ===== PROS/CONS ===== */
+    .pros-cons { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0; }
+    .pros, .cons { background: var(--bg-secondary); border-radius: 8px; padding: 1rem; }
+    .pros h4 { color: var(--success); font-size: 0.85rem; margin-bottom: 0.5rem; }
+    .cons h4 { color: var(--error); font-size: 0.85rem; margin-bottom: 0.5rem; }
+    .pros ul, .cons ul { margin-left: 1.25rem; font-size: 0.85rem; color: var(--text-secondary); }
+    .pros li, .cons li { margin-bottom: 0.25rem; }
+
+    /* ===== PLACEHOLDER (for mockup areas) ===== */
+    .placeholder {
+      background: var(--bg-tertiary);
+      border: 2px dashed var(--border);
+      border-radius: 8px;
+      padding: 2rem;
+      text-align: center;
+      color: var(--text-tertiary);
+    }
+
+    /* ===== INLINE MOCKUP ELEMENTS ===== */
+    .mock-nav { background: var(--accent); color: white; padding: 0.75rem 1rem; display: flex; gap: 1.5rem; font-size: 0.9rem; }
+    .mock-sidebar { background: var(--bg-tertiary); padding: 1rem; min-width: 180px; }
+    .mock-content { padding: 1.5rem; flex: 1; }
+    .mock-button { background: var(--accent); color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; font-size: 0.85rem; }
+    .mock-input { background: var(--bg-primary); border: 1px solid var(--border); border-radius: 6px; padding: 0.5rem; width: 100%; }
+  </style>
+<style>body{padding:20px;font-family:system-ui,sans-serif}</style>
+</head><body>
+<script>function toggleSelect(el){document.querySelectorAll('.selected').forEach(e=>e.classList.remove('selected'));el.classList.add('selected')}</script>
+<h2>Exploded view, fixed — the BUILDING is big; its own layers lift apart in place</h2>
+<p class="subtitle">One large house dominating the frame. Its real parts are spread apart along the vertical axis — roof lifted up, walls and window in the middle, footing dropped below — still obviously ONE building, just pulled open. No thumbnail rail. Tap a part to slide it home (assemble) or out (explode).</p>
+
+<style>
+  .pg{ border:2px solid #cbb994;border-radius:14px;overflow:hidden;background:#0e0e1c;box-shadow:0 14px 40px #0007;max-width:980px;margin:0 auto; }
+  .nav{ display:flex;align-items:center;gap:8px;background:#16162a;padding:0 16px;height:50px;border-bottom:1px solid #2a2a44; }
+  .logo{ color:#e8d4b8;font-weight:800;font-size:14px;display:flex;gap:7px;align-items:center; } .logo .d{ width:16px;height:16px;border-radius:50%;background:#a8b2c1; }
+  .chap{ font-size:12.5px;font-weight:700;padding:5px 13px;border-radius:7px;color:#9aa6b8; } .chap.active{ background:#2563eb;color:#fff; } .chap.soon{ opacity:.4; }
+  .navr{ margin-left:auto;display:flex;gap:6px; } .ib{ width:27px;height:27px;border-radius:6px;background:#21213a;color:#9aa6b8;display:inline-flex;align-items:center;justify-content:center;font-size:12px; }
+
+  .stage{ position:relative;height:600px;overflow:hidden;background:radial-gradient(120% 100% at 56% 42%,#243049,#171d31 62%,#10121f); }
+
+  /* ONE big building, centered, ~440px tall. Each part sits at its EXPLODED offset
+     from its assembled position, with a dotted connector showing where it belongs. */
+  .bx{ position:absolute;left:54%;transform:translateX(-50%);width:300px;height:560px;top:24px; }
+  .part{ position:absolute;left:50%;transform:translateX(-50%);cursor:pointer;transition:transform .15s; }
+  .part:hover{ filter:brightness(1.08); }
+  .conn{ position:absolute;left:50%;transform:translateX(-50%);width:2px;background:repeating-linear-gradient(#6a7a96 0 5px,#0000 5px 11px);opacity:.45; }
+  .lab{ position:absolute;left:104%;white-space:nowrap;font-size:12px;font-weight:800;color:#cfe0f5;background:#1a2233cc;border:1.5px solid #3a4a66;border-radius:7px;padding:2px 9px; }
+  .lab.glow{ color:#1a1a1a;background:#f6c453;border-color:#f6c453; }
+
+  /* roof + overhang (lifted HIGH) -->*/
+  .roof{ width:0;height:0;border-left:150px solid transparent;border-right:150px solid transparent;border-bottom:84px solid #b85c34;filter:drop-shadow(0 8px 10px #0008); }
+  .eave{ width:330px;height:14px;background:#9a4a24;border-radius:7px;margin:-4px auto 0; }
+  /* sun discs float to the sides at roof height */
+  .sun{ width:46px;height:46px;border-radius:50%;background:#f5c542;box-shadow:0 0 0 12px #f5c54222,0 0 30px #f5c54277;position:absolute; }
+  /* walls (middle) */
+  .walls{ width:172px;height:150px;background:#f3ead6;border:5px solid #2d3a4a;border-radius:2px; }
+  .wallpat{ position:absolute;inset:6px;background:repeating-linear-gradient(0deg,#c9a86a44 0 2px,#0000 2px 10px); }
+  /* window (slid out to the right of the walls a touch) */
+  .win{ width:86px;height:108px;background:#cfe3ee;border:5px solid #2d3a4a;position:relative; }
+  .win:before{ content:"";position:absolute;left:50%;top:0;bottom:0;width:2px;background:#2d3a4a; }
+  .win:after{ content:"";position:absolute;top:50%;left:0;right:0;height:2px;background:#2d3a4a; }
+  /* rain streaks (drift above-right) */
+  .rain{ width:120px;height:60px;background:repeating-linear-gradient(20deg,#7fb3d5 0 3px,#0000 3px 13px);border-radius:6px; }
+  /* footing (dropped LOW) */
+  .footing{ width:300px;height:40px;background:repeating-linear-gradient(90deg,#7c6f5a 0 10px,#5e5444 10px 18px);border:4px solid #2d3a4a;border-radius:4px;position:relative; }
+  .piers{ position:absolute;top:-22px;left:30px;right:30px;height:22px;background:
+     linear-gradient(90deg,#9aa7b3 0 22px,#0000 22px) 0 0/64px 100% repeat-x;opacity:.9; }
+
+  .words{ position:absolute;left:20px;top:26px;width:210px;color:#eaf0f8;z-index:8; }
+  .kick{ font-size:10.5px;letter-spacing:1.8px;text-transform:uppercase;color:#8fb4e8;font-weight:800; }
+  .ch{ font-size:22px;font-weight:800;line-height:1.12;margin:6px 0 8px;color:#fff;text-shadow:0 2px 10px #0009; }
+  .cp{ font-size:12.5px;line-height:1.55;color:#d6deea;text-shadow:0 1px 6px #0008; }
+  .invite{ background:#f6c45333;border:1px solid #f6c45399;color:#ffe6a8;border-radius:8px;padding:3px 9px;font-weight:700;font-size:12px;display:inline-block;margin-top:9px; }
+  /* collapse/expand affordance */
+  .assemble{ position:absolute;right:16px;top:14px;background:#1a2138ee;border:1.5px solid #2563eb;color:#8fd0ff;font-size:11px;font-weight:800;border-radius:16px;padding:5px 12px;z-index:8; }
+
+  .bot{ position:absolute;left:0;right:0;bottom:0;height:42px;display:flex;align-items:center;justify-content:center;gap:12px;background:linear-gradient(to top,#0e0e1cee,transparent);z-index:9; }
+  .nb{ font-size:12px;font-weight:700;border:1.5px solid #5a6a8a;border-radius:8px;padding:5px 13px;background:#1a2138cc;color:#dfe6f0; }
+  .dots{ display:flex;gap:7px; } .pd{ width:9px;height:9px;border-radius:50%;background:#2563eb; } .pd.o{ background:#39435f; }
+</style>
+
+<div class="pg">
+  <div class="nav"><div class="logo"><span class="d"></span>HatCoatAndBoots</div>
+    <span class="chap active">The Hat</span><span class="chap soon">The Coat</span><span class="chap soon">The Boots</span>
+    <span class="navr"><span class="ib">A</span><span class="ib">◐</span><span class="ib">☰</span></span></div>
+
+  <div class="stage">
+    <!-- vertical connector spine showing all pieces belong to one stack -->
+    <div class="conn" style="left:54%;top:70px;height:470px"></div>
+
+    <div class="bx">
+      <!-- ROOF lifted high -->
+      <div class="part" style="top:0">
+        <div class="roof"></div><div class="eave"></div>
+        <span class="lab glow" style="top:30px">roof + overhang</span>
+      </div>
+      <!-- SUN discs at roof height, sides -->
+      <div class="part" style="top:30px;left:-6%"><div class="sun"></div><span class="lab" style="left:-150%;top:10px">summer sun ☀</span></div>
+      <div class="part" style="top:96px;left:108%"><div class="sun" style="background:#f0a93a"></div><span class="lab" style="left:60%;top:8px">winter sun</span></div>
+      <!-- RAIN drifting upper right -->
+      <div class="part" style="top:128px;left:120%"><div class="rain"></div><span class="lab" style="top:64px;left:-10%">rain ☔</span></div>
+      <!-- WALLS middle -->
+      <div class="part" style="top:210px"><div class="walls"><div class="wallpat"></div></div><span class="lab" style="top:60px">walls</span></div>
+      <!-- WINDOW slid out beside walls -->
+      <div class="part" style="top:232px;left:128%"><div class="win"></div><span class="lab" style="top:46px;left:10%">window</span></div>
+      <!-- FOOTING dropped low -->
+      <div class="part" style="top:430px"><div class="footing"><div class="piers"></div></div><span class="lab" style="top:14px">footing</span></div>
+    </div>
+
+    <div class="words">
+      <div class="kick">The Hat · Step 2 of 4</div>
+      <div class="ch">The summer sun is blocked</div>
+      <div class="cp">The roof's overhang reaches out past the wall and shades the window. Tap the overhang to lift it off and watch the sun pour in.</div>
+      <div class="invite">👆 Tap any part to pull it off</div>
+    </div>
+    <div class="assemble">⤢ Snap it together</div>
+
+    <div class="bot"><button class="nb">‹ Back</button><div class="dots"><span class="pd"></span><span class="pd"></span><span class="pd o"></span><span class="pd o"></span></div><button class="nb">Next ›</button></div>
+  </div>
+</div>
+
+<p class="subtitle" style="margin-top:18px;text-align:center"><b>Now the building is the hero.</b> It's big, centered, and recognizably one house — just pulled open along its spine so each real part (roof, sun, rain, walls, window, footing) is visible and labeled in place. "⤢ Snap it together" collapses it back into a solid house; tapping a part toggles just that one. The layers are big BECAUSE they're the building, not a separate menu.</p>
+
+<div class="options" style="margin-top:8px">
+  <div class="option" data-choice="yes" onclick="toggleSelect(this)">
+    <div class="letter">✓</div><div class="content"><h3>Yes — building-as-hero, exploded in place</h3><p>Big house pulled open along its spine; tap a part to toggle; snap-together collapses it.</p></div>
+  </div>
+  <div class="option" data-choice="tweak" onclick="toggleSelect(this)">
+    <div class="letter">✎</div><div class="content"><h3>Better — but adjust</h3><p>e.g. less explode spread, no labels, bigger still, words elsewhere. Tell me.</p></div>
+  </div>
+  <div class="option" data-choice="no" onclick="toggleSelect(this)">
+    <div class="letter">✗</div><div class="content"><h3>Still wrong</h3><p>Tell me what.</p></div>
+  </div>
+</div>
+</body></html>

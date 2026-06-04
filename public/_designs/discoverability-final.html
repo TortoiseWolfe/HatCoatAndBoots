@@ -1,0 +1,302 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>discoverability-final</title>
+  <style>
+    /*
+     * BRAINSTORM COMPANION FRAME TEMPLATE
+     *
+     * This template provides a consistent frame with:
+     * - OS-aware light/dark theming
+     * - Fixed header and selection indicator bar
+     * - Scrollable main content area
+     * - CSS helpers for common UI patterns
+     *
+     * Content is injected via placeholder comment in #claude-content.
+     */
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; overflow: hidden; }
+
+    /* ===== THEME VARIABLES ===== */
+    :root {
+      --bg-primary: #f5f5f7;
+      --bg-secondary: #ffffff;
+      --bg-tertiary: #e5e5e7;
+      --border: #d1d1d6;
+      --text-primary: #1d1d1f;
+      --text-secondary: #86868b;
+      --text-tertiary: #aeaeb2;
+      --accent: #0071e3;
+      --accent-hover: #0077ed;
+      --success: #34c759;
+      --warning: #ff9f0a;
+      --error: #ff3b30;
+      --selected-bg: #e8f4fd;
+      --selected-border: #0071e3;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-primary: #1d1d1f;
+        --bg-secondary: #2d2d2f;
+        --bg-tertiary: #3d3d3f;
+        --border: #424245;
+        --text-primary: #f5f5f7;
+        --text-secondary: #86868b;
+        --text-tertiary: #636366;
+        --accent: #0a84ff;
+        --accent-hover: #409cff;
+        --selected-bg: rgba(10, 132, 255, 0.15);
+        --selected-border: #0a84ff;
+      }
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      display: flex;
+      flex-direction: column;
+      line-height: 1.5;
+    }
+
+    /* ===== FRAME STRUCTURE ===== */
+    .header {
+      background: var(--bg-secondary);
+      padding: 0.5rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .header h1 { font-size: 0.85rem; font-weight: 500; color: var(--text-secondary); }
+    .header .status { font-size: 0.7rem; color: var(--success); display: flex; align-items: center; gap: 0.4rem; }
+    .header .status::before { content: ''; width: 6px; height: 6px; background: var(--success); border-radius: 50%; }
+
+    .main { flex: 1; overflow-y: auto; }
+    #claude-content { padding: 2rem; min-height: 100%; }
+
+    .indicator-bar {
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border);
+      padding: 0.5rem 1.5rem;
+      flex-shrink: 0;
+      text-align: center;
+    }
+    .indicator-bar span {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+    }
+    .indicator-bar .selected-text {
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    /* ===== TYPOGRAPHY ===== */
+    h2 { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.5rem; }
+    h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.25rem; }
+    .subtitle { color: var(--text-secondary); margin-bottom: 1.5rem; }
+    .section { margin-bottom: 2rem; }
+    .label { font-size: 0.7rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+
+    /* ===== OPTIONS (for A/B/C choices) ===== */
+    .options { display: flex; flex-direction: column; gap: 0.75rem; }
+    .option {
+      background: var(--bg-secondary);
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem 1.25rem;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    .option:hover { border-color: var(--accent); }
+    .option.selected { background: var(--selected-bg); border-color: var(--selected-border); }
+    .option .letter {
+      background: var(--bg-tertiary);
+      color: var(--text-secondary);
+      width: 1.75rem; height: 1.75rem;
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 600; font-size: 0.85rem; flex-shrink: 0;
+    }
+    .option.selected .letter { background: var(--accent); color: white; }
+    .option .content { flex: 1; }
+    .option .content h3 { font-size: 0.95rem; margin-bottom: 0.15rem; }
+    .option .content p { color: var(--text-secondary); font-size: 0.85rem; margin: 0; }
+
+    /* ===== CARDS (for showing designs/mockups) ===== */
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; }
+    .card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    .card.selected { border-color: var(--selected-border); border-width: 2px; }
+    .card-image { background: var(--bg-tertiary); aspect-ratio: 16/10; display: flex; align-items: center; justify-content: center; }
+    .card-body { padding: 1rem; }
+    .card-body h3 { margin-bottom: 0.25rem; }
+    .card-body p { color: var(--text-secondary); font-size: 0.85rem; }
+
+    /* ===== MOCKUP CONTAINER ===== */
+    .mockup {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+    }
+    .mockup-header {
+      background: var(--bg-tertiary);
+      padding: 0.5rem 1rem;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--border);
+    }
+    .mockup-body { padding: 1.5rem; }
+
+    /* ===== SPLIT VIEW (side-by-side comparison) ===== */
+    .split { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    @media (max-width: 700px) { .split { grid-template-columns: 1fr; } }
+
+    /* ===== PROS/CONS ===== */
+    .pros-cons { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0; }
+    .pros, .cons { background: var(--bg-secondary); border-radius: 8px; padding: 1rem; }
+    .pros h4 { color: var(--success); font-size: 0.85rem; margin-bottom: 0.5rem; }
+    .cons h4 { color: var(--error); font-size: 0.85rem; margin-bottom: 0.5rem; }
+    .pros ul, .cons ul { margin-left: 1.25rem; font-size: 0.85rem; color: var(--text-secondary); }
+    .pros li, .cons li { margin-bottom: 0.25rem; }
+
+    /* ===== PLACEHOLDER (for mockup areas) ===== */
+    .placeholder {
+      background: var(--bg-tertiary);
+      border: 2px dashed var(--border);
+      border-radius: 8px;
+      padding: 2rem;
+      text-align: center;
+      color: var(--text-tertiary);
+    }
+
+    /* ===== INLINE MOCKUP ELEMENTS ===== */
+    .mock-nav { background: var(--accent); color: white; padding: 0.75rem 1rem; display: flex; gap: 1.5rem; font-size: 0.9rem; }
+    .mock-sidebar { background: var(--bg-tertiary); padding: 1rem; min-width: 180px; }
+    .mock-content { padding: 1.5rem; flex: 1; }
+    .mock-button { background: var(--accent); color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; font-size: 0.85rem; }
+    .mock-input { background: var(--bg-primary); border: 1px solid var(--border); border-radius: 6px; padding: 0.5rem; width: 100%; }
+  </style>
+<style>body{padding:20px;font-family:system-ui,sans-serif}</style>
+</head><body>
+<script>function toggleSelect(el){document.querySelectorAll('.selected').forEach(e=>e.classList.remove('selected'));el.classList.add('selected')}</script>
+<h2>Tap-the-parts, made discoverable for a child — the recommended design</h2>
+<p class="subtitle">Option A (the building parts ARE the controls), but the scroll-story "arms" ONE part per beat with a gentle breathing halo + an in-prose "👆 try tapping" nudge + a tooltip in the sky. One tap shows the tooltip, the next removes the part. No totem, no persistent strips. Two states shown below.</p>
+
+<style>
+  .dd-wrap{ display:grid;grid-template-columns:1fr 1fr;gap:18px; }
+  @media (max-width:900px){ .dd-wrap{ grid-template-columns:1fr; } }
+  .pg{ border:2px solid #cbb994;border-radius:13px;overflow:hidden;background:#0e0e1c;box-shadow:0 10px 30px #0005; }
+  .nav{ display:flex;align-items:center;gap:8px;background:#16162a;padding:0 12px;height:44px;border-bottom:1px solid #2a2a44; }
+  .logo{ color:#e8d4b8;font-weight:800;font-size:12.5px;display:flex;gap:6px;align-items:center; } .logo .d{ width:14px;height:14px;border-radius:50%;background:#a8b2c1; }
+  .chap{ font-size:11.5px;font-weight:700;padding:4px 10px;border-radius:7px;color:#9aa6b8; } .chap.active{ background:#2563eb;color:#fff; } .chap.soon{ opacity:.4; }
+  .navr{ margin-left:auto;display:flex;gap:5px; } .ib{ width:24px;height:24px;border-radius:6px;background:#21213a;color:#9aa6b8;display:inline-flex;align-items:center;justify-content:center;font-size:11px; }
+  .stage{ position:relative;height:340px;overflow:hidden;background:radial-gradient(120% 90% at 50% 16%,#2a3550,#1a2138 56%,#131726); }
+  /* building */
+  .b{ position:absolute;left:50%;bottom:14px;transform:translateX(-46%); }
+  .rf{ width:0;height:0;border-left:128px solid transparent;border-right:128px solid transparent;border-bottom:70px solid #b85c34;filter:drop-shadow(0 5px 8px #0007); }
+  .ev{ width:286px;height:12px;background:#9a4a24;border-radius:6px;margin:-4px auto 0; }
+  .wl{ width:132px;height:182px;background:#f3ead6;border:4px solid #2d3a4a;margin:0 auto;position:relative;border-radius:2px; }
+  .wn{ position:absolute;left:30px;top:42px;width:72px;height:88px;background:#cfe3ee;border:4px solid #2d3a4a; }
+  .su{ position:absolute;width:42px;height:42px;border-radius:50%;background:#f5c542;box-shadow:0 0 0 11px #f5c54222,0 0 30px #f5c54277; }
+  .ry{ position:absolute;height:4px;background:#f5c542;transform-origin:left center;border-radius:2px;opacity:.85; }
+  /* discovery halo — breathing ring on the ARMED part */
+  @keyframes breathe{ 0%,100%{ transform:scale(1);opacity:.55 } 50%{ transform:scale(1.08);opacity:1 } }
+  .halo{ position:absolute;border:3px solid #f6c453;border-radius:12px;box-shadow:0 0 0 2px #10202e, 0 0 18px #f6c45366;animation:breathe 2.6s ease-in-out infinite;pointer-events:none; }
+  .hand{ position:absolute;font-size:20px;animation:breathe 2.6s ease-in-out infinite; }
+  /* words in LEFT sky, with the invite folded INTO the prose */
+  .words{ position:absolute;left:18px;top:30px;width:230px;color:#eaf0f8;z-index:4; }
+  .kick{ font-size:10px;letter-spacing:1.8px;text-transform:uppercase;color:#8fb4e8;font-weight:800; }
+  .ch{ font-size:22px;font-weight:800;line-height:1.12;margin:5px 0 8px;color:#fff;text-shadow:0 2px 10px #0008; }
+  .cp{ font-size:12.5px;line-height:1.55;color:#d6deea;text-shadow:0 1px 6px #0007; }
+  .invite{ background:#f6c45333;border:1px solid #f6c45399;color:#ffe6a8;border-radius:8px;padding:2px 8px;font-weight:700;font-size:11.5px;display:inline-block;margin-top:7px; }
+  /* tooltip card anchored in the SKY near the part (transient, single) */
+  .tip{ position:absolute;background:#10202e;color:#eef5ff;border:1.5px solid #2f4straight;border:1.5px solid #2f4a63;border-radius:10px;padding:7px 10px;width:150px;z-index:6;box-shadow:0 8px 22px #0007; }
+  .tip:after{ content:"";position:absolute;width:10px;height:10px;background:#10202e;border-right:1.5px solid #2f4a63;border-bottom:1.5px solid #2f4a63;transform:rotate(45deg); }
+  .tip .tn{ font-weight:800;font-size:12.5px;color:#fff; } .tip .tv{ font-size:11px;color:#8fd0ff;font-weight:700;margin-top:3px; }
+  /* bottom nav overlaid */
+  .bot{ position:absolute;left:0;right:0;bottom:0;height:40px;display:flex;align-items:center;justify-content:center;gap:10px;background:linear-gradient(to top,#0e0e1cdd,transparent);z-index:5; }
+  .nb{ font-size:11.5px;font-weight:700;border:1.5px solid #5a6a8a;border-radius:7px;padding:4px 11px;background:#1a2138cc;color:#dfe6f0; }
+  .dots{ display:flex;gap:6px; } .pd{ width:8px;height:8px;border-radius:50%;background:#2563eb; } .pd.o{ background:#39435f; }
+  .hint{ position:absolute;right:14px;bottom:48px;background:#1a2138dd;border:1px solid #4a5a7a;color:#cdd8ea;font-size:10.5px;font-weight:700;border-radius:14px;padding:3px 9px;z-index:5; }
+  .lbl{ text-align:center;font-size:11.5px;color:#8a93a6;padding:7px 8px 2px;font-weight:700; }
+  .back{ position:absolute;right:14px;top:14px;background:#1a2138ee;border:1.5px solid #2563eb;color:#8fd0ff;font-size:10.5px;font-weight:800;border-radius:14px;padding:3px 10px;z-index:6; }
+</style>
+
+<div class="dd-wrap">
+
+  <!-- STATE 1: ARMED — roof breathing, invite in prose, first-visit hint -->
+  <div class="pg">
+    <div class="nav"><div class="logo"><span class="d"></span>HatCoatAndBoots</div>
+      <span class="chap active">The Hat</span><span class="chap soon">The Coat</span><span class="chap soon">The Boots</span>
+      <span class="navr"><span class="ib">A</span><span class="ib">◐</span><span class="ib">☰</span></span></div>
+    <div class="lbl">① Story arms the roof — it gently breathes, prose says "try tapping"</div>
+    <div class="stage">
+      <div class="b"><div class="rf"></div><div class="ev"></div><div class="wl"><div class="wn"></div></div></div>
+      <div class="su" style="left:48px;top:30px"></div><div class="ry" style="left:80px;top:60px;width:120px;transform:rotate(34deg)"></div>
+      <!-- halo on the roof/overhang -->
+      <div class="halo" style="left:158px;bottom:208px;width:300px;height:88px"></div>
+      <div class="hand" style="left:300px;bottom:228px">👆</div>
+      <div class="words">
+        <div class="kick">The Hat · Step 2 of 4</div>
+        <div class="ch">The summer sun is blocked</div>
+        <div class="cp">The roof reaches out past the wall — an overhang — and shades the window, so the room stays cool with no machine.</div>
+        <div class="invite">👆 Try tapping the overhang</div>
+      </div>
+      <div class="hint">Tap a part to take it off</div>
+      <div class="bot"><button class="nb">‹ Back</button><div class="dots"><span class="pd"></span><span class="pd"></span><span class="pd o"></span><span class="pd o"></span></div><button class="nb">Next ›</button></div>
+    </div>
+  </div>
+
+  <!-- STATE 2: TAPPED — tooltip open, roof removed (reader mode), back-to-story chip -->
+  <div class="pg">
+    <div class="nav"><div class="logo"><span class="d"></span>HatCoatAndBoots</div>
+      <span class="chap active">The Hat</span><span class="chap soon">The Coat</span><span class="chap soon">The Boots</span>
+      <span class="navr"><span class="ib">A</span><span class="ib">◐</span><span class="ib">☰</span></span></div>
+    <div class="lbl">② Child taps → roof lifts off, tooltip teaches, "↺ back to the story" appears</div>
+    <div class="stage">
+      <!-- building WITHOUT roof now (cause & effect) -->
+      <div class="b"><div class="wl"><div class="wn"></div></div></div>
+      <div class="su" style="left:48px;top:30px"></div><div class="ry" style="left:80px;top:60px;width:120px;transform:rotate(34deg);opacity:.5"></div>
+      <!-- tooltip anchored up in the sky where the roof was -->
+      <div class="tip" style="left:150px;top:60px"><div class="tn">Roof overhang</div><div class="tv">↩ Tap to put the roof back</div>
+        <span style="position:absolute;left:24px;bottom:-6px"></span></div>
+      <div class="back">↺ back to the story</div>
+      <div class="words">
+        <div class="kick">The Hat · Step 2 of 4</div>
+        <div class="ch">The summer sun is blocked</div>
+        <div class="cp">See? With the overhang gone, the high sun pours straight onto the window. That's the heat the roof was stopping.</div>
+      </div>
+      <div class="bot"><button class="nb">‹ Back</button><div class="dots"><span class="pd"></span><span class="pd"></span><span class="pd o"></span><span class="pd o"></span></div><button class="nb">Next ›</button></div>
+    </div>
+  </div>
+
+</div>
+
+<p class="subtitle" style="margin-top:16px"><b>How a child discovers it (touch, no hover):</b> the breathing halo + the "👆 try tapping" line pull the eye → first tap opens the tooltip (doesn't remove yet — a tap is never punished) → second tap removes the roof and the sun visibly floods in (the reward). After they've done it twice, single taps just work. Reduced-motion: the halo is a static ring + "👆 tap" badge, no breathing. Every part is a real keyboard button; toggles are announced aloud.</p>
+
+<div class="options" style="margin-top:8px">
+  <div class="option" data-choice="ship-it" onclick="toggleSelect(this)">
+    <div class="letter">✓</div><div class="content"><h3>Yes — this is the exploration design</h3><p>One armed part per beat, breathing halo, in-prose invite, sky tooltip, tap-to-reveal reward. No totem.</p></div>
+  </div>
+  <div class="option" data-choice="tweak" onclick="toggleSelect(this)">
+    <div class="letter">✎</div><div class="content"><h3>Close — adjust something</h3><p>e.g. less/more animation, different invite wording, hint pill placement. Tell me.</p></div>
+  </div>
+  <div class="option" data-choice="no" onclick="toggleSelect(this)">
+    <div class="letter">✗</div><div class="content"><h3>Not it</h3><p>Tell me what's off.</p></div>
+  </div>
+</div>
+</body></html>

@@ -1,0 +1,287 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>overlay-readability</title>
+  <style>
+    /*
+     * BRAINSTORM COMPANION FRAME TEMPLATE
+     *
+     * This template provides a consistent frame with:
+     * - OS-aware light/dark theming
+     * - Fixed header and selection indicator bar
+     * - Scrollable main content area
+     * - CSS helpers for common UI patterns
+     *
+     * Content is injected via placeholder comment in #claude-content.
+     */
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; overflow: hidden; }
+
+    /* ===== THEME VARIABLES ===== */
+    :root {
+      --bg-primary: #f5f5f7;
+      --bg-secondary: #ffffff;
+      --bg-tertiary: #e5e5e7;
+      --border: #d1d1d6;
+      --text-primary: #1d1d1f;
+      --text-secondary: #86868b;
+      --text-tertiary: #aeaeb2;
+      --accent: #0071e3;
+      --accent-hover: #0077ed;
+      --success: #34c759;
+      --warning: #ff9f0a;
+      --error: #ff3b30;
+      --selected-bg: #e8f4fd;
+      --selected-border: #0071e3;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-primary: #1d1d1f;
+        --bg-secondary: #2d2d2f;
+        --bg-tertiary: #3d3d3f;
+        --border: #424245;
+        --text-primary: #f5f5f7;
+        --text-secondary: #86868b;
+        --text-tertiary: #636366;
+        --accent: #0a84ff;
+        --accent-hover: #409cff;
+        --selected-bg: rgba(10, 132, 255, 0.15);
+        --selected-border: #0a84ff;
+      }
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      display: flex;
+      flex-direction: column;
+      line-height: 1.5;
+    }
+
+    /* ===== FRAME STRUCTURE ===== */
+    .header {
+      background: var(--bg-secondary);
+      padding: 0.5rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .header h1 { font-size: 0.85rem; font-weight: 500; color: var(--text-secondary); }
+    .header .status { font-size: 0.7rem; color: var(--success); display: flex; align-items: center; gap: 0.4rem; }
+    .header .status::before { content: ''; width: 6px; height: 6px; background: var(--success); border-radius: 50%; }
+
+    .main { flex: 1; overflow-y: auto; }
+    #claude-content { padding: 2rem; min-height: 100%; }
+
+    .indicator-bar {
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border);
+      padding: 0.5rem 1.5rem;
+      flex-shrink: 0;
+      text-align: center;
+    }
+    .indicator-bar span {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+    }
+    .indicator-bar .selected-text {
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    /* ===== TYPOGRAPHY ===== */
+    h2 { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.5rem; }
+    h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.25rem; }
+    .subtitle { color: var(--text-secondary); margin-bottom: 1.5rem; }
+    .section { margin-bottom: 2rem; }
+    .label { font-size: 0.7rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+
+    /* ===== OPTIONS (for A/B/C choices) ===== */
+    .options { display: flex; flex-direction: column; gap: 0.75rem; }
+    .option {
+      background: var(--bg-secondary);
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem 1.25rem;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    .option:hover { border-color: var(--accent); }
+    .option.selected { background: var(--selected-bg); border-color: var(--selected-border); }
+    .option .letter {
+      background: var(--bg-tertiary);
+      color: var(--text-secondary);
+      width: 1.75rem; height: 1.75rem;
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 600; font-size: 0.85rem; flex-shrink: 0;
+    }
+    .option.selected .letter { background: var(--accent); color: white; }
+    .option .content { flex: 1; }
+    .option .content h3 { font-size: 0.95rem; margin-bottom: 0.15rem; }
+    .option .content p { color: var(--text-secondary); font-size: 0.85rem; margin: 0; }
+
+    /* ===== CARDS (for showing designs/mockups) ===== */
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; }
+    .card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    .card.selected { border-color: var(--selected-border); border-width: 2px; }
+    .card-image { background: var(--bg-tertiary); aspect-ratio: 16/10; display: flex; align-items: center; justify-content: center; }
+    .card-body { padding: 1rem; }
+    .card-body h3 { margin-bottom: 0.25rem; }
+    .card-body p { color: var(--text-secondary); font-size: 0.85rem; }
+
+    /* ===== MOCKUP CONTAINER ===== */
+    .mockup {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+    }
+    .mockup-header {
+      background: var(--bg-tertiary);
+      padding: 0.5rem 1rem;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--border);
+    }
+    .mockup-body { padding: 1.5rem; }
+
+    /* ===== SPLIT VIEW (side-by-side comparison) ===== */
+    .split { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    @media (max-width: 700px) { .split { grid-template-columns: 1fr; } }
+
+    /* ===== PROS/CONS ===== */
+    .pros-cons { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0; }
+    .pros, .cons { background: var(--bg-secondary); border-radius: 8px; padding: 1rem; }
+    .pros h4 { color: var(--success); font-size: 0.85rem; margin-bottom: 0.5rem; }
+    .cons h4 { color: var(--error); font-size: 0.85rem; margin-bottom: 0.5rem; }
+    .pros ul, .cons ul { margin-left: 1.25rem; font-size: 0.85rem; color: var(--text-secondary); }
+    .pros li, .cons li { margin-bottom: 0.25rem; }
+
+    /* ===== PLACEHOLDER (for mockup areas) ===== */
+    .placeholder {
+      background: var(--bg-tertiary);
+      border: 2px dashed var(--border);
+      border-radius: 8px;
+      padding: 2rem;
+      text-align: center;
+      color: var(--text-tertiary);
+    }
+
+    /* ===== INLINE MOCKUP ELEMENTS ===== */
+    .mock-nav { background: var(--accent); color: white; padding: 0.75rem 1rem; display: flex; gap: 1.5rem; font-size: 0.9rem; }
+    .mock-sidebar { background: var(--bg-tertiary); padding: 1rem; min-width: 180px; }
+    .mock-content { padding: 1.5rem; flex: 1; }
+    .mock-button { background: var(--accent); color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; font-size: 0.85rem; }
+    .mock-input { background: var(--bg-primary); border: 1px solid var(--border); border-radius: 6px; padding: 0.5rem; width: 100%; }
+  </style>
+<style>body{padding:20px;font-family:system-ui,sans-serif}</style>
+</head><body>
+<script>function toggleSelect(el){document.querySelectorAll('.selected').forEach(e=>e.classList.remove('selected'));el.classList.add('selected')}</script>
+<h2>You picked full-bleed building + words on top. How do we keep the words readable?</h2>
+<p class="subtitle">This is the ONE risk of option 3 — text over artwork. Here's the same caption, four ways to make it always legible (AAA contrast) without hiding the building. Same busy diagram behind each. Click your preference.</p>
+
+<style>
+  .or-row{ display:grid;grid-template-columns:1fr 1fr;gap:18px; }
+  @media (max-width:760px){ .or-row{ grid-template-columns:1fr; } }
+  .or-card{ border:2px solid #cbb994;border-radius:14px;overflow:hidden;cursor:pointer;transition:transform .12s,box-shadow .12s;background:#fbf7ee; }
+  .or-card:hover{ transform:translateY(-3px);box-shadow:0 10px 26px rgba(0,0,0,.16); }
+  .or-card.selected{ outline:4px solid #2563eb;outline-offset:2px; }
+  .or-h{ background:#1a1a2e;color:#e8d4b8;padding:8px 11px;font-weight:700;font-size:13px; }
+  /* a deliberately BUSY stage so we can stress-test readability */
+  .or-stage{ position:relative;height:240px;overflow:hidden;background:#f3ead6;
+     background-image:repeating-linear-gradient(0deg,#e4d8bd 0 1px,#0000 1px 18px),repeating-linear-gradient(90deg,#e4d8bd 0 1px,#0000 1px 18px); }
+  .bgbuild{ position:absolute;left:50%;top:30px;transform:translateX(-50%) scale(1.5); }
+  .rf{ width:0;height:0;border-left:70px solid transparent;border-right:70px solid transparent;border-bottom:40px solid #a8542f; }
+  .ev{ width:156px;height:7px;background:#8a431f;border-radius:4px;margin:-3px auto 0; }
+  .wl{ width:72px;height:96px;background:#f3ead6;border:3px solid #2d3a4a;margin:0 auto;position:relative; }
+  .wn{ position:absolute;left:16px;top:22px;width:40px;height:48px;background:#cfe3ee;border:2.5px solid #2d3a4a; }
+  .su{ position:absolute;width:22px;height:22px;border-radius:50%;background:#f5c542;box-shadow:0 0 0 6px #f5c54244; }
+  .ry{ position:absolute;height:3px;background:#f5c542;transform-origin:left center;border-radius:2px; }
+  .or-foot{ padding:9px 11px;font-size:11.5px;line-height:1.45;color:#3a3326;min-height:58px; }
+  .kick{ font-size:10px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700; }
+  .cap-h{ font-size:15px;font-weight:800;margin:2px 0 4px; }
+  .cap-p{ font-size:11.5px;line-height:1.5; }
+</style>
+
+<div class="or-row">
+
+  <!-- A: SOLID CARD -->
+  <div class="or-card" data-choice="card" onclick="toggleSelect(this)">
+    <div class="or-h">A · Solid caption card (corner)</div>
+    <div class="or-stage">
+      <div class="bgbuild"><div class="rf"></div><div class="ev"></div><div class="wl"><div class="wn"></div></div>
+        <div class="su" style="left:-40px;top:-30px"></div><div class="ry" style="left:-30px;top:-22px;width:54px;transform:rotate(40deg)"></div></div>
+      <div style="position:absolute;left:12px;bottom:12px;width:60%;background:#1a1a2e;color:#f3ead6;padding:9px 11px;border-radius:10px;box-shadow:0 6px 18px #0005">
+        <div class="kick" style="color:#e8d4b8">The Hat · 2 of 4</div>
+        <div class="cap-h" style="color:#fff">Summer sun is blocked</div>
+        <div class="cap-p" style="color:#ece3d0">The overhang shades the window — cool with no machine.</div>
+      </div>
+    </div>
+    <div class="or-foot">An opaque dark card in a corner. <b>Bulletproof contrast</b>, dead simple, never fights the art. The card covers part of the building. Safest, least "floaty."</div>
+  </div>
+
+  <!-- B: FROSTED GLASS -->
+  <div class="or-card" data-choice="frost" onclick="toggleSelect(this)">
+    <div class="or-h">B · Frosted-glass panel (blurred behind)</div>
+    <div class="or-stage">
+      <div class="bgbuild"><div class="rf"></div><div class="ev"></div><div class="wl"><div class="wn"></div></div>
+        <div class="su" style="left:-40px;top:-30px"></div><div class="ry" style="left:-30px;top:-22px;width:54px;transform:rotate(40deg)"></div></div>
+      <div style="position:absolute;left:12px;bottom:12px;width:62%;background:#fbf7eecc;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);color:#2d2417;padding:9px 11px;border-radius:10px;border:1px solid #fff8;box-shadow:0 6px 18px #0003">
+        <div class="kick" style="color:#9a7b3f">The Hat · 2 of 4</div>
+        <div class="cap-h" style="color:#2d2417">Summer sun is blocked</div>
+        <div class="cap-p">The overhang shades the window — cool with no machine.</div>
+      </div>
+    </div>
+    <div class="or-foot">A translucent panel that <b>blurs the building behind it</b> — you still sense the art through it, words stay crisp. Modern, "designed." Blur can be perf-heavy and needs a fallback for old browsers.</div>
+  </div>
+
+  <!-- C: SCRIM GRADIENT -->
+  <div class="or-card" data-choice="scrim" onclick="toggleSelect(this)">
+    <div class="or-h">C · Gradient scrim (art fades to dark behind text)</div>
+    <div class="or-stage">
+      <div class="bgbuild"><div class="rf"></div><div class="ev"></div><div class="wl"><div class="wn"></div></div>
+        <div class="su" style="left:-40px;top:-30px"></div><div class="ry" style="left:-30px;top:-22px;width:54px;transform:rotate(40deg)"></div></div>
+      <div style="position:absolute;left:0;right:0;bottom:0;height:55%;background:linear-gradient(to top,#1a1a2eee 12%,#1a1a2e88 50%,#1a1a2e00 100%)"></div>
+      <div style="position:absolute;left:14px;bottom:12px;width:75%;color:#f3ead6">
+        <div class="kick" style="color:#e8d4b8">The Hat · 2 of 4</div>
+        <div class="cap-h" style="color:#fff">Summer sun is blocked</div>
+        <div class="cap-p" style="color:#ece3d0">The overhang shades the window — cool with no machine.</div>
+      </div>
+    </div>
+    <div class="or-foot">No card — the bottom of the art <b>fades into a dark wash</b> and the words sit on it (like a movie poster / photo caption). Cinematic, no hard edges. The building's lower part gets dimmed.</div>
+  </div>
+
+  <!-- D: SIDE GUTTER (not over art) -->
+  <div class="or-card" data-choice="gutter" onclick="toggleSelect(this)">
+    <div class="or-h">D · Words in a side gutter (over the margin, not the building)</div>
+    <div class="or-stage">
+      <div class="bgbuild" style="left:62%;top:34px;transform:translateX(-50%) scale(1.35)"><div class="rf"></div><div class="ev"></div><div class="wl"><div class="wn"></div></div>
+        <div class="su" style="left:-40px;top:-30px"></div><div class="ry" style="left:-30px;top:-22px;width:54px;transform:rotate(40deg)"></div></div>
+      <div style="position:absolute;left:0;top:0;bottom:0;width:42%;background:linear-gradient(to right,#f3ead6 70%,#f3ead600);"></div>
+      <div style="position:absolute;left:12px;top:50px;width:33%;color:#2d2417">
+        <div class="kick" style="color:#9a7b3f">The Hat · 2 of 4</div>
+        <div class="cap-h">Summer sun is blocked</div>
+        <div class="cap-p">The overhang shades the window — cool with no machine.</div>
+      </div>
+    </div>
+    <div class="or-foot">Building shifts off-center; words live in the <b>empty sky/margin beside it</b>, never on top of the art. Best readability, still feels full-bleed. Less "words floating ON the building" than you may have pictured.</div>
+  </div>
+
+</div>
+</body></html>
