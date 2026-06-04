@@ -126,7 +126,9 @@ export default function RootLayout({
             <AccessibilityProvider>
               <GlobalNav />
               <CountdownBanner />
-              <SetupBanner />
+              {/* The book runs intentionally without Supabase; the "not
+                  configured" setup nag is dev noise, so it stays off. */}
+              <SetupBanner show={false} />
               <ErrorBoundary level="page">
                 <div className="bg-base-200 min-h-0 flex-1 overflow-hidden pb-14">
                   {children}

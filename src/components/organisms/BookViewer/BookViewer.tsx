@@ -81,8 +81,10 @@ export function ChapterViewer({ manifest }: ChapterViewerProps) {
           />
         </div>
 
-        {/* Narrative + controls column. */}
-        <div className="flex flex-col gap-3 lg:[grid-column:2]">
+        {/* Narrative + controls column — capped to the building's height on
+            desktop so the ribbon's prose scrolls internally and the controls
+            (toggles, Back/Next) stay in the fold. */}
+        <div className="flex min-h-0 flex-col gap-3 lg:[grid-column:2] lg:max-h-[min(100%,68vh)]">
           <StoryRibbon
             heading={step.heading}
             prose={step.prose}
@@ -91,19 +93,20 @@ export function ChapterViewer({ manifest }: ChapterViewerProps) {
             stepCount={steps.length}
             onPrev={goPrev}
             onNext={goNext}
+            className="min-h-0 flex-1"
           />
           {mode === 'reader' && (
             <button
               type="button"
               onClick={() => resumeStory(step.dockedLayerIds)}
-              className="btn btn-sm self-start"
+              className="btn btn-sm shrink-0 self-start"
             >
               ↺ back to the story
             </button>
           )}
 
           {/* Visible layer controls — turn each part on/off. */}
-          <div>
+          <div className="shrink-0">
             <p className="text-base-content/60 mb-2 text-xs font-bold tracking-wider uppercase">
               Take it apart — tap a part to show or hide it
             </p>
@@ -115,6 +118,7 @@ export function ChapterViewer({ manifest }: ChapterViewerProps) {
           </div>
 
           <SourcesNote
+            className="shrink-0"
             whyItMatters={manifest.whyItMatters}
             sourcedAside={manifest.sourcedAside}
             sources={manifest.sources}

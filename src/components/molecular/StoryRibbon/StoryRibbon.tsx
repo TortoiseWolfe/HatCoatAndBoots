@@ -33,23 +33,25 @@ export function StoryRibbon({
 }: StoryRibbonProps) {
   return (
     <div
-      className={`bg-base-100/90 text-base-content rounded-xl p-4 backdrop-blur-sm ${className}`}
+      className={`bg-base-100/90 text-base-content flex min-h-0 flex-col rounded-xl p-4 backdrop-blur-sm ${className}`}
     >
-      <h2 className="font-blueprint text-xl font-bold">{heading}</h2>
+      <h2 className="font-blueprint shrink-0 text-xl font-bold">{heading}</h2>
+      {/* Prose scrolls within the ribbon so a long beat (e.g. the intro) never
+          pushes Back/Next off-screen. */}
       <div
         aria-live="polite"
-        className="mt-1 space-y-2 text-sm leading-relaxed"
+        className="mt-1 min-h-0 flex-1 space-y-2 overflow-y-auto pr-1 text-sm leading-relaxed"
       >
         {prose.split('\n\n').map((para, i) => (
           <p key={i}>{para}</p>
         ))}
+        {takeaway && (
+          <p className="border-primary/60 text-base-content/80 mt-3 border-l-2 pl-3 italic">
+            {takeaway}
+          </p>
+        )}
       </div>
-      {takeaway && (
-        <p className="border-primary/60 text-base-content/80 mt-3 border-l-2 pl-3 text-sm italic">
-          {takeaway}
-        </p>
-      )}
-      <div className="mt-3 flex items-center justify-between gap-3">
+      <div className="mt-3 flex shrink-0 items-center justify-between gap-3">
         <button
           type="button"
           onClick={onPrev}
