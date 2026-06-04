@@ -8,7 +8,7 @@ import { LayerToggles } from '../../molecular/LayerToggles';
 import { SourcesNote } from '../../molecular/SourcesNote';
 import { useScrollStory } from './useScrollStory';
 import { useLayerState } from './useLayerState';
-import type { ChapterManifest } from './manifests/types';
+import type { ChapterManifest, Step } from './manifests/types';
 
 export interface ChapterViewerProps {
   manifest: ChapterManifest;
@@ -26,12 +26,29 @@ export interface ChapterViewerProps {
  */
 export function ChapterViewer({ manifest }: ChapterViewerProps) {
   const allIds = manifest.layers.map((l) => l.id);
+
+  // The chapter intro is the FIRST slide, not a static block above the house: a
+  // synthetic opening step that shows the whole assembled building while the
+  // ribbon carries the intro prose. The authored views follow.
+  const introStep: Step[] =
+    manifest.intro && manifest.intro.length > 0
+      ? [
+          {
+            id: 'intro',
+            heading: manifest.subtitle ?? 'Start here',
+            prose: manifest.intro.join('\n\n'),
+            dockedLayerIds: allIds,
+          },
+        ]
+      : [];
+  const steps: Step[] = [...introStep, ...manifest.steps];
+
   const { activeStepIndex, goNext, goPrev, goTo, registerStep } =
-    useScrollStory(manifest.steps.length);
-  const step = manifest.steps[activeStepIndex];
+    useScrollStory(steps.length);
+  const step = steps[activeStepIndex];
   const { mode, isDocked, syncStory, toggle, resumeStory } = useLayerState(
     allIds,
-    manifest.steps[0].dockedLayerIds
+    steps[0].dockedLayerIds
   );
 
   // Story drives the docked set when the active beat changes (story mode only).
@@ -42,12 +59,9 @@ export function ChapterViewer({ manifest }: ChapterViewerProps) {
 
   return (
     <div className="flex flex-col gap-6">
-      {/* Lead-in: the visible title + subtitle + intro paragraphs. */}
-      <ChapterLeadIn
-        title={manifest.displayTitle ?? manifest.meta.title}
-        subtitle={manifest.subtitle}
-        intro={manifest.intro}
-      />
+      {/* Lead-in: title only. The intro prose lives in the first slide, not as a
+          static block above the house. */}
+      <ChapterLeadIn title={manifest.displayTitle ?? manifest.meta.title} />
 
       <section className="relative flex min-h-0 flex-col gap-4 lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,34%)] lg:items-start">
         {/* The building (hero). */}
@@ -68,7 +82,7 @@ export function ChapterViewer({ manifest }: ChapterViewerProps) {
             prose={step.prose}
             takeaway={step.takeaway}
             stepIndex={activeStepIndex}
-            stepCount={manifest.steps.length}
+            stepCount={steps.length}
             onPrev={goPrev}
             onNext={goNext}
           />
@@ -106,7 +120,7 @@ export function ChapterViewer({ manifest }: ChapterViewerProps) {
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 -z-10"
         >
-          {manifest.steps.map((s, i) => (
+          {steps.map((s, i) => (
             <div
               key={s.id}
               data-step-index={i}

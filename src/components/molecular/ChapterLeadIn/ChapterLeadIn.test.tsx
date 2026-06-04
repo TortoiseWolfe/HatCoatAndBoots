@@ -15,18 +15,7 @@ describe('ChapterLeadIn', () => {
     expect(screen.getByText(/three jobs at once/i)).toBeInTheDocument();
   });
 
-  it('renders each intro paragraph', () => {
-    render(
-      <ChapterLeadIn
-        title="The Hat"
-        intro={['First paragraph here.', 'Second paragraph here.']}
-      />
-    );
-    expect(screen.getByText('First paragraph here.')).toBeInTheDocument();
-    expect(screen.getByText('Second paragraph here.')).toBeInTheDocument();
-  });
-
-  it('omits subtitle and intro when not provided', () => {
+  it('omits the subtitle when not provided', () => {
     const { container } = render(<ChapterLeadIn title="The Hat" />);
     expect(container.querySelectorAll('p')).toHaveLength(0);
   });

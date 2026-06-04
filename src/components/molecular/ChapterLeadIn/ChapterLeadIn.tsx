@@ -3,44 +3,31 @@ import React from 'react';
 export interface ChapterLeadInProps {
   /** The full chapter title (the visible <h1>). */
   title: string;
-  /** The chapter subtitle, shown under the title. */
+  /** Optional one-line subtitle, shown beside/under the title. */
   subtitle?: string;
-  /** Intro paragraphs, rendered as a lead-in above the building. */
-  intro?: string[];
   className?: string;
 }
 
 /**
- * The chapter lead-in: the visible <h1> title, subtitle, and intro paragraphs
- * shown above the building. SSR/no-JS readable — sets up the chapter before the
- * reader starts stepping through the views.
+ * The chapter lead-in: just the <h1> title (and an optional one-line subtitle)
+ * above the building. Deliberately compact — the chapter's intro prose lives in
+ * the FIRST scroll step (in the ribbon), not as a static block above the house,
+ * so nothing dead competes with the building for the fold.
  *
  * @category molecular
  */
 export function ChapterLeadIn({
   title,
   subtitle,
-  intro,
   className = '',
 }: ChapterLeadInProps) {
   return (
-    <header className={`mx-auto max-w-3xl text-center ${className}`}>
+    <header className={`text-center ${className}`}>
       <h1 className="font-blueprint text-base-content text-2xl font-bold sm:text-3xl">
         {title}
       </h1>
       {subtitle && (
-        <p className="text-base-content/80 mt-2 text-base italic sm:text-lg">
-          {subtitle}
-        </p>
-      )}
-      {intro && intro.length > 0 && (
-        <div className="mt-4 space-y-3 text-left">
-          {intro.map((para, i) => (
-            <p key={i} className="text-base-content/90 leading-relaxed">
-              {para}
-            </p>
-          ))}
-        </div>
+        <p className="text-base-content/70 mt-1 text-sm italic">{subtitle}</p>
       )}
     </header>
   );

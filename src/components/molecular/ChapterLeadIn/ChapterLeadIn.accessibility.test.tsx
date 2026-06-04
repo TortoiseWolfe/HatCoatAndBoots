@@ -11,7 +11,6 @@ describe('ChapterLeadIn Accessibility', () => {
       <ChapterLeadIn
         title="The Hat: What a Roof Knows About the Sun"
         subtitle="three jobs at once"
-        intro={['An intro paragraph that sets up the chapter.']}
       />
     );
     const results = await axe(container);
