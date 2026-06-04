@@ -47,7 +47,6 @@ type Story = StoryObj<typeof meta>;
 
 export const AllDocked: Story = {
   args: {
-    chapter: 'hat',
     layers: LAYERS,
     isDocked: () => true,
     onToggle: () => {},
@@ -56,7 +55,6 @@ export const AllDocked: Story = {
 
 export const RoofExploded: Story = {
   args: {
-    chapter: 'hat',
     layers: LAYERS,
     isDocked: (id: string) => id !== 'roof-overhang',
     onToggle: () => {},

@@ -74,7 +74,6 @@ export function ChapterViewer({ manifest }: ChapterViewerProps) {
         {/* The building (hero). */}
         <div className="lg:[grid-column:1]">
           <ExplodedBuilding
-            chapter={manifest.slug}
             layers={manifest.layers}
             isDocked={isDocked}
             onToggle={toggle}

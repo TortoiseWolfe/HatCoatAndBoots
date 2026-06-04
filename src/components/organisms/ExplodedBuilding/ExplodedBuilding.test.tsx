@@ -32,7 +32,6 @@ describe('ExplodedBuilding', () => {
   it('renders one button per layer with an accessible name + pressed state', () => {
     render(
       <ExplodedBuilding
-        chapter="hat"
         layers={LAYERS}
         isDocked={() => true}
         onToggle={() => {}}
@@ -45,7 +44,6 @@ describe('ExplodedBuilding', () => {
   it('reflects exploded state via aria-pressed=false', () => {
     render(
       <ExplodedBuilding
-        chapter="hat"
         layers={LAYERS}
         isDocked={(id) => id !== 'roof-overhang'}
         onToggle={() => {}}
@@ -60,7 +58,6 @@ describe('ExplodedBuilding', () => {
     const onToggle = vi.fn();
     render(
       <ExplodedBuilding
-        chapter="hat"
         layers={LAYERS}
         isDocked={() => true}
         onToggle={onToggle}
@@ -73,7 +70,6 @@ describe('ExplodedBuilding', () => {
   it('renders the building as ONE shared inline <svg> with a <g> per layer (not stacked <img>s)', () => {
     const { container } = render(
       <ExplodedBuilding
-        chapter="hat"
         layers={LAYERS}
         isDocked={() => true}
         onToggle={() => {}}
@@ -91,7 +87,6 @@ describe('ExplodedBuilding', () => {
   it('docked layers translate to 0,0; exploded layers translate by their offset', () => {
     const { container, rerender } = render(
       <ExplodedBuilding
-        chapter="hat"
         layers={LAYERS}
         isDocked={() => true}
         onToggle={() => {}}
@@ -106,7 +101,6 @@ describe('ExplodedBuilding', () => {
     // Explode the roof (offset y:-60) → its group translates away from origin.
     rerender(
       <ExplodedBuilding
-        chapter="hat"
         layers={LAYERS}
         isDocked={(id) => id !== 'roof-overhang'}
         onToggle={() => {}}

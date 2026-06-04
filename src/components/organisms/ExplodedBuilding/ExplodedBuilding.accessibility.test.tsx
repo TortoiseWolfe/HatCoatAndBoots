@@ -24,7 +24,6 @@ describe('ExplodedBuilding Accessibility', () => {
   it('should have no accessibility violations', async () => {
     const { container } = render(
       <ExplodedBuilding
-        chapter="hat"
         layers={LAYERS}
         isDocked={() => true}
         onToggle={() => {}}
@@ -37,7 +36,6 @@ describe('ExplodedBuilding Accessibility', () => {
   it('the decorative building SVG is hidden from assistive tech', () => {
     const { container } = render(
       <ExplodedBuilding
-        chapter="hat"
         layers={LAYERS}
         isDocked={() => true}
         onToggle={() => {}}

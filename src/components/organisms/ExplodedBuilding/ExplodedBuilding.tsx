@@ -8,8 +8,6 @@ import type { Layer, LayerId } from '../BookViewer/manifests/types';
 import { SVG_BODIES } from './svg-bodies.generated';
 
 export interface ExplodedBuildingProps {
-  /** Chapter slug, e.g. 'hat' — selects which inlined SVG bodies to use. */
-  chapter: string;
   layers: Layer[];
   /** True when the layer is docked (in place); false when exploded. */
   isDocked: (id: LayerId) => boolean;
@@ -35,14 +33,21 @@ const VIEWBOX = 360;
  * @category organisms
  */
 export function ExplodedBuilding({
-  chapter,
   layers,
   isDocked,
   onToggle,
   spotlightId,
   className = '',
 }: ExplodedBuildingProps) {
-  const bodies = SVG_BODIES[chapter] ?? {};
+  // Resolve each layer's inlined SVG body from its OWN src path (e.g.
+  // 'book/hat/wall.svg' → SVG_BODIES['hat']['wall']). Shared context layers in
+  // Coat/Boots point at book/hat/* art, so we must key off src, not the active
+  // chapter — otherwise the shared house renders empty on Coat/Boots.
+  const bodyFor = (src: string): string => {
+    const m = src.match(/book\/([^/]+)\/([^/]+)\.svg$/);
+    if (!m) return '';
+    return SVG_BODIES[m[1]]?.[m[2]] ?? '';
+  };
   // Draw back-to-front by z (later DOM order = on top).
   const ordered = [...layers].sort((a, b) => a.z - b.z);
 
@@ -63,7 +68,7 @@ export function ExplodedBuilding({
           const docked = isDocked(layer.id);
           const ox = docked ? 0 : layer.explodeOffset.x;
           const oy = docked ? 0 : layer.explodeOffset.y;
-          const body = bodies[layer.id] ?? '';
+          const body = bodyFor(layer.src);
           return (
             <g
               key={layer.id}
