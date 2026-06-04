@@ -831,3 +831,27 @@ p:not([class*='text-']) {
 .sb-preparing-docs.sb-wrapper {
   background-color: var(--color-base-100, inherit) !important;
 }
+
+/* Exploded building — full-bleed sky, never crops the figure. */
+.book-sky {
+  background: linear-gradient(to bottom, #1b2a3a 0%, #2f4356 100%);
+}
+.book-tab {
+  bottom: 8%;
+  left: 6%;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #10202e;
+  border-radius: 6px;
+  padding: 2px 7px;
+}
+.book-part--spotlight {
+  outline: 3px solid #f6c453;
+  outline-offset: -3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .book-part {
+    transition: none;
+  }
+}
