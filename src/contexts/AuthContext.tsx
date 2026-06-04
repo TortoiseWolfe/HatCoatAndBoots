@@ -15,7 +15,11 @@ import React, {
   useMemo,
 } from 'react';
 import { User, Session } from '@supabase/supabase-js';
-import { supabase, setAllowAuthTokenRemoval } from '@/lib/supabase/client';
+import {
+  supabase,
+  setAllowAuthTokenRemoval,
+  isSupabaseConfigured,
+} from '@/lib/supabase/client';
 import { useIdleTimeout } from '@/hooks/useIdleTimeout';
 import { retryWithBackoff } from '@/lib/auth/retry-utils';
 import { createLogger } from '@/lib/logger';
@@ -151,6 +155,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   });
 
   useEffect(() => {
+    // When Supabase isn't configured (e.g. the book runs with no backend), there
+    // is no session to fetch — resolve to logged-out immediately instead of
+    // retrying three times and logging an error on every page load.
+    if (!isSupabaseConfigured()) {
+      setSession(null);
+      setUser(null);
+      setError(null);
+      setIsLoading(false);
+      return;
+    }
+
     // Fallback timeout - prevent infinite loading (FR-001)
     // Must be longer than retry delays (1s + 2s + 4s = 7s) to allow retries to complete
     const loadingTimeout = setTimeout(() => {

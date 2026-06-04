@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { useAnalytics } from '@/hooks/useAnalytics';
 import { projectConfig } from '@/config/project.config';
 import { createLogger } from '@/lib/logger';
@@ -13,6 +14,9 @@ interface BeforeInstallPromptEvent extends Event {
 const logger = createLogger('components:pwa');
 
 export default function PWAInstall() {
+  // The navbar already carries the single "Install App" affordance; the floating
+  // pill would be a duplicate that overlaps the book viewer, so hide it in the book.
+  const pathname = usePathname();
   const [deferredPrompt, setDeferredPrompt] =
     useState<BeforeInstallPromptEvent | null>(null);
   const [showInstallButton, setShowInstallButton] = useState(false);
@@ -207,6 +211,10 @@ export default function PWAInstall() {
       window.history.replaceState({}, '', newUrl);
     }
   }, []);
+
+  // Never show the floating pill inside the book — the navbar Install button is the
+  // single affordance there, and the pill would overlap the viewer.
+  if ((pathname ?? '').startsWith('/book')) return null;
 
   // Show if: debug mode is on, OR install button should show and not installed
   if (!isDebugMode && (!showInstallButton || isInstalled)) return null;
