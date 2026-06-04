@@ -34,7 +34,7 @@ export function generateMetadata(options: MetadataOptions = {}): Metadata {
 
   const fullTitle =
     title === projectConfig.projectName
-      ? `${title} - Modern Web Starter`
+      ? `${title} — a building book`
       : `${title} | ${projectConfig.projectName}`;
 
   const canonicalUrl = `${projectConfig.deployUrl}${path}`;

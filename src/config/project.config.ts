@@ -94,7 +94,7 @@ export function generateManifest() {
   const basePath = config.basePath || '';
 
   return {
-    name: `${config.projectName} - Modern Web Starter`,
+    name: `${config.projectName} — a building book`,
     short_name: config.projectName,
     description: config.projectDescription,
     start_url: `${basePath}/`,
