@@ -44,7 +44,7 @@ export function ChapterViewer({ manifest }: ChapterViewerProps) {
     <div className="flex flex-col gap-6">
       {/* Lead-in: the visible title + subtitle + intro paragraphs. */}
       <ChapterLeadIn
-        title={manifest.meta.title}
+        title={manifest.displayTitle ?? manifest.meta.title}
         subtitle={manifest.subtitle}
         intro={manifest.intro}
       />

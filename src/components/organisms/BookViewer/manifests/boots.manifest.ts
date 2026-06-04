@@ -9,6 +9,7 @@ import { bootsStrings as s } from './boots.strings';
 export const bootsManifest: ChapterManifest = {
   slug: 'boots',
   meta: { title: 'The Boots', kicker: 'What a foundation knows about water' },
+  displayTitle: s.chapterTitle,
   subtitle: s.chapterSubtitle,
   intro: s.intro,
   whyItMatters: s.whyItMatters,

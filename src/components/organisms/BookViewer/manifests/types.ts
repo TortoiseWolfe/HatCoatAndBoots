@@ -56,6 +56,8 @@ export interface ChapterManifest {
   meta: { title: string; kicker: string };
   layers: Layer[];
   steps: Step[];
+  /** Full editorial chapter title for the lead-in (vs short meta.title for nav). */
+  displayTitle?: string;
   /** Long chapter subtitle (the full editorial subtitle, vs short meta.kicker). */
   subtitle?: string;
   /** Intro paragraphs rendered above the building (SSR/no-JS readable lead-in). */

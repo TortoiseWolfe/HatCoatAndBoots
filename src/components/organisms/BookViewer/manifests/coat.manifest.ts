@@ -10,6 +10,7 @@ import { coatStrings as s } from './coat.strings';
 export const coatManifest: ChapterManifest = {
   slug: 'coat',
   meta: { title: 'The Coat', kicker: 'What a wall knows about the cold' },
+  displayTitle: s.chapterTitle,
   subtitle: s.chapterSubtitle,
   intro: s.intro,
   whyItMatters: s.whyItMatters,

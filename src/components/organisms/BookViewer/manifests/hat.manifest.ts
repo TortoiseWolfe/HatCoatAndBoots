@@ -9,6 +9,7 @@ import { hatStrings as s } from './hat.strings';
 export const hatManifest: ChapterManifest = {
   slug: 'hat',
   meta: { title: 'The Hat', kicker: 'Why a roof needs a brim' },
+  displayTitle: s.chapterTitle,
   subtitle: s.chapterSubtitle,
   intro: s.intro,
   whyItMatters: s.whyItMatters,
