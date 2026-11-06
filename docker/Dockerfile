@@ -145,6 +145,10 @@ CMD ["pnpm", "run", "dev"]
 # Builder stage for production
 FROM base AS builder
 WORKDIR /app
+# The prebuild step (scripts/sync-wireframes.sh) runs python3 to write the
+# wireframe manifest; the slim base image does not ship it.
+RUN apt-get update && apt-get install -y --no-install-recommends python3 \
+    && rm -rf /var/lib/apt/lists/*
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
@@ -152,24 +156,12 @@ COPY . .
 RUN pnpm run build
 
 # Production image
-FROM base AS runner
-WORKDIR /app
+# The site is a static export (next.config.ts sets output: 'export'), so the
+# build writes plain files to out/ and there is no Node server to run. Serve
+# them with nginx instead. nginx handles SIGTERM itself as PID 1 and the
+# unprivileged image already runs as a non-root user (uid 101).
+FROM nginxinc/nginx-unprivileged:stable-alpine AS runner
 
-ENV NODE_ENV=production
+COPY --from=builder --chown=nginx:nginx /app/out /usr/share/nginx/html
 
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
-
-# Copy built application
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/.next/standalone ./
-COPY --from=builder /app/.next/static ./.next/static
-
-USER nextjs
-
-EXPOSE 3000
-
-ENV PORT=3000
-ENV HOSTNAME="0.0.0.0"
-
-CMD ["node", "server.js"]
+EXPOSE 8080
