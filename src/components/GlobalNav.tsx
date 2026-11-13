@@ -123,9 +123,9 @@ export function GlobalNav() {
 
   const navItems = [
     { href: '/', label: 'Home' },
-    { href: '/blog', label: 'Blog' },
-    { href: '/docs', label: 'Docs' },
-    { href: '/wireframes', label: 'Wireframes' },
+    { href: '/book/hat', label: 'The Hat' },
+    { href: '/book/coat', label: 'The Coat' },
+    { href: '/book/boots', label: 'The Boots' },
   ];
 
   // Inside the book, the chapter tabs (Hat/Coat/Boots) ARE the main nav so a
@@ -350,22 +350,7 @@ export function GlobalNav() {
                   </li>
                 </ul>
               </div>
-            ) : (
-              <>
-                <Link
-                  href="/sign-in"
-                  className="btn btn-ghost btn-sm hidden min-h-11 min-w-11 lg:inline-flex"
-                >
-                  Sign In
-                </Link>
-                <Link
-                  href="/sign-up"
-                  className="btn btn-primary btn-sm hidden min-h-11 min-w-11 lg:inline-flex"
-                >
-                  Sign Up
-                </Link>
-              </>
-            )}
+            ) : null /* The book has no accounts; no Sign In / Sign Up. */}
 
             {/* Mobile/tablet menu (visible below lg) - 44px touch target */}
             <div className="dropdown dropdown-end lg:hidden">
@@ -452,19 +437,7 @@ export function GlobalNav() {
                       </button>
                     </li>
                   </>
-                ) : (
-                  <>
-                    <li className="menu-title mt-2">
-                      <span>Account</span>
-                    </li>
-                    <li>
-                      <Link href="/sign-in">Sign In</Link>
-                    </li>
-                    <li>
-                      <Link href="/sign-up">Sign Up</Link>
-                    </li>
-                  </>
-                )}
+                ) : null}
               </ul>
             </div>
 
