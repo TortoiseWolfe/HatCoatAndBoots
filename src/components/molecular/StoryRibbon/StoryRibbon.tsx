@@ -35,11 +35,14 @@ export function StoryRibbon({
     <div
       className={`bg-base-100 text-base-content flex min-h-0 flex-col rounded-xl p-4 backdrop-blur-sm ${className}`}
     >
-      <h2 className="font-blueprint shrink-0 text-xl font-bold sm:text-2xl">{heading}</h2>
+      <h2 className="font-blueprint shrink-0 text-xl font-bold sm:text-2xl">
+        {heading}
+      </h2>
       {/* Prose scrolls within the ribbon so a long beat (e.g. the intro) never
           pushes Back/Next off-screen. */}
       <div
         aria-live="polite"
+        tabIndex={0}
         className="mt-1 min-h-0 flex-1 space-y-3 overflow-y-auto pr-1 text-base leading-relaxed"
       >
         {prose.split('\n\n').map((para, i) => (

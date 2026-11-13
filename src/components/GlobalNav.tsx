@@ -176,7 +176,7 @@ export function GlobalNav() {
 
   return (
     <header className="border-base-300 bg-base-100 sticky top-0 z-50 border-b shadow-sm">
-      <nav className="container mx-auto px-4">
+      <nav aria-label="Main" className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           {/* Logo & Brand */}
           <div className="flex items-center gap-3">
@@ -205,7 +205,7 @@ export function GlobalNav() {
           {isBookPage ? (
             <nav
               aria-label="Book chapters"
-              className="flex items-center gap-1 lg:flex"
+              className="flex min-w-0 items-center gap-0.5 sm:gap-1 lg:flex"
             >
               {chapterTabs.map((tab) => {
                 const active =
@@ -215,7 +215,7 @@ export function GlobalNav() {
                     key={tab.href}
                     href={tab.href}
                     aria-current={active ? 'page' : undefined}
-                    className={`btn btn-ghost btn-sm ${active ? 'btn-active' : ''}`}
+                    className={`btn btn-ghost btn-sm px-2 sm:px-3 ${active ? 'btn-active' : ''}`}
                   >
                     {tab.label}
                   </Link>
@@ -277,85 +277,91 @@ export function GlobalNav() {
             {/* Auth Buttons */}
             {/* User account dropdown (logged in) or auth buttons (logged out) */}
             {/* Auth buttons hidden on mobile - they're in the hamburger menu */}
-            {user ? (
-              <div className="dropdown dropdown-end">
-                <label
-                  tabIndex={0}
-                  className="btn btn-ghost btn-circle min-h-11 min-w-11"
-                  aria-label="User account menu"
-                >
-                  <AvatarDisplay
-                    avatarUrl={
-                      profile?.avatar_url ||
-                      (user.user_metadata?.avatar_url as string) ||
-                      null
-                    }
-                    displayName={profile?.display_name || user.email || 'User'}
-                    size="sm"
-                  />
-                </label>
-                <ul
-                  tabIndex={0}
-                  className="menu menu-sm dropdown-content bg-base-100 rounded-box -right-2 z-[1] mt-3 w-48 max-w-[calc(100vw-4rem)] p-2 shadow sm:w-52"
-                >
-                  <li className="menu-title">
-                    <span>{user.email}</span>
-                  </li>
-                  <li>
-                    <Link href="/profile">Profile</Link>
-                  </li>
-                  <li>
-                    <Link href="/account">Account Settings</Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/messages"
-                      className="flex items-center justify-between"
-                    >
-                      <span>Messages</span>
-                      {unreadCount > 0 && (
-                        <span className="badge badge-primary badge-sm">
-                          {unreadCount}
-                        </span>
-                      )}
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/messages?tab=connections">Connections</Link>
-                  </li>
-                  {isAdmin && (
-                    <li>
-                      <Link href="/admin">Admin Dashboard</Link>
+            {
+              user ? (
+                <div className="dropdown dropdown-end">
+                  <label
+                    tabIndex={0}
+                    role="button"
+                    className="btn btn-ghost btn-circle min-h-11 min-w-11"
+                    aria-label="User account menu"
+                  >
+                    <AvatarDisplay
+                      avatarUrl={
+                        profile?.avatar_url ||
+                        (user.user_metadata?.avatar_url as string) ||
+                        null
+                      }
+                      displayName={
+                        profile?.display_name || user.email || 'User'
+                      }
+                      size="sm"
+                    />
+                  </label>
+                  <ul
+                    tabIndex={0}
+                    className="menu menu-sm dropdown-content bg-base-100 rounded-box -right-2 z-[1] mt-3 w-48 max-w-[calc(100vw-4rem)] p-2 shadow sm:w-52"
+                  >
+                    <li className="menu-title">
+                      <span>{user.email}</span>
                     </li>
-                  )}
-                  <li>
-                    <button
-                      type="button"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        // Close dropdown
-                        if (document.activeElement instanceof HTMLElement) {
-                          document.activeElement.blur();
-                        }
-                        // signOut() handles the window.location.href='/'
-                        // redirect internally; setting it again here races
-                        // with the in-flight navigation on Firefox and
-                        // manifests as NS_BINDING_ABORTED in Playwright's
-                        // page.waitForURL.
-                        void signOut();
-                      }}
-                    >
-                      Sign Out
-                    </button>
-                  </li>
-                </ul>
-              </div>
-            ) : null /* The book has no accounts; no Sign In / Sign Up. */}
+                    <li>
+                      <Link href="/profile">Profile</Link>
+                    </li>
+                    <li>
+                      <Link href="/account">Account Settings</Link>
+                    </li>
+                    <li>
+                      <Link
+                        href="/messages"
+                        className="flex items-center justify-between"
+                      >
+                        <span>Messages</span>
+                        {unreadCount > 0 && (
+                          <span className="badge badge-primary badge-sm">
+                            {unreadCount}
+                          </span>
+                        )}
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/messages?tab=connections">Connections</Link>
+                    </li>
+                    {isAdmin && (
+                      <li>
+                        <Link href="/admin">Admin Dashboard</Link>
+                      </li>
+                    )}
+                    <li>
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          // Close dropdown
+                          if (document.activeElement instanceof HTMLElement) {
+                            document.activeElement.blur();
+                          }
+                          // signOut() handles the window.location.href='/'
+                          // redirect internally; setting it again here races
+                          // with the in-flight navigation on Firefox and
+                          // manifests as NS_BINDING_ABORTED in Playwright's
+                          // page.waitForURL.
+                          void signOut();
+                        }}
+                      >
+                        Sign Out
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+              ) : null /* The book has no accounts; no Sign In / Sign Up. */
+            }
 
             {/* Mobile/tablet menu (visible below lg) - 44px touch target */}
             <div className="dropdown dropdown-end lg:hidden">
               <label
                 tabIndex={0}
+                role="button"
                 className="btn btn-ghost btn-circle min-h-11 min-w-11"
                 aria-label="Navigation menu"
               >
@@ -479,6 +485,7 @@ export function GlobalNav() {
             <div className="dropdown dropdown-end hidden lg:block">
               <label
                 tabIndex={0}
+                role="button"
                 className="btn btn-ghost btn-circle min-h-11 min-w-11"
                 title="Change theme"
                 aria-label="Change theme"

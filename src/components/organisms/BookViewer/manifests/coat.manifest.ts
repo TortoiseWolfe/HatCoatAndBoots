@@ -79,7 +79,7 @@ export const coatManifest: ChapterManifest = {
       src: 'book/coat/continuous-insulation.svg',
       label: s.layerLabels['continuous-insulation'],
       alt: 'A continuous outer wrap of insulation',
-      tabColor: '#5b86a8',
+      tabColor: '#6491b5',
       tabWord: 'WRAP',
       z: 33,
       explodeOffset: { x: 95, y: 30 },

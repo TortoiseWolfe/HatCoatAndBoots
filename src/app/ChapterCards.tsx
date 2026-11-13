@@ -18,7 +18,7 @@ export function ChapterCards() {
           <li key={slug}>
             <Link
               href={`/book/${slug}`}
-              className="border-base-300 bg-base-100 hover:border-primary hover:shadow-md focus-visible:outline-primary group flex h-full min-h-11 flex-col rounded-xl border p-6 shadow-sm transition focus-visible:outline-4 focus-visible:outline-offset-2"
+              className="border-base-300 bg-base-100 hover:border-primary focus-visible:outline-primary group flex h-full min-h-11 flex-col rounded-xl border p-6 shadow-sm transition hover:shadow-md focus-visible:outline-4 focus-visible:outline-offset-2"
             >
               <span className="text-base-content/70 text-sm font-bold tracking-wider uppercase">
                 Chapter {i + 1}
