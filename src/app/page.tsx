@@ -1,8 +1,7 @@
 import Link from 'next/link';
-import {
-  CHAPTER_SLUGS,
-  getChapter,
-} from '@/components/organisms/BookViewer/manifests';
+import { hatManifest } from '@/components/organisms/BookViewer/manifests/hat.manifest';
+import { SVG_BODIES } from '@/components/organisms/ExplodedBuilding/svg-bodies.generated';
+import { ChapterCards } from './ChapterCards';
 
 // ── The book cover / front door. Audience is a reader (ages 13–18). Three
 //     chapters — Hat, Coat, Boots — each a focus on the same shared building.
@@ -13,6 +12,14 @@ export const metadata = {
   description:
     'An interactive book about how buildings work: the Hat (roof), the Coat (walls), and the Boots (foundation).',
 };
+
+// The assembled house from the Hat chapter's own art, drawn once as a static
+// picture (the chapters are where it comes apart).
+const COVER_LAYERS = [...hatManifest.layers].sort((a, b) => a.z - b.z);
+function bodyFor(src: string): string {
+  const m = src.match(/book\/([^/]+)\/([^/]+)\.svg$/);
+  return m ? (SVG_BODIES[m[1]]?.[m[2]] ?? '') : '';
+}
 
 export default function Home() {
   return (
@@ -28,52 +35,57 @@ export default function Home() {
       <section
         id="main-content"
         aria-labelledby="cover-heading"
-        className="mx-auto w-full max-w-5xl flex-1 px-4 py-12 sm:px-6 lg:py-20"
+        className="mx-auto w-full max-w-5xl flex-1 px-4 py-10 sm:px-6 lg:py-16"
       >
-        {/* Cover header */}
-        <div className="text-center">
-          <h1
-            id="cover-heading"
-            className="font-blueprint text-base-content text-4xl font-bold sm:text-5xl"
+        {/* Cover: title and invitation beside the house */}
+        <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
+          <div className="text-center lg:text-left">
+            <h1
+              id="cover-heading"
+              className="font-blueprint text-base-content text-4xl font-bold sm:text-5xl"
+            >
+              Hat, Coat &amp; Boots
+            </h1>
+            <p className="text-base-content/90 mt-4 text-lg leading-relaxed sm:text-xl">
+              Every building does three jobs at once. A roof is its{' '}
+              <strong>hat</strong>, the walls its <strong>coat</strong>, and the
+              foundation its <strong>boots</strong>. Pull each one apart and see
+              how it works — no machines, just good design.
+            </p>
+            <Link
+              href="/book/hat"
+              className="btn btn-primary mt-6 min-h-12 px-8 text-base"
+            >
+              Start with the Hat →
+            </Link>
+          </div>
+
+          <div
+            role="img"
+            aria-label="A small house, drawn in layers: a roof with a wide brim, an insulated wall with a window, and a footing in the ground."
+            className="book-sky relative mx-auto aspect-square w-full max-w-md overflow-hidden rounded-2xl shadow-lg"
           >
-            Hat, Coat &amp; Boots
-          </h1>
-          <p className="text-base-content/80 mx-auto mt-4 max-w-2xl text-lg leading-relaxed">
-            Every building does three jobs at once. A roof is its{' '}
-            <strong>hat</strong>, the walls its <strong>coat</strong>, and the
-            foundation its <strong>boots</strong>. Pull each one apart and see
-            how it works — no machines, just good design.
-          </p>
+            <svg
+              viewBox="0 0 360 360"
+              aria-hidden="true"
+              className="absolute inset-0 h-full w-full"
+              preserveAspectRatio="xMidYMid meet"
+            >
+              {COVER_LAYERS.map((layer) => (
+                <g
+                  key={layer.id}
+                  dangerouslySetInnerHTML={{ __html: bodyFor(layer.src) }}
+                />
+              ))}
+            </svg>
+          </div>
         </div>
 
         {/* Three chapter cards */}
-        <ul className="mt-10 grid gap-6 sm:grid-cols-3">
-          {CHAPTER_SLUGS.map((slug, i) => {
-            const chapter = getChapter(slug);
-            if (!chapter) return null;
-            return (
-              <li key={slug}>
-                <Link
-                  href={`/book/${slug}`}
-                  className="border-base-300 bg-base-100 hover:border-primary group flex h-full flex-col rounded-xl border p-6 transition-colors"
-                >
-                  <span className="text-base-content/50 text-sm font-bold tracking-wider uppercase">
-                    Chapter {i + 1}
-                  </span>
-                  <span className="font-blueprint text-base-content group-hover:text-primary mt-1 text-2xl font-bold">
-                    {chapter.meta.title}
-                  </span>
-                  <span className="text-base-content/80 mt-2 leading-relaxed">
-                    {chapter.meta.kicker}
-                  </span>
-                  <span className="text-primary mt-4 text-sm font-semibold">
-                    Start reading →
-                  </span>
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
+        <h2 className="sr-only">Chapters</h2>
+        <div className="mt-12">
+          <ChapterCards />
+        </div>
       </section>
     </main>
   );
