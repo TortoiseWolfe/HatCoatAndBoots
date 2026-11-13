@@ -109,7 +109,7 @@ export function CookieConsent({
               <button
                 onClick={handleCustomize}
                 className="btn btn-ghost btn-sm"
-                aria-label="Customize cookie preferences"
+                aria-label="Settings: customize cookie preferences"
               >
                 Settings
               </button>

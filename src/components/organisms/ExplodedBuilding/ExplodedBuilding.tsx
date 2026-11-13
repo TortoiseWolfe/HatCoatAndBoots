@@ -96,7 +96,12 @@ export function ExplodedBuilding({
               key={layer.id}
               type="button"
               aria-pressed={docked}
-              aria-label={layer.label}
+              aria-label={
+                // The name must contain the tab's visible word as a whole word.
+                new RegExp(`\\b${layer.tabWord}\\b`, 'i').test(layer.label)
+                  ? layer.label
+                  : `${layer.label} ${layer.tabWord.toLowerCase()}`
+              }
               onClick={() => onToggle(layer.id)}
               className={`book-part absolute flex min-h-11 min-w-11 -translate-x-1/2 -translate-y-1/2 cursor-pointer items-center justify-center rounded-md transition-[left,top] duration-300 ${
                 spotlightId === layer.id ? 'book-part--spotlight' : ''
