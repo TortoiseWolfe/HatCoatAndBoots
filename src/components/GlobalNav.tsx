@@ -280,7 +280,7 @@ export function GlobalNav() {
             {
               user ? (
                 <div className="dropdown dropdown-end">
-                  <label
+                  <div
                     tabIndex={0}
                     role="button"
                     className="btn btn-ghost btn-circle min-h-11 min-w-11"
@@ -297,7 +297,7 @@ export function GlobalNav() {
                       }
                       size="sm"
                     />
-                  </label>
+                  </div>
                   <ul
                     tabIndex={0}
                     className="menu menu-sm dropdown-content bg-base-100 rounded-box -right-2 z-[1] mt-3 w-48 max-w-[calc(100vw-4rem)] p-2 shadow sm:w-52"
@@ -359,7 +359,7 @@ export function GlobalNav() {
 
             {/* Mobile/tablet menu (visible below lg) - 44px touch target */}
             <div className="dropdown dropdown-end lg:hidden">
-              <label
+              <div
                 tabIndex={0}
                 role="button"
                 className="btn btn-ghost btn-circle min-h-11 min-w-11"
@@ -379,7 +379,7 @@ export function GlobalNav() {
                     d="M4 6h16M4 12h16M4 18h16"
                   />
                 </svg>
-              </label>
+              </div>
               <ul
                 tabIndex={0}
                 className="menu menu-sm dropdown-content bg-base-100 rounded-box -right-2 z-[1] mt-3 w-40 max-w-[calc(100vw-4rem)] p-2 shadow sm:w-44"
@@ -483,7 +483,7 @@ export function GlobalNav() {
 
             {/* Theme Selector - Hidden below lg (1024px) */}
             <div className="dropdown dropdown-end hidden lg:block">
-              <label
+              <div
                 tabIndex={0}
                 role="button"
                 className="btn btn-ghost btn-circle min-h-11 min-w-11"
@@ -504,7 +504,7 @@ export function GlobalNav() {
                     d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"
                   />
                 </svg>
-              </label>
+              </div>
               <ul
                 tabIndex={0}
                 className="dropdown-content bg-base-100 rounded-box z-[1] max-h-96 w-44 max-w-[calc(100vw-4rem)] overflow-y-auto p-2 shadow-lg sm:w-52"

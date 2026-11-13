@@ -101,7 +101,7 @@ export const coatManifest: ChapterManifest = {
       src: 'book/coat/thermal-mass-interior.svg',
       label: s.layerLabels['thermal-mass-interior'],
       alt: 'Interior thermal mass storing heat',
-      tabColor: '#b07a3c',
+      tabColor: '#c98f50',
       tabWord: 'MASS',
       z: 35,
       explodeOffset: { x: -110, y: 40 },
