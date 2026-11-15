@@ -182,6 +182,15 @@ a.link-primary {
   text-decoration: underline;
 }
 
+/* Keyboard focus inside DaisyUI menus (the hamburger and account dropdowns)
+ * only changed the row's grey background, which is easy to miss. Draw a real
+ * outline so the focused item is clear (WCAG 2.4.7 and 2.4.11). */
+.menu a:focus-visible,
+.menu button:focus-visible {
+  outline: 2px solid var(--color-base-content);
+  outline-offset: -2px;
+}
+
 /* Avatar glow/shadow — uses base-content so it auto-adapts:
  * dark themes → light glow, light themes → dark shadow.
  * Works across all 35 DaisyUI themes. */
