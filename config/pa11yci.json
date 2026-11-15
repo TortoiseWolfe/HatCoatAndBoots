@@ -3,7 +3,7 @@
   "// Note2": "Next.js 15 streams metadata via JavaScript. The title element appears after hydration, not in initial HTML.",
   "// Note3": "color-contrast (and color-contrast-enhanced for AAA) is ignored here because Pa11y's axe runner hardcodes violations.concat(incomplete) — it treats 'needs review' as failure. DaisyUI .btn gradients prevent axe from resolving a flat bg color, so every button lands in incomplete (14–61 false positives per page, ratio=0). The real contrast gate is tests/e2e/color-contrast.spec.ts, which runs the same axe rule on the same pages but asserts violations only, covering both scripthammer-light and scripthammer-dark (headless Chromium's prefers-color-scheme defaults to light, so this config never tested dark).",
   "// Note4": "Standard bumped to WCAG2AAA per #21 (Phase 0 closure). Contrast checks remain delegated to the E2E spec; pa11y here covers the non-contrast AAA criteria (focus visibility, link purpose, etc.).",
-  "// Note5 (#48 — feature 047 Three.js Game)": "/game/3d is DELIBERATELY OMITTED from the urls allowlist below. Pa11y / axe-core cannot audit <canvas> content (no DOM tree inside WebGL surfaces), so scanning the route would either produce false positives or simply fail to detect anything useful. The existing /game (dice game) IS auditable but is also not in the current allowlist — feature 037-game-a11y-tests covers its automated coverage via E2E tests in tests/e2e/. The fallback panel rendered when WebGL is unavailable IS pa11y-auditable via the same DOM rules; manual review covers it (see features/enhancements/047-threejs-game/tasks.md T027 + T049 for the canvas-not-auditable a11y review template).",
+  "// Note5 (#48 — feature 047 Three.js Game)": "/game/3d is listed below, but pa11y / axe-core cannot audit <canvas> content (no DOM tree inside WebGL surfaces), so only the page frame and the fallback panel shown when WebGL is unavailable are checked. Manual review covers the canvas itself (see the feature 047 tasks T027 and T049 for the canvas-not-auditable a11y review template).",
   "defaults": {
     "standard": "WCAG2AAA",
     "timeout": 30000,
@@ -47,6 +47,429 @@
       "url": "http://localhost:3000/status",
       "screenCapture": ".pa11y-screenshots/status.png",
       "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/book",
+      "screenCapture": ".pa11y-screenshots/book.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/book/hat",
+      "screenCapture": ".pa11y-screenshots/book-hat.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/book/coat",
+      "screenCapture": ".pa11y-screenshots/book-coat.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/book/boots",
+      "screenCapture": ".pa11y-screenshots/book-boots.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/account",
+      "screenCapture": ".pa11y-screenshots/account.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/admin",
+      "screenCapture": ".pa11y-screenshots/admin.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/admin/audit",
+      "screenCapture": ".pa11y-screenshots/admin-audit.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/admin/messaging",
+      "screenCapture": ".pa11y-screenshots/admin-messaging.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/admin/payments",
+      "screenCapture": ".pa11y-screenshots/admin-payments.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/admin/users",
+      "screenCapture": ".pa11y-screenshots/admin-users.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/auth/callback",
+      "screenCapture": ".pa11y-screenshots/auth-callback.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/comment-policy",
+      "screenCapture": ".pa11y-screenshots/comment-policy.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/contact",
+      "screenCapture": ".pa11y-screenshots/contact.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/cookies",
+      "screenCapture": ".pa11y-screenshots/cookies.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/docs",
+      "screenCapture": ".pa11y-screenshots/docs.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/forgot-password",
+      "screenCapture": ".pa11y-screenshots/forgot-password.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/game",
+      "screenCapture": ".pa11y-screenshots/game.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/game/3d",
+      "screenCapture": ".pa11y-screenshots/game-3d.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/map",
+      "screenCapture": ".pa11y-screenshots/map.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/messages",
+      "screenCapture": ".pa11y-screenshots/messages.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/messages/new-group",
+      "screenCapture": ".pa11y-screenshots/messages-new-group.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/messages/setup",
+      "screenCapture": ".pa11y-screenshots/messages-setup.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/payment-demo",
+      "screenCapture": ".pa11y-screenshots/payment-demo.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/payment-result",
+      "screenCapture": ".pa11y-screenshots/payment-result.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/privacy-controls",
+      "screenCapture": ".pa11y-screenshots/privacy-controls.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/privacy",
+      "screenCapture": ".pa11y-screenshots/privacy.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/profile",
+      "screenCapture": ".pa11y-screenshots/profile.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/reset-password",
+      "screenCapture": ".pa11y-screenshots/reset-password.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/schedule",
+      "screenCapture": ".pa11y-screenshots/schedule.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/sign-in",
+      "screenCapture": ".pa11y-screenshots/sign-in.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/sign-up",
+      "screenCapture": ".pa11y-screenshots/sign-up.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/verify-email",
+      "screenCapture": ".pa11y-screenshots/verify-email.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/wireframes",
+      "screenCapture": ".pa11y-screenshots/wireframes.png",
+      "ignore": ["color-contrast", "color-contrast-enhanced", "frame-tested"]
+    },
+    {
+      "url": "http://localhost:3000/wireframes/viewer.html",
+      "screenCapture": ".pa11y-screenshots/wireframes-viewer-html.png"
+    },
+    {
+      "url": "http://localhost:3000/offline.html",
+      "screenCapture": ".pa11y-screenshots/offline-html.png"
+    },
+    {
+      "url": "http://localhost:3000/_designs",
+      "screenCapture": ".pa11y-screenshots/designs.png",
+      "ignore": ["color-contrast", "color-contrast-enhanced", "frame-tested"]
+    },
+    {
+      "url": "http://localhost:3000/_designs/combined-model.html",
+      "screenCapture": ".pa11y-screenshots/designs-combined-model-html.png"
+    },
+    {
+      "url": "http://localhost:3000/_designs/discoverability-final.html",
+      "screenCapture": ".pa11y-screenshots/designs-discoverability-final-html.png"
+    },
+    {
+      "url": "http://localhost:3000/_designs/discoverability-single.html",
+      "screenCapture": ".pa11y-screenshots/designs-discoverability-single-html.png"
+    },
+    {
+      "url": "http://localhost:3000/_designs/exploded-insitu.html",
+      "screenCapture": ".pa11y-screenshots/designs-exploded-insitu-html.png"
+    },
+    {
+      "url": "http://localhost:3000/_designs/full-page-frame.html",
+      "screenCapture": ".pa11y-screenshots/designs-full-page-frame-html.png"
+    },
+    {
+      "url": "http://localhost:3000/_designs/layout-spine.html",
+      "screenCapture": ".pa11y-screenshots/designs-layout-spine-html.png"
+    },
+    {
+      "url": "http://localhost:3000/_designs/overlay-readability.html",
+      "screenCapture": ".pa11y-screenshots/designs-overlay-readability-html.png"
+    },
+    {
+      "url": "http://localhost:3000/_designs/responsive.html",
+      "screenCapture": ".pa11y-screenshots/designs-responsive-html.png"
+    },
+    {
+      "url": "http://localhost:3000/blog",
+      "screenCapture": ".pa11y-screenshots/blog.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/blog/seo",
+      "screenCapture": ".pa11y-screenshots/blog-seo.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/blog/message-encryption-security-explained",
+      "screenCapture": ".pa11y-screenshots/blog-message-encryption-security-explained.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/blog/offline-payment-system-stripe-paypal",
+      "screenCapture": ".pa11y-screenshots/blog-offline-payment-system-stripe-paypal.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/blog/authentication-supabase-oauth",
+      "screenCapture": ".pa11y-screenshots/blog-authentication-supabase-oauth.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/blog/countdown-timer-tutorial",
+      "screenCapture": ".pa11y-screenshots/blog-countdown-timer-tutorial.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/blog/this-is-an-extremely-long-url-slug-that-should-be-much-shorter-for-better-seo",
+      "screenCapture": ".pa11y-screenshots/blog-this-is-an-extremely-long-url-slug-that-should-be-much-shorter-for-better-seo.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/blog/auto-configuration-system",
+      "screenCapture": ".pa11y-screenshots/blog-auto-configuration-system.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/blog/scripthammer-intro",
+      "screenCapture": ".pa11y-screenshots/blog-scripthammer-intro.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/blog/tags",
+      "screenCapture": ".pa11y-screenshots/blog-tags.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/blog/tags/authentication",
+      "screenCapture": ".pa11y-screenshots/blog-tags-authentication.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/blog/tags/auto-config",
+      "screenCapture": ".pa11y-screenshots/blog-tags-auto-config.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/blog/tags/automation",
+      "screenCapture": ".pa11y-screenshots/blog-tags-automation.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/blog/tags/best-practices",
+      "screenCapture": ".pa11y-screenshots/blog-tags-best-practices.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/blog/tags/business-strategy",
+      "screenCapture": ".pa11y-screenshots/blog-tags-business-strategy.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/blog/tags/component-development",
+      "screenCapture": ".pa11y-screenshots/blog-tags-component-development.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/blog/tags/content-writing",
+      "screenCapture": ".pa11y-screenshots/blog-tags-content-writing.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/blog/tags/conversion-optimization",
+      "screenCapture": ".pa11y-screenshots/blog-tags-conversion-optimization.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/blog/tags/developer-experience",
+      "screenCapture": ".pa11y-screenshots/blog-tags-developer-experience.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/blog/tags/docker",
+      "screenCapture": ".pa11y-screenshots/blog-tags-docker.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/blog/tags/e2e",
+      "screenCapture": ".pa11y-screenshots/blog-tags-e2e.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/blog/tags/edge-functions",
+      "screenCapture": ".pa11y-screenshots/blog-tags-edge-functions.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/blog/tags/encryption",
+      "screenCapture": ".pa11y-screenshots/blog-tags-encryption.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/blog/tags/gdpr",
+      "screenCapture": ".pa11y-screenshots/blog-tags-gdpr.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/blog/tags/messaging",
+      "screenCapture": ".pa11y-screenshots/blog-tags-messaging.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/blog/tags/oauth",
+      "screenCapture": ".pa11y-screenshots/blog-tags-oauth.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/blog/tags/offline-first",
+      "screenCapture": ".pa11y-screenshots/blog-tags-offline-first.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/blog/tags/optimization",
+      "screenCapture": ".pa11y-screenshots/blog-tags-optimization.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/blog/tags/payments",
+      "screenCapture": ".pa11y-screenshots/blog-tags-payments.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/blog/tags/paypal",
+      "screenCapture": ".pa11y-screenshots/blog-tags-paypal.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/blog/tags/privacy",
+      "screenCapture": ".pa11y-screenshots/blog-tags-privacy.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/blog/tags/prp-workflow",
+      "screenCapture": ".pa11y-screenshots/blog-tags-prp-workflow.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/blog/tags/pwa",
+      "screenCapture": ".pa11y-screenshots/blog-tags-pwa.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/blog/tags/react",
+      "screenCapture": ".pa11y-screenshots/blog-tags-react.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/blog/tags/scripthammer",
+      "screenCapture": ".pa11y-screenshots/blog-tags-scripthammer.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/blog/tags/security",
+      "screenCapture": ".pa11y-screenshots/blog-tags-security.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/blog/tags/seo",
+      "screenCapture": ".pa11y-screenshots/blog-tags-seo.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/blog/tags/stripe",
+      "screenCapture": ".pa11y-screenshots/blog-tags-stripe.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/blog/tags/supabase",
+      "screenCapture": ".pa11y-screenshots/blog-tags-supabase.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/blog/tags/tutorial",
+      "screenCapture": ".pa11y-screenshots/blog-tags-tutorial.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/blog/tags/typescript",
+      "screenCapture": ".pa11y-screenshots/blog-tags-typescript.png",
+      "actions": ["wait for element footer to be visible"]
+    },
+    {
+      "url": "http://localhost:3000/blog/tags/web-development",
+      "screenCapture": ".pa11y-screenshots/blog-tags-web-development.png",
+      "actions": ["wait for element footer to be visible"]
     }
-  ]
+  ],
+  "// Note6": "Every page the site publishes is listed below (one URL per route, 15 Nov 2026), so a new violation on any page fails CI. Pages from public/ that are plain HTML (_designs, wireframes, offline.html) have no footer, so they skip the footer wait. Auth-gated pages redirect to the sign-in screen and are audited as that screen. The /404 and unknown-route pages are left out.",
+  "// Note7": "/blog/tags/next.js is left out because the static file server in CI reads the .js ending as a script file; the live-site axe pass covers it. /wireframes and /_designs are galleries of iframes, so axe's frame-tested check is ignored there; each framed page is listed on its own.",
+  "// Note8": "/conversations is left out because it only redirects to /messages?tab=chats; in the static export its first HTML is Next's redirect shell, which has no lang attribute until the browser follows the redirect. /messages is listed on its own."
 }

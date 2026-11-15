@@ -137,7 +137,7 @@ export default function CommentPolicyPage() {
           </ul>
           <p className="mb-4">
             For more details, see our{' '}
-            <Link href="/privacy" className="text-primary hover:underline">
+            <Link href="/privacy" className="text-primary underline">
               Privacy Policy
             </Link>
             .
@@ -174,7 +174,7 @@ export default function CommentPolicyPage() {
           <p className="mb-4">
             If you believe your comment was removed in error or wish to appeal a
             moderation decision, please{' '}
-            <Link href="/contact" className="text-primary hover:underline">
+            <Link href="/contact" className="text-primary underline">
               contact us
             </Link>{' '}
             with:

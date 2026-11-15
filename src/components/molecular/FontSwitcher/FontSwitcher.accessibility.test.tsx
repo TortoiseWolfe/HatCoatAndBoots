@@ -17,7 +17,7 @@ describe('FontSwitcher Accessibility', () => {
       render(<FontSwitcher />);
 
       const button = screen.getByRole('button', { name: /font selection/i });
-      expect(button).toHaveAttribute('aria-label', 'Font Selection');
+      expect(button.getAttribute('aria-label')).toMatch(/^Font Selection: /);
     });
 
     it('should mark dropdown as listbox', async () => {

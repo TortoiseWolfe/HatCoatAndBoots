@@ -68,7 +68,7 @@ export const FontSwitcher: React.FC<FontSwitcherProps> = ({
       <button
         tabIndex={0}
         className="btn btn-ghost gap-2"
-        aria-label="Font Selection"
+        aria-label={`Font Selection: ${currentFontConfig?.name || 'Select Font'}`}
       >
         <FontIcon className="h-5 w-5" />
         <span className="hidden sm:inline">

@@ -405,6 +405,11 @@ describe('MarkdownProcessor HTML rendering', () => {
     expect(html).toContain('<li>first</li>');
   });
 
+  it('does not wrap the items of an <ol> in a <ul>', () => {
+    const { html } = process('1. first\n2. second');
+    expect(html).not.toContain('<ul>');
+  });
+
   it('converts horizontal rules', () => {
     const { html } = process('before\n\n---\n\nafter');
     expect(html).toContain('<hr />');

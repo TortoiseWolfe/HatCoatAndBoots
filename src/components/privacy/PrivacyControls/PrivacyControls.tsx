@@ -254,7 +254,7 @@ export function PrivacyControls({
             className="btn btn-sm btn-primary"
             aria-label="Manage cookie preferences"
           >
-            Manage Cookies
+            Manage cookie preferences
           </button>
           <button
             onClick={handleExport}
