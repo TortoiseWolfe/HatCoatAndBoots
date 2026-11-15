@@ -522,6 +522,19 @@ p:not([class*='text-']) {
   @apply ring-primary ring-2 outline-none;
 }
 
+/* Map credit line: Leaflet's default grey on its pale strip is under 4.5:1 */
+.leaflet-control-attribution,
+.leaflet-control-attribution a {
+  color: #4a4a4a;
+}
+
+[data-theme='scripthammer-dark'] .leaflet-control-attribution,
+[data-theme='scripthammer-dark'] .leaflet-control-attribution a,
+[data-theme='dark'] .leaflet-control-attribution,
+[data-theme='dark'] .leaflet-control-attribution a {
+  color: #c8c8d0;
+}
+
 /* Fix marker positioning */
 .leaflet-marker-icon {
   transition: none !important;
