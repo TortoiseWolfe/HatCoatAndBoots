@@ -87,7 +87,7 @@ export const hatManifest: ChapterManifest = {
       src: 'book/hat/rain.svg',
       label: 'Rain',
       alt: 'Rain shedding clear of the wall',
-      tabColor: '#5b86a8',
+      tabColor: '#6491b5',
       tabWord: 'RAIN',
       z: 55,
       explodeOffset: { x: 40, y: -45 },

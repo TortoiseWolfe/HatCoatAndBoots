@@ -34,7 +34,7 @@ export const bootsManifest: ChapterManifest = {
       src: 'book/boots/grade-and-drain.svg',
       label: s.layerLabels['grade-and-drain'],
       alt: 'Sloped grade and drainage away from the base',
-      tabColor: '#5b86a8',
+      tabColor: '#6491b5',
       tabWord: 'GRADE',
       z: 18,
       explodeOffset: { x: -90, y: 50 },

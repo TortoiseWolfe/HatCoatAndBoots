@@ -19,7 +19,6 @@ import {
   JsonLdScript,
 } from '@/utils/metadata';
 import PWAInstall from '@/components/PWAInstall';
-import { CountdownBanner } from '@/components/atomic/CountdownBanner';
 import { SetupBanner } from '@/components/SetupBanner';
 import A11yDevOverlay from '@/components/organisms/A11yDevOverlay';
 
@@ -125,7 +124,6 @@ export default function RootLayout({
           <AuthProvider>
             <AccessibilityProvider>
               <GlobalNav />
-              <CountdownBanner />
               {/* The book runs intentionally without Supabase; the "not
                   configured" setup nag is dev noise, so it stays off. */}
               <SetupBanner show={false} />

@@ -106,7 +106,7 @@ export function ChapterViewer({ manifest }: ChapterViewerProps) {
 
           {/* Visible layer controls — turn each part on/off. */}
           <div className="shrink-0">
-            <p className="text-base-content/60 mb-2 text-xs font-bold tracking-wider uppercase">
+            <p className="text-base-content/80 mb-2 text-sm font-bold tracking-wider uppercase">
               Take it apart — tap a part to show or hide it
             </p>
             <LayerToggles

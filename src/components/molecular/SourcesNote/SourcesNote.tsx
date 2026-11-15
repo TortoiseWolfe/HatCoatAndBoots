@@ -31,10 +31,10 @@ export function SourcesNote({
     <details
       className={`border-base-300 bg-base-100/60 rounded-lg border ${className}`}
     >
-      <summary className="text-base-content hover:bg-base-200 flex min-h-11 cursor-pointer list-none items-center gap-2 rounded-lg px-3 py-2 text-xs font-bold tracking-wider uppercase">
+      <summary className="text-base-content hover:bg-base-200 flex min-h-11 cursor-pointer list-none items-center gap-2 rounded-lg px-3 py-2 text-sm font-bold tracking-wider uppercase">
         Why it matters &amp; sources
       </summary>
-      <div className="space-y-3 px-3 pt-1 pb-3 text-sm">
+      <div className="space-y-3 px-3 pt-1 pb-3 text-base">
         {whyItMatters && (
           <p className="text-base-content/90 leading-relaxed">{whyItMatters}</p>
         )}
