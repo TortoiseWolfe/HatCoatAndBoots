@@ -293,11 +293,7 @@ function NewGroupContent() {
           </div>
 
           {/* Available Connections List */}
-          <div
-            className="border-base-300 overflow-hidden rounded-lg border"
-            role="listbox"
-            aria-label="Available connections"
-          >
+          <div className="border-base-300 overflow-hidden rounded-lg border">
             {isLoading ? (
               <div className="flex justify-center p-8">
                 <span className="loading loading-spinner loading-lg" />
@@ -311,7 +307,11 @@ function NewGroupContent() {
                     : 'No connections available'}
               </div>
             ) : (
-              <div className="divide-base-200 divide-y">
+              <div
+                className="divide-base-200 divide-y"
+                role="listbox"
+                aria-label="Available connections"
+              >
                 {availableConnections.map((user) => (
                   <button
                     key={user.id}
