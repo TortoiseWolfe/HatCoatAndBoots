@@ -380,6 +380,13 @@ export class MarkdownProcessor {
     // Unordered lists
     html = html.replace(/^- (.+)$/gm, '<li>$1</li>');
 
+    // Group unordered items first: once the ordered items lose their class
+    // they look like plain items, and the unordered pattern would wrap each
+    // of them in a <ul> inside the <ol>.
+    html = html.replace(/(<li>.*?<\/li>\n?)(<li>.*?<\/li>\n?)*/gm, (match) => {
+      return `<ul>\n${match}</ul>`;
+    });
+
     // Group consecutive ordered li elements into ol
     html = html.replace(
       /(<li class="ordered">.*?<\/li>\n?)(<li class="ordered">.*?<\/li>\n?)*/gm,
@@ -389,11 +396,6 @@ export class MarkdownProcessor {
         return `<ol>\n${cleanedMatch}</ol>`;
       }
     );
-
-    // Group consecutive unordered li elements into ul
-    html = html.replace(/(<li>.*?<\/li>\n?)(<li>.*?<\/li>\n?)*/gm, (match) => {
-      return `<ul>\n${match}</ul>`;
-    });
 
     // Temporarily replace the CODE_PLACEHOLDER to protect it from underscore processing
     const TEMP_PLACEHOLDER = '§§§CODEBLOCKPLACEHOLDER§§§';

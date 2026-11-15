@@ -191,6 +191,7 @@ export default function Scene({
         camera={{ position: [0, 0, 5], fov: 50 }}
         gl={{ preserveDrawingBuffer: false }}
         onCreated={onCanvasCreated}
+        role="img"
         aria-label="3D scene preview"
       >
         <color attach="background" args={[themeTokens.base]} />

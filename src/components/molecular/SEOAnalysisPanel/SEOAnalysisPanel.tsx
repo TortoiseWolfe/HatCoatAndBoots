@@ -176,7 +176,12 @@ export default function SEOAnalysisPanel({
           <h4 className="mb-2 text-xs font-semibold sm:text-sm">
             Suggestions for Improvement ({suggestions.length})
           </h4>
-          <div className="max-h-60 space-y-2 overflow-y-auto">
+          <div
+            className="max-h-60 space-y-2 overflow-y-auto"
+            role="region"
+            aria-label="Suggestions list"
+            tabIndex={0}
+          >
             {suggestions.map((suggestion, i) => (
               <div
                 key={i}

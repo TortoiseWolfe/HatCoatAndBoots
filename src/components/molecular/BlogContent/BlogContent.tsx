@@ -39,7 +39,7 @@ export default function BlogContent({ htmlContent }: BlogContentProps) {
         // Prism will handle the highlighting after the content is rendered
         return `
           <div class="mockup-code bg-base-300 my-4 relative" data-code-id="${id}">
-            <div class="absolute top-2 right-12 text-xs text-base-content/80">${lang}</div>
+            <div class="absolute top-2 right-12 text-xs text-[#d4d4d4]">${lang}</div>
             <button
               onclick="navigator.clipboard.writeText(this.parentElement.querySelector('pre').textContent); this.innerHTML='✓'; setTimeout(() => this.innerHTML='📋', 2000)"
               class="btn btn-xs btn-ghost absolute top-2 right-2"
