@@ -124,13 +124,14 @@ export default async function TagPage({ params }: PageProps) {
     <main className="container mx-auto px-4 py-8">
       {/* Header */}
       <div className="mb-12 text-center">
-        <div className="mb-4 flex items-center justify-center gap-2">
+        <div className="mb-4 flex flex-wrap items-center justify-center gap-2">
           <h1 className="text-3xl font-bold">Posts tagged</h1>
           <TagBadge
             tag={properTag}
             size="lg"
             variant="primary"
             clickable={false}
+            className="h-auto max-w-full py-1 break-words whitespace-normal"
           />
         </div>
         <p className="text-base-content/85 text-lg">
